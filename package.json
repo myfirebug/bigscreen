@@ -22,7 +22,6 @@
     },
     "scripts": {
         "start": "set PORT=6001 && cross-env REACT_APP_ENV=development react-app-rewired start",
-        "build:demo": "cross-env REACT_APP_ENV=demo react-app-rewired build",
         "build:test": "cross-env REACT_APP_ENV=test react-app-rewired build",
         "build:production": "cross-env REACT_APP_ENV=production react-app-rewired build",
         "eject": "react-scripts eject"

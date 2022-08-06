@@ -22,16 +22,16 @@ function invade(target, name, callback) {
     });
 }
 
-const overrides = {
-    publicPath: {
-        development: '',
-        demo: 'http://192.168.200.9/manage/base_app/',
-        test: 'http://172.19.20.5/manage/base_app/build/',
-        production: 'http://192.168.200.9:82/',
-        qsng: 'http://118.114.241.16:82/'
-    },
-    library: 'base_app'
-};
+// const overrides = {
+//     publicPath: {
+//         development: '',
+//         demo: 'http://192.168.200.9/manage/base_app/',
+//         test: 'http://172.19.20.5/manage/base_app/build/',
+//         production: 'http://192.168.200.9:82/',
+//         qsng: 'http://118.114.241.16:82/'
+//     },
+//     library: 'base_app'
+// };
 
 module.exports = override(
     // 配置c
@@ -62,9 +62,9 @@ module.exports = override(
         config.resolve.plugins = [];
         if (process.env.NODE_ENV !== 'development') {
             config.devtool = false;
-            config.output.publicPath = overrides.publicPath[alias];
-            config.output.libraryTarget = 'umd';
-            config.output.library = overrides.library;
+            // config.output.publicPath = overrides.publicPath[alias];
+            // config.output.libraryTarget = 'umd';
+            // config.output.library = overrides.library;
 
             // 删除打包后的所有console
             invade(config.optimization.minimizer, 'TerserPlugin', (e) => {

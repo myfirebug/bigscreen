@@ -1,4 +1,4 @@
-# 基于 React 后台管理系统框架
+# 基于 React 拖动配置大屏的后台管理系统
 
 # 目录结构
 
@@ -39,40 +39,48 @@
 
 ## 构建测试项目
 
-## `npm test`
+## `npm build:test`
 
 ## 构建正式项目
 
-### `npm build`
+### `npm build:production`
 
 # 4.目录结构
 
 ```
-child-application
-├── config-overrides.js                                        // webpack配置文件
+bigscreen
+├── config-overrides.js
+├── doc
 ├── package-lock.json
 ├── package.json
 ├── paths.json
-├── public                                                     // 静态文件
+├── public
+│   ├── css
+│   │   └── animate.min.css
 │   ├── favicon.ico
 │   ├── index.html
 │   ├── logo192.png
 │   ├── logo512.png
 │   ├── manifest.json
-│   ├── mock                                                   // 模拟数据
+│   ├── mock
 │   │   └── menu.json
 │   └── robots.txt
 ├── README.md
-├── src                                                        // 开发目录
+├── src
 │   ├── App.test.tsx
-│   ├── App.tsx                                                // 入口文件
-│   ├── assets                                                 // 静态资源
+│   ├── App.tsx
+│   ├── assets
 │   │   ├── font
 │   │   │   ├── iconfont.ttf
 │   │   │   ├── iconfont.woff
 │   │   │   └── iconfont.woff2
-│   │   ├── images
-│   │   │   └── bg.jpg
+│   │   ├── image
+│   │   │   ├── common
+│   │   │   │   └── avatar.png
+│   │   │   ├── login
+│   │   │   │   └── bg.jpg
+│   │   │   └── report
+│   │   │       └── canvas-bg.png
 │   │   └── scss
 │   │       ├── base
 │   │       │   ├── font.scss
@@ -84,20 +92,48 @@ child-application
 │   │           ├── config.scss
 │   │           ├── function.scss
 │   │           └── mixins.scss
-│   ├── components                                             // 组件
+│   ├── components
+│   │   ├── json-editor
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
 │   │   ├── loading
 │   │   │   └── index.tsx
-│   │   └── private-route
+│   │   ├── pop-confirm
+│   │   │   └── index.tsx
+│   │   ├── private-route
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   └── wrapper
 │   │       ├── index.scss
 │   │       └── index.tsx
-│   ├── hook                                                    // hook文件
-│   ├── index.tsx                                               // 入口文件
-│   ├── layouts                                                 // 框架子应用没有使用
-│   │   ├── index.scss
-│   │   └── index.tsx
+│   ├── config
+│   │   ├── index.ts
+│   │   └── table-config.ts
+│   ├── index.scss
+│   ├── index.tsx
 │   ├── logo.svg
-│   ├── pages                                                   // 页面
-│   │   ├── frame                                               // 框架入口
+│   ├── pages
+│   │   ├── configuration
+│   │   │   ├── components
+│   │   │   │   ├── add-or-edit-page
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── center
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── header
+│   │   │   │   │   ├── index.scss
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── left
+│   │   │   │   │   ├── index.scss
+│   │   │   │   │   └── index.tsx
+│   │   │   │   ├── right
+│   │   │   │   │   ├── index.scss
+│   │   │   │   │   └── index.tsx
+│   │   │   │   └── ruler
+│   │   │   │       ├── index.scss
+│   │   │   │       └── index.tsx
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── frame
 │   │   │   ├── components
 │   │   │   │   ├── bread-crumbs.tsx
 │   │   │   │   ├── menu.tsx
@@ -110,34 +146,64 @@ child-application
 │   │   ├── login
 │   │   │   ├── index.scss
 │   │   │   └── index.tsx
-│   │   └── system-management
-│   │       └── dictionary
+│   │   └── report
+│   │       └── big-screen
 │   │           ├── index.scss
 │   │           └── index.tsx
 │   ├── react-app-env.d.ts
 │   ├── reportWebVitals.ts
-│   ├── service                                                 // 接口层
+│   ├── service
 │   │   ├── config.ts
+│   │   ├── download.ts
 │   │   ├── fetch.ts
 │   │   └── index.ts
 │   ├── setupTests.ts
-│   ├── store                                                   // 状态
+│   ├── store
 │   │   ├── actions
 │   │   │   ├── authorization.ts
-│   │   │   └── counter.ts
+│   │   │   ├── counter.ts
+│   │   │   └── largeScreen.ts
 │   │   ├── actionType.ts
 │   │   ├── index.ts
 │   │   └── reducers
 │   │       ├── authorization.ts
 │   │       ├── counter.ts
-│   │       └── index.ts
-│   ├── types                                                   // 常用ts类型
+│   │       ├── index.ts
+│   │       └── largeScreen.ts
+│   ├── types
 │   │   └── index.ts
-│   └── utils                                                   // 工具
-│       ├── session-storage.ts
-│       └── tools.ts
+│   ├── utils
+│   │   ├── session-storage.ts
+│   │   └── tools.ts
+│   └── widget
+│       ├── bar
+│       ├── group
+│       │   ├── index.scss
+│       │   └── index.tsx
+│       ├── image
+│       ├── index.scss
+│       ├── index.tsx
+│       ├── line
+│       ├── link
+│       ├── pie
+│       ├── radar
+│       ├── table
+│       ├── text
+│       │   ├── index.scss
+│       │   └── index.tsx
+│       └── tools
+│           ├── configure
+│           │   ├── animate.ts
+│           │   ├── coordinate.ts
+│           │   ├── index.ts
+│           │   ├── page.ts
+│           │   └── widget
+│           │       ├── group.ts
+│           │       └── text.ts
+│           └── index.ts
 ├── tree.text
-└── tsconfig.json
+├── tsconfig.json
+└── yarn.lock
 
 ```
 
