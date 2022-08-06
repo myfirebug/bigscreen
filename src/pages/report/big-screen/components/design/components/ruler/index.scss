@@ -1,0 +1,94 @@
+@include b(screen-disign) {
+    @include e(ruler) {
+        @include m(h) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 5000px;
+            display: flex;
+            flex-wrap: wrap;
+            padding-left: 16px;
+            height: 16px;
+            background-color: #474747;
+            overflow: hidden;
+            .ruler-h-50 {
+                position: relative;
+                display: flex;
+                width: 50px;
+                height: 100%;
+                align-items: flex-end;
+                i {
+                    flex: 1;
+                    border-right: 1px solid #666;
+                    box-sizing: border-box;
+                    &:nth-child(2n) {
+                        height: 6px;
+                    }
+                    &:nth-child(2n + 1) {
+                        height: 4px;
+                    }
+                    &:last-child {
+                        height: 100%;
+                    }
+                }
+                b {
+                    transform: scale(.7);
+                    transform-origin: 0 0;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 10;
+                    line-height: 1;
+                    font-weight: normal;
+                    color: #a0a0a0;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+            }
+        }
+        @include m(v) {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            height: 3000px;
+            width: 16px;
+            overflow: hidden;
+            padding-top: 16px;
+            background-color: #474747;
+            .ruler-h-50 {
+                position: relative;
+                display: flex;
+                flex-direction: column;
+                height: 50px;
+                width: 100%;
+                align-items: flex-end;
+                i {
+                    flex: 1;
+                    border-bottom: 1px solid #666;
+                    &:nth-child(2n) {
+                        width: 6px;
+                    }
+                    &:nth-child(2n + 1) {
+                        width: 4px;
+                    }
+                    &:last-child {
+                        width: 100%;
+                    }
+                }
+                b {
+                    width: 10px;
+                    transform: scale(.7);
+                    transform-origin: 0 0;
+                    position: absolute;
+                    left: 0;
+                    top: 0;
+                    font-size: 10;
+                    line-height: 1;
+                    font-weight: normal;
+                    color: #a0a0a0;
+                    font-family: Arial, Helvetica, sans-serif;
+                }
+            }
+        }
+    }
+}

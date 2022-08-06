@@ -1,0 +1,15 @@
+/* 系统所用字体库样式[统一使用system-icon] */
+
+@font-face {
+    font-family: "web-iconfont";
+    /* Project id 371843 */
+    src: url('../../font/iconfont.woff2?t=1641294973149') format('woff2'), url('../../font/iconfont.woff?t=1641294973149') format('woff'), url('../../font/iconfont.ttf?t=1641294973149') format('truetype');
+}
+
+.bg-icon {
+    font-family: "web-iconfont" !important;
+    font-size: 16px;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

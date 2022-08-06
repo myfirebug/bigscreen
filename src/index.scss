@@ -1,0 +1,143 @@
+/*公用搜索样式*/
+
+@include b(search) {
+    margin-bottom: 10px;
+    padding: 15px 10px 0 10px;
+    background: #fff;
+    border-radius: 5px;
+    @include e(list) {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    @include e(item) {
+        width: 300px;
+        display: flex;
+        align-items: center;
+        padding-bottom: 15px;
+        overflow: hidden;
+        .label {
+            width: 100px;
+            text-align: right;
+        }
+        .value {
+            flex: 1;
+            overflow: hidden;
+        }
+    }
+}
+
+
+/*公用表格*/
+
+@include b(table) {
+    background: #fff;
+    padding: 15px 15px 0 15px;
+    border-radius: 5px;
+    @include e(bars) {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        @include m(left) {
+            color: rgba(0, 0, 0, 0.85);
+            font-weight: 500;
+            font-size: 16px;
+            .ant-btn {
+                margin-right: 10px;
+            }
+        }
+        @include m(right) {
+            display: flex;
+            align-items: center;
+            height: 32px;
+            .search-icon {
+                width: 32px;
+                cursor: pointer;
+                &:hover {
+                    color: #1890ff;
+                }
+            }
+        }
+    }
+    @include e(content) {
+        padding-top: 15px;
+        .ant-table-thead>tr>th,
+        .ant-table-tbody>tr>td,
+        .ant-table tfoot>tr>th,
+        .ant-table tfoot>tr>td {
+            padding: 10px;
+        }
+        .operation {
+            .ant-btn {
+                margin-right: 10px;
+                &:last-child {
+                    margin: 0;
+                }
+            }
+        }
+    }
+    @include e(operation) {
+        position: relative;
+        left: -5px;
+        display: flex;
+        align-items: center;
+        .link {
+            opacity: 1;
+            color: #1890ff;
+            cursor: pointer;
+            margin: 0 5px;
+            transition: all .25s ease 0s;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+        .num {
+            display: inline;
+            min-width: 60px;
+            color: #333;
+        }
+    }
+}
+
+.link {
+    color: #1890ff;
+    transition: all .25s ease 0s;
+    cursor: pointer;
+    &:hover {
+        color: #40a9ff
+    }
+}
+
+
+/* 设置滚动条的样式 */
+
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+
+
+/* 滚动槽 */
+
+::-webkit-scrollbar-track {
+    border-radius: 6px;
+}
+
+
+/* 滚动条滑块 */
+
+::-webkit-scrollbar-thumb {
+    border-radius: 6px;
+    background: rgba(255, 255, 255, .5);
+}
+
+::-webkit-scrollbar-thumb:window-inactive {
+    background: rgba(255, 255, 255, .5);
+}
+
+.ant-pro-table .ant-pro-table-search {
+    margin-bottom: 10px;
+}
+
+.ant-tabs-content-left .ant-tabs-tabpane {
+    padding-left: 10px!important;
+}

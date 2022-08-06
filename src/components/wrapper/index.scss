@@ -1,0 +1,14 @@
+@include b(wrapper) {
+    text-align: center;
+    @include e(loading) {
+        margin: 32px 0;
+    }
+    @include e(error) {
+        margin: 32px 0;
+        .anticon {
+            font-size: 40px;
+            color: #bbb;
+            padding-bottom: 10px;
+        }
+    }
+}

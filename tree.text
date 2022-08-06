@@ -1,0 +1,125 @@
+child-application
+├── build
+│   ├── asset-manifest.json
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── mock
+│   │   └── menu.json
+│   ├── robots.txt
+│   └── static
+│       ├── css
+│       │   ├── 17.0188d0fe.chunk.css
+│       │   ├── 202.fa358a01.chunk.css
+│       │   ├── 226.0188d0fe.chunk.css
+│       │   ├── 346.fa358a01.chunk.css
+│       │   ├── 456.fa358a01.chunk.css
+│       │   ├── 662.fa358a01.chunk.css
+│       │   └── main.cbc2d744.css
+│       ├── js
+│       │   ├── 123.f6d7aab5.chunk.js
+│       │   ├── 17.028548db.chunk.js
+│       │   ├── 202.69737f15.chunk.js
+│       │   ├── 226.5ae13522.chunk.js
+│       │   ├── 346.7fc3ac32.chunk.js
+│       │   ├── 456.29b1ba89.chunk.js
+│       │   ├── 662.cd0c3237.chunk.js
+│       │   ├── main.434bedf1.js
+│       │   └── main.434bedf1.js.LICENSE.txt
+│       └── media
+│           ├── iconfont.04adbf21e593b174d3ee.woff2
+│           ├── iconfont.9bdb5a29cd94bdde3a4a.ttf
+│           └── iconfont.dd7d280b07e00a8ea7f2.woff
+├── config-overrides.js
+├── package-lock.json
+├── package.json
+├── paths.json
+├── public
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── mock
+│   │   └── menu.json
+│   └── robots.txt
+├── README.md
+├── src
+│   ├── App.test.tsx
+│   ├── App.tsx
+│   ├── assets
+│   │   ├── font
+│   │   │   ├── iconfont.ttf
+│   │   │   ├── iconfont.woff
+│   │   │   └── iconfont.woff2
+│   │   ├── images
+│   │   │   └── bg.jpg
+│   │   └── scss
+│   │       ├── base
+│   │       │   ├── font.scss
+│   │       │   ├── normalize.scss
+│   │       │   └── var.scss
+│   │       ├── index.scss
+│   │       └── mixin
+│   │           ├── basic.scss
+│   │           ├── config.scss
+│   │           ├── function.scss
+│   │           └── mixins.scss
+│   ├── components
+│   │   ├── loading
+│   │   │   └── index.tsx
+│   │   └── private-route
+│   │       ├── index.scss
+│   │       └── index.tsx
+│   ├── config
+│   │   └── index.ts
+│   ├── hook
+│   ├── index.tsx
+│   ├── layouts
+│   │   ├── index.scss
+│   │   └── index.tsx
+│   ├── logo.svg
+│   ├── pages
+│   │   ├── frame
+│   │   │   ├── components
+│   │   │   │   ├── bread-crumbs.tsx
+│   │   │   │   ├── menu.tsx
+│   │   │   │   └── routers.tsx
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── home
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   ├── login
+│   │   │   ├── index.scss
+│   │   │   └── index.tsx
+│   │   └── system-management
+│   │       └── dictionary
+│   │           ├── index.scss
+│   │           └── index.tsx
+│   ├── react-app-env.d.ts
+│   ├── reportWebVitals.ts
+│   ├── service
+│   │   ├── config.ts
+│   │   ├── fetch.ts
+│   │   └── index.ts
+│   ├── setupTests.ts
+│   ├── store
+│   │   ├── actions
+│   │   │   ├── authorization.ts
+│   │   │   └── counter.ts
+│   │   ├── actionType.ts
+│   │   ├── index.ts
+│   │   └── reducers
+│   │       ├── authorization.ts
+│   │       ├── counter.ts
+│   │       └── index.ts
+│   ├── types
+│   │   └── index.ts
+│   └── utils
+│       ├── session-storage.ts
+│       └── tools.ts
+├── tree.text
+└── tsconfig.json

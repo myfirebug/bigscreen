@@ -1,0 +1,20 @@
+// 系统主题等样式库[与antd主题保持一致]
+// https://github.com/ant-design/ant-design/blob/master/components/style/color/colors.less
+// 背景
+$bgBase: #F5F7FA;
+$bgBlack: #000000;
+$bgWhite: #ffffff;
+$bgTrans: transparent;
+$blue-base: #526ecc;
+/// color|1|Background Color|4
+$--color-white: #FFFFFF !default;
+$blue-1: mix($--color-white, $blue-base, 10%) !default;
+$blue-2: mix($--color-white, $blue-base, 20%) !default;
+$blue-3: mix($--color-white, $blue-base, 30%) !default;
+$blue-4: mix($--color-white, $blue-base, 40%) !default;
+$blue-5: mix($--color-white, $blue-base, 50%) !default;
+$blue-6: mix($--color-white, $blue-base, 60%) !default;
+$blue-7: mix($--color-white, $blue-base, 70%) !default;
+$blue-8: mix($--color-white, $blue-base, 80%) !default;
+$blue-9: mix($--color-white, $blue-base, 90%) !default;
+$blue-10: mix($--color-white, $blue-base, 100%) !default;
