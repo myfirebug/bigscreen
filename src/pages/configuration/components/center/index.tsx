@@ -5,6 +5,8 @@ import { IPage, IWidget } from '@store/actionType'
 import { Rnd } from 'react-rnd'
 // 所有组件地址
 import components from '@src/widget'
+// 接口
+import Request from '@src/components/request'
 
 interface IDesignBodyCenterProps {
   currentPage: IPage;
@@ -54,7 +56,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   }
 
   // 渲染组件
-  const renderWidgets = (widgets: IWidget[], groupId?: string) => {
+  const renderWidgets = (widgets: IWidget[], groupWidget?: IWidget) => {
     return (
       <>
         {
@@ -174,7 +176,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         }}
                         className={item.id === currentWidgetGroupId ? 'is-active' : ''}>
                         {
-                          renderWidgets(item.widgets, item.id)
+                          renderWidgets(item.widgets, item)
                         }
                       </Widget>
                     </div>
@@ -277,11 +279,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         e.preventDefault()
                         e.stopPropagation()
                         if (item.id !== currentWidgetId) {
-                          if (e.ctrlKey && !groupId && !currentWidgetGroupId) {
-                            //
+                          if (e.ctrlKey && !groupWidget && !currentWidgetGroupId) {
                             changeLargeScreenElement(currentWidgetId ? `${currentWidgetId},${item.id}` : item.id)
                           } else {
-                            changeLargeScreenElement(item.id, groupId)
+                            changeLargeScreenElement(item.id, groupWidget?.id)
                           }
                         }
                       }}
@@ -293,28 +294,32 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         {/* 坐标值 */}
                         <div className="label">{item.coordinateValue.left},{item.coordinateValue.top}</div>
                       </div>
-                      <Widget
-                        className={`${item.configureValue.animateName}`}
-                        text={item.configureValue.elementValue}
-                        config={{
-                          data: item.dataValue.mock,
-                          field: item.dataValue.field,
-                          url: item.dataValue.url,
-                          dataType: item.dataValue.dataType,
-                          params: item.dataValue.params
-                        }}
-                        style={{
-                          ...item.configureValue,
-                          width: '100%',
-                          height: '100%',
-                          animationName: item.configureValue.animateName,
-                          animationTimingFunction: item.configureValue.animateTiming,
-                          animationDelay: item.configureValue.animateDelay + 's',
-                          animationDuration: item.configureValue.animateTime + 's',
-                          animationIterationCount: item.configureValue.animateInfinite ? 'infinite' : 1,
-                          textShadow: `${item.configureValue.textShadowX}px ${item.configureValue.textShadowY}px ${item.configureValue.textShadowF}px ${item.configureValue.textShadowC}`,
-                          fontSize: Number(item.configureValue.fontSize)
-                        }} />
+                      <Request
+                        isPlaceholder={true}
+                        method={item.dataValue.method}
+                        url={item.dataValue.url}
+                        params={JSON.stringify(item.dataValue.params)}
+                        render={(data) => {
+                          return (
+                            <Widget
+                              className={`${item.configureValue.animateName}`}
+                              field={item.dataValue.field}
+                              data={item.dataValue.dataType === 'mock' ? item.data : data}
+                              style={{
+                                ...item.configureValue,
+                                width: '100%',
+                                height: '100%',
+                                animationName: item.configureValue.animateName,
+                                animationTimingFunction: item.configureValue.animateTiming,
+                                animationDelay: item.configureValue.animateDelay + 's',
+                                animationDuration: item.configureValue.animateTime + 's',
+                                animationIterationCount: item.configureValue.animateInfinite ? 'infinite' : 1,
+                                textShadow: `${item.configureValue.textShadowX}px ${item.configureValue.textShadowY}px ${item.configureValue.textShadowF}px ${item.configureValue.textShadowC}`,
+                                fontSize: Number(item.configureValue.fontSize)
+                              }} />
+                          )
+                        }
+                        }></Request>
                     </div>
                   </Rnd>
                 )

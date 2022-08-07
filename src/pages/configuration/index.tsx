@@ -40,8 +40,6 @@ import DesignBodyCenter from './components/center'
 import './index.scss'
 
 interface IDisignProps {
-  drawer: any;
-  setDrawer: React.Dispatch<any>;
   modifyScreen: (datas: any) => void;
   screen: IScreen;
   pages: IPage[];
@@ -67,8 +65,6 @@ interface IDisignProps {
 }
 
 const Disign: FC<IDisignProps> = ({
-  drawer,
-  setDrawer,
   modifyScreen,
   screen,
   pages,
@@ -141,13 +137,11 @@ const Disign: FC<IDisignProps> = ({
         undoLargeScreen={undoLargeScreen}
         redoLargeScreen={redoLargeScreen}
         addLargeScreenElement={addLargeScreenElement}
-        drawer={drawer}
         currentPageId={currentPage.id}
         pastPage={pastPage}
         futurePage={futurePage}
         currentWidgetId={currentWidgetId}
         modifyLargeScreenElement={modifyLargeScreenElement}
-        setDrawer={setDrawer}
         delLargeScreenElement={delLargeScreenElement}
         copyLargeScreenElement={copyLargeScreenElement}
         currentWidgetGroupId={currentWidgetGroupId}

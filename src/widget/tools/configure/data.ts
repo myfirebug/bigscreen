@@ -1,36 +1,4 @@
-const group = {
-	code: 'widget-group',
-	type: 'group',
-	label: '组',
-	widgets: [],
-	configure: [
-		{
-			type: 'SketchPicker',
-			label: '背景颜色',
-			name: 'backgroundColor',
-			required: false,
-			placeholder: '请选择背景颜色'
-		}
-	],
-	configureValue: {
-		backgroundColor: ''
-	},
-	// 坐标值
-	coordinateValue: {
-		left: 0,
-		top: 0,
-		width: 500,
-		height: 500
-	},
-	dataValue: {
-		dataType: 'mock',
-		mock: {
-			value: '文本框'
-		},
-		url: '',
-		method: 'get',
-		field: 'value'
-	},
+const data = {
 	data: [
 		{
 			type: 'Select',
@@ -42,6 +10,15 @@ const group = {
 				{ code: 'mock', name: 'mock数据' },
 				{ code: 'dynamic', name: '动态数据' }
 			]
+		},
+		{
+			type: 'JsonEdit',
+			label: '模拟数据',
+			name: 'mock',
+			required: false,
+			placeholder: '',
+			relationField: 'dataType',
+			relationValue: 'mock'
 		},
 		{
 			type: 'TextArea',
@@ -82,8 +59,15 @@ const group = {
 			placeholder: '',
 			relationField: 'dataType',
 			relationValue: 'dynamic'
+		},
+		{
+			type: 'Input',
+			label: '字段',
+			name: 'field',
+			required: false,
+			placeholder: '请输入接口对应字段'
 		}
 	]
 };
 
-export default group;
+export default data;

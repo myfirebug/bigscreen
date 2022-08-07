@@ -90,7 +90,12 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
    * @param datas 表格数据
    * @returns ReactNode
    */
-  const renderDynamicForm = (datas: any, form: FormInstance<any>, callback: Function, field: string) => {
+  const renderDynamicForm = (
+    datas: any,
+    form: FormInstance<any>,
+    callback: Function,
+    field: string,
+    isUpdate: boolean = true) => {
     return datas.map((item: any, index: number) => {
       if (judgeType(item, '[object Object]')) {
         return (
@@ -104,7 +109,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               >
                 <Input
                   allowClear
-                  onBlur={e => onChangeHandler(callback, item.name, e.target.value, field)}
+                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
                   placeholder={item.placeholder} />
               </Form.Item>
             }
@@ -116,7 +121,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 rules={[{ required: item.require }]}
               >
                 <InputNumber
-                  onBlur={e => onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
+                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
                   style={{ width: '100%' }}
                   placeholder={item.placeholder} />
               </Form.Item>
@@ -130,7 +135,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               >
                 <TextArea
                   allowClear
-                  onBlur={e => onChangeHandler(callback, item.name, e.target.value, field)}
+                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
                   rows={8}
                   placeholder={item.placeholder} />
               </Form.Item>
@@ -143,7 +148,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 valuePropName="checked"
                 rules={[{ required: item.require }]}
               >
-                <Switch onChange={(value) => onChangeHandler(callback, item.name, value, field)} />
+                <Switch onChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
               </Form.Item>
             }
             {
@@ -153,7 +158,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 name={item.name}
                 rules={[{ required: item.require }]}
               >
-                <Slider onAfterChange={(value) => onChangeHandler(callback, item.name, value, field)} />
+                <Slider onAfterChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
               </Form.Item>
             }
             {
@@ -165,7 +170,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               >
                 <Select
                   allowClear
-                  onChange={(value: string) => onChangeHandler(callback, item.name, value, field)}
+                  onChange={(value: string) => isUpdate && onChangeHandler(callback, item.name, value, field)}
                   placeholder={item.placeholder}>
                   {
                     item.options.map((item: any) => (
@@ -191,7 +196,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     >
                       <Input
                         allowClear
-                        onBlur={e => onChangeHandler(callback, item.name, e.target.value, field)}
+                        onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
                         placeholder={item.placeholder} />
                     </Form.Item>
                   </Col>
@@ -211,7 +216,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                                   form.setFieldsValue({
                                     [item.name]: e.hex
                                   })
-                                  onChangeHandler(callback, item.name, e.hex, field)
+                                  isUpdate && onChangeHandler(callback, item.name, e.hex, field)
                                 }} />
                             </div>
                           </div>
@@ -233,7 +238,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 <Form.Item shouldUpdate noStyle>
                   <JsonEditor
                     value={form.getFieldValue(item.name)}
-                    onChange={e => onChangeHandler(callback, item.name, e, field)} />
+                    onChange={e => isUpdate && onChangeHandler(callback, item.name, e, field)} />
                 </Form.Item>
               </Form.Item>
             }
@@ -248,7 +253,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 item.map((subItem: any, subIndex: number) => (
                   <Panel header={subItem.name} key={subIndex}>
                     {
-                      renderDynamicForm(subItem.list, form, callback, field)
+                      renderDynamicForm(subItem.list, form, callback, field, isUpdate)
                     }
                   </Panel>
                 ))
@@ -270,7 +275,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
 
   return (
     <div className='app-screen-disign__body--right' style={{
-      right: rightFlag ? 0 : -300
+      right: rightFlag ? 0 : -400
     }}>
       <div
         onClick={() => setRightFlag(!rightFlag)}
@@ -330,7 +335,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     currentWidget.configure || [],
                     configureForm,
                     modifyLargeScreenElement,
-                    'configureValue'
+                    'configureValue',
+                    true
                   )
                 }
               </Form>
@@ -348,7 +354,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     currentWidget.data || [],
                     dataForm,
                     modifyLargeScreenElement,
-                    'dataValue'
+                    'dataValue',
+                    true
                   )
                 }
               </Form>
@@ -370,7 +377,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     coordinateConfigure.configure || [],
                     dynamicForm,
                     modifyLargeScreenElement,
-                    'coordinateValue'
+                    'coordinateValue',
+                    true
                   )
                 }
               </Form>

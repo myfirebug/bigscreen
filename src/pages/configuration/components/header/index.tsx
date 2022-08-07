@@ -29,8 +29,6 @@ import {
 } from 'react-router-dom'
 
 interface IDesignHeaderProps {
-  drawer: any;
-  setDrawer: React.Dispatch<any>;
   addLargeScreenElement: (data: any) => void;
   pastPage: IPage[];
   futurePage: IPage[];
@@ -48,7 +46,6 @@ interface IDesignHeaderProps {
 }
 
 const DesignHeader: FC<IDesignHeaderProps> = ({
-  setDrawer,
   addLargeScreenElement,
   currentPageId,
   pastPage,
