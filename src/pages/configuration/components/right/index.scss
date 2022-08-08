@@ -48,6 +48,9 @@
             .ant-form-item {
                 padding: 0 15px;
                 margin-bottom: 14px;
+                .anticon {
+                    color: rgba(255, 255, 255, 0.6);
+                }
             }
             .ant-form-item-label>label {
                 color: rgba(255, 255, 255, .6);

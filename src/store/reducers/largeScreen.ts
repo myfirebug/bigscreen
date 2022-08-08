@@ -410,6 +410,10 @@ export const largeScreen = (
 				id: groupId,
 				widgets: subWidgets.map((item) => ({
 					...item,
+					dataValue: {
+						...item.dataValue,
+						useInterface: true
+					},
 					coordinateValue: {
 						...item.coordinateValue,
 						left: item.coordinateValue.left - Math.min(...coordinates.left),
@@ -448,6 +452,10 @@ export const largeScreen = (
 				const insertWidgets = currentPage.widgets[index].widgets.map(
 					(item) => ({
 						...item,
+						dataValue: {
+							...item.dataValue,
+							useInterface: false
+						},
 						coordinateValue: {
 							...item.coordinateValue,
 							left:

@@ -17,9 +17,7 @@ interface ITextProps extends HTMLAttributes<HTMLDivElement> {
 }
 
 const Text: FC<ITextProps> = ({
-  data = {
-    value: '文本框'
-  },
+  data = {},
   field = 'value',
   className,
   children,

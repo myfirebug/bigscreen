@@ -11,7 +11,7 @@ const animate = {
 			name: '动画',
 			list: [
 				{
-					type: 'Select',
+					componentName: 'Select',
 					label: '动画名称',
 					name: 'animateName',
 					required: false,
@@ -82,7 +82,7 @@ const animate = {
 					]
 				},
 				{
-					type: 'Select',
+					componentName: 'Select',
 					label: '动画属性',
 					name: 'animateTiming',
 					required: false,
@@ -96,7 +96,7 @@ const animate = {
 					]
 				},
 				{
-					type: 'InputNumber',
+					componentName: 'InputNumber',
 					label: '时间',
 					name: 'animateTime',
 					required: false,
@@ -105,7 +105,7 @@ const animate = {
 					max: 100
 				},
 				{
-					type: 'InputNumber',
+					componentName: 'InputNumber',
 					label: '延迟',
 					name: 'animateDelay',
 					required: false,
@@ -114,7 +114,7 @@ const animate = {
 					max: 100
 				},
 				{
-					type: 'Switch',
+					componentName: 'Switch',
 					label: '循环播放',
 					name: 'animateInfinite',
 					required: false,

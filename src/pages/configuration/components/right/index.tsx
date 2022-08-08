@@ -2,14 +2,15 @@ import React, {
   FC, useEffect, useState
 } from 'react'
 import './index.scss'
-import { Tabs, Form, Input, InputNumber, FormInstance, Row, Col, Select, Collapse, Switch, Slider } from 'antd'
+import { Tabs, Form, Input, InputNumber, FormInstance, Row, Col, Select, Collapse, Switch, Slider, Button } from 'antd'
 import { pageConfigure, coordinateConfigure } from '@src/widget/tools'
 import { SketchPicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
 import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+// 获取配置项
+import { widgetConfigure } from '@src/widget/tools/configure'
 // JSON编辑器
-import ReactJson from 'react-json-view'
 import JsonEditor from '@src/components/json-editor'
 
 const { TextArea } = Input
@@ -26,6 +27,7 @@ interface IDesignBodyRightProps {
   currentPage: IPage;
   setRightFlag: React.Dispatch<React.SetStateAction<boolean>>;
   rightFlag: Boolean;
+  currentWidgetGroupId: string;
 }
 
 const DesignBodyRight: FC<IDesignBodyRightProps> = ({
@@ -36,7 +38,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   modifyLargeScreenElement,
   currentPage,
   setRightFlag,
-  rightFlag
+  rightFlag,
+  currentWidgetGroupId
 }) => {
   const [key, setKey] = useState('1')
   // 配置from
@@ -79,16 +82,199 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     } else {
       const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
       newCurrentWidget[field][name] = value
-      callback && callback(currentWidgetId, {
-        ...newCurrentWidget
-      })
+      callback && callback(currentWidgetId, newCurrentWidget)
     }
   }
 
   /**
+   * 基础表单
+   * @param item 单个配置项
+   * @param form 表单实例
+   * @param callback 返回方法
+   * @param field 字段名
+   * @param isUpdate 是否change更新
+   * @returns 
+   */
+  const baseForm = (
+    item: any,
+    form: FormInstance<any>,
+    callback: Function,
+    field: string,
+    isUpdate: boolean = true
+  ) => {
+    return (
+      <>
+        {
+          item.componentName === 'Input' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <Input
+              allowClear
+              disabled={item.disabled}
+              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
+              placeholder={item.placeholder} />
+          </Form.Item>
+        }
+        {
+          item.componentName === 'InputNumber' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <InputNumber
+              disabled={item.disabled}
+              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
+              style={{ width: '100%' }}
+              placeholder={item.placeholder} />
+          </Form.Item>
+        }
+        {
+          item.componentName === 'TextArea' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <TextArea
+              allowClear
+              disabled={item.disabled}
+              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
+              rows={8}
+              placeholder={item.placeholder} />
+          </Form.Item>
+        }
+        {
+          item.componentName === 'Switch' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            valuePropName="checked"
+            rules={[{ required: item.require }]}
+          >
+            <Switch
+              disabled={item.disabled}
+              onChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
+          </Form.Item>
+        }
+        {
+          item.componentName === 'Slider' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <Slider
+
+              disabled={item.disabled}
+              onAfterChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
+          </Form.Item>
+        }
+        {
+          item.componentName === 'Select' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <Select
+              allowClear
+              disabled={item.disabled}
+              onChange={(value: string) => isUpdate && onChangeHandler(callback, item.name, value, field)}
+              placeholder={item.placeholder}>
+              {
+                item.options.map((item: any) => (
+                  <Option
+                    key={item.code}
+                    value={item.code}>
+                    {item.name}
+                  </Option>
+                ))
+              }
+            </Select>
+          </Form.Item>
+        }
+        {
+          item.componentName === 'SketchPicker' &&
+          <Form.Item label={item.label}>
+            <Row>
+              <Col span={12}>
+                <Form.Item
+                  noStyle
+                  name={item.name}
+                  tooltip={item.tooltip}
+                  rules={[{ required: item.require }]}
+                >
+                  <Input
+                    allowClear
+                    disabled={item.disabled}
+                    onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
+                    placeholder={item.placeholder} />
+                </Form.Item>
+              </Col>
+              <Col span={11} offset={1}>
+                <Form.Item shouldUpdate noStyle>
+                  {
+                    () => (
+                      <div className='color-wrapper' style={{
+                        background: form.getFieldValue(item.name),
+                        width: '100%'
+                      }}>
+                        获取颜色
+                        <div className='color'>
+                          <SketchPicker
+                            color={form.getFieldValue(item.name)}
+                            onChangeComplete={e => {
+                              form.setFieldsValue({
+                                [item.name]: e.hex
+                              })
+                              isUpdate ? onChangeHandler(callback, item.name, e.hex, field) : form.setFieldValue(item.name, e.hex)
+                            }} />
+                        </div>
+                      </div>
+                    )
+                  }
+                </Form.Item>
+              </Col>
+            </Row>
+          </Form.Item>
+        }
+        {
+          item.componentName === 'JsonEdit' &&
+          <Form.Item
+            label={item.label}
+            name={item.name}
+            tooltip={item.tooltip}
+            rules={[{ required: item.require }]}
+          >
+            <Form.Item shouldUpdate noStyle>
+              <JsonEditor
+                value={form.getFieldValue(item.name)}
+                onChange={e => isUpdate ? onChangeHandler(callback, item.name, e, field) : form.setFieldValue(item.name, e)} />
+            </Form.Item>
+          </Form.Item>
+        }
+      </>
+    )
+  }
+
+  /**
    * 动态渲染表单
-   * @param datas 表格数据
-   * @returns ReactNode
+   * @param datas 数据
+   * @param form 表单实例
+   * @param callback 返回函数
+   * @param field 字段名
+   * @param isUpdate 是否change更新
+   * @returns 
    */
   const renderDynamicForm = (
     datas: any,
@@ -98,149 +284,23 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     isUpdate: boolean = true) => {
     return datas.map((item: any, index: number) => {
       if (judgeType(item, '[object Object]')) {
+        const relationFields = item.relationFields !== undefined ? item.relationFields.split(',') : []
         return (
           <div key={index}>
             {
-              item.type === 'Input' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <Input
-                  allowClear
-                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
-                  placeholder={item.placeholder} />
-              </Form.Item>
-            }
-            {
-              item.type === 'InputNumber' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <InputNumber
-                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
-                  style={{ width: '100%' }}
-                  placeholder={item.placeholder} />
-              </Form.Item>
-            }
-            {
-              item.type === 'TextArea' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <TextArea
-                  allowClear
-                  onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
-                  rows={8}
-                  placeholder={item.placeholder} />
-              </Form.Item>
-            }
-            {
-              item.type === 'Switch' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                valuePropName="checked"
-                rules={[{ required: item.require }]}
-              >
-                <Switch onChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
-              </Form.Item>
-            }
-            {
-              item.type === 'Slider' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <Slider onAfterChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
-              </Form.Item>
-            }
-            {
-              item.type === 'Select' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <Select
-                  allowClear
-                  onChange={(value: string) => isUpdate && onChangeHandler(callback, item.name, value, field)}
-                  placeholder={item.placeholder}>
-                  {
-                    item.options.map((item: any) => (
-                      <Option
-                        key={item.code}
-                        value={item.code}>
-                        {item.name}
-                      </Option>
-                    ))
-                  }
-                </Select>
-              </Form.Item>
-            }
-            {
-              item.type === 'SketchPicker' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item label={item.label}>
-                <Row>
-                  <Col span={12}>
-                    <Form.Item
-                      noStyle
-                      name={item.name}
-                      rules={[{ required: item.require }]}
-                    >
-                      <Input
-                        allowClear
-                        onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
-                        placeholder={item.placeholder} />
-                    </Form.Item>
-                  </Col>
-                  <Col span={11} offset={1}>
-                    <Form.Item shouldUpdate noStyle>
-                      {
-                        () => (
-                          <div className='color-wrapper' style={{
-                            background: form.getFieldValue(item.name),
-                            width: '100%'
-                          }}>
-                            获取颜色
-                            <div className='color'>
-                              <SketchPicker
-                                color={form.getFieldValue(item.name)}
-                                onChangeComplete={e => {
-                                  form.setFieldsValue({
-                                    [item.name]: e.hex
-                                  })
-                                  isUpdate && onChangeHandler(callback, item.name, e.hex, field)
-                                }} />
-                            </div>
-                          </div>
-                        )
-                      }
-                    </Form.Item>
-
-                  </Col>
-                </Row>
-              </Form.Item>
-            }
-            {
-              item.type === 'JsonEdit' && (item.relationField === undefined || currentWidget[field][item.relationField] === item.relationValue) &&
-              <Form.Item
-                label={item.label}
-                name={item.name}
-                rules={[{ required: item.require }]}
-              >
-                <Form.Item shouldUpdate noStyle>
-                  <JsonEditor
-                    value={form.getFieldValue(item.name)}
-                    onChange={e => isUpdate && onChangeHandler(callback, item.name, e, field)} />
+              !relationFields.length ?
+                baseForm(item, form, callback, field, isUpdate) :
+                <Form.Item
+                  noStyle
+                  shouldUpdate>
+                  {({ getFieldValue }) => {
+                    if (relationFields.every((subItem: string) => item.relationValues.includes(String(getFieldValue(subItem))))) {
+                      return (
+                        baseForm(item, form, callback, field, isUpdate)
+                      );
+                    }
+                  }}
                 </Form.Item>
-              </Form.Item>
             }
           </div >
         )
@@ -260,6 +320,44 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               }
             </Collapse>
           </div>
+        )
+      }
+    })
+  }
+
+  // 保存数据
+  const saveData = (values: any) => {
+    console.log(values, 'values')
+    const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
+    const index = widgetConfigure.findIndex((item: any) => item.code === newCurrentWidget.code)
+    newCurrentWidget.dataValue = values
+    // 如果没有说明该组件有问题
+    if (index === -1) {
+      return
+    }
+    newCurrentWidget.dataValue = {
+      ...widgetConfigure[index].dataValue,
+      ...values
+    }
+    modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
+  }
+
+  // 组件树
+  const renderWidgetsTree = (datas: IWidget[]) => {
+    return datas.map((item) => {
+      if (item.widgets) {
+        return (
+          <div key={item.id}>
+            {renderWidgetsTree(item.widgets)}
+          </div>
+        )
+      } else {
+        return (
+          <li
+            key={item.id}
+            className="app-screen-disign__layer--item">
+            {item.label}
+          </li>
         )
       }
     })
@@ -289,24 +387,28 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         activeKey={key}
         onChange={key => setKey(key)}
         destroyInactiveTabPane>
-        <TabPane tab="图层" key="5">
+        <TabPane tab="图层管理" key="5">
           <Wrapper
             loading={false}
             error={false}
             nodata={Boolean((currentPage && currentPage.widgets && !currentPage.widgets.length))}>
             <ul className="app-screen-disign__layer">
               {
+                renderWidgetsTree(currentPage.widgets || [])
+              }
+              {/* {
                 currentPage.widgets ? currentPage.widgets.map((item: any) => (
                   <li
                     key={item.id}
                     className="app-screen-disign__layer--item">{item.label}</li>
                 )) : null
-              }
+              } */}
             </ul>
           </Wrapper>
         </TabPane>
         <TabPane tab="项目配置" key="1">
           <Form
+            preserve
             form={pageForm}
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 18 }}
@@ -343,11 +445,13 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
             </TabPane>
             <TabPane tab="数据" key="3">
               <Form
+                preserve
                 form={dataForm}
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
                 autoComplete="off"
                 labelAlign="left"
+                onFinish={saveData}
               >
                 {
                   renderDynamicForm(
@@ -355,13 +459,40 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     dataForm,
                     modifyLargeScreenElement,
                     'dataValue',
-                    true
+                    false
                   )
                 }
+                {/* {
+                  currentWidgetId && currentWidgetGroupId === currentWidgetId ?
+                    <>
+                      <Form.Item
+                        label="使用接口数据"
+                        name="useInterface"
+                        valuePropName="checked"
+                      >
+                        <Switch />
+                      </Form.Item>
+                      <Form.Item
+                        noStyle
+                        shouldUpdate={(prevValues, curValues) => prevValues.useInterface !== curValues.useInterface}>
+                        {({ getFieldValue }) => {
+                          if (getFieldValue('useInterface')) {
+                            return dataFormRender(true)
+                          }
+                        }}</Form.Item>
+                    </> : dataFormRender(!currentWidgetGroupId)
+                } */}
+
+                <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
+                  <Button type="primary" htmlType="submit" block>
+                    保存
+                  </Button>
+                </Form.Item>
               </Form>
             </TabPane>
             <TabPane tab="坐标" key="4">
               <Form
+                preserve
                 form={dynamicForm}
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}

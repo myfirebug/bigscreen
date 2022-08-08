@@ -5,7 +5,7 @@ const group = {
 	widgets: [],
 	configure: [
 		{
-			type: 'SketchPicker',
+			componentName: 'SketchPicker',
 			label: '背景颜色',
 			name: 'backgroundColor',
 			required: false,
@@ -23,65 +23,67 @@ const group = {
 		height: 500
 	},
 	dataValue: {
-		dataType: 'mock',
+		useInterface: false,
+		dataType: 'dynamic',
 		mock: {
-			value: '文本框'
+			value: '123'
 		},
 		url: '',
-		method: 'get',
-		field: 'value'
+		method: 'get'
 	},
 	data: [
 		{
-			type: 'Select',
-			label: '数据类型',
+			componentName: 'Switch',
+			label: '使用接口',
+			name: 'useInterface',
+			required: false,
+			type: 'hidden',
+			placeholder: ''
+		},
+		{
+			componentName: 'JsonEdit',
+			label: 'mock数据',
+			name: 'mock',
+			required: false,
+			placeholder: '请输入mock数据',
+			relationFields: 'useInterface',
+			relationValues: 'false'
+		},
+		{
+			componentName: 'Select',
+			label: '请求类型',
 			name: 'dataType',
 			required: false,
 			placeholder: '',
+			disabled: true,
+			relationFields: 'useInterface',
+			relationValues: 'true',
 			options: [
 				{ code: 'mock', name: 'mock数据' },
-				{ code: 'dynamic', name: '动态数据' }
+				{ code: 'dynamic', name: '接口数据' }
 			]
 		},
 		{
-			type: 'TextArea',
+			componentName: 'TextArea',
 			label: '接口地址',
 			name: 'url',
 			required: false,
-			placeholder: '',
-			relationField: 'dataType',
-			relationValue: 'dynamic'
+			placeholder: '请输入接口地址',
+			relationFields: 'dataType,useInterface',
+			relationValues: 'dynamic,true'
 		},
 		{
-			type: 'JsonEdit',
-			label: '真实数据',
-			name: 'data',
-			required: false,
-			placeholder: '',
-			relationField: 'dataType',
-			relationValue: 'dynamic'
-		},
-		{
-			type: 'Select',
-			label: '接口方式',
+			componentName: 'Select',
+			label: '请求方式',
 			name: 'method',
 			required: false,
-			placeholder: '请选择接口方式',
-			relationField: 'dataType',
-			relationValue: 'dynamic',
+			placeholder: '',
+			relationFields: 'dataType,useInterface',
+			relationValues: 'dynamic,true',
 			options: [
 				{ code: 'get', name: 'GET' },
-				{ code: 'post', name: 'POST' }
+				{ code: 'post', name: 'post' }
 			]
-		},
-		{
-			type: 'JsonEdit',
-			label: '接口参数',
-			name: 'params',
-			required: false,
-			placeholder: '',
-			relationField: 'dataType',
-			relationValue: 'dynamic'
 		}
 	]
 };

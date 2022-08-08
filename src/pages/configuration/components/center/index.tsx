@@ -56,7 +56,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   }
 
   // 渲染组件
-  const renderWidgets = (widgets: IWidget[], groupWidget?: IWidget) => {
+  const renderWidgets = (widgets: IWidget[], groupConfig?: any) => {
     return (
       <>
         {
@@ -168,17 +168,34 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         {/* 坐标值 */}
                         <div className="label">{item.coordinateValue.left},{item.coordinateValue.top}</div>
                       </div>
-                      <Widget
-                        style={{
-                          width: item.coordinateValue.width,
-                          height: item.coordinateValue.height,
-                          ...item.configureValue
-                        }}
-                        className={item.id === currentWidgetGroupId ? 'is-active' : ''}>
-                        {
-                          renderWidgets(item.widgets, item)
-                        }
-                      </Widget>
+                      <Request
+                        isPlaceholder={true}
+                        method={item.dataValue.method}
+                        url={item.dataValue.url}
+                        params={JSON.stringify(item.dataValue.params || {})}
+                        render={(data) => {
+                          console.log(item, "item.useInterface ? data : item.dataValue.mock")
+                          return (
+                            <Widget
+                              style={{
+                                width: item.coordinateValue.width,
+                                height: item.coordinateValue.height,
+                                ...item.configureValue
+                              }}
+                              className={item.id === currentWidgetGroupId ? 'is-active' : ''}>
+                              {
+                                renderWidgets(item.widgets, {
+                                  ...item,
+                                  dataValue: {
+                                    ...item.dataValue,
+                                    mock: item.dataValue.useInterface ? data : item.dataValue.mock
+                                  }
+                                })
+                              }
+                            </Widget>
+                          )
+                        }}></Request>
+
                     </div>
                   </Rnd>
                 )
@@ -279,10 +296,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         e.preventDefault()
                         e.stopPropagation()
                         if (item.id !== currentWidgetId) {
-                          if (e.ctrlKey && !groupWidget && !currentWidgetGroupId) {
+                          if (e.ctrlKey && !groupConfig && !currentWidgetGroupId) {
                             changeLargeScreenElement(currentWidgetId ? `${currentWidgetId},${item.id}` : item.id)
                           } else {
-                            changeLargeScreenElement(item.id, groupWidget?.id)
+                            changeLargeScreenElement(item.id, groupConfig?.id)
                           }
                         }
                       }}
@@ -296,15 +313,25 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       </div>
                       <Request
                         isPlaceholder={true}
-                        method={item.dataValue.method}
-                        url={item.dataValue.url}
-                        params={JSON.stringify(item.dataValue.params)}
+                        method={item.dataValue.useInterface ? '' : item.dataValue.method}
+                        url={item.dataValue.useInterface ? '' : item.dataValue.url}
+                        params={JSON.stringify(item.dataValue.params || {})}
                         render={(data) => {
+                          // 确定数据
+                          let datas: any = null
+                          if (item.dataValue.useInterface) {
+                            console.log(groupConfig, 'groupConfig')
+                            datas = groupConfig.dataValue.mock
+                          } else {
+                            datas = item.dataValue.dataType === 'mock' ? item.dataValue.mock : data
+                          }
+
+
                           return (
                             <Widget
                               className={`${item.configureValue.animateName}`}
                               field={item.dataValue.field}
-                              data={item.dataValue.dataType === 'mock' ? item.data : data}
+                              data={datas}
                               style={{
                                 ...item.configureValue,
                                 width: '100%',

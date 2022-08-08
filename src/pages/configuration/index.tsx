@@ -223,6 +223,7 @@ const Disign: FC<IDisignProps> = ({
               modifyLargeScreenElement={modifyLargeScreenElement}
               modifyScreen={modifyScreen}
               currentWidget={currentWidget}
+              currentWidgetGroupId={currentWidgetGroupId}
               currentWidgetId={currentWidgetId} /> : null
         }
       </div>

@@ -1,7 +1,5 @@
 // 动画
 import animate from '../animate';
-// 数据配置项
-import data from '../data';
 
 const text = {
 	code: 'widget-text',
@@ -32,7 +30,7 @@ const text = {
 	// 基础配置项
 	configure: [
 		{
-			type: 'InputNumber',
+			componentName: 'InputNumber',
 			label: '字体大小',
 			name: 'fontSize',
 			required: false,
@@ -40,21 +38,21 @@ const text = {
 			placeholder: ''
 		},
 		{
-			type: 'InputNumber',
+			componentName: 'InputNumber',
 			label: '字体间距',
 			name: 'letterSpacing',
 			required: false,
 			placeholder: ''
 		},
 		{
-			type: 'InputNumber',
+			componentName: 'InputNumber',
 			label: '行高',
 			name: 'lineHeight',
 			required: false,
 			placeholder: ''
 		},
 		{
-			type: 'Select',
+			componentName: 'Select',
 			label: '文字粗细',
 			name: 'fontWeight',
 			required: false,
@@ -67,7 +65,7 @@ const text = {
 			]
 		},
 		{
-			type: 'Select',
+			componentName: 'Select',
 			label: '对齐方式',
 			name: 'textAlign',
 			required: false,
@@ -79,14 +77,14 @@ const text = {
 			]
 		},
 		{
-			type: 'SketchPicker',
+			componentName: 'SketchPicker',
 			label: '字体颜色',
 			name: 'color',
 			required: false,
 			placeholder: '请选择字体颜色'
 		},
 		{
-			type: 'SketchPicker',
+			componentName: 'SketchPicker',
 			label: '背景颜色',
 			name: 'backgroundColor',
 			required: false,
@@ -98,28 +96,28 @@ const text = {
 				name: '文字阴影',
 				list: [
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: 'X轴偏移',
 						name: 'textShadowX',
 						required: false,
 						placeholder: '请输入X轴偏移'
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: 'Y轴偏移',
 						name: 'textShadowY',
 						required: false,
 						placeholder: '请输入Y轴偏移'
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '模糊值',
 						name: 'textShadowF',
 						required: false,
 						placeholder: '请输入模糊值'
 					},
 					{
-						type: 'SketchPicker',
+						componentName: 'SketchPicker',
 						label: '颜色',
 						name: 'textShadowC',
 						required: false,
@@ -133,7 +131,7 @@ const text = {
 				name: '边框',
 				list: [
 					{
-						type: 'Select',
+						componentName: 'Select',
 						label: '边框样式',
 						name: 'borderStyle',
 						required: false,
@@ -151,14 +149,14 @@ const text = {
 						]
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '边框尺寸',
 						name: 'borderWidth',
 						required: false,
 						placeholder: '请输入尺寸'
 					},
 					{
-						type: 'SketchPicker',
+						componentName: 'SketchPicker',
 						label: '颜色',
 						name: 'borderColor',
 						required: false,
@@ -172,28 +170,28 @@ const text = {
 				name: '圆角',
 				list: [
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '左上',
 						name: 'borderTopLeftRadius',
 						required: false,
 						placeholder: '请输入尺寸'
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '右上',
 						name: 'borderTopRightRadius',
 						required: false,
 						placeholder: '请输入尺寸'
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '左下',
 						name: 'borderBottomLeftRadius',
 						required: false,
 						placeholder: '请输入尺寸'
 					},
 					{
-						type: 'InputNumber',
+						componentName: 'InputNumber',
 						label: '右下',
 						name: 'borderBottomRightRadius',
 						required: false,
@@ -211,6 +209,7 @@ const text = {
 		height: 40
 	},
 	dataValue: {
+		useInterface: false,
 		dataType: 'mock',
 		mock: {
 			value: '文本框'
@@ -219,7 +218,68 @@ const text = {
 		method: 'get',
 		field: 'value'
 	},
-	...data
+	data: [
+		{
+			componentName: 'Switch',
+			label: '使用组数据',
+			name: 'useInterface',
+			required: false,
+			disabled: true,
+			placeholder: '',
+			tooltip: '该组件使用组的接口数据'
+		},
+		{
+			componentName: 'Select',
+			label: '请求类型',
+			name: 'dataType',
+			required: false,
+			placeholder: '',
+			relationFields: 'useInterface',
+			relationValues: 'false',
+			options: [
+				{ code: 'mock', name: 'mock数据' },
+				{ code: 'dynamic', name: '接口数据' }
+			]
+		},
+		{
+			componentName: 'JsonEdit',
+			label: 'mock数据',
+			name: 'mock',
+			required: false,
+			placeholder: '请输入mock数据',
+			relationFields: 'dataType,useInterface',
+			relationValues: 'mock,false'
+		},
+		{
+			componentName: 'TextArea',
+			label: '接口地址',
+			name: 'url',
+			required: false,
+			placeholder: '请输入接口地址',
+			relationFields: 'dataType,useInterface',
+			relationValues: 'dynamic,false'
+		},
+		{
+			componentName: 'Select',
+			label: '请求方式',
+			name: 'method',
+			required: false,
+			placeholder: '',
+			relationFields: 'dataType,useInterface',
+			relationValues: 'dynamic,false',
+			options: [
+				{ code: 'get', name: 'GET' },
+				{ code: 'post', name: 'post' }
+			]
+		},
+		{
+			componentName: 'Input',
+			label: '对应字段',
+			name: 'field',
+			required: false,
+			placeholder: ''
+		}
+	]
 };
 
 export default text;
