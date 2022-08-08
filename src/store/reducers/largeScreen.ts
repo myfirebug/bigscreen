@@ -14,6 +14,7 @@ import {
 	UNDO_LARGESCREEN,
 	REDO_LARGESCREEN,
 	LARGESCREEN_STATE,
+	SHOWORHIDE_LARGESCREEN_ELEMENT,
 	MODIFY_SCREEN,
 	GROUP,
 	CANCEL_GROUP,
@@ -194,6 +195,48 @@ export const largeScreen = (
 				...copy,
 				pastPage: [...copy.pastPage, currentPage]
 			};
+		}
+		// 显示隐藏组件
+		case SHOWORHIDE_LARGESCREEN_ELEMENT: {
+			const currentPage: IPage = copy.currentPage;
+			// 找组下标
+			const groupIndex = currentPage.widgets.findIndex(
+				(item) => item.id === action.groupId
+			);
+
+			if (groupIndex !== -1) {
+				currentPage.widgets[groupIndex].widgets = currentPage.widgets[
+					groupIndex
+				].widgets.map((item) => {
+					if (item.id === action.id) {
+						return {
+							...item,
+							configureValue: {
+								...item.configureValue,
+								display:
+									item.configureValue.display === 'block' ? 'none' : 'block'
+							}
+						};
+					}
+					return item;
+				});
+			} else {
+				// 如果没有分组，则找分当前页下面的widget
+				currentPage.widgets = currentPage.widgets.map((item) => {
+					if (item.id === action.id) {
+						return {
+							...item,
+							configureValue: {
+								...item.configureValue,
+								display:
+									item.configureValue.display === 'block' ? 'none' : 'block'
+							}
+						};
+					}
+					return item;
+				});
+			}
+			return copy;
 		}
 		// 修改元素，注意里只有子级组件才传groupId哈
 		case MODIFY_LARGESCREEN_ELEMENT: {

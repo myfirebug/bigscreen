@@ -19,14 +19,14 @@ const Wrapper: FC<IWrapperProps> = ({
   children
 }) => {
   return (
-    <div className="bg-wrapper">
+    <div className="app-wrapper">
       {
-        loading && <div className='bg-wrapper__loading'>
+        loading && <div className='app-wrapper__loading'>
           <Spin tip="loading..." />
         </div>
       }
       {
-        error && !loading && <div className='bg-wrapper__error'>
+        error && !loading && <div className='app-wrapper__error'>
           <CloseCircleOutlined />
           <p style={{
             color: '#00000040',
@@ -35,7 +35,7 @@ const Wrapper: FC<IWrapperProps> = ({
         </div>
       }
       {
-        !loading && !error && nodata && <div className="bg-wrapper__nodata">
+        !loading && !error && nodata && <div className="app-wrapper__nodata">
           <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
         </div>
       }

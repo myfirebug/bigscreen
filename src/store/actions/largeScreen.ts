@@ -25,6 +25,8 @@ import {
 	UNDO_LARGESCREEN_TYPE,
 	REDO_LARGESCREEN,
 	REDO_LARGESCREEN_TYPE,
+	SHOWORHIDE_LARGESCREEN_ELEMENT,
+	SHOWORHIDE_LARGESCREEN_ELEMENT_TYPE,
 	GROUP,
 	GROUP_TYPE,
 	CANCEL_GROUP,
@@ -83,6 +85,13 @@ export interface IDelLargeScreenElementAction {
 	type: DEL_LARGESCREEN_ELEMENT_TYPE;
 }
 
+// 显示隐藏元素
+export interface IShowOrHideLargeScreenElementAction {
+	type: SHOWORHIDE_LARGESCREEN_ELEMENT_TYPE;
+	id: string;
+	groupId?: string;
+}
+
 // 修改元素
 export interface IModifyLargeScreenElementAction {
 	type: MODIFY_LARGESCREEN_ELEMENT_TYPE;
@@ -138,6 +147,7 @@ export type ModifyAction =
 	| IRedoLargeScreenAction
 	| IModifyScreenAction
 	| IGroupAction
+	| IShowOrHideLargeScreenElementAction
 	| ICancelGroupAction;
 
 // 获取页面数据的方法
@@ -189,6 +199,16 @@ const actionAddLargeScreenElement = (
 // 删除元素数据的方法
 const actionDelLargeScreenElement = (): IDelLargeScreenElementAction => ({
 	type: DEL_LARGESCREEN_ELEMENT
+});
+
+// 显示隐藏元素数据的方法
+const actionShowOrHideLargeScreenElement = (
+	id: string,
+	groupId?: string
+): IShowOrHideLargeScreenElementAction => ({
+	type: SHOWORHIDE_LARGESCREEN_ELEMENT,
+	id,
+	groupId
 });
 
 // 修改元素数据的方法
@@ -285,6 +305,12 @@ export const addLargeScreenElement =
 export const delLargeScreenElement = () => (dispatch: Dispatch) => {
 	dispatch(actionDelLargeScreenElement());
 };
+
+// 显示隐藏页面数据
+export const showOrHideLargeScreenElement =
+	(id: string, groupId?: string) => (dispatch: Dispatch) => {
+		dispatch(actionShowOrHideLargeScreenElement(id, groupId));
+	};
 
 // 修改元素数据
 export const modifyLargeScreenElement =

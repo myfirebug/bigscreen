@@ -37,7 +37,7 @@ interface IDesignHeaderProps {
   currentPageId: string;
   undoLargeScreen: () => void;
   redoLargeScreen: () => void;
-  modifyLargeScreenElement: (id: string, data: IWidget, groupId?: string) => void;
+  modifyLargeScreenElement: (id: string, data: IWidget) => void;
   delLargeScreenElement: () => void;
   copyLargeScreenElement: () => void;
   currentWidgetGroupId: string;

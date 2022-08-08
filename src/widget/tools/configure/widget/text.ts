@@ -8,6 +8,7 @@ const text = {
 	isGroup: false,
 	// 配置项值
 	configureValue: {
+		display: 'block',
 		fontSize: 26,
 		letterSpacing: 0,
 		fontWeight: 'normal',

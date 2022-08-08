@@ -13,6 +13,7 @@ const group = {
 		}
 	],
 	configureValue: {
+		display: 'block',
 		backgroundColor: ''
 	},
 	// 坐标值

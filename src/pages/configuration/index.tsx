@@ -21,6 +21,7 @@ import {
   modifyScreen,
   changeLargeScreenPage,
   changeLargeScreenElement,
+  showOrHideLargeScreenElement,
   group,
   cancelGroup
 } from '@store/actions/largeScreen'
@@ -50,6 +51,7 @@ interface IDisignProps {
   addLargeScreenElement: (data: any) => void;
   modifyLargeScreenElement: (id: string, data: IWidget) => void;
   changeLargeScreenElement: (id: string, groupId?: string) => void;
+  showOrHideLargeScreenElement: (id: string, groupId?: string) => void;
   delLargeScreenElement: () => void;
   copyLargeScreenElement: () => void;
   group: () => void;
@@ -86,7 +88,8 @@ const Disign: FC<IDisignProps> = ({
   delLargeScreenElement,
   copyLargeScreenElement,
   group,
-  cancelGroup
+  cancelGroup,
+  showOrHideLargeScreenElement
 }) => {
 
   // 获取装组件的盒子，这里需要获取他的宽度
@@ -223,6 +226,8 @@ const Disign: FC<IDisignProps> = ({
               modifyLargeScreenElement={modifyLargeScreenElement}
               modifyScreen={modifyScreen}
               currentWidget={currentWidget}
+              showOrHideLargeScreenElement={showOrHideLargeScreenElement}
+              changeLargeScreenElement={changeLargeScreenElement}
               currentWidgetGroupId={currentWidgetGroupId}
               currentWidgetId={currentWidgetId} /> : null
         }
@@ -261,7 +266,8 @@ const mapDispatchToProps = {
   changeLargeScreenElement,
   copyLargeScreenElement,
   group,
-  cancelGroup
+  cancelGroup,
+  showOrHideLargeScreenElement
 };
 
 

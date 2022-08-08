@@ -134,4 +134,54 @@
             }
         }
     }
+    @include e(layer) {
+        text-align: left;
+        .app-screen-disign__layer {
+            >.header {
+                padding-left: 10px;
+            }
+            .app-screen-disign__layer--item .header {
+                padding-left: 34px;
+            }
+        }
+        .header {
+            display: flex;
+            height: 36px;
+            line-height: 36px;
+            color: rgba(255, 255, 255, 0.6);
+            border-bottom: 1px solid #383838;
+            cursor: pointer;
+            transition: all .25s ease 0s;
+            &:hover {
+                background-color: rgba(0, 0, 0, .1);
+            }
+            @include when(active) {
+                color: #fff;
+                background-color: rgba(0, 0, 0, .1);
+            }
+            >span {
+                display: block;
+            }
+            .show {
+                &:hover {
+                    color: #fff;
+                    transform: rotate(-15deg);
+                }
+            }
+            .show,
+            .file {
+                width: 24px;
+                text-align: center;
+                transition: all .25s ease 0s;
+            }
+            .label {
+                padding-left: 10px;
+            }
+        }
+        @include m(item) {
+            .header {
+                padding-left: 10px;
+            }
+        }
+    }
 }

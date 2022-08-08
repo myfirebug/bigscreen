@@ -174,7 +174,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         url={item.dataValue.url}
                         params={JSON.stringify(item.dataValue.params || {})}
                         render={(data) => {
-                          console.log(item, "item.useInterface ? data : item.dataValue.mock")
                           return (
                             <Widget
                               style={{

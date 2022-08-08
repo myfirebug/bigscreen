@@ -1,13 +1,33 @@
 import React, {
-  FC, useEffect, useState
+  FC, MouseEvent, useEffect, useState
 } from 'react'
 import './index.scss'
-import { Tabs, Form, Input, InputNumber, FormInstance, Row, Col, Select, Collapse, Switch, Slider, Button } from 'antd'
+import {
+  Tabs,
+  Form,
+  Input,
+  InputNumber,
+  FormInstance,
+  Row,
+  Col,
+  Select,
+  Collapse,
+  Switch,
+  Slider,
+  Button
+} from 'antd'
 import { pageConfigure, coordinateConfigure } from '@src/widget/tools'
 import { SketchPicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
-import { LeftOutlined, RightOutlined } from '@ant-design/icons'
+import {
+  LeftOutlined,
+  RightOutlined,
+  EyeOutlined,
+  EyeInvisibleOutlined,
+  FolderOutlined,
+  FolderOpenOutlined
+} from '@ant-design/icons'
 // 获取配置项
 import { widgetConfigure } from '@src/widget/tools/configure'
 // JSON编辑器
@@ -28,6 +48,8 @@ interface IDesignBodyRightProps {
   setRightFlag: React.Dispatch<React.SetStateAction<boolean>>;
   rightFlag: Boolean;
   currentWidgetGroupId: string;
+  showOrHideLargeScreenElement: (id: string, groupId?: string) => void;
+  changeLargeScreenElement: (id: string, groupId?: string) => void;
 }
 
 const DesignBodyRight: FC<IDesignBodyRightProps> = ({
@@ -39,7 +61,9 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   currentPage,
   setRightFlag,
   rightFlag,
-  currentWidgetGroupId
+  currentWidgetGroupId,
+  showOrHideLargeScreenElement,
+  changeLargeScreenElement
 }) => {
   const [key, setKey] = useState('1')
   // 配置from
@@ -327,7 +351,6 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
 
   // 保存数据
   const saveData = (values: any) => {
-    console.log(values, 'values')
     const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
     const index = widgetConfigure.findIndex((item: any) => item.code === newCurrentWidget.code)
     newCurrentWidget.dataValue = values
@@ -342,34 +365,83 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
   }
 
+  // 切换元素
+  const changeElement = (e: MouseEvent, id: string, groupId?: string) => {
+    e.stopPropagation()
+    e.preventDefault()
+    changeLargeScreenElement(id, groupId)
+  }
+
+  // 修改元素
+  const modifyElement = (e: MouseEvent, id: string, groupId?: string) => {
+    e.stopPropagation()
+    e.preventDefault()
+    showOrHideLargeScreenElement(id, groupId)
+  }
+
   // 组件树
-  const renderWidgetsTree = (datas: IWidget[]) => {
+  const renderWidgetsTree = (datas: IWidget[], groudId?: string) => {
     return datas.map((item) => {
       if (item.widgets) {
         return (
-          <div key={item.id}>
-            {renderWidgetsTree(item.widgets)}
+          <div
+            className="app-screen-disign__layer"
+            key={item.id}>
+            <div
+              onClick={(e) => changeElement(e, item.id, item.id)}
+              className={`header ${item.id === currentWidgetId ? 'is-active' : ''}`}>
+              <span
+                onClick={(e) => modifyElement(e, item.id)}
+                className='show'>
+                {
+                  item.configureValue.display === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                }
+              </span>
+              <span className="file">
+                <FolderOpenOutlined />
+              </span>
+              <span className="label">
+                {item.label}
+              </span>
+            </div>
+            {renderWidgetsTree(item.widgets, item.id)}
           </div>
         )
       } else {
         return (
-          <li
+          <div
             key={item.id}
             className="app-screen-disign__layer--item">
-            {item.label}
-          </li>
+            <div
+              onClick={(e) => changeElement(e, item.id, groudId)}
+              className={`header ${item.id === currentWidgetId ? 'is-active' : ''}`}>
+              <span
+                onClick={(e) => modifyElement(e, item.id, groudId)}
+                className='show'>
+                {
+                  item.configureValue.display === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                }
+              </span>
+              <span className="file">
+                <FolderOutlined />
+              </span>
+              <span className="label">
+                {item.label}
+              </span>
+            </div>
+          </div>
         )
       }
     })
   }
 
-  useEffect(() => {
-    if (currentWidgetId && !currentWidgetId.includes(',')) {
-      setKey('2')
-    } else {
-      setKey('1')
-    }
-  }, [currentWidgetId])
+  // useEffect(() => {
+  //   if (currentWidgetId && !currentWidgetId.includes(',')) {
+  //     setKey('2')
+  //   } else {
+  //     setKey('1')
+  //   }
+  // }, [currentWidgetId])
 
   return (
     <div className='app-screen-disign__body--right' style={{
@@ -392,7 +464,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
             loading={false}
             error={false}
             nodata={Boolean((currentPage && currentPage.widgets && !currentPage.widgets.length))}>
-            <ul className="app-screen-disign__layer">
+            <div className="app-screen-disign__layer">
               {
                 renderWidgetsTree(currentPage.widgets || [])
               }
@@ -403,7 +475,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                     className="app-screen-disign__layer--item">{item.label}</li>
                 )) : null
               } */}
-            </ul>
+            </div>
           </Wrapper>
         </TabPane>
         <TabPane tab="项目配置" key="1">
