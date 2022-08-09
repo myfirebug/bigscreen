@@ -26,9 +26,9 @@
                 transition: all .25s ease 0s;
                 &:hover {
                     color: #fff;
-                    background-color: rgba(0, 0, 0, .8);
+                    background-color: #222;
                     .elements {
-                        display: block;
+                        display: flex;
                     }
                 }
                 @include when(disabled) {
@@ -41,12 +41,44 @@
             }
             .elements {
                 display: none;
+                flex-wrap: wrap;
                 position: absolute;
                 left: 0;
                 top: 49px;
-                width: 400px;
-                height: 400px;
-                background-color: rgba(0, 0, 0, .8);
+                width: 450px;
+                padding-top: 15px;
+                background-color: #222;
+                >div {
+                    width: 100px;
+                    height: 120px;
+                    margin: 0 0 0 10px;
+                    color: #666;
+                    &:hover {
+                        color: #fff;
+                        .img {
+                            border-color: #444;
+                        }
+                    }
+                }
+                .img {
+                    width: 100%;
+                    height: 80px;
+                    font-size: 45px;
+                    text-align: center;
+                    line-height: 80px;
+                    border: 1px solid #333;
+                    box-sizing: border-box;
+                    border-radius: 5px;
+                    overflow: hidden;
+                    transition: all .25s ease 0s;
+                }
+                .name {
+                    height: 30px;
+                    line-height: 30px;
+                    font-size: 12px;
+                    transition: all .25s ease 0s;
+                    @include single()
+                }
             }
         }
         @include m(center) {
@@ -91,7 +123,7 @@
                 transition: all .25s ease 0s;
                 &:hover {
                     color: #fff;
-                    background-color: rgba(0, 0, 0, .8);
+                    background-color: #222;
                 }
                 @include when(disabled) {
                     color: rgba(255, 255, 255, .4);

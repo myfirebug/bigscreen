@@ -181,7 +181,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                           // 确定数据
                           let datas: any = null
                           if (item.dataValue.useInterface) {
-                            console.log(groupConfig, 'groupConfig')
                             datas = groupConfig.dataValue.mock
                           } else {
                             datas = item.dataValue.dataType === 'mock' ? item.dataValue.mock : data

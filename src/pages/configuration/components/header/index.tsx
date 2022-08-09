@@ -15,7 +15,8 @@ import {
   FolderOutlined,
   FolderAddOutlined,
   DeleteOutlined,
-  CopyOutlined
+  CopyOutlined,
+  PictureOutlined
 } from '@ant-design/icons'
 // 配置文件
 import { widgetConfigure } from '@src/widget/tools'
@@ -204,7 +205,28 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
               {item.icon}
               <p>{item.name}</p>
               {
-                item.data ? <div className="elements"></div> : ''
+                item.datas && item.datas.length ?
+                  <div className="elements">
+                    {
+                      item.datas.map((subItem: any, subIndex: string) => (
+                        <div
+                          onClick={() => {
+                            if (subItem.widgetName) {
+                              addElement(subItem.widgetName)
+                            }
+                          }}
+                          key={subIndex}>
+                          <div className="img">
+                            {
+                              subItem.src ? <img src={subItem.src} /> : <PictureOutlined />
+                            }
+                          </div>
+                          <div className="name">{subItem.name}</div>
+                        </div>
+                      ))
+                    }
+                  </div>
+                  : ''
               }
             </li>
           ))

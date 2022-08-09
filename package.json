@@ -1,82 +1,83 @@
 {
-    "name": "main",
-    "version": "0.1.0",
-    "private": true,
-    "dependencies": {
-        "@ant-design/pro-layout": "^6.34.9",
-        "@ant-design/pro-table": "^2.71.2",
-        "@testing-library/jest-dom": "^5.16.3",
-        "@testing-library/react": "^12.1.4",
-        "@testing-library/user-event": "^13.5.0",
-        "@types/jest": "^27.4.1",
-        "@types/node": "^16.11.26",
-        "@types/react": "^17.0.43",
-        "@types/react-dom": "^17.0.14",
-        "ahooks": "^3.3.0",
-        "react": "^18.0.0",
-        "react-color": "^2.19.3",
-        "react-dom": "^18.0.0",
-        "react-scripts": "5.0.0",
-        "typescript": "^4.6.3",
-        "web-vitals": "^2.1.4"
-    },
-    "scripts": {
-        "start": "set PORT=6001 && cross-env REACT_APP_ENV=development react-app-rewired start",
-        "build:test": "cross-env REACT_APP_ENV=test react-app-rewired build",
-        "build:production": "cross-env REACT_APP_ENV=production react-app-rewired build",
-        "eject": "react-scripts eject"
-    },
-    "eslintConfig": {
-        "extends": [
-            "react-app",
-            "react-app/jest"
-        ],
-        "rules": {
-            "jsx-a11y/anchor-is-valid": "off"
-        }
-    },
-    "browserslist": {
-        "production": [
-            ">0.2%",
-            "not dead",
-            "not op_mini all"
-        ],
-        "development": [
-            "last 1 chrome version",
-            "last 1 firefox version",
-            "last 1 safari version"
-        ]
-    },
-    "devDependencies": {
-        "@types/classnames": "^2.3.1",
-        "@types/jsoneditor": "^9.5.1",
-        "@types/react-color": "^3.0.6",
-        "@types/react-redux": "^7.1.23",
-        "@types/react-router-dom": "^5.3.3",
-        "@types/redux-logger": "^3.0.9",
-        "@types/redux-thunk": "^2.1.0",
-        "antd": "^4.19.3",
-        "antd-img-crop": "^4.2.3",
-        "axios": "^0.26.1",
-        "braft-editor": "^2.3.9",
-        "build-plugin-icestark": "^2.5.3",
-        "cross-env": "^7.0.3",
-        "customize-cra": "^1.0.0",
-        "ice": "^3.7.71",
-        "jsoneditor": "^9.9.0",
-        "node-sass": "^7.0.1",
-        "react-app-rewired": "^2.2.1",
-        "react-json-view": "^1.21.3",
-        "react-redux": "^7.2.8",
-        "react-rnd": "^10.3.7",
-        "react-router-dom": "^5.3.0",
-        "redux": "^4.1.2",
-        "redux-logger": "^3.0.6",
-        "redux-persist": "^6.0.0",
-        "redux-thunk": "^2.4.1",
-        "sass-loader": "^12.6.0",
-        "sass-resources-loader": "^2.2.4",
-        "webpack-bundle-analyzer": "^4.5.0"
-    },
-    "homepage": "."
+  "name": "main",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/pro-layout": "^6.34.9",
+    "@ant-design/pro-table": "^2.71.2",
+    "@testing-library/jest-dom": "^5.16.3",
+    "@testing-library/react": "^12.1.4",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.4.1",
+    "@types/node": "^16.11.26",
+    "@types/react": "^17.0.43",
+    "@types/react-dom": "^17.0.14",
+    "ahooks": "^3.3.0",
+    "react": "^18.0.0",
+    "react-color": "^2.19.3",
+    "react-dom": "^18.0.0",
+    "react-scripts": "5.0.0",
+    "typescript": "^4.6.3",
+    "web-vitals": "^2.1.4"
+  },
+  "scripts": {
+    "start": "set PORT=6001 && cross-env REACT_APP_ENV=development react-app-rewired start",
+    "build:test": "cross-env REACT_APP_ENV=test react-app-rewired build",
+    "build:production": "cross-env REACT_APP_ENV=production react-app-rewired build",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ],
+    "rules": {
+      "jsx-a11y/anchor-is-valid": "off"
+    }
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "@types/classnames": "^2.3.1",
+    "@types/jsoneditor": "^9.5.1",
+    "@types/react-color": "^3.0.6",
+    "@types/react-redux": "^7.1.23",
+    "@types/react-router-dom": "^5.3.3",
+    "@types/redux-logger": "^3.0.9",
+    "@types/redux-thunk": "^2.1.0",
+    "antd": "^4.19.3",
+    "antd-img-crop": "^4.2.3",
+    "axios": "^0.26.1",
+    "braft-editor": "^2.3.9",
+    "build-plugin-icestark": "^2.5.3",
+    "cross-env": "^7.0.3",
+    "customize-cra": "^1.0.0",
+    "echarts": "^5.3.2",
+    "ice": "^3.7.71",
+    "jsoneditor": "^9.9.0",
+    "node-sass": "^7.0.1",
+    "react-app-rewired": "^2.2.1",
+    "react-json-view": "^1.21.3",
+    "react-redux": "^7.2.8",
+    "react-rnd": "^10.3.7",
+    "react-router-dom": "^5.3.0",
+    "redux": "^4.1.2",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^6.0.0",
+    "redux-thunk": "^2.4.1",
+    "sass-loader": "^12.6.0",
+    "sass-resources-loader": "^2.2.4",
+    "webpack-bundle-analyzer": "^4.5.0"
+  },
+  "homepage": "."
 }

@@ -10,5 +10,8 @@
 import text from './widget/text';
 // 文本框配置
 import group from './widget/group';
+// 折线图
+import lines from './widget/line';
+console.log(lines, 'lineslineslineslineslineslineslineslines');
 
-export const widgetConfigure: any = [text, group];
+export const widgetConfigure: any = [text, group, ...lines];

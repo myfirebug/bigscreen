@@ -46,7 +46,11 @@ export const componentsClassify: any[] = [{
   type: 'line',
   icon: <LineChartOutlined />,
   name: '折线图',
-  datas: []
+  datas: [{
+    src: '',
+    widgetName: 'widget-base-line',
+    name: '基础折线图'
+  }]
 },
 {
   type: 'bar',
@@ -72,7 +76,9 @@ const components: any = {
   // 文本框
   'widget-text': require('./text').default,
   // 组
-  'widget-group': require('./group').default
+  'widget-group': require('./group').default,
+  // 基础折线图
+  'widget-base-line': require('./line/base-line').default
 }
 
 export default components

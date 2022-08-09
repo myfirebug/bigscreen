@@ -20,7 +20,6 @@ const Text: FC<ITextProps> = ({
   children,
   ...rest
 }) => {
-  console.log(data, 'widget-text')
   return (
     <div
       className={`app-element app-element__text ${className || ''}`} {...rest}>

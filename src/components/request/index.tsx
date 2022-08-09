@@ -1,10 +1,8 @@
 import {
-  FC,
   useEffect,
   memo
 } from 'react'
 import Wrapper from '@src/components/wrapper'
-import { IAnyObject } from '@src/types'
 import { useRequest } from 'ahooks'
 import axios from 'axios'
 
