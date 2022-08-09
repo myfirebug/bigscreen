@@ -1,3 +1,6 @@
+// 动画
+import animate from '../animate';
+
 const group = {
 	code: 'widget-group',
 	type: 'group',
@@ -10,11 +13,13 @@ const group = {
 			name: 'backgroundColor',
 			required: false,
 			placeholder: '请选择背景颜色'
-		}
+		},
+		animate.configure
 	],
 	configureValue: {
 		display: 'block',
-		backgroundColor: ''
+		backgroundColor: '',
+		...animate.configureValue
 	},
 	// 坐标值
 	coordinateValue: {

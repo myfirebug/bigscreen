@@ -369,7 +369,9 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   const changeElement = (e: MouseEvent, id: string, groupId?: string) => {
     e.stopPropagation()
     e.preventDefault()
-    changeLargeScreenElement(id, groupId)
+    if (id !== currentWidgetId) {
+      changeLargeScreenElement(id, groupId)
+    }
   }
 
   // 修改元素

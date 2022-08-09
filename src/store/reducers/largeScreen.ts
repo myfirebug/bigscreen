@@ -65,7 +65,7 @@ const initialState = {
 		backgroundColor: '',
 		title: '大屏',
 		description: '描述',
-		gridSize: 10,
+		gridSize: 30,
 		gridBorderColor: '#ddd',
 		gridFlag: false,
 		backgroundImage: ''
@@ -153,7 +153,7 @@ export const largeScreen = (
 			}
 			return {
 				...copy,
-				pastPage: [...copy.pastPage, currentPage],
+				// pastPage: [...copy.pastPage, currentPage],
 				currentPage: currentPage,
 				currentWidgetId: action.data.id,
 				currentWidget: action.data
@@ -192,8 +192,8 @@ export const largeScreen = (
 			copy.currentWidget = {} as IWidget;
 
 			return {
-				...copy,
-				pastPage: [...copy.pastPage, currentPage]
+				...copy
+				// pastPage: [...copy.pastPage, currentPage]
 			};
 		}
 		// 显示隐藏组件
@@ -275,7 +275,7 @@ export const largeScreen = (
 
 			return {
 				...copy,
-				pastPage: [...copy.pastPage, currentPage],
+				// pastPage: [...copy.pastPage, currentPage],
 				currentPage: currentPage,
 				currentWidget: action.data,
 				currentWidgetId: action.id
@@ -313,7 +313,7 @@ export const largeScreen = (
 
 			return {
 				...copy,
-				pastPage: [...copy.pastPage, currentPage],
+				// pastPage: [...copy.pastPage, currentPage],
 				currentWidgetId: action.id,
 				currentWidgetGroupId: action.groupId || ''
 			};
@@ -387,8 +387,8 @@ export const largeScreen = (
 			}
 
 			return {
-				...copy,
-				pastPage: [...copy.pastPage, currentPage]
+				...copy
+				// pastPage: [...copy.pastPage, currentPage]
 			};
 		}
 		// 撤销

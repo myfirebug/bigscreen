@@ -74,6 +74,8 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         id: guid(),
         ...widgetConfigure[index]
       })
+    } else {
+      message.info('该组件正在开发中...')
     }
   }
   // 撤销
@@ -246,7 +248,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             </Tooltip>
           </li>
         </ul>
-        <ul className='shortcuts-group'>
+        {/* <ul className='shortcuts-group'>
           <li
             onClick={undoHander}
             className={`${!pastPage.length ? 'is-disabled' : ''}`}>
@@ -263,7 +265,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
               <p>恢复</p>
             </Tooltip>
           </li>
-        </ul>
+        </ul> */}
         <ul className='shortcuts-group'>
           <li
             onClick={() => moveHander('top')}

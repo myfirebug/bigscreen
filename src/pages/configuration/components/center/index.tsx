@@ -7,6 +7,10 @@ import { Rnd } from 'react-rnd'
 import components from '@src/widget'
 // 接口
 import Request from '@src/components/request'
+// 拖动组件
+import Drag from './components/drag'
+// grid组件
+import Grid from './components/grid'
 
 interface IDesignBodyCenterProps {
   currentPage: IPage;
@@ -55,6 +59,21 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
     })
   }
 
+  // 渲染样式
+  const getStyle = (config: any) => {
+    return {
+      ...config,
+      width: config.width,
+      height: config.height,
+      animationName: config.animateName,
+      animationTimingFunction: config.animateTiming,
+      animationDelay: config.animateDelay + 's',
+      animationDuration: config.animateTime + 's',
+      animationIterationCount: config.animateInfinite ? 'infinite' : 1,
+      textShadow: `${config.textShadowX}px ${config.textShadowY}px ${config.textShadowF}px ${config.textShadowC}`
+    }
+  }
+
   // 渲染组件
   const renderWidgets = (widgets: IWidget[], groupConfig?: any) => {
     return (
@@ -66,92 +85,14 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
               const Widget = components[item.code]
               if (Widget) {
                 return (
-                  <Rnd
-                    className={item.id !== currentWidgetId ? 'react-draggable-disabled react-draggable-group' : 'react-draggable-group'}
-                    default={{
-                      x: item.coordinateValue.left,
-                      y: item.coordinateValue.top,
-                      width: item.coordinateValue.width,
-                      height: item.coordinateValue.height
-                    }}
-                    position={{
-                      x: item.coordinateValue.left,
-                      y: item.coordinateValue.top
-                    }}
-                    resizeHandleWrapperClass="handle"
-                    resizeHandleWrapperStyle={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      right: 0,
-                      bottom: 0,
-                      border: 'dashed 2px #fff'
-                    }}
-                    resizeHandleStyles={{
-                      bottom: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        left: '50%',
-                        bottom: -10,
-                        marginLeft: -10
-                      },
-                      bottomLeft: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      bottomRight: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      left: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        top: '50%',
-                        left: -10,
-                        marginTop: -10
-                      },
-                      right: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        top: '50%',
-                        right: -10,
-                        marginTop: -10
-                      },
-                      top: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        left: '50%',
-                        top: -10,
-                        marginLeft: -10
-                      },
-                      topLeft: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      topRight: {
-                        background: '#fff',
-                        borderRadius: 10
-                      }
-                    }}
-                    size={{
-                      width: item.coordinateValue.width,
-                      height: item.coordinateValue.height
-                    }}
-                    key={index}
-                    scale={cale}
-                    disableDragging={item.id !== currentWidgetId}
-                    onDragStop={dragStopHandle}
-                    onResizeStop={resizeHandle}
-                    bounds="parent"
-                  >
+                  <Drag
+                    item={item}
+                    currentWidgetId={currentWidgetId}
+                    currentWidget={currentWidget}
+                    cale={cale}
+                    modifyLargeScreenElement={modifyLargeScreenElement}
+                    key={item.id}
+                    className="react-draggable-group">
                     <div
                       onClick={(e: any) => {
                         e.preventDefault()
@@ -176,11 +117,11 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         render={(data) => {
                           return (
                             <Widget
-                              style={{
+                              style={getStyle({
+                                ...item.configureValue,
                                 width: item.coordinateValue.width,
-                                height: item.coordinateValue.height,
-                                ...item.configureValue
-                              }}
+                                height: item.coordinateValue.height
+                              })}
                               className={item.id === currentWidgetGroupId ? 'is-active' : ''}>
                               {
                                 renderWidgets(item.widgets, {
@@ -194,9 +135,8 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                             </Widget>
                           )
                         }}></Request>
-
                     </div>
-                  </Rnd>
+                  </Drag>
                 )
               }
             } else {
@@ -204,92 +144,14 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
               const Widget = components[item.code]
               if (Widget) {
                 return (
-                  <Rnd
-                    className={item.id !== currentWidgetId ? 'react-draggable-disabled' : ''}
-                    default={{
-                      x: item.coordinateValue.left,
-                      y: item.coordinateValue.top,
-                      width: item.coordinateValue.width,
-                      height: item.coordinateValue.height
-                    }}
-                    position={{
-                      x: item.coordinateValue.left,
-                      y: item.coordinateValue.top
-                    }}
-                    resizeHandleWrapperClass="handle"
-                    resizeHandleWrapperStyle={{
-                      position: 'absolute',
-                      left: 0,
-                      top: 0,
-                      right: 0,
-                      bottom: 0,
-                      border: 'dashed 2px #fff'
-                    }}
-                    resizeHandleStyles={{
-                      bottom: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        left: '50%',
-                        bottom: -10,
-                        marginLeft: -10
-                      },
-                      bottomLeft: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      bottomRight: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      left: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        top: '50%',
-                        left: -10,
-                        marginTop: -10
-                      },
-                      right: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        top: '50%',
-                        right: -10,
-                        marginTop: -10
-                      },
-                      top: {
-                        width: 20,
-                        height: 20,
-                        background: '#fff',
-                        borderRadius: 10,
-                        left: '50%',
-                        top: -10,
-                        marginLeft: -10
-                      },
-                      topLeft: {
-                        background: '#fff',
-                        borderRadius: 10
-                      },
-                      topRight: {
-                        background: '#fff',
-                        borderRadius: 10
-                      }
-                    }}
-                    size={{
-                      width: item.coordinateValue.width,
-                      height: item.coordinateValue.height
-                    }}
-                    key={index}
-                    scale={cale}
-                    disableDragging={item.id !== currentWidgetId}
-                    onDragStop={dragStopHandle}
-                    onResizeStop={resizeHandle}
-                    bounds="parent"
-                  >
+                  <Drag
+                    item={item}
+                    currentWidgetId={currentWidgetId}
+                    currentWidget={currentWidget}
+                    cale={cale}
+                    modifyLargeScreenElement={modifyLargeScreenElement}
+                    key={item.id}
+                    className="">
                     <div
                       onClick={(e) => {
                         e.preventDefault()
@@ -324,30 +186,21 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                           } else {
                             datas = item.dataValue.dataType === 'mock' ? item.dataValue.mock : data
                           }
-
-
                           return (
                             <Widget
                               className={`${item.configureValue.animateName}`}
                               field={item.dataValue.field}
                               data={datas}
-                              style={{
+                              style={getStyle({
                                 ...item.configureValue,
-                                width: '100%',
-                                height: '100%',
-                                animationName: item.configureValue.animateName,
-                                animationTimingFunction: item.configureValue.animateTiming,
-                                animationDelay: item.configureValue.animateDelay + 's',
-                                animationDuration: item.configureValue.animateTime + 's',
-                                animationIterationCount: item.configureValue.animateInfinite ? 'infinite' : 1,
-                                textShadow: `${item.configureValue.textShadowX}px ${item.configureValue.textShadowY}px ${item.configureValue.textShadowF}px ${item.configureValue.textShadowC}`,
-                                fontSize: Number(item.configureValue.fontSize)
-                              }} />
+                                width: item.coordinateValue.width,
+                                height: item.coordinateValue.height
+                              })} />
                           )
                         }
                         }></Request>
                     </div>
-                  </Rnd>
+                  </Drag>
                 )
               }
             }
@@ -359,35 +212,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
 
   return (
     <>
-      {
-        screen.gridFlag ?
-          <svg xmlns="http://www.w3.org/2000/svg"
-            xmlnsXlink="http://www.w3.org/1999/xlink"
-            width="100%"
-            height="100%"
-            id="canvas">
-            <defs>
-              <pattern
-                patternUnits="userSpaceOnUse"
-                id="p1"
-                x="0"
-                y="0"
-                width={screen.gridSize}
-                height={screen.gridSize}
-              >
-                <rect
-                  x="0"
-                  y="0"
-                  stroke={screen.gridBorderColor}
-                  fill="none"
-                  width={screen.gridSize + 0.5}
-                  height={screen.gridSize + 0.5}
-                ></rect>
-              </pattern>
-            </defs>
-            <rect id="wrapper" className='grid' x="0" y="0" fill="url(#p1)" width="100%" height="100%"></rect>
-          </svg> : null
-      }
+      <Grid screen={screen} />
       {
         currentPage && currentPage.widgets ?
           renderWidgets(currentPage.widgets) : null

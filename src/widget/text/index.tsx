@@ -1,12 +1,9 @@
 import {
   FC,
-  HTMLAttributes,
-  useEffect
+  HTMLAttributes
 } from 'react'
 import { IAnyObject } from '@src/types'
 import './index.scss'
-import { useRequest } from 'ahooks'
-import axios from 'axios'
 
 
 interface ITextProps extends HTMLAttributes<HTMLDivElement> {
