@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 16:06:17
+ * @Last Modified time: 2022-08-10 17:58:37
  */
 const echarts = {
 	// 标题配置项值
@@ -294,20 +294,15 @@ const echarts = {
 		xAxisNameTextStyleLineHeight: 12,
 		xAxisNameTextStyleFontFamily: 'serif',
 		xAxisNameTextStyleFontWeight: 'normal',
-		xAxisNameTextStyleColor: '#fff',
 		xAxisBoundaryGap: false,
 		xAxisNameRotate: 0,
 		xAxisLineShow: true,
-		xAxisLineColor: '#fff',
 		xAxisLabelShow: true,
-		xAxisLabelColor: '#fff',
 		xAxisLabelRotate: 0,
-		xAxisSplitLineColor: '#fff',
 		xAxisSplitLineShow: true,
 		xAxisSplitAreaShow: false,
 		xAxisSplitAreaOpacity: 10,
-		xAxisPointerShow: true,
-		xAxisPointerColor: '#fff'
+		xAxisPointerShow: true
 	},
 	xAxis: [
 		{
@@ -337,6 +332,8 @@ const echarts = {
 			label: '是否留白',
 			name: 'xAxisBoundaryGap',
 			required: false,
+			relationFields: 'xAxisShow',
+			relationValues: 'true',
 			placeholder: '请输入'
 		},
 		[
@@ -416,13 +413,6 @@ const echarts = {
 							{ code: 'bolder', name: '特粗体' },
 							{ code: 'lighter', name: '细体' }
 						]
-					},
-					{
-						componentName: 'SketchPicker',
-						label: '字体颜色',
-						name: 'xAxisNameTextStyleColor',
-						required: false,
-						placeholder: '请选择字体颜色'
 					}
 				]
 			}
@@ -439,15 +429,6 @@ const echarts = {
 						name: 'xAxisLineShow',
 						required: false,
 						placeholder: '请输入'
-					},
-					{
-						componentName: 'SketchPicker',
-						label: '颜色',
-						name: 'xAxisLineColor',
-						required: false,
-						relationFields: 'xAxisLineShow',
-						relationValues: 'true',
-						placeholder: '请选择颜色'
 					}
 				]
 			}
@@ -464,15 +445,6 @@ const echarts = {
 						name: 'xAxisLabelShow',
 						required: false,
 						placeholder: '请输入'
-					},
-					{
-						componentName: 'SketchPicker',
-						label: '颜色',
-						name: 'xAxisLabelColor',
-						required: false,
-						relationFields: 'xAxisLabelShow',
-						relationValues: 'true',
-						placeholder: '请选择颜色'
 					},
 					{
 						componentName: 'Slider',
@@ -498,15 +470,6 @@ const echarts = {
 						name: 'xAxisSplitLineShow',
 						required: false,
 						placeholder: ''
-					},
-					{
-						componentName: 'SketchPicker',
-						label: '颜色',
-						name: 'xAxisSplitLineColor',
-						required: false,
-						relationFields: 'xAxisLabelShow',
-						relationValues: 'true',
-						placeholder: '请选择颜色'
 					}
 				]
 			}
@@ -547,14 +510,350 @@ const echarts = {
 						name: 'xAxisPointerShow',
 						required: false,
 						placeholder: ''
+					}
+				]
+			}
+		]
+	],
+	yAxisValue: {
+		yAxisShow: true,
+		yAxisType: 'value',
+		yAxisName: '',
+		yAxisNameLocation: 'end',
+		yAxisNameTextStyleFontSize: 12,
+		yAxisNameTextStyleLineHeight: 12,
+		yAxisNameTextStyleFontFamily: 'serif',
+		yAxisNameTextStyleFontWeight: 'normal',
+		yAxisBoundaryGap: false,
+		yAxisNameRotate: 0,
+		yAxisLineShow: true,
+		yAxisLabelShow: true,
+		yAxisLabelRotate: 0,
+		yAxisSplitLineShow: true,
+		yAxisSplitAreaShow: false,
+		yAxisSplitAreaOpacity: 10,
+		yAxisPointerShow: false
+	},
+	yAxis: [
+		{
+			componentName: 'Switch',
+			label: '是否显示',
+			name: 'yAxisShow',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Select',
+			label: '坐标轴类型',
+			name: 'yAxisType',
+			required: false,
+			placeholder: '请选择',
+			relationFields: 'yAxisShow',
+			relationValues: 'true',
+			options: [
+				{ code: 'value', name: '数值轴' },
+				{ code: 'category', name: '类目轴' },
+				{ code: 'time', name: '时间轴' },
+				{ code: 'log', name: '对数轴' }
+			]
+		},
+		{
+			componentName: 'Switch',
+			label: '是否留白',
+			name: 'yAxisBoundaryGap',
+			required: false,
+			relationFields: 'yAxisShow',
+			relationValues: 'true',
+			placeholder: '请输入'
+		},
+		[
+			{
+				name: '坐标轴名称',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Input',
+						label: '名称',
+						name: 'yAxisName',
+						required: false,
+						placeholder: '请输入'
+					},
+					{
+						componentName: 'Slider',
+						label: '旋转',
+						name: 'yAxisNameRotate',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'Select',
+						label: '显示位置',
+						name: 'yAxisNameLocation',
+						required: false,
+						placeholder: '请选择',
+						options: [
+							{ code: 'start', name: 'start' },
+							{ code: 'middle', name: 'middle' },
+							{ code: 'end', name: 'end' }
+						]
+					},
+					{
+						componentName: 'InputNumber',
+						label: '字体大小',
+						name: 'yAxisNameTextStyleFontSize',
+						required: false,
+						min: 12,
+						placeholder: ''
+					},
+					{
+						componentName: 'InputNumber',
+						label: '行高',
+						name: 'yAxisNameTextStyleLineHeight',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'Select',
+						label: '字体样式',
+						name: 'yAxisNameTextStyleFontFamily',
+						required: false,
+						placeholder: '',
+						options: [
+							{ code: 'SimSun', name: '宋体' },
+							{ code: 'KaiTi', name: '楷体' },
+							{ code: 'Microsoft YaHei', name: '微软雅黑' },
+							{ code: 'STHeiti', name: '华文黑体' },
+							{ code: 'arial', name: '无衬线体' },
+							{ code: 'serif', name: '有衬线体' },
+							{ code: 'cursive', name: '草书' },
+							{ code: 'monospace', name: '等宽字体' },
+							{ code: 'courier', name: '打印字体' }
+						]
+					},
+					{
+						componentName: 'Select',
+						label: '文字粗细',
+						name: 'yAxisNameTextStyleFontWeight',
+						required: false,
+						placeholder: '',
+						options: [
+							{ code: 'normal', name: '正常' },
+							{ code: 'bold', name: '粗体' },
+							{ code: 'bolder', name: '特粗体' },
+							{ code: 'lighter', name: '细体' }
+						]
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴轴线',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisLineShow',
+						required: false,
+						placeholder: '请输入'
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴刻度标签',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisLabelShow',
+						required: false,
+						placeholder: '请输入'
+					},
+					{
+						componentName: 'Slider',
+						label: '旋转',
+						name: 'yAxisLabelRotate',
+						required: false,
+						relationFields: 'yAxisLabelShow',
+						relationValues: 'true',
+						placeholder: ''
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴分隔线',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisSplitLineShow',
+						required: false,
+						placeholder: ''
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴分隔区域',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisSplitAreaShow',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'Slider',
+						label: '透明度',
+						name: 'yAxisSplitAreaOpacity',
+						required: false,
+						relationFields: 'yAxisSplitAreaShow',
+						relationValues: 'true'
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴指示器',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisPointerShow',
+						required: false,
+						placeholder: ''
+					}
+				]
+			}
+		]
+	],
+	echartColorValue: {
+		axisNameColor: 'rgba(255,255,255,.2)',
+		axisLineColor: 'rgba(255,255,255,.2)',
+		axisLabelColor: 'rgba(255,255,255,.8)',
+		splitLineColor: 'rgba(255,255,255,.2)',
+		axisPointerColor: 'red',
+		themeColor1: '#fc97af',
+		themeColor2: '#87f7cf',
+		themeColor3: '#f7f494',
+		themeColor4: '#72ccff',
+		themeColor5: '#f7c5a0',
+		themeColor6: '#d4a4eb',
+		themeColor7: '#d2f5a6',
+		themeColor8: '#76f2f2'
+	},
+	echartColor: [
+		{
+			componentName: 'SketchPicker',
+			label: '坐标名称颜色',
+			name: 'axisNameColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '轴线颜色',
+			name: 'axisLineColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '刻度标签颜色',
+			name: 'axisLabelColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '分隔线颜色',
+			name: 'splitLineColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '指示器颜色',
+			name: 'axisPointerColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		[
+			{
+				name: '主题色',
+				list: [
+					{
+						componentName: 'SketchPicker',
+						label: '系列一',
+						name: 'themeColor1',
+						required: false,
+						placeholder: '请选择颜色'
 					},
 					{
 						componentName: 'SketchPicker',
-						label: '颜色',
-						name: 'xAxisPointerColor',
+						label: '系列二',
+						name: 'themeColor2',
 						required: false,
-						relationFields: 'xAxisPointerShow',
-						relationValues: 'true',
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列三',
+						name: 'themeColor3',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列四',
+						name: 'themeColor4',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列五',
+						name: 'themeColor5',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列六',
+						name: 'themeColor6',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列七',
+						name: 'themeColor7',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '系列八',
+						name: 'themeColor8',
+						required: false,
 						placeholder: '请选择颜色'
 					}
 				]

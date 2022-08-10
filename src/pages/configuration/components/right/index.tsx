@@ -16,7 +16,7 @@ import {
   Slider,
   Button
 } from 'antd'
-import { SketchPicker } from 'react-color'
+import { SketchPicker, ChromePicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
 import { guid } from '@src/utils/tools'
@@ -258,7 +258,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                       }}>
                         获取颜色
                         <div className='color'>
-                          <SketchPicker
+                          <ChromePicker
                             color={form.getFieldValue(item.name)}
                             onChangeComplete={e => {
                               form.setFieldsValue({

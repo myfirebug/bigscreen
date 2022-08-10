@@ -15,6 +15,15 @@ const BaseLine: FC<IBaseLineProps> = ({
 
   const getOption = useMemo(() => {
     return {
+      color: [
+        style?.themeColor1,
+        style?.themeColor2,
+        style?.themeColor3,
+        style?.themeColor4,
+        style?.themeColor5,
+        style?.themeColor6,
+        style?.themeColor7,
+        style?.themeColor8],
       title: {
         show: style?.titleTextShow,
         text: style?.titleText,
@@ -52,7 +61,7 @@ const BaseLine: FC<IBaseLineProps> = ({
         name: style?.xAxisName,
         nameLocation: style?.xAxisNameLocation,
         nameTextStyle: {
-          color: style?.xAxisNameTextStyleColor,
+          color: style?.axisNameColor,
           fontWeight: style?.xAxisNameTextStyleFontWeight,
           lineHeight: style?.xAxisNameTextStyleLineHeight,
           fontFamily: style?.xAxisNameTextStyleFontFamily,
@@ -63,18 +72,18 @@ const BaseLine: FC<IBaseLineProps> = ({
         axisLine: {
           show: style?.xAxisLineShow,
           lineStyle: {
-            color: style?.xAxisLineColor
+            color: style?.axisLineColor
           }
         },
         axisLabel: {
           show: style?.xAxisLabelShow,
-          color: style?.xAxisLabelColor,
+          color: style?.axisLabelColor,
           rotate: style?.xAxisLabelRotate
         },
         splitLine: {
           show: style?.xAxisSplitLineShow,
           lineStyle: {
-            color: style?.xAxisSplitLineColor
+            color: style?.splitLineColor
           }
         },
         splitArea: {
@@ -87,7 +96,52 @@ const BaseLine: FC<IBaseLineProps> = ({
         axisPointer: {
           show: style?.xAxisPointerShow,
           lineStyle: {
-            color: style?.xAxisPointerColor
+            color: style?.axisPointerColor
+          }
+        }
+      },
+      yAxis: {
+        show: style?.yAxisShow,
+        type: style?.yAxisType,
+        name: style?.yAxisName,
+        nameLocation: style?.yAxisNameLocation,
+        nameTextStyle: {
+          color: style?.axisNameColor,
+          fontWeight: style?.yAxisNameTextStyleFontWeight,
+          lineHeight: style?.yAxisNameTextStyleLineHeight,
+          fontFamily: style?.yAxisNameTextStyleFontFamily,
+          fontSize: style?.yAxisNameTextStyleFontSize
+        },
+        nameRotate: style?.yAxisNameRotate,
+        boundaryGap: style?.yAxisBoundaryGap,
+        axisLine: {
+          show: style?.yAxisLineShow,
+          lineStyle: {
+            color: style?.axisLineColor
+          }
+        },
+        axisLabel: {
+          show: style?.yAxisLabelShow,
+          color: style?.axisLabelColor,
+          rotate: style?.yAxisLabelRotate
+        },
+        splitLine: {
+          show: style?.yAxisSplitLineShow,
+          lineStyle: {
+            color: style?.splitLineColor
+          }
+        },
+        splitArea: {
+          show: style?.yAxisSplitAreaShow,
+          areaStyle: {
+            color: ['#fff', '#000'],
+            opacity: style?.yAxisSplitAreaOpacity ? style?.yAxisSplitAreaOpacity / 100 : 0.1
+          }
+        },
+        axisPointer: {
+          show: style?.yAxisPointerShow,
+          lineStyle: {
+            color: style?.axisPointerColor
           }
         }
       }
@@ -104,49 +158,49 @@ const BaseLine: FC<IBaseLineProps> = ({
         },
         legend: {
           ...getOption.legend,
-          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-        },
-        toolbox: {
-          feature: {
-            saveAsImage: {}
-          }
+          data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine', 'sdfdfsd']
         },
         xAxis: {
           ...getOption.xAxis,
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
         yAxis: {
-          type: 'value'
+          ...getOption.yAxis
         },
         series: [
           {
             name: 'Email',
-            type: 'line',
-            stack: 'Total',
+            type: 'bar',
             data: [120, 132, 101, 134, 90, 230, 210]
           },
           {
             name: 'Union Ads',
             type: 'line',
-            stack: 'Total',
+            smooth: false,
+            areaStyle: {},
             data: [220, 182, 191, 234, 290, 330, 310]
           },
           {
             name: 'Video Ads',
-            type: 'line',
-            stack: 'Total',
+            type: 'bar',
             data: [150, 232, 201, 154, 190, 330, 410]
           },
           {
             name: 'Direct',
             type: 'line',
-            stack: 'Total',
+            smooth: false,
             data: [320, 332, 301, 334, 390, 330, 320]
           },
           {
             name: 'Search Engine',
             type: 'line',
-            stack: 'Total',
+            smooth: false,
+            data: [820, 932, 901, 934, 1290, 1330, 1320]
+          },
+          {
+            name: 'sdfdfsd',
+            type: 'line',
+            smooth: false,
             data: [820, 932, 901, 934, 1290, 1330, 1320]
           }
         ]

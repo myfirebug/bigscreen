@@ -35,7 +35,8 @@ const Echarts = memo((props: IEchartConfig) => {
   const echartsInstance = useRef<any>(null)
   useEffect(() => {
     if (echartsRef.current && (!echartsInstance.current || theme)) {
-      echartsInstance.current = echarts.init(echartsRef.current)
+      echartsInstance.current = echarts.init(echartsRef.current, theme)
+      // echartsInstance.current = echarts.init(echartsRef.current)
       // 这里主要外面需要获取echarts实例
       typeof getEchart === 'function' && getEchart(echartsInstance.current)
     }
@@ -46,11 +47,11 @@ const Echarts = memo((props: IEchartConfig) => {
       echartsInstance.current.setOption({
         ...options,
         tooltip: {
-          backgroundColor: 'rgba(6,38,67,.9)',
+          backgroundColor: 'rgba(0,0,0,.6)',
           borderColor: 'rgba(255,255,255,.2)',
           padding: [8, 8],
           textStyle: {
-            color: '#AFD8FF'
+            color: '#fff'
           },
           confine: true,
           ...options.tooltip
