@@ -37,16 +37,22 @@ const BaseLine: FC<IBaseLineProps> = ({
           fontSize: style?.legendFontSize,
           color: style?.legendColor
         }
+      },
+      grid: {
+        show: style?.gridShow,
+        left: style?.gridLeft,
+        right: style?.gridRight,
+        top: style?.gridTop,
+        bottom: style?.gridBottom,
+        borderColor: style?.gridBorderColor,
+        backgroundColor: 'red'
       }
     }
   }, [style])
 
   return (
     <CustomEcharts
-      style={{
-        width: style?.widget,
-        height: style?.height
-      }}
+      style={style}
       options={{
         ...getOption,
         tooltip: {
@@ -55,12 +61,6 @@ const BaseLine: FC<IBaseLineProps> = ({
         legend: {
           ...getOption.legend,
           data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
-        },
-        grid: {
-          left: '3%',
-          right: '4%',
-          bottom: '3%',
-          containLabel: true
         },
         toolbox: {
           feature: {

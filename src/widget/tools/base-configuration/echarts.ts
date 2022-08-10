@@ -2,8 +2,8 @@
  * 图表配置
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
- * @Last Modified by:   hejp
- * @Last Modified time: 2022-08-10 10:16:02
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-10 12:00:45
  */
 const echarts = {
 	// 标题配置项值
@@ -231,8 +231,60 @@ const echarts = {
 			]
 		}
 	],
-	gridValue: {},
-	grid: []
+	gridValue: {
+		gridShow: false,
+		gridLeft: 50,
+		gridRight: 50,
+		gridTop: 50,
+		gridBottom: 50,
+		gridBorderColor: '#ccc'
+	},
+	grid: [
+		{
+			componentName: 'Switch',
+			label: '是否显示',
+			name: 'gridShow',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '左边距',
+			name: 'gridLeft',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '右边距',
+			name: 'gridRight',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '上边距',
+			name: 'gridTop',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '下边距',
+			name: 'gridBottom',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '边框颜色',
+			name: 'gridBorderColor',
+			required: false,
+			relationFields: 'gridShow',
+			relationValues: 'true',
+			placeholder: '请选择边框颜色'
+		}
+	]
 };
 
 export default echarts;
