@@ -46,8 +46,8 @@
                 }
             }
             .ant-form-item {
-                padding: 0 15px;
-                margin-bottom: 14px;
+                padding: 0 15px 16px 15px;
+                margin-bottom: 0;
                 .anticon {
                     color: rgba(255, 255, 255, 0.6);
                 }
@@ -69,6 +69,9 @@
             .ant-collapse {
                 background: none;
                 border: none;
+                .ant-collapse {
+                    padding-left: 8px;
+                }
                 &-header {
                     padding: 8px 10px!important;
                     color: rgba(255, 255, 255, 0.6)!important;
@@ -83,6 +86,7 @@
                     background: none;
                     border: none;
                     border-top: 1px solid #383838;
+                    background-color: #494949;
                     &-box {
                         padding: 0 !important;
                     }

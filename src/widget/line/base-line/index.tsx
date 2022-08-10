@@ -44,8 +44,52 @@ const BaseLine: FC<IBaseLineProps> = ({
         right: style?.gridRight,
         top: style?.gridTop,
         bottom: style?.gridBottom,
-        borderColor: style?.gridBorderColor,
-        backgroundColor: 'red'
+        borderColor: style?.gridBorderColor
+      },
+      xAxis: {
+        show: style?.xAxisShow,
+        type: style?.xAxisType,
+        name: style?.xAxisName,
+        nameLocation: style?.xAxisNameLocation,
+        nameTextStyle: {
+          color: style?.xAxisNameTextStyleColor,
+          fontWeight: style?.xAxisNameTextStyleFontWeight,
+          lineHeight: style?.xAxisNameTextStyleLineHeight,
+          fontFamily: style?.xAxisNameTextStyleFontFamily,
+          fontSize: style?.xAxisNameTextStyleFontSize
+        },
+        nameRotate: style?.xAxisNameRotate,
+        boundaryGap: style?.xAxisBoundaryGap,
+        axisLine: {
+          show: style?.xAxisLineShow,
+          lineStyle: {
+            color: style?.xAxisLineColor
+          }
+        },
+        axisLabel: {
+          show: style?.xAxisLabelShow,
+          color: style?.xAxisLabelColor,
+          rotate: style?.xAxisLabelRotate
+        },
+        splitLine: {
+          show: style?.xAxisSplitLineShow,
+          lineStyle: {
+            color: style?.xAxisSplitLineColor
+          }
+        },
+        splitArea: {
+          show: style?.xAxisSplitAreaShow,
+          areaStyle: {
+            color: ['#fff', '#000'],
+            opacity: style?.xAxisSplitAreaOpacity ? style?.xAxisSplitAreaOpacity / 100 : 0.1
+          }
+        },
+        axisPointer: {
+          show: style?.xAxisPointerShow,
+          lineStyle: {
+            color: style?.xAxisPointerColor
+          }
+        }
       }
     }
   }, [style])
@@ -68,8 +112,7 @@ const BaseLine: FC<IBaseLineProps> = ({
           }
         },
         xAxis: {
-          type: 'category',
-          boundaryGap: false,
+          ...getOption.xAxis,
           data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun']
         },
         yAxis: {

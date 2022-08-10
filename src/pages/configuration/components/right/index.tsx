@@ -19,6 +19,7 @@ import {
 import { SketchPicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
+import { guid } from '@src/utils/tools'
 import {
   LeftOutlined,
   RightOutlined,
@@ -198,7 +199,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
             rules={[{ required: item.require }]}
           >
             <Slider
-
+              min={item.min || 0}
+              max={item.max || 100}
               disabled={item.disabled}
               onAfterChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
           </Form.Item>
@@ -333,17 +335,40 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
       if (judgeType(item, '[object Array]')) {
         return (
           <div key={index}>
-            <Collapse accordion>
-              {
-                item.map((subItem: any, subIndex: number) => (
-                  <Panel header={subItem.name} key={subIndex}>
+            {
+              item.map((subItem: any, subIndex: number) => {
+                const relationFields = subItem.relationFields !== undefined ? subItem.relationFields.split(',') : []
+                return (
+                  <Collapse key={subIndex}>
                     {
-                      renderDynamicForm(subItem.list, form, callback, field, isUpdate)
+                      subItem.relationFields === undefined ?
+                        <Panel header={subItem.name} key={subItem + subIndex}>
+                          {
+                            renderDynamicForm(subItem.list, form, callback, field, isUpdate)
+                          }
+                        </Panel> :
+                        <Form.Item
+                          noStyle
+                          shouldUpdate>
+                          {({ getFieldValue }) => {
+                            if (relationFields.every((subbItem: string) => subItem.relationValues.includes(String(getFieldValue(subbItem))))) {
+                              return (
+                                <Collapse key={subIndex}>
+                                  <Panel header={subItem.name} key={subItem + subIndex}>
+                                    {
+                                      renderDynamicForm(subItem.list, form, callback, field, isUpdate)
+                                    }
+                                  </Panel>
+                                </Collapse>
+                              );
+                            }
+                          }}
+                        </Form.Item>
                     }
-                  </Panel>
-                ))
-              }
-            </Collapse>
+                  </Collapse>
+                )
+              })
+            }
           </div>
         )
       }

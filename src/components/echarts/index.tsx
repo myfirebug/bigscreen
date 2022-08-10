@@ -35,7 +35,7 @@ const Echarts = memo((props: IEchartConfig) => {
   const echartsInstance = useRef<any>(null)
   useEffect(() => {
     if (echartsRef.current && (!echartsInstance.current || theme)) {
-      echartsInstance.current = echarts.init(echartsRef.current, theme)
+      echartsInstance.current = echarts.init(echartsRef.current)
       // 这里主要外面需要获取echarts实例
       typeof getEchart === 'function' && getEchart(echartsInstance.current)
     }
