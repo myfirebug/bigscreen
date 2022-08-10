@@ -16,31 +16,27 @@ export const componentsClassify: any[] = [{
   type: 'text',
   icon: <FontSizeOutlined />,
   name: '文本',
-  widgetName: 'widget-text'
+  widgetName: 'widgetText'
 },
 {
   type: 'image',
   icon: <FileImageOutlined />,
-  name: '图片',
-  widgetName: 'widget-image'
+  name: '图片'
 },
 {
   type: 'link',
   icon: <LinkOutlined />,
-  name: '链接',
-  widgetName: 'widget-link'
+  name: '链接'
 },
 {
   type: 'date',
   icon: <ClockCircleOutlined />,
-  name: '当前时间',
-  widgetName: 'widget-date'
+  name: '当前时间'
 },
 {
   type: 'table',
   icon: <TableOutlined />,
-  name: '表格',
-  widgetName: 'widget-table'
+  name: '表格'
 },
 {
   type: 'line',
@@ -48,7 +44,7 @@ export const componentsClassify: any[] = [{
   name: '折线图',
   datas: [{
     src: '',
-    widgetName: 'widget-base-line',
+    widgetName: 'widgetBaseLine',
     name: '基础折线图'
   }]
 },
@@ -74,11 +70,11 @@ export const componentsClassify: any[] = [{
 // 所有组件地址
 const components: any = {
   // 文本框
-  'widget-text': require('./text').default,
+  'widgetText': require('./text').default,
   // 组
-  'widget-group': require('./group').default,
+  'widgetGroup': require('./group').default,
   // 基础折线图
-  'widget-base-line': require('./line/base-line').default
+  'widgetBaseLine': require('./line/base-line').default
 }
 
 export default components

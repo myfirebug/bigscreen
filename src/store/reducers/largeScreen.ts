@@ -22,7 +22,9 @@ import {
 	IWidget
 } from '../actionType';
 // 配置文件
-import { widgetConfigure } from '@src/widget/tools';
+import configuration from '@src/widget/tools/main';
+
+const { widgetConfiguration } = configuration;
 
 /**
  * 找到所有组件的坐标
@@ -442,14 +444,9 @@ export const largeScreen = (
 			);
 
 			const coordinates = getCoordinates(subWidgets);
-
-			// 找到组的配置
-			const index = widgetConfigure.findIndex(
-				(item: any) => item.type === 'group'
-			);
 			// 找到选中的组件
 			const groupsElements = {
-				...widgetConfigure[index],
+				...widgetConfiguration.widgetGroup,
 				id: groupId,
 				widgets: subWidgets.map((item) => ({
 					...item,

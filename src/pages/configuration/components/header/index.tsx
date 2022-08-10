@@ -19,7 +19,7 @@ import {
   PictureOutlined
 } from '@ant-design/icons'
 // 配置文件
-import { widgetConfigure } from '@src/widget/tools'
+import configuration from '@src/widget/tools/main'
 // 获取组件分类
 import { componentsClassify } from '@src/widget'
 import { guid } from '@src/utils/tools'
@@ -28,6 +28,9 @@ import { IPage, IWidget } from '@src/store/actionType'
 import {
   useHistory
 } from 'react-router-dom'
+
+// 微件配置文件
+const { widgetConfiguration } = configuration
 
 interface IDesignHeaderProps {
   addLargeScreenElement: (data: any) => void;
@@ -69,11 +72,11 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
       message.error('请先添加页面哦')
       return
     }
-    const index = widgetConfigure.findIndex((item: any) => item.code === code)
-    if (index !== -1) {
+    // const index = widgetConfigure.findIndex((item: any) => item.code === code)
+    if (widgetConfiguration[code]) {
       addLargeScreenElement({
         id: guid(),
-        ...widgetConfigure[index]
+        ...widgetConfiguration[code]
       })
     } else {
       message.info('该组件正在开发中...')

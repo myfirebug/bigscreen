@@ -1,11 +1,14 @@
-// 动画
-import animate from '../animate';
+/*
+ * group类型的配置
+ * @Author: hejp
+ * @Date: 2022-08-10 10:00:37
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-10 11:16:12
+ */
+import baseConfiguration from '../base-configuration';
+const { animate } = baseConfiguration;
 
 const group = {
-	code: 'widget-group',
-	type: 'group',
-	label: '组',
-	widgets: [],
 	configure: [
 		{
 			componentName: 'SketchPicker',
@@ -16,27 +19,6 @@ const group = {
 		},
 		animate.configure
 	],
-	configureValue: {
-		display: 'block',
-		backgroundColor: '',
-		...animate.configureValue
-	},
-	// 坐标值
-	coordinateValue: {
-		left: 0,
-		top: 0,
-		width: 500,
-		height: 500
-	},
-	dataValue: {
-		useInterface: false,
-		dataType: 'dynamic',
-		mock: {
-			value: '123'
-		},
-		url: '',
-		method: 'get'
-	},
 	data: [
 		{
 			componentName: 'Switch',

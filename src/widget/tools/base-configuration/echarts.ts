@@ -1,4 +1,12 @@
+/*
+ * 图表配置
+ * @Author: hejp
+ * @Date: 2022-08-10 10:16:02
+ * @Last Modified by:   hejp
+ * @Last Modified time: 2022-08-10 10:16:02
+ */
 const echarts = {
+	// 标题配置项值
 	titleValue: {
 		titleTextShow: false,
 		titleText: '',
@@ -8,6 +16,7 @@ const echarts = {
 		titleTextFontWeight: 'bold',
 		titleTextColor: '#fff'
 	},
+	// 标题配置项
 	title: [
 		{
 			componentName: 'Switch',
@@ -109,6 +118,7 @@ const echarts = {
 			]
 		}
 	],
+	// 图例配置项值
 	legendValue: {
 		legendShow: true,
 		legendType: 'plain',
@@ -119,6 +129,7 @@ const echarts = {
 		legendLeft: 'center',
 		legendTop: 'top'
 	},
+	// 图例配置项
 	legend: [
 		{
 			componentName: 'Switch',

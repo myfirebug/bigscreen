@@ -1,3 +1,10 @@
+/*
+ * 坐标配置
+ * @Author: hejp
+ * @Date: 2022-08-10 10:15:52
+ * @Last Modified by:   hejp
+ * @Last Modified time: 2022-08-10 10:15:52
+ */
 const coordinate = {
 	type: 'page',
 	label: '坐标',

@@ -1,3 +1,10 @@
+/*
+ * 页面配置
+ * @Author: hejp
+ * @Date: 2022-08-10 10:16:25
+ * @Last Modified by:   hejp
+ * @Last Modified time: 2022-08-10 10:16:25
+ */
 const page = {
 	type: 'page',
 	label: '页面配置',

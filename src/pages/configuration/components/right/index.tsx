@@ -16,7 +16,6 @@ import {
   Slider,
   Button
 } from 'antd'
-import { pageConfigure, coordinateConfigure } from '@src/widget/tools'
 import { SketchPicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
@@ -28,10 +27,12 @@ import {
   FolderOutlined,
   FolderOpenOutlined
 } from '@ant-design/icons'
-// 获取配置项
-import { widgetConfigure } from '@src/widget/tools/configure'
+// 配置文件
+import configuration from '@src/widget/tools/main'
 // JSON编辑器
 import JsonEditor from '@src/components/json-editor'
+// 微件配置文件
+const { widgetTypesConfiguration, widgetConfiguration, baseConfiguration } = configuration
 
 const { TextArea } = Input
 const { TabPane } = Tabs
@@ -352,14 +353,13 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   // 保存数据
   const saveData = (values: any) => {
     const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
-    const index = widgetConfigure.findIndex((item: any) => item.code === newCurrentWidget.code)
     newCurrentWidget.dataValue = values
     // 如果没有说明该组件有问题
-    if (index === -1) {
+    if (!widgetConfiguration[newCurrentWidget.code]) {
       return
     }
     newCurrentWidget.dataValue = {
-      ...widgetConfigure[index].dataValue,
+      ...widgetConfiguration[newCurrentWidget.code].dataValue,
       ...values
     }
     modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
@@ -470,13 +470,6 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               {
                 renderWidgetsTree(currentPage.widgets || [])
               }
-              {/* {
-                currentPage.widgets ? currentPage.widgets.map((item: any) => (
-                  <li
-                    key={item.id}
-                    className="app-screen-disign__layer--item">{item.label}</li>
-                )) : null
-              } */}
             </div>
           </Wrapper>
         </TabPane>
@@ -492,7 +485,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
           // onValuesChange={(changedValues, allValues) => modifyScreen(allValues)}
           >
             {
-              renderDynamicForm(pageConfigure.configure || [], pageForm, modifyScreen, '')
+              renderDynamicForm(baseConfiguration.page.configure || [], pageForm, modifyScreen, '')
             }
           </Form>
         </TabPane>
@@ -507,13 +500,14 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 labelAlign="left"
               >
                 {
-                  renderDynamicForm(
-                    currentWidget.configure || [],
-                    configureForm,
-                    modifyLargeScreenElement,
-                    'configureValue',
-                    true
-                  )
+                  widgetTypesConfiguration[currentWidget.type] ?
+                    renderDynamicForm(
+                      widgetTypesConfiguration[currentWidget.type].configure || [],
+                      configureForm,
+                      modifyLargeScreenElement,
+                      'configureValue',
+                      true
+                    ) : null
                 }
               </Form>
             </TabPane>
@@ -528,34 +522,15 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 onFinish={saveData}
               >
                 {
-                  renderDynamicForm(
-                    currentWidget.data || [],
-                    dataForm,
-                    modifyLargeScreenElement,
-                    'dataValue',
-                    false
-                  )
+                  widgetTypesConfiguration[currentWidget.type] ?
+                    renderDynamicForm(
+                      widgetTypesConfiguration[currentWidget.type].data || [],
+                      dataForm,
+                      modifyLargeScreenElement,
+                      'dataValue',
+                      false
+                    ) : null
                 }
-                {/* {
-                  currentWidgetId && currentWidgetGroupId === currentWidgetId ?
-                    <>
-                      <Form.Item
-                        label="使用接口数据"
-                        name="useInterface"
-                        valuePropName="checked"
-                      >
-                        <Switch />
-                      </Form.Item>
-                      <Form.Item
-                        noStyle
-                        shouldUpdate={(prevValues, curValues) => prevValues.useInterface !== curValues.useInterface}>
-                        {({ getFieldValue }) => {
-                          if (getFieldValue('useInterface')) {
-                            return dataFormRender(true)
-                          }
-                        }}</Form.Item>
-                    </> : dataFormRender(!currentWidgetGroupId)
-                } */}
 
                 <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
                   <Button type="primary" htmlType="submit" block>
@@ -572,14 +547,10 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 wrapperCol={{ span: 18 }}
                 autoComplete="off"
                 labelAlign="left"
-              // onValuesChange={(changedValues, allValues) => modifyLargeScreenElement(currentWidgetId, {
-              //   ...currentWidget,
-              //   coordinateValue: allValues
-              // })}
               >
                 {
                   renderDynamicForm(
-                    coordinateConfigure.configure || [],
+                    baseConfiguration.coordinate.configure || [],
                     dynamicForm,
                     modifyLargeScreenElement,
                     'coordinateValue',

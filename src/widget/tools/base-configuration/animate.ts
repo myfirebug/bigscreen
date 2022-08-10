@@ -1,3 +1,10 @@
+/*
+ * 动画配置
+ * @Author: hejp
+ * @Date: 2022-08-10 10:15:40
+ * @Last Modified by:   hejp
+ * @Last Modified time: 2022-08-10 10:15:40
+ */
 const animate = {
 	configureValue: {
 		animateInfinite: false,

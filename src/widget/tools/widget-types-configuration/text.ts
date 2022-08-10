@@ -1,36 +1,18 @@
-// 动画
-import animate from '../animate';
-// 字体
-import font from '../font';
-// 请求
-import data from '../data';
+/*
+ * text类型的配置
+ * @Author: hejp
+ * @Date: 2022-08-10 09:57:10
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-10 10:41:03
+ */
+import baseConfiguration from '../base-configuration';
+const { font, animate, data } = baseConfiguration;
 
 const text = {
-	code: 'widget-text',
-	type: 'text',
-	label: '文本',
-	isGroup: false,
-	// 配置项值
-	configureValue: {
-		display: 'block',
-		textShadowX: 0,
-		textShadowY: 0,
-		textShadowF: 0,
-		textShadowC: '',
-		borderStyle: 'none',
-		borderWidth: 0,
-		borderColor: '',
-		borderTopLeftRadius: 0,
-		borderTopRightRadius: 0,
-		borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 0,
-		...animate.configureValue,
-		...font.configureValue
-	},
 	// 基础配置项
 	configure: [
+		...font.configure,
 		[
-			...font.configure,
 			...animate.configure,
 			{
 				name: '文字阴影',
@@ -141,24 +123,7 @@ const text = {
 			}
 		]
 	],
-	// 坐标值
-	coordinateValue: {
-		left: 0,
-		top: 0,
-		width: 100,
-		height: 40
-	},
-	dataValue: {
-		useInterface: false,
-		dataType: 'mock',
-		mock: {
-			value: '文本框'
-		},
-		url: '',
-		method: 'get',
-		field: 'value'
-	},
-	data: data
+	data: data.configure
 };
 
 export default text;
