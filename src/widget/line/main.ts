@@ -5,7 +5,9 @@ const line: any = {
 	// 基础平滑折线图
 	widgetBaseSmoothLine: require('./index').default,
 	// 基础面积图
-	widgetBaseAreaLine: require('./index').default
+	widgetBaseAreaLine: require('./index').default,
+	// 基础纵向折线图
+	widgetBaseLengthwaysLine: require('./index').default
 };
 
 export default line;

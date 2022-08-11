@@ -56,9 +56,11 @@ export const componentsClassify: any[] = [{
     src: '',
     widgetName: 'widgetBaseAreaLine',
     name: '基础面积图'
+  }, {
+    src: '',
+    widgetName: 'widgetBaseLengthwaysLine',
+    name: '基础纵向折线图'
   }]
-
-
 },
 {
   type: 'bar',
