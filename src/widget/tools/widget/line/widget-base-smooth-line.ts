@@ -3,15 +3,15 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 10:12:50
+ * @Last Modified time: 2022-08-11 10:52:55
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
 
 export default {
-	code: 'widgetBaseLine',
+	code: 'widgetBaseSmoothLine',
 	type: 'line',
-	label: '基础折线图',
+	label: '基础平滑折线图',
 	// 配置项值
 	configureValue: {
 		display: 'block',
@@ -22,7 +22,8 @@ export default {
 		...echarts.xAxisValue,
 		...echarts.yAxisValue,
 		...echarts.echartColorValue,
-		...echarts.lineValue
+		...echarts.lineValue,
+		lineSmooth: true
 	},
 	// 坐标值
 	coordinateValue: {

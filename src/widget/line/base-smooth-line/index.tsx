@@ -5,11 +5,11 @@ import CustomEcharts from '@src/components/echarts'
 
 import { IEchartConfig } from '@src/types'
 
-interface IBaseLineProps extends IEchartConfig {
+interface IBaseSmoothLineProps extends IEchartConfig {
   configure: any;
 }
 
-const BaseLine: FC<IBaseLineProps> = ({
+const BaseSmoothLine: FC<IBaseSmoothLineProps> = ({
   style
 }) => {
 
@@ -197,4 +197,4 @@ const BaseLine: FC<IBaseLineProps> = ({
   )
 }
 
-export default BaseLine
+export default BaseSmoothLine

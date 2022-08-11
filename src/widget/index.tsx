@@ -9,6 +9,8 @@ import {
   ClockCircleOutlined,
   TableOutlined
 } from '@ant-design/icons'
+// 折线图集合
+import line from './line'
 import './index.scss'
 
 // 组件分类
@@ -46,7 +48,12 @@ export const componentsClassify: any[] = [{
     src: '',
     widgetName: 'widgetBaseLine',
     name: '基础折线图'
+  }, {
+    src: '',
+    widgetName: 'widgetBaseSmoothLine',
+    name: '基础平滑折线图'
   }]
+
 },
 {
   type: 'bar',
@@ -73,8 +80,7 @@ const components: any = {
   'widgetText': require('./text').default,
   // 组
   'widgetGroup': require('./group').default,
-  // 基础折线图
-  'widgetBaseLine': require('./line/base-line').default
+  ...line
 }
 
 export default components

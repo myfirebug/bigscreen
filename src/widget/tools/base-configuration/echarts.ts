@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 17:58:37
+ * @Last Modified time: 2022-08-11 10:34:46
  */
 const echarts = {
 	// 标题配置项值
@@ -231,6 +231,7 @@ const echarts = {
 			]
 		}
 	],
+	// 风格配置项值
 	gridValue: {
 		gridShow: false,
 		gridLeft: 50,
@@ -239,6 +240,7 @@ const echarts = {
 		gridBottom: 50,
 		gridBorderColor: '#ccc'
 	},
+	// 网格配置
 	grid: [
 		{
 			componentName: 'Switch',
@@ -285,6 +287,7 @@ const echarts = {
 			placeholder: '请选择边框颜色'
 		}
 	],
+	// xAxis配置项值
 	xAxisValue: {
 		xAxisShow: true,
 		xAxisType: 'category',
@@ -304,6 +307,7 @@ const echarts = {
 		xAxisSplitAreaOpacity: 10,
 		xAxisPointerShow: true
 	},
+	// xAsix配置
 	xAxis: [
 		{
 			componentName: 'Switch',
@@ -515,6 +519,7 @@ const echarts = {
 			}
 		]
 	],
+	// yAxis配置项值
 	yAxisValue: {
 		yAxisShow: true,
 		yAxisType: 'value',
@@ -534,6 +539,7 @@ const echarts = {
 		yAxisSplitAreaOpacity: 10,
 		yAxisPointerShow: false
 	},
+	// yAxis配置项
 	yAxis: [
 		{
 			componentName: 'Switch',
@@ -745,6 +751,7 @@ const echarts = {
 			}
 		]
 	],
+	// 颜色值
 	echartColorValue: {
 		axisNameColor: 'rgba(255,255,255,.2)',
 		axisLineColor: 'rgba(255,255,255,.2)',
@@ -760,6 +767,7 @@ const echarts = {
 		themeColor7: '#d2f5a6',
 		themeColor8: '#76f2f2'
 	},
+	// 颜色配置
 	echartColor: [
 		{
 			componentName: 'SketchPicker',
@@ -855,6 +863,96 @@ const echarts = {
 						name: 'themeColor8',
 						required: false,
 						placeholder: '请选择颜色'
+					}
+				]
+			}
+		]
+	],
+	// 折现配置项值
+	lineValue: {
+		lineShowSymbol: true,
+		lineSymbol: 'circle',
+		lineSymbolSize: 4,
+		lineWidth: 2,
+		lineSmooth: false,
+		lineAreaStyle: false,
+		lineAreaStyleOpacity: 70
+	},
+	// 折现配置项
+	line: [
+		{
+			componentName: 'Switch',
+			label: '平滑曲线',
+			name: 'lineSmooth',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '线条宽度',
+			name: 'lineWidth',
+			required: false,
+			placeholder: ''
+		},
+		[
+			{
+				name: '标记',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '显示标记',
+						name: 'lineShowSymbol',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'Select',
+						label: '标记图标',
+						name: 'lineSymbol',
+						required: false,
+						placeholder: '请选择标记图标',
+						relationFields: 'lineShowSymbol',
+						relationValues: 'true',
+						options: [
+							{ code: 'circle', name: 'circle' },
+							{ code: 'rect', name: 'rect' },
+							{ code: 'roundRect', name: 'roundRect' },
+							{ code: 'triangle', name: 'triangle' },
+							{ code: 'diamond', name: 'diamond' },
+							{ code: 'pin', name: 'pin' },
+							{ code: 'arrow', name: 'arrow' },
+							{ code: 'none', name: 'none' }
+						]
+					},
+					{
+						componentName: 'Slider',
+						label: '标记大小',
+						name: 'lineSymbolSize',
+						required: false,
+						relationFields: 'lineShowSymbol',
+						relationValues: 'true',
+						placeholder: ''
+					}
+				]
+			},
+			{
+				name: '区域面积图',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '区域面积图',
+						name: 'lineAreaStyle',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'Slider',
+						label: '透明度',
+						name: 'lineAreaStyleOpacity',
+						required: false,
+						relationFields: 'lineAreaStyle',
+						relationValues: 'true',
+						placeholder: ''
 					}
 				]
 			}
