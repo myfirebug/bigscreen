@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 14:46:48
+ * @Last Modified time: 2022-08-11 18:55:24
  */
 const echarts = {
 	// 标题配置项值
@@ -305,7 +305,9 @@ const echarts = {
 		xAxisSplitLineShow: true,
 		xAxisSplitAreaShow: false,
 		xAxisSplitAreaOpacity: 10,
-		xAxisPointerShow: true
+		xAxisPointerShow: true,
+		xAxisTickShow: true,
+		xAxisAlignWithLabel: false
 	},
 	// xAsix配置
 	xAxis: [
@@ -439,6 +441,31 @@ const echarts = {
 		],
 		[
 			{
+				name: '坐标轴刻度',
+				relationFields: 'xAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'xAxisTickShow',
+						required: false,
+						placeholder: '请输入'
+					},
+					{
+						componentName: 'Switch',
+						label: '对齐标签',
+						name: 'xAxisAlignWithLabel',
+						required: false,
+						relationFields: 'xAxisTickShow',
+						relationValues: 'true',
+						placeholder: ''
+					}
+				]
+			}
+		],
+		[
+			{
 				name: '坐标轴刻度标签',
 				relationFields: 'xAxisShow',
 				relationValues: 'true',
@@ -537,7 +564,9 @@ const echarts = {
 		yAxisSplitLineShow: true,
 		yAxisSplitAreaShow: false,
 		yAxisSplitAreaOpacity: 10,
-		yAxisPointerShow: false
+		yAxisPointerShow: false,
+		yAxisTickShow: true,
+		yAxisAlignWithLabel: false
 	},
 	// yAxis配置项
 	yAxis: [
@@ -665,6 +694,31 @@ const echarts = {
 						name: 'yAxisLineShow',
 						required: false,
 						placeholder: '请输入'
+					}
+				]
+			}
+		],
+		[
+			{
+				name: '坐标轴刻度',
+				relationFields: 'yAxisShow',
+				relationValues: 'true',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'yAxisTickShow',
+						required: false,
+						placeholder: '请输入'
+					},
+					{
+						componentName: 'Switch',
+						label: '对齐标签',
+						name: 'yAxisAlignWithLabel',
+						required: false,
+						relationFields: 'yAxisTickShow',
+						relationValues: 'true',
+						placeholder: ''
 					}
 				]
 			}
@@ -868,7 +922,7 @@ const echarts = {
 			}
 		]
 	],
-	// 折现配置项值
+	// 折线配置项值
 	lineValue: {
 		lineShowSymbol: true,
 		lineSymbol: 'circle',
@@ -878,7 +932,7 @@ const echarts = {
 		lineAreaStyle: false,
 		lineAreaStyleOpacity: 70
 	},
-	// 折现配置项
+	// 折线配置项
 	line: [
 		{
 			componentName: 'Switch',
@@ -957,6 +1011,90 @@ const echarts = {
 				]
 			}
 		]
+	],
+	// 柱状图配置项值
+	barValue: {
+		barWidth: 40,
+		barShowBackground: false,
+		barBorderRadius: 0
+	},
+	// 柱状图配置项
+	bar: [
+		{
+			componentName: 'Slider',
+			label: '柱状宽度',
+			name: 'barWidth',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Switch',
+			label: '显示柱条背景',
+			name: 'barShowBackground',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '圆角大小',
+			name: 'barBorderRadius',
+			required: false,
+			placeholder: ''
+		}
+	],
+	// 数据标签配置项值
+	seriesLabelValue: {
+		seriesLabelShow: false,
+		seriesLabelPosition: 'top',
+		seriesLabelColor: '#fff'
+	},
+	// 数据标签配置项
+	seriesLabel: [
+		{
+			name: '图形上的文本标签',
+			list: [
+				{
+					componentName: 'Switch',
+					label: '是否显示',
+					name: 'seriesLabelShow',
+					required: false,
+					placeholder: ''
+				},
+				{
+					componentName: 'Select',
+					label: '标签的位置',
+					name: 'seriesLabelPosition',
+					required: false,
+					placeholder: '请选择标签的位置',
+					relationFields: 'seriesLabelShow',
+					relationValues: 'true',
+					options: [
+						{ code: 'top', name: 'top' },
+						{ code: 'left', name: 'left' },
+						{ code: 'right', name: 'right' },
+						{ code: 'bottom', name: 'bottom' },
+						{ code: 'inside', name: 'inside' },
+						{ code: 'insideLeft', name: 'insideLeft' },
+						{ code: 'insideRight', name: 'insideRight' },
+						{ code: 'insideTop', name: 'insideTop' },
+						{ code: 'insideBottom', name: 'insideBottom' },
+						{ code: 'insideTopLeft', name: 'insideTopLeft' },
+						{ code: 'insideBottomLeft', name: 'insideBottomLeft' },
+						{ code: 'insideTopRight', name: 'insideTopRight' },
+						{ code: 'insideBottomRight', name: 'insideinsideBottomRightTop' }
+					]
+				},
+				{
+					componentName: 'SketchPicker',
+					label: '文字颜色',
+					name: 'seriesLabelColor',
+					required: false,
+					relationFields: 'seriesLabelShow',
+					relationValues: 'true',
+					placeholder: '请选择文字颜色'
+				}
+			]
+		}
 	]
 };
 

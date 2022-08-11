@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 14:30:13
+ * @Last Modified time: 2022-08-11 18:20:57
  */
 interface result {
 	legendData: any[];
@@ -75,6 +75,10 @@ export function handleEchartsOption(style: any): any {
 			},
 			nameRotate: style?.xAxisNameRotate,
 			boundaryGap: style?.xAxisBoundaryGap,
+			axisTick: {
+				show: style?.xAxisTickShow,
+				alignWithLabel: style?.xAxisAlignWithLabel
+			},
 			axisLine: {
 				show: style?.xAxisLineShow,
 				lineStyle: {
@@ -122,6 +126,10 @@ export function handleEchartsOption(style: any): any {
 			},
 			nameRotate: style?.yAxisNameRotate,
 			boundaryGap: style?.yAxisBoundaryGap,
+			axisTick: {
+				show: style?.yAxisTickShow,
+				alignWithLabel: style?.yAxisAlignWithLabel
+			},
 			axisLine: {
 				show: style?.yAxisLineShow,
 				lineStyle: {
@@ -171,6 +179,14 @@ export function handleEchartsOption(style: any): any {
 							: 0.7
 				  }
 				: null
+		},
+		bar: {
+			type: 'bar',
+			barWidth: style?.barWidth,
+			showBackground: style?.barShowBackground,
+			itemStyle: {
+				borderRadius: style?.barBorderRadius || 0
+			}
 		},
 		series: []
 	};

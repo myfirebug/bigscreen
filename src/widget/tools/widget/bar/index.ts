@@ -3,13 +3,13 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 18:47:59
+ * @Last Modified time: 2022-08-11 18:53:42
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
 
 export default {
-	type: 'line',
+	type: 'bar',
 	// 配置项值
 	configureValue: {
 		display: 'block',
@@ -20,8 +20,10 @@ export default {
 		...echarts.xAxisValue,
 		...echarts.yAxisValue,
 		...echarts.echartColorValue,
-		...echarts.lineValue,
-		...echarts.seriesLabel
+		...echarts.barValue,
+		...echarts.seriesLabel,
+		xAxisBoundaryGap: true,
+		yAxisBoundaryGap: true
 	},
 	// 坐标值
 	coordinateValue: {

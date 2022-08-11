@@ -36,13 +36,17 @@ const BaseLine: FC<IBaseLineProps> = ({ style, data, field }) => {
 			series: series
 				? series.map((item) => ({
 					...configuration.line,
-					...item
+					...item,
+					label: {
+						show: style?.seriesLabelShow,
+						position: style?.seriesLabelPosition,
+						color: style?.seriesLabelColor
+					}
 				}))
 				: []
 		};
 	}, [data, field, style]);
 
-	console.log(getOption, 'getOption')
 
 	return (
 		<CustomEcharts style={style} options={getOption} />

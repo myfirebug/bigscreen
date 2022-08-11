@@ -11,6 +11,8 @@ import {
 } from '@ant-design/icons'
 // 折线图集合
 import line from './line/main'
+// 柱状图集合
+import Bar from './bar/main'
 import './index.scss'
 
 // 组件分类
@@ -66,7 +68,11 @@ export const componentsClassify: any[] = [{
   type: 'bar',
   icon: <BarChartOutlined />,
   name: '柱状图',
-  datas: []
+  datas: [{
+    src: '',
+    widgetName: 'widgetBaseBar',
+    name: '基础柱状图线图'
+  }]
 },
 {
   type: 'pie',
@@ -87,7 +93,8 @@ const components: any = {
   'widgetText': require('./text').default,
   // 组
   'widgetGroup': require('./group').default,
-  ...line
+  ...line,
+  ...Bar
 }
 
 export default components
