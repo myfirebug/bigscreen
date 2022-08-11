@@ -3,10 +3,10 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 10:24:00
+ * @Last Modified time: 2022-08-11 16:09:53
  */
 import baseConfiguration from '../base-configuration';
-const { font, animate, data } = baseConfiguration;
+const { font, animate, data, box } = baseConfiguration;
 
 export default {
 	code: 'widgetText',
@@ -19,13 +19,7 @@ export default {
 		textShadowY: 0,
 		textShadowF: 0,
 		textShadowC: '',
-		borderStyle: 'none',
-		borderWidth: 0,
-		borderColor: '',
-		borderTopLeftRadius: 0,
-		borderTopRightRadius: 0,
-		borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 0,
+		...box.configureValue,
 		...animate.configureValue,
 		...font.configureValue
 	},

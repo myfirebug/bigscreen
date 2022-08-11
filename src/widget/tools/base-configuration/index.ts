@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:48:55
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 10:23:22
+ * @Last Modified time: 2022-08-11 16:08:37
  */
 // 页面
 import page from './page';
@@ -15,6 +15,8 @@ import animate from './animate';
 import data from './data';
 // 字体
 import font from './font';
+// 盒子
+import box from './box';
 // 图表
 import echarts from './echarts';
 
@@ -24,7 +26,8 @@ const baseConfiguration = {
 	animate,
 	data,
 	font,
-	echarts
+	echarts,
+	box
 };
 
 export default baseConfiguration;

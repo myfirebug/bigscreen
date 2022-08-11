@@ -52,7 +52,12 @@ export const componentsClassify: any[] = [{
     src: '',
     widgetName: 'widgetBaseSmoothLine',
     name: '基础平滑折线图'
+  }, {
+    src: '',
+    widgetName: 'widgetBaseAreaLine',
+    name: '基础面积图'
   }]
+
 
 },
 {

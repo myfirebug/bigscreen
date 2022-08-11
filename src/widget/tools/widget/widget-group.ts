@@ -3,11 +3,11 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 14:32:03
+ * @Last Modified time: 2022-08-11 16:29:25
  */
 // 获取本地环境的数据
 import baseConfiguration from '../base-configuration';
-const { animate } = baseConfiguration;
+const { animate, box } = baseConfiguration;
 
 export default {
 	code: 'widgetGroup',
@@ -17,7 +17,8 @@ export default {
 	configureValue: {
 		display: 'block',
 		backgroundColor: '',
-		...animate.configureValue
+		...animate.configureValue,
+		...box.configureValue
 	},
 	// 坐标值
 	coordinateValue: {

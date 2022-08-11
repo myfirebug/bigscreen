@@ -3,10 +3,10 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:00:37
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 11:16:12
+ * @Last Modified time: 2022-08-11 16:31:20
  */
 import baseConfiguration from '../base-configuration';
-const { animate } = baseConfiguration;
+const { animate, box } = baseConfiguration;
 
 const group = {
 	configure: [
@@ -17,7 +17,8 @@ const group = {
 			required: false,
 			placeholder: '请选择背景颜色'
 		},
-		animate.configure
+		animate.configure,
+		box.configure
 	],
 	data: [
 		{

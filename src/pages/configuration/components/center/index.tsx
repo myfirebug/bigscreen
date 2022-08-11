@@ -34,31 +34,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   currentWidgetGroupId
 }) => {
 
-  // 移动时
-  const dragStopHandle = (e: any, d: any) => {
-    modifyLargeScreenElement(currentWidgetId, {
-      ...currentWidget,
-      coordinateValue: {
-        ...currentWidget.coordinateValue,
-        left: Number(d.lastX.toFixed(2)),
-        top: Number(d.lastY.toFixed(2))
-      }
-    })
-  }
-
-  // 改变盒子的比例时
-  const resizeHandle = (e: any, direction: any, ref: any, delta: any, position: any) => {
-    modifyLargeScreenElement(currentWidgetId, {
-      ...currentWidget,
-      coordinateValue: {
-        width: ref.offsetWidth,
-        height: ref.offsetHeight,
-        left: Number(position.x.toFixed(2)),
-        top: Number(position.y.toFixed(2))
-      }
-    })
-  }
-
   // 渲染样式
   const getStyle = (config: any) => {
     return {
@@ -70,7 +45,8 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
       animationDelay: config.animateDelay + 's',
       animationDuration: config.animateTime + 's',
       animationIterationCount: config.animateInfinite ? 'infinite' : 1,
-      textShadow: `${config.textShadowX}px ${config.textShadowY}px ${config.textShadowF}px ${config.textShadowC}`
+      textShadow: `${config.textShadowX}px ${config.textShadowY}px ${config.textShadowF}px ${config.textShadowC}`,
+      boxShadow: `${config.boxShadowX}px ${config.boxShadowY}px ${config.boxShadowF}px ${config.boxShadowC} ${config.boxInset ? 'inset' : ''}`
     }
   }
 

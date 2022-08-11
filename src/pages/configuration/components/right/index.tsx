@@ -261,10 +261,11 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                           <ChromePicker
                             color={form.getFieldValue(item.name)}
                             onChangeComplete={e => {
+                              console.log(e, '123')
                               form.setFieldsValue({
-                                [item.name]: e.hex
+                                [item.name]: `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`
                               })
-                              isUpdate ? onChangeHandler(callback, item.name, e.hex, field) : form.setFieldValue(item.name, e.hex)
+                              isUpdate ? onChangeHandler(callback, item.name, `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`, field) : form.setFieldValue(item.name, `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`)
                             }} />
                         </div>
                       </div>
