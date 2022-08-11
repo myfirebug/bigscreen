@@ -10,7 +10,7 @@ import {
   TableOutlined
 } from '@ant-design/icons'
 // 折线图集合
-import line from './line'
+import line from './line/main'
 import './index.scss'
 
 // 组件分类

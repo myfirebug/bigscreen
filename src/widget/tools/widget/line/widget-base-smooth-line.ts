@@ -3,35 +3,16 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 10:52:55
+ * @Last Modified time: 2022-08-11 14:45:55
  */
-import baseConfiguration from '../../base-configuration';
-const { echarts, animate, data } = baseConfiguration;
+import lineConfig from './index';
 
 export default {
 	code: 'widgetBaseSmoothLine',
-	type: 'line',
 	label: '基础平滑折线图',
-	// 配置项值
+	...lineConfig,
 	configureValue: {
-		display: 'block',
-		...animate.configureValue,
-		...echarts.titleValue,
-		...echarts.legendValue,
-		...echarts.gridValue,
-		...echarts.xAxisValue,
-		...echarts.yAxisValue,
-		...echarts.echartColorValue,
-		...echarts.lineValue,
+		...lineConfig.configureValue,
 		lineSmooth: true
-	},
-	// 坐标值
-	coordinateValue: {
-		left: 0,
-		top: 0,
-		width: 500,
-		height: 500
-	},
-	// 数据值
-	dataValue: data.configureValue
+	}
 };

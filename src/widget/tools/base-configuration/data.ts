@@ -3,8 +3,9 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:10:09
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 10:45:59
+ * @Last Modified time: 2022-08-11 14:33:44
  */
+// 获取本地环境的数据
 const data = {
 	// 数据项默认值
 	configureValue: {

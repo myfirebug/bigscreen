@@ -3,10 +3,11 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 11:18:06
+ * @Last Modified time: 2022-08-11 14:32:03
  */
+// 获取本地环境的数据
 import baseConfiguration from '../base-configuration';
-const { font, animate, data } = baseConfiguration;
+const { animate } = baseConfiguration;
 
 export default {
 	code: 'widgetGroup',

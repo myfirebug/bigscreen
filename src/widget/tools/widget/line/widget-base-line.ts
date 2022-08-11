@@ -3,34 +3,12 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 10:12:50
+ * @Last Modified time: 2022-08-11 14:43:49
  */
-import baseConfiguration from '../../base-configuration';
-const { echarts, animate, data } = baseConfiguration;
+import lineConfig from './index';
 
 export default {
 	code: 'widgetBaseLine',
-	type: 'line',
 	label: '基础折线图',
-	// 配置项值
-	configureValue: {
-		display: 'block',
-		...animate.configureValue,
-		...echarts.titleValue,
-		...echarts.legendValue,
-		...echarts.gridValue,
-		...echarts.xAxisValue,
-		...echarts.yAxisValue,
-		...echarts.echartColorValue,
-		...echarts.lineValue
-	},
-	// 坐标值
-	coordinateValue: {
-		left: 0,
-		top: 0,
-		width: 500,
-		height: 500
-	},
-	// 数据值
-	dataValue: data.configureValue
+	...lineConfig
 };

@@ -65,7 +65,7 @@ module.exports = {
         'no-lonely-if': 2, //禁止else语句内只有if语句
         'no-loop-func': 1, //禁止在循环中使用函数（如果没有引用外部变量不形成闭包就可以）
         'no-mixed-requires': [0, false], //声明时不能混用声明类型
-        'no-mixed-spaces-and-tabs': [2, false], //禁止混用tab和空格
+        'no-mixed-spaces-and-tabs': 0, //禁止混用tab和空格
         'linebreak-style': [0, 'windows'], //换行风格
         'no-multi-spaces': 0, //不能用多余的空格
         'no-multi-str': 2, //字符串不能用\换行

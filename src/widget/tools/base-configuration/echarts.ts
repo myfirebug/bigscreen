@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 10:34:46
+ * @Last Modified time: 2022-08-11 14:46:48
  */
 const echarts = {
 	// 标题配置项值
@@ -235,8 +235,8 @@ const echarts = {
 	gridValue: {
 		gridShow: false,
 		gridLeft: 50,
-		gridRight: 50,
-		gridTop: 50,
+		gridRight: 10,
+		gridTop: 20,
 		gridBottom: 50,
 		gridBorderColor: '#ccc'
 	},
