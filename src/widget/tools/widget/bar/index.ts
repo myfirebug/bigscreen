@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 18:53:42
+ * @Last Modified time: 2022-08-12 12:12:05
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -21,7 +21,8 @@ export default {
 		...echarts.yAxisValue,
 		...echarts.echartColorValue,
 		...echarts.barValue,
-		...echarts.seriesLabel,
+		...echarts.seriesLabelValue,
+		...echarts.seriesStackValue,
 		xAxisBoundaryGap: true,
 		yAxisBoundaryGap: true
 	},
@@ -30,7 +31,7 @@ export default {
 		left: 0,
 		top: 0,
 		width: 500,
-		height: 300
+		height: 320
 	},
 	// 数据值
 	dataValue: {

@@ -63,7 +63,7 @@ const Request = memo((props: IRequestProps) => {
   }, [run, url, params])
 
   return (
-    <div style={{ overflow: 'hidden' }}>
+    <>
       {
         isPlaceholder ?
           <Wrapper
@@ -77,7 +77,7 @@ const Request = memo((props: IRequestProps) => {
           </Wrapper>
           : render(data)
       }
-    </div>
+    </>
   )
 })
 export default Request

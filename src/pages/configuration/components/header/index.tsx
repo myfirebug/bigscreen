@@ -226,7 +226,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
                               subItem.src ? <img src={subItem.src} /> : <PictureOutlined />
                             }
                           </div>
-                          <div className="name">{subItem.name}</div>
+                          <div className="name" title={subItem.name}>{subItem.name}</div>
                         </div>
                       ))
                     }

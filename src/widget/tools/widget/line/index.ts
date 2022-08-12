@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 18:47:59
+ * @Last Modified time: 2022-08-12 12:12:14
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -21,14 +21,15 @@ export default {
 		...echarts.yAxisValue,
 		...echarts.echartColorValue,
 		...echarts.lineValue,
-		...echarts.seriesLabel
+		...echarts.seriesLabel,
+		...echarts.seriesStackValue
 	},
 	// 坐标值
 	coordinateValue: {
 		left: 0,
 		top: 0,
 		width: 500,
-		height: 300
+		height: 320
 	},
 	// 数据值
 	dataValue: {

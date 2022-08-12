@@ -9,10 +9,6 @@ import {
   ClockCircleOutlined,
   TableOutlined
 } from '@ant-design/icons'
-// 折线图集合
-import line from './line/main'
-// 柱状图集合
-import Bar from './bar/main'
 import './index.scss'
 
 // 组件分类
@@ -47,19 +43,19 @@ export const componentsClassify: any[] = [{
   icon: <LineChartOutlined />,
   name: '折线图',
   datas: [{
-    src: '',
+    src: require('../assets/image/configuration/line/widgetBaseLine.png'),
     widgetName: 'widgetBaseLine',
     name: '基础折线图'
   }, {
-    src: '',
+    src: require('../assets/image/configuration/line/widgetBaseSmoothLine.png'),
     widgetName: 'widgetBaseSmoothLine',
     name: '基础平滑折线图'
   }, {
-    src: '',
+    src: require('../assets/image/configuration/line/widgetBaseAreaLine.png'),
     widgetName: 'widgetBaseAreaLine',
     name: '基础面积图'
   }, {
-    src: '',
+    src: require('../assets/image/configuration/line/widgetBaseLengthwaysLine.png'),
     widgetName: 'widgetBaseLengthwaysLine',
     name: '基础纵向折线图'
   }]
@@ -69,10 +65,36 @@ export const componentsClassify: any[] = [{
   icon: <BarChartOutlined />,
   name: '柱状图',
   datas: [{
-    src: '',
+    src: require('../assets/image/configuration/bar/widgetBaseBar.png'),
     widgetName: 'widgetBaseBar',
-    name: '基础柱状图线图'
+    name: '基础柱状图'
+  },
+  {
+    src: require('../assets/image/configuration/bar/widgetBackgroudBar.png'),
+    widgetName: 'widgetBackgroudBar',
+    name: '带背景色的柱状图'
+  },
+  {
+    src: require('../assets/image/configuration/bar/widgetAlignmentBar.png'),
+    widgetName: 'widgetAlignmentBar',
+    name: '坐标轴刻度与标签对齐'
+  },
+  {
+    src: require('../assets/image/configuration/bar/widgetRadiusBar.png'),
+    widgetName: 'widgetRadiusBar',
+    name: '圆角柱状图'
+  },
+  {
+    src: require('../assets/image/configuration/bar/widgetLengthwaysBar.png'),
+    widgetName: 'widgetLengthwaysBar',
+    name: '纵向柱状图'
+  },
+  {
+    src: require('../assets/image/configuration/bar/widgetStackBar.png'),
+    widgetName: 'widgetStackBar',
+    name: '堆积柱状图'
   }]
+
 },
 {
   type: 'pie',
@@ -90,11 +112,13 @@ export const componentsClassify: any[] = [{
 // 所有组件地址
 const components: any = {
   // 文本框
-  'widgetText': require('./text').default,
+  text: require('./text').default,
   // 组
-  'widgetGroup': require('./group').default,
-  ...line,
-  ...Bar
+  group: require('./group').default,
+  // 折线图
+  line: require('./line').default,
+  // 柱状图
+  bar: require('./bar').default
 }
 
 export default components

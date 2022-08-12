@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 18:20:57
+ * @Last Modified time: 2022-08-12 11:34:42
  */
 interface result {
 	legendData: any[];
@@ -20,6 +20,12 @@ interface result {
  */
 export function handleEchartsOption(style: any): any {
 	return {
+		backgroundColor: '#242638',
+		toolbox: {
+			feature: {
+				saveAsImage: {}
+			}
+		},
 		color: [
 			style?.themeColor1,
 			style?.themeColor2,
@@ -77,7 +83,10 @@ export function handleEchartsOption(style: any): any {
 			boundaryGap: style?.xAxisBoundaryGap,
 			axisTick: {
 				show: style?.xAxisTickShow,
-				alignWithLabel: style?.xAxisAlignWithLabel
+				alignWithLabel: style?.xAxisAlignWithLabel,
+				lineStyle: {
+					color: style?.axisLineColor
+				}
 			},
 			axisLine: {
 				show: style?.xAxisLineShow,

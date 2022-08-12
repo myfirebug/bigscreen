@@ -7,7 +7,7 @@ import { IEchartConfig } from '@src/types'
 import { handleEchartsOption, handleData } from '@src/utils/echarts'
 
 interface IBaseLineProps extends IEchartConfig {
-	configure: any;
+	style: any;
 	data: any;
 	field: string;
 }
@@ -41,7 +41,8 @@ const BaseLine: FC<IBaseLineProps> = ({ style, data, field }) => {
 						show: style?.seriesLabelShow,
 						position: style?.seriesLabelPosition,
 						color: style?.seriesLabelColor
-					}
+					},
+					stack: style?.seriesStackValue
 				}))
 				: []
 		};
@@ -49,7 +50,10 @@ const BaseLine: FC<IBaseLineProps> = ({ style, data, field }) => {
 
 
 	return (
-		<CustomEcharts style={style} options={getOption} />
+		<CustomEcharts style={{
+			width: style.width,
+			height: style.height
+		}} options={getOption} />
 	)
 }
 

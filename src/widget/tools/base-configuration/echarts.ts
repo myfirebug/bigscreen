@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 18:55:24
+ * @Last Modified time: 2022-08-12 11:52:07
  */
 const echarts = {
 	// 标题配置项值
@@ -235,9 +235,9 @@ const echarts = {
 	gridValue: {
 		gridShow: false,
 		gridLeft: 50,
-		gridRight: 10,
-		gridTop: 20,
-		gridBottom: 50,
+		gridRight: 30,
+		gridTop: 30,
+		gridBottom: 30,
 		gridBorderColor: '#ccc'
 	},
 	// 网格配置
@@ -1094,6 +1094,19 @@ const echarts = {
 					placeholder: '请选择文字颜色'
 				}
 			]
+		}
+	],
+	// 数据堆叠配置项
+	seriesStackValue: {
+		seriesStackValue: ''
+	},
+	seriesStack: [
+		{
+			componentName: 'Input',
+			label: '数据堆积名称',
+			name: 'seriesStackValue',
+			required: false,
+			placeholder: '请输入数据堆积名称'
 		}
 	]
 };

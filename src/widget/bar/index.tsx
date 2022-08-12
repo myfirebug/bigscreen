@@ -7,7 +7,7 @@ import { IEchartConfig } from '@src/types'
 import { handleEchartsOption, handleData } from '@src/utils/echarts'
 
 interface IBarProps extends IEchartConfig {
-  configure: any;
+  style: any;
   data: any;
   field: string;
 }
@@ -41,14 +41,18 @@ const Bar: FC<IBarProps> = ({ style, data, field }) => {
             show: style?.seriesLabelShow,
             position: style?.seriesLabelPosition,
             color: style?.seriesLabelColor
-          }
+          },
+          stack: style?.seriesStackValue
         }))
         : []
     };
   }, [data, field, style]);
 
   return (
-    <CustomEcharts style={style} options={getOption} />
+    <CustomEcharts style={{
+      width: style.width,
+      height: style.height
+    }} options={getOption} />
   )
 }
 
