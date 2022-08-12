@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 11:34:42
+ * @Last Modified time: 2022-08-12 15:56:57
  */
 interface result {
 	legendData: any[];
@@ -196,6 +196,9 @@ export function handleEchartsOption(style: any): any {
 			itemStyle: {
 				borderRadius: style?.barBorderRadius || 0
 			}
+		},
+		pie: {
+			type: 'pie'
 		},
 		series: []
 	};

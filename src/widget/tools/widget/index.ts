@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:21:13
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 17:15:07
+ * @Last Modified time: 2022-08-12 15:51:00
  */
 import widgetText from './widget-text';
 import widgetGroup from './widget-group';
@@ -11,6 +11,8 @@ import widgetGroup from './widget-group';
 import line from './line/main';
 // 柱状图
 import bar from './bar/main';
+// 饼图
+import pie from './pie/main';
 
 console.log(line, 'line');
 
@@ -18,7 +20,8 @@ const widgetConfiguration: any = {
 	widgetText,
 	widgetGroup,
 	...line,
-	...bar
+	...bar,
+	...pie
 };
 
 export default widgetConfiguration;

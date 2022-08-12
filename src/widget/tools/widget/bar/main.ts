@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 11:36:11
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 12:01:22
+ * @Last Modified time: 2022-08-12 15:05:48
  */
 // 基础柱状图
 import widgetBaseBar from './widget-base-bar';

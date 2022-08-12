@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 11:52:07
+ * @Last Modified time: 2022-08-12 17:47:40
  */
 const echarts = {
 	// 标题配置项值
@@ -305,7 +305,7 @@ const echarts = {
 		xAxisSplitLineShow: true,
 		xAxisSplitAreaShow: false,
 		xAxisSplitAreaOpacity: 10,
-		xAxisPointerShow: true,
+		xAxisPointerShow: false,
 		xAxisTickShow: true,
 		xAxisAlignWithLabel: false
 	},
@@ -1107,6 +1107,36 @@ const echarts = {
 			name: 'seriesStackValue',
 			required: false,
 			placeholder: '请输入数据堆积名称'
+		}
+	],
+	// 饼图配置项值
+	pieValue: {
+		seriesInsideRadius: 0,
+		seriesAutsideRadius: 80,
+		seriesRoseType: false
+	},
+	// 饼图配置项
+	pie: [
+		{
+			componentName: 'Slider',
+			label: '内半径',
+			name: 'seriesInsideRadius',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Slider',
+			label: '外半径',
+			name: 'seriesAutsideRadius',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'Switch',
+			label: '南丁格尔图',
+			name: 'seriesRoseType',
+			required: false,
+			placeholder: ''
 		}
 	]
 };

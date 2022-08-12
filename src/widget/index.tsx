@@ -100,7 +100,23 @@ export const componentsClassify: any[] = [{
   type: 'pie',
   icon: <PieChartOutlined />,
   name: '饼图',
-  datas: []
+  datas: [
+    {
+      src: require('../assets/image/configuration/pie/widgetBasePie.png'),
+      widgetName: 'widgetBasePie',
+      name: '基础饼图'
+    },
+    {
+      src: require('../assets/image/configuration/pie/widgetAnnulusPie.png'),
+      widgetName: 'widgetAnnulusPie',
+      name: '圆环饼图'
+    },
+    {
+      src: require('../assets/image/configuration/pie/widgetRosetypePie.png'),
+      widgetName: 'widgetRosetypePie',
+      name: '南丁格尔图'
+    }
+  ]
 },
 {
   type: 'radar',
@@ -118,7 +134,9 @@ const components: any = {
   // 折线图
   line: require('./line').default,
   // 柱状图
-  bar: require('./bar').default
+  bar: require('./bar').default,
+  // 饼图
+  pie: require('./pie').default
 }
 
 export default components

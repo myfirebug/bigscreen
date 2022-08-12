@@ -1,7 +1,7 @@
 import React, {
   FC, useCallback, useEffect
 } from 'react'
-import { message, Tooltip } from 'antd'
+import { message, Tooltip, Modal } from 'antd'
 import {
   SaveOutlined,
   EyeOutlined,
@@ -16,7 +16,8 @@ import {
   FolderAddOutlined,
   DeleteOutlined,
   CopyOutlined,
-  PictureOutlined
+  PictureOutlined,
+  ExclamationCircleOutlined
 } from '@ant-design/icons'
 // 配置文件
 import configuration from '@src/widget/tools/main'
@@ -135,22 +136,36 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
       const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
       switch (field) {
         case 'top':
-          newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top - 10
+          newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top - 1
           break
         case 'left':
-          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left - 10
+          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left - 1
           break
-        case 'bottom': newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top + 10
+        case 'bottom': newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top + 1
           break
         default:
-          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left + 10
+          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left + 1
       }
       modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
     }
   }, [currentWidgetId, currentWidget, modifyLargeScreenElement])
 
+  // 确认框
+  const showConfirm = (message: string, callback: Function) => {
+    Modal.confirm({
+      title: `您确定要${message}?`,
+      icon: <ExclamationCircleOutlined />,
+      content: '温馨提示',
+      onOk() {
+        callback && callback()
+      }
+    })
+  }
+
   useEffect(() => {
     const keyupHander = (e: any) => {
+      e.preventDefault()
+      e.stopPropagation()
       if (e.ctrlKey) {
         switch (e.keyCode) {
           case 90:
@@ -178,9 +193,13 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
           case 40:
             moveHander('bottom')
             break
+          default:
+        }
+      } else {
+        switch (e.keyCode) {
           // 删除
           case 46:
-            delHandler()
+            showConfirm('删除', delHandler)
             break
           default:
         }
@@ -191,7 +210,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
     return () => {
       document.removeEventListener('keyup', keyupHander)
     }
-  }, [undoHander, redoHandler, moveHander, delHandler, copyHandler, currentWidgetId])
+  }, [undoHander, redoHandler, moveHander, delHandler, copyHandler, currentWidgetId, showConfirm])
 
   return (
     <div className='app-screen-disign__header'>

@@ -30,8 +30,8 @@ const Drag: FC<IDragProps> = ({
       ...currentWidget,
       coordinateValue: {
         ...currentWidget.coordinateValue,
-        left: Number(d.lastX.toFixed(2)),
-        top: Number(d.lastY.toFixed(2))
+        left: Number(d.lastX.toFixed(0)),
+        top: Number(d.lastY.toFixed(0))
       }
     })
   }
@@ -43,8 +43,8 @@ const Drag: FC<IDragProps> = ({
       coordinateValue: {
         width: ref.offsetWidth,
         height: ref.offsetHeight,
-        left: Number(position.x.toFixed(2)),
-        top: Number(position.y.toFixed(2))
+        left: Number(position.x.toFixed(0)),
+        top: Number(position.y.toFixed(0))
       }
     })
   }
