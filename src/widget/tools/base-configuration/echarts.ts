@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 17:47:40
+ * @Last Modified time: 2022-08-13 22:59:14
  */
 const echarts = {
 	// 标题配置项值
@@ -1138,6 +1138,71 @@ const echarts = {
 			required: false,
 			placeholder: ''
 		}
+	],
+	// 雷达图配置项值
+	radarValue: {
+		radarShape: 'polygon',
+		radarRadius: 75,
+		radarAxisLinelColor: 'rgba(255,255,255,.8)',
+		radarSplitLineColor: 'rgba(255,255,255,.05)',
+		radarSplitAreaOddColor: 'rgba(250,250,250,0.3)',
+		radarSplitAreaEvenColor: 'rgba(200,200,200,0.3)'
+	},
+	// 雷达图配置项
+	radar: [
+		{
+			componentName: 'Select',
+			label: '绘制类型',
+			name: 'radarShape',
+			required: false,
+			placeholder: '',
+			options: [
+				{ code: 'polygon', name: 'polygon' },
+				{ code: 'circle', name: 'circle' }
+			]
+		},
+		{
+			componentName: 'Slider',
+			label: '半径',
+			name: 'radarRadius',
+			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '轴线颜色',
+			name: 'radarAxisLinelColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		{
+			componentName: 'SketchPicker',
+			label: '分隔线颜色',
+			name: 'radarSplitLineColor',
+			required: false,
+			placeholder: '请选择颜色'
+		},
+		[
+			{
+				name: '分隔区域颜色',
+				list: [
+					{
+						componentName: 'SketchPicker',
+						label: '奇数行',
+						name: 'radarSplitAreaOddColor',
+						required: false,
+						placeholder: '请选择颜色'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '偶数行',
+						name: 'radarSplitAreaEvenColor',
+						required: false,
+						placeholder: '请选择颜色'
+					}
+				]
+			}
+		]
 	]
 };
 

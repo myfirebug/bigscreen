@@ -74,9 +74,8 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
       return
     }
     // const index = widgetConfigure.findIndex((item: any) => item.code === code)
-
+    console.log(widgetConfiguration, code)
     if (widgetConfiguration[code]) {
-      console.log(widgetConfiguration, code)
       addLargeScreenElement({
         id: guid(),
         ...widgetConfiguration[code]

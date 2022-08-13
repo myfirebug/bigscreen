@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 15:56:57
+ * @Last Modified time: 2022-08-13 23:00:38
  */
 interface result {
 	legendData: any[];
@@ -20,7 +20,6 @@ interface result {
  */
 export function handleEchartsOption(style: any): any {
 	return {
-		backgroundColor: '#242638',
 		toolbox: {
 			feature: {
 				saveAsImage: {}
@@ -199,6 +198,36 @@ export function handleEchartsOption(style: any): any {
 		},
 		pie: {
 			type: 'pie'
+		},
+		radar: {
+			config: {
+				radius: (style?.radarRadius || 75) + '%',
+				axisLine: {
+					show: true,
+					lineStyle: {
+						width: 1,
+						color: style?.radarAxisLinelColor
+					}
+				},
+				splitLine: {
+					show: true,
+					lineStyle: {
+						color: style?.radarSplitLineColor
+					}
+				},
+				splitArea: {
+					show: true,
+					areaStyle: {
+						color: [
+							style?.radarSplitAreaOddColor,
+							style?.radarSplitAreaEvenColor
+						]
+					}
+				}
+			},
+			series: {
+				type: 'radar'
+			}
 		},
 		series: []
 	};

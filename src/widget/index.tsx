@@ -122,7 +122,13 @@ export const componentsClassify: any[] = [{
   type: 'radar',
   icon: <RadarChartOutlined />,
   name: '雷达图',
-  datas: []
+  datas: [
+    {
+      src: require('../assets/image/configuration/radar/widgetBaseRadar.png'),
+      widgetName: 'widgetBaseRadar',
+      name: '基础雷达图'
+    }
+  ]
 }]
 
 // 所有组件地址
@@ -136,7 +142,9 @@ const components: any = {
   // 柱状图
   bar: require('./bar').default,
   // 饼图
-  pie: require('./pie').default
+  pie: require('./pie').default,
+  // 雷达图
+  radar: require('./radar').default
 }
 
 export default components
