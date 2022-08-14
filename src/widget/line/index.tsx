@@ -35,14 +35,8 @@ const BaseLine: FC<IBaseLineProps> = ({ style, data, field }) => {
 			},
 			series: series
 				? series.map((item) => ({
-					...configuration.line,
-					...item,
-					label: {
-						show: style?.seriesLabelShow,
-						position: style?.seriesLabelPosition,
-						color: style?.seriesLabelColor
-					},
-					stack: style?.seriesStackValue
+					...configuration.line.series,
+					...item
 				}))
 				: []
 		};

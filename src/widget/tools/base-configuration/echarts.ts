@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 11:38:59
+ * @Last Modified time: 2022-08-14 21:01:30
  */
 const echarts = {
 	// 标题配置项值
@@ -1208,6 +1208,44 @@ const echarts = {
 				]
 			}
 		]
+	],
+	// 漏斗图配置项值
+	funnelValue: {
+		funnelOrient: 'vertical',
+		funnelSort: 'descending',
+		funnelGap: 0
+	},
+	funnel: [
+		{
+			componentName: 'Select',
+			label: '漏斗图朝向',
+			name: 'funnelOrient',
+			required: false,
+			placeholder: '',
+			options: [
+				{ code: 'vertical', name: 'vertical' },
+				{ code: 'horizontal', name: 'horizontal' }
+			]
+		},
+		{
+			componentName: 'Select',
+			label: '数据排序',
+			name: 'funnelSort',
+			required: false,
+			placeholder: '',
+			options: [
+				{ code: 'ascending', name: 'ascending' },
+				{ code: 'descending', name: 'descending' },
+				{ code: 'none', name: 'none' }
+			]
+		},
+		{
+			componentName: 'Slider',
+			label: '图形间距',
+			name: 'funnelGap',
+			required: false,
+			placeholder: ''
+		}
 	]
 };
 

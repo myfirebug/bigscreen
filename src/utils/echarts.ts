@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 11:44:39
+ * @Last Modified time: 2022-08-14 21:16:52
  */
 interface result {
 	legendData: any[];
@@ -172,32 +172,63 @@ export function handleEchartsOption(style: any): any {
 			}
 		},
 		line: {
-			type: 'line',
-			showSymbol: style?.showSymbol,
-			symbol: style?.symbol,
-			symbolSize: style?.symbolSize,
-			smooth: style?.lineSmooth,
-			lineStyle: {
-				width: style?.lineWidth
-			},
-			areaStyle: style?.lineAreaStyle
-				? {
-						opacity: style?.lineAreaStyleOpacity
-							? style?.lineAreaStyleOpacity / 100
-							: 0.7
-				  }
-				: null
+			series: {
+				type: 'line',
+				showSymbol: style?.showSymbol,
+				symbol: style?.symbol,
+				symbolSize: style?.symbolSize,
+				smooth: style?.lineSmooth,
+				lineStyle: {
+					width: style?.lineWidth
+				},
+				label: {
+					show: style?.seriesLabelShow,
+					position: style?.seriesLabelPosition,
+					color: style?.seriesLabelColor
+				},
+				stack: style?.seriesStackValue,
+				areaStyle: style?.lineAreaStyle
+					? {
+							opacity: style?.lineAreaStyleOpacity
+								? style?.lineAreaStyleOpacity / 100
+								: 0.7
+					  }
+					: null
+			}
 		},
 		bar: {
-			type: 'bar',
-			barWidth: style?.barWidth,
-			showBackground: style?.barShowBackground,
-			itemStyle: {
-				borderRadius: style?.barBorderRadius || 0
+			series: {
+				type: 'bar',
+				barWidth: style?.barWidth,
+				showBackground: style?.barShowBackground,
+				itemStyle: {
+					borderRadius: style?.barBorderRadius || 0
+				},
+				label: {
+					show: style?.seriesLabelShow,
+					position: style?.seriesLabelPosition,
+					color: style?.seriesLabelColor
+				},
+				stack: style?.seriesStackValue
 			}
 		},
 		pie: {
-			type: 'pie'
+			series: {
+				type: 'pie',
+				label: {
+					show: style?.seriesLabelShow,
+					position: style?.seriesLabelPosition,
+					color: style?.seriesLabelColor
+				},
+				roseType: style?.seriesRoseType,
+				itemStyle: {
+					borderRadius: style?.seriesRoseType ? 4 : 0
+				},
+				radius: [
+					`${style?.seriesInsideRadius || 0}%`,
+					`${style?.seriesAutsideRadius || 0}%`
+				]
+			}
 		},
 		radar: {
 			config: {
@@ -231,6 +262,19 @@ export function handleEchartsOption(style: any): any {
 				showSymbol: style?.showSymbol,
 				symbol: style?.symbol,
 				symbolSize: style?.symbolSize
+			}
+		},
+		funnel: {
+			series: {
+				type: 'funnel',
+				label: {
+					show: style?.seriesLabelShow,
+					position: style?.seriesLabelPosition,
+					color: style?.seriesLabelColor
+				},
+				orient: style?.funnelOrient,
+				sort: style?.funnelSort,
+				gap: style?.funnelGap
 			}
 		},
 		series: []

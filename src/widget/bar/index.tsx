@@ -35,14 +35,8 @@ const Bar: FC<IBarProps> = ({ style, data, field }) => {
       },
       series: series
         ? series.map((item) => ({
-          ...configuration.bar,
-          ...item,
-          label: {
-            show: style?.seriesLabelShow,
-            position: style?.seriesLabelPosition,
-            color: style?.seriesLabelColor
-          },
-          stack: style?.seriesStackValue
+          ...configuration.bar.series,
+          ...item
         }))
         : []
     };

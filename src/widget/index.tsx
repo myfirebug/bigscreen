@@ -134,6 +134,18 @@ export const componentsClassify: any[] = [{
       name: '圆形雷达图'
     }
   ]
+},
+{
+  type: 'funnel',
+  icon: <RadarChartOutlined />,
+  name: '漏斗图',
+  datas: [
+    {
+      src: require('../assets/image/configuration/funnel/widgetBaseFunnel.png'),
+      widgetName: 'widgetBaseFunnel',
+      name: '基础漏斗图'
+    }
+  ]
 }]
 
 // 所有组件地址
@@ -149,7 +161,9 @@ const components: any = {
   // 饼图
   pie: require('./pie').default,
   // 雷达图
-  radar: require('./radar').default
+  radar: require('./radar').default,
+  // 漏斗图
+  funnel: require('./funnel').default
 }
 
 export default components

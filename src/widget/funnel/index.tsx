@@ -6,38 +6,42 @@ import { IEchartConfig } from '@src/types'
 // 处理options
 import { handleEchartsOption, handleData } from '@src/utils/echarts'
 
-interface IPieProps extends IEchartConfig {
+interface IFunnelProps extends IEchartConfig {
   style: any;
   data: any;
   field: string;
 }
 
-const Pie: FC<IPieProps> = ({ style, data, field }) => {
+const Funnel: FC<IFunnelProps> = ({ style, data, field }) => {
   // 处理echarts数据
   const getOption = useMemo(() => {
     const configuration = handleEchartsOption(style);
     const currentData = data && data[field] ? data[field] : [];
     const { legendData, xAxisData, yAxisData, series } =
       handleData(currentData);
-    console.log(currentData, series, 'series')
+
+    console.log(configuration, currentData)
     return {
       ...configuration,
       legend: {
         ...configuration.legend,
         data: legendData
       },
-      xAxis: {
-        ...configuration.xAxis,
-        data: xAxisData
-      },
-      yAxis: {
-        ...configuration.yAxis,
-        data: yAxisData
-      },
       series: series
         ? series.map((item, index) => ({
-          ...configuration.pie.series,
-          ...item,
+          ...configuration.funnel.series,
+          name: item.name,
+          labelLine: {
+            length: 10,
+            lineStyle: {
+              width: 0,
+              type: 'solid'
+            }
+          },
+          itemStyle: {
+            borderColor: '#fff',
+            borderWidth: 0
+          },
           data: currentData[index].data
         }))
         : []
@@ -52,4 +56,4 @@ const Pie: FC<IPieProps> = ({ style, data, field }) => {
   )
 }
 
-export default Pie
+export default Funnel

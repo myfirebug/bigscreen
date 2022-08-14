@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:21:13
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-13 21:23:00
+ * @Last Modified time: 2022-08-14 20:11:32
  */
 import widgetText from './widget-text';
 import widgetGroup from './widget-group';
@@ -15,8 +15,8 @@ import bar from './bar/main';
 import pie from './pie/main';
 // 雷达图
 import radar from './radar/main';
-
-console.log(line, 'line');
+// 漏斗图
+import funnel from './funnel/main';
 
 const widgetConfiguration: any = {
 	widgetText,
@@ -24,7 +24,8 @@ const widgetConfiguration: any = {
 	...line,
 	...bar,
 	...pie,
-	...radar
+	...radar,
+	...funnel
 };
 
 export default widgetConfiguration;
