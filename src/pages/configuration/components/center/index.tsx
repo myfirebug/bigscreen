@@ -11,6 +11,8 @@ import Request from '@src/components/request'
 import Drag from './components/drag'
 // grid组件
 import Grid from './components/grid'
+// 屏幕辅助线
+import Auxiliary from './components/auxiliary'
 
 interface IDesignBodyCenterProps {
   currentPage: IPage;
@@ -188,6 +190,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   return (
     <>
       <Grid screen={screen} />
+      <Auxiliary screen={screen} />
       {
         currentPage && currentPage.widgets ?
           renderWidgets(currentPage.widgets) : null

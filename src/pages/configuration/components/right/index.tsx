@@ -155,6 +155,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
           >
             <InputNumber
               disabled={item.disabled}
+              min={item.min}
+              max={item.max}
               onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
               style={{ width: '100%' }}
               placeholder={item.placeholder} />

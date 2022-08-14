@@ -103,13 +103,15 @@ export interface IPage {
 export interface IScreen {
 	width: number | string;
 	height: number | string;
+	horizontalNumber: number;
+	verticalNumber: number;
 	title: string;
 	description: string;
 	backgroundColor: string;
 	backgroundImage: string;
-	gridSize: number;
-	gridBorderColor: string;
-	gridFlag: boolean;
+	showAuxiliary: boolean;
+	auxiliaryBorderColor: string;
+	interval: number;
 }
 /**
  * 所有页面

@@ -64,13 +64,15 @@ const initialState = {
 	screen: {
 		width: 1920,
 		height: 1080,
-		backgroundColor: '',
+		backgroundColor: 'rgba(0,0,0,.5)',
 		title: '大屏',
 		description: '描述',
-		gridSize: 30,
-		gridBorderColor: '#ddd',
-		gridFlag: false,
-		backgroundImage: ''
+		auxiliaryBorderColor: '#ddd',
+		showAuxiliary: false,
+		backgroundImage: '',
+		horizontalNumber: 4,
+		verticalNumber: 3,
+		interval: 10
 	},
 	currentWidgetGroupId: ''
 };

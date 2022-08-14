@@ -2,8 +2,8 @@
  * 页面配置
  * @Author: hejp
  * @Date: 2022-08-10 10:16:25
- * @Last Modified by:   hejp
- * @Last Modified time: 2022-08-10 10:16:25
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-14 16:23:23
  */
 const page = {
 	type: 'page',
@@ -26,6 +26,24 @@ const page = {
 			placeholder: '请输入屏幕高度',
 			min: 1080,
 			max: 3000
+		},
+		{
+			componentName: 'InputNumber',
+			label: '横几屏',
+			name: 'horizontalNumber',
+			required: false,
+			min: 1,
+			max: 6,
+			placeholder: '请输入横几屏'
+		},
+		{
+			componentName: 'InputNumber',
+			label: '竖几屏',
+			min: 1,
+			max: 6,
+			name: 'verticalNumber',
+			required: false,
+			placeholder: '请输入竖几屏'
 		},
 		{
 			componentName: 'SketchPicker',
@@ -57,28 +75,28 @@ const page = {
 		},
 		[
 			{
-				name: '网格',
+				name: '屏幕辅助线',
 				list: [
 					{
 						componentName: 'Switch',
 						label: '是否显示',
-						name: 'gridFlag',
+						name: 'showAuxiliary',
 						required: false,
 						placeholder: '请选择是否显示'
 					},
 					{
 						componentName: 'InputNumber',
-						label: '网格大小',
-						name: 'gridSize',
+						label: '屏幕间隔',
+						min: 0,
+						max: 20,
+						name: 'interval',
 						required: false,
-						placeholder: '请输入网格大小',
-						min: 10,
-						max: 200
+						placeholder: '请输入竖几屏'
 					},
 					{
 						componentName: 'SketchPicker',
 						label: '线颜色',
-						name: 'gridBorderColor',
+						name: 'auxiliaryBorderColor',
 						required: false,
 						placeholder: '请选择网络线颜色'
 					}

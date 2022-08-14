@@ -116,3 +116,17 @@
         }
     }
 }
+
+@include b(auxiliary) {
+    @include e(list) {
+        display: flex;
+        flex-wrap: wrap;
+        width: 100%;
+        height: 100%;
+        box-sizing: border-box;
+    }
+    @include e(item) {
+        border: 1px dashed #07B6F0;
+        margin: 10px;
+    }
+}

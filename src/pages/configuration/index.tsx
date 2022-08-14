@@ -128,8 +128,7 @@ const Disign: FC<IDisignProps> = ({
 
   // 取消选中元素或者组
   const cancelSelectedElementHander = (e: any) => {
-    const target = e.target
-    if ((target.nodeName === 'rect' || target.className === 'elements-wrap-canvas') && currentWidgetId) {
+    if (currentWidgetId) {
       changeLargeScreenElement('')
     }
   }
