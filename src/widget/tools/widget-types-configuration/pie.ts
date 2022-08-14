@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 17:31:06
+ * @Last Modified time: 2022-08-14 11:27:30
  */
 import baseConfiguration from '../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -37,20 +37,20 @@ const pie = {
 			},
 			{
 				name: '标题',
-				list: echarts.title
+				list: [...echarts.title]
 			},
 			{
 				name: '图例',
-				list: echarts.legend
+				list: [...echarts.title]
 			},
 			{
 				name: '自定义颜色',
-				list: echarts.echartColor
+				list: [...echarts.echartColor]
 			},
 			...animate.configure
 		]
 	],
-	data: data.configure
+	data: [...data.configure]
 };
 
 export default pie;

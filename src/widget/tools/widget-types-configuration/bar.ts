@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 11:53:54
+ * @Last Modified time: 2022-08-14 11:35:03
  */
 import baseConfiguration from '../base-configuration';
 const { echarts, animate, data } = baseConfiguration;

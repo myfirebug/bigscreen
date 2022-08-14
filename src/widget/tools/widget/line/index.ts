@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 12:12:14
+ * @Last Modified time: 2022-08-14 11:39:22
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -22,7 +22,8 @@ export default {
 		...echarts.echartColorValue,
 		...echarts.lineValue,
 		...echarts.seriesLabel,
-		...echarts.seriesStackValue
+		...echarts.seriesStackValue,
+		...echarts.symbolValue
 	},
 	// 坐标值
 	coordinateValue: {

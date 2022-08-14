@@ -127,6 +127,11 @@ export const componentsClassify: any[] = [{
       src: require('../assets/image/configuration/radar/widgetBaseRadar.png'),
       widgetName: 'widgetBaseRadar',
       name: '基础雷达图'
+    },
+    {
+      src: require('../assets/image/configuration/radar/widgetCircleRadar.png'),
+      widgetName: 'widgetCircleRadar',
+      name: '圆形雷达图'
     }
   ]
 }]

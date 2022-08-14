@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:00:37
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 16:31:20
+ * @Last Modified time: 2022-08-14 11:35:23
  */
 import baseConfiguration from '../base-configuration';
 const { animate, box } = baseConfiguration;

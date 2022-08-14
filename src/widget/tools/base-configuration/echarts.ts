@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-13 22:59:14
+ * @Last Modified time: 2022-08-14 11:38:59
  */
 const echarts = {
 	// 标题配置项值
@@ -922,11 +922,56 @@ const echarts = {
 			}
 		]
 	],
+	// 标记配置项值
+	symbolValue: {
+		showSymbol: true,
+		symbol: 'circle',
+		symbolSize: 4
+	},
+	symbol: [
+		{
+			name: '标记',
+			list: [
+				{
+					componentName: 'Switch',
+					label: '显示标记',
+					name: 'showSymbol',
+					required: false,
+					placeholder: ''
+				},
+				{
+					componentName: 'Select',
+					label: '标记图标',
+					name: 'symbol',
+					required: false,
+					placeholder: '请选择标记图标',
+					relationFields: 'showSymbol',
+					relationValues: 'true',
+					options: [
+						{ code: 'circle', name: 'circle' },
+						{ code: 'rect', name: 'rect' },
+						{ code: 'roundRect', name: 'roundRect' },
+						{ code: 'triangle', name: 'triangle' },
+						{ code: 'diamond', name: 'diamond' },
+						{ code: 'pin', name: 'pin' },
+						{ code: 'arrow', name: 'arrow' },
+						{ code: 'none', name: 'none' }
+					]
+				},
+				{
+					componentName: 'Slider',
+					label: '标记大小',
+					name: 'symbolSize',
+					required: false,
+					relationFields: 'showSymbol',
+					relationValues: 'true',
+					placeholder: ''
+				}
+			]
+		}
+	],
 	// 折线配置项值
 	lineValue: {
-		lineShowSymbol: true,
-		lineSymbol: 'circle',
-		lineSymbolSize: 4,
 		lineWidth: 2,
 		lineSmooth: false,
 		lineAreaStyle: false,
@@ -949,46 +994,6 @@ const echarts = {
 			placeholder: ''
 		},
 		[
-			{
-				name: '标记',
-				list: [
-					{
-						componentName: 'Switch',
-						label: '显示标记',
-						name: 'lineShowSymbol',
-						required: false,
-						placeholder: ''
-					},
-					{
-						componentName: 'Select',
-						label: '标记图标',
-						name: 'lineSymbol',
-						required: false,
-						placeholder: '请选择标记图标',
-						relationFields: 'lineShowSymbol',
-						relationValues: 'true',
-						options: [
-							{ code: 'circle', name: 'circle' },
-							{ code: 'rect', name: 'rect' },
-							{ code: 'roundRect', name: 'roundRect' },
-							{ code: 'triangle', name: 'triangle' },
-							{ code: 'diamond', name: 'diamond' },
-							{ code: 'pin', name: 'pin' },
-							{ code: 'arrow', name: 'arrow' },
-							{ code: 'none', name: 'none' }
-						]
-					},
-					{
-						componentName: 'Slider',
-						label: '标记大小',
-						name: 'lineSymbolSize',
-						required: false,
-						relationFields: 'lineShowSymbol',
-						relationValues: 'true',
-						placeholder: ''
-					}
-				]
-			},
 			{
 				name: '区域面积图',
 				list: [

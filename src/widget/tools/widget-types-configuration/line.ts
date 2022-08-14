@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-12 11:54:02
+ * @Last Modified time: 2022-08-14 11:39:42
  */
 import baseConfiguration from '../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -13,7 +13,12 @@ const line = {
 		[
 			{
 				name: '折线设置',
-				list: [...echarts.line, echarts.seriesLabel, ...echarts.seriesStack]
+				list: [
+					...echarts.line,
+					echarts.seriesLabel,
+					echarts.symbol,
+					...echarts.seriesStack
+				]
 			},
 			{
 				name: '标题',

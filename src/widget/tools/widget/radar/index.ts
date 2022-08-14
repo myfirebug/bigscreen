@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-13 22:56:49
+ * @Last Modified time: 2022-08-14 11:42:14
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -23,6 +23,7 @@ export default {
 		...echarts.radarValue,
 		...echarts.seriesLabel,
 		...echarts.seriesStackValue,
+		...echarts.symbolValue,
 		xAxisShow: false,
 		yAxisShow: false
 	},

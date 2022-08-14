@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-13 23:00:38
+ * @Last Modified time: 2022-08-14 11:44:39
  */
 interface result {
 	legendData: any[];
@@ -173,9 +173,9 @@ export function handleEchartsOption(style: any): any {
 		},
 		line: {
 			type: 'line',
-			showSymbol: style?.lineShowSymbol,
-			symbol: style?.lineSymbol,
-			symbolSize: style?.lineSymbolSize,
+			showSymbol: style?.showSymbol,
+			symbol: style?.symbol,
+			symbolSize: style?.symbolSize,
 			smooth: style?.lineSmooth,
 			lineStyle: {
 				width: style?.lineWidth
@@ -201,6 +201,7 @@ export function handleEchartsOption(style: any): any {
 		},
 		radar: {
 			config: {
+				shape: style?.radarShape,
 				radius: (style?.radarRadius || 75) + '%',
 				axisLine: {
 					show: true,
@@ -226,7 +227,10 @@ export function handleEchartsOption(style: any): any {
 				}
 			},
 			series: {
-				type: 'radar'
+				type: 'radar',
+				showSymbol: style?.showSymbol,
+				symbol: style?.symbol,
+				symbolSize: style?.symbolSize
 			}
 		},
 		series: []
