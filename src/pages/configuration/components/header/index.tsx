@@ -220,7 +220,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             <li
               className={`${!currentPageId ? 'is-disabled' : ''}`}
               onClick={() => {
-                if (item.widgetName) {
+                if (!item.datas) {
                   addElement(item.widgetName)
                 }
               }}

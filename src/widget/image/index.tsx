@@ -21,7 +21,6 @@ const Image: FC<IImageProps> = ({
   children,
   ...rest
 }) => {
-  console.log(data, field, 'dfsdfsdfsdfsdfs')
   return (
     <div
       className={`app-element app-element__image ${className || ''}`} {...rest}>

@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 21:01:44
+ * @Last Modified time: 2022-08-15 14:04:10
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -16,16 +16,15 @@ export default {
 		...animate.configureValue,
 		...echarts.titleValue,
 		...echarts.legendValue,
-		...echarts.gridValue,
-		...echarts.xAxisValue,
-		...echarts.yAxisValue,
 		...echarts.echartColorValue,
 		...echarts.funnelValue,
 		...echarts.seriesLabelValue,
 		xAxisShow: false,
 		yAxisShow: false,
 		seriesLabelShow: true,
-		seriesLabelPosition: 'inside'
+		seriesLabelPosition: 'inside',
+		xAxisType: 'category',
+		yAxisType: 'value'
 	},
 	// 坐标值
 	coordinateValue: {

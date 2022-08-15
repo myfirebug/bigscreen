@@ -165,6 +165,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                           }
                           return (
                             <Widget
+                              options={{
+                                a: 1,
+                                b: 2
+                              }}
                               className={`${item.configureValue.animateName}`}
                               field={item.dataValue.field}
                               data={datas}

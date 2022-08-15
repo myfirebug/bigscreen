@@ -7,7 +7,8 @@ import {
   FileImageOutlined,
   LinkOutlined,
   ClockCircleOutlined,
-  TableOutlined
+  TableOutlined,
+  DotChartOutlined
 } from '@ant-design/icons'
 import './index.scss'
 
@@ -150,7 +151,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'scatter',
-  icon: <RadarChartOutlined />,
+  icon: <DotChartOutlined />,
   name: '散点图',
   datas: [
     {
