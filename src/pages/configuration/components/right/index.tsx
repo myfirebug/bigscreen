@@ -263,7 +263,6 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                           <ChromePicker
                             color={form.getFieldValue(item.name)}
                             onChangeComplete={e => {
-                              console.log(e, '123')
                               form.setFieldsValue({
                                 [item.name]: `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`
                               })

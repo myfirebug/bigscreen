@@ -32,7 +32,6 @@ const Frame: FC<IFrameProps> = ({
   ...rest
 }) => {
   const history = useHistory()
-  console.log(rest.location?.pathname, 'rest.location?.pathname')
   // 判断全屏的路由
   const isFullscreen = useMemo(() => {
     const map = ['/frame/configuration']

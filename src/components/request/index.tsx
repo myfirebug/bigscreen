@@ -1,6 +1,8 @@
 import {
   useEffect,
-  memo
+  memo,
+  FC,
+  useState
 } from 'react'
 import Wrapper from '@src/components/wrapper'
 import { useRequest } from 'ahooks'
@@ -27,41 +29,37 @@ interface IRequestProps {
   render: (data: any) => any;
 }
 
-const Request = memo((props: IRequestProps) => {
-  const {
-    method,
-    url,
-    params,
-    isPlaceholder,
-    render
-  } = props
+const Request: FC<IRequestProps> = ({
+  method,
+  url,
+  params,
+  isPlaceholder,
+  render
+}) => {
   // 获取数据
-  const { data, loading, error, run } = useRequest(async () => {
-    const { data } = await new Promise((resolve: (data: IResult) => void, reject: (data: any) => void) => {
+  const [data, setData] = useState<any>(null)
+  const [loading, setLoading] = useState(false)
+  const [error, setError] = useState(false)
+
+  useEffect(() => {
+    if (url) {
+      setError(false)
+      setLoading(true)
       axios({
         url: url,
         method: method,
         params: JSON.parse(params)
       })
-        .then((res) => {
-          resolve(res.data)
+        .then((res: any) => {
+          setLoading(false)
+          setData(res.data.data || res.data)
         })
         .catch(res => {
-          reject(res)
+          setLoading(false)
+          setError(true)
         })
-    })
-    return data
-  }, {
-    manual: true,
-    refreshDeps: [params]
-  })
-
-  useEffect(() => {
-    if (url) {
-      run()
     }
-  }, [run, url, params])
-
+  }, [url, params])
   return (
     <>
       {
@@ -79,5 +77,59 @@ const Request = memo((props: IRequestProps) => {
       }
     </>
   )
-})
+}
+
+
+// const Request = memo((props: IRequestProps) => {
+//   const {
+//     method,
+//     url,
+//     params,
+//     isPlaceholder,
+//     render
+//   } = props
+//   // 获取数据
+//   const { data, loading, error, run } = useRequest(async () => {
+//     const { data } = await new Promise((resolve: (data: IResult) => void, reject: (data: any) => void) => {
+//       axios({
+//         url: url,
+//         method: method,
+//         params: JSON.parse(params)
+//       })
+//         .then((res: any) => {
+//           resolve(res.data.data || res.data)
+//         })
+//         .catch(res => {
+//           reject(res)
+//         })
+//     })
+//     return data
+//   }, {
+//     manual: true,
+//     refreshDeps: [params]
+//   })
+
+//   useEffect(() => {
+//     if (url) {
+//       run()
+//     }
+//   }, [run, url, params])
+//   return (
+//     <>
+//       {
+//         isPlaceholder ?
+//           <Wrapper
+//             loading={loading}
+//             error={Boolean(error)}
+//             nodata={false}
+//           >
+//             {
+//               data && render(data)
+//             }
+//           </Wrapper>
+//           : data && render(data)
+//       }
+//     </>
+//   )
+// })
 export default Request
