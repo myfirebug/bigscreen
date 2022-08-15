@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 21:01:30
+ * @Last Modified time: 2022-08-15 11:05:02
  */
 const echarts = {
 	// 标题配置项值
@@ -1215,6 +1215,7 @@ const echarts = {
 		funnelSort: 'descending',
 		funnelGap: 0
 	},
+	// 漏斗图配置
 	funnel: [
 		{
 			componentName: 'Select',
@@ -1245,6 +1246,23 @@ const echarts = {
 			name: 'funnelGap',
 			required: false,
 			placeholder: ''
+		}
+	],
+	// 散点图配置项值
+	scatterValue: {
+		scatterColorBy: 'data'
+	},
+	scatter: [
+		{
+			componentName: 'Select',
+			label: '取色的策略',
+			name: 'scatterColorBy',
+			required: false,
+			placeholder: '',
+			options: [
+				{ code: 'series', name: 'series' },
+				{ code: 'data', name: 'data' }
+			]
 		}
 	]
 };

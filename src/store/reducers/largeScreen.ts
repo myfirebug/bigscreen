@@ -276,7 +276,6 @@ export const largeScreen = (
 					return item;
 				});
 			}
-
 			return {
 				...copy,
 				// pastPage: [...copy.pastPage, currentPage],

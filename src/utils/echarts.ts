@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 21:16:52
+ * @Last Modified time: 2022-08-15 11:04:23
  */
 interface result {
 	legendData: any[];
@@ -275,6 +275,20 @@ export function handleEchartsOption(style: any): any {
 				orient: style?.funnelOrient,
 				sort: style?.funnelSort,
 				gap: style?.funnelGap
+			}
+		},
+		scatter: {
+			series: {
+				type: 'scatter',
+				colorBy: style?.scatterColorBy,
+				showSymbol: style?.showSymbol,
+				symbol: style?.symbol,
+				symbolSize: style?.symbolSize,
+				label: {
+					show: style?.seriesLabelShow,
+					position: style?.seriesLabelPosition,
+					color: style?.seriesLabelColor
+				}
 			}
 		},
 		series: []

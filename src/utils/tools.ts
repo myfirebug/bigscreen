@@ -513,21 +513,11 @@ export const getEventPath = (event: any) => {
  * 防抖
  * @param fn 传入的方法
  * @param delay 时间毫秒 单位ms
- * @param immediate 是否默认值一次默认false
  * @returns 方法
  */
-export const debounce = (
-	fn: Function,
-	delay: number,
-	immediate: boolean = false
-): Function => {
+export const debounce = (fn: Function, delay: number): Function => {
 	let timer: any = null;
 	return (...args: any[]) => {
-		if (immediate) {
-			fn.apply(this, args);
-			immediate = false;
-			return;
-		}
 		clearTimeout(timer);
 		timer = setTimeout(() => {
 			fn.apply(this, args);
@@ -544,24 +534,15 @@ export const validateionLen = {
  * 节流
  * @param fn 传入的方法
  * @param delay 时间毫秒 单位ms
- * @param immediate 是否默认值一次默认false
  * @returns 方法
  */
-export const throttle = (
-	fn: Function,
-	delay: number,
-	immediate: boolean = false
-): Function => {
+export const throttle = (fn: Function, delay: number): Function => {
 	let timer: any = null;
 	return (...args: any) => {
-		if (immediate) {
-			fn.apply(this, args);
-			immediate = false;
-			return;
-		}
 		if (!timer) {
 			timer = setTimeout(() => {
 				fn.apply(this, args);
+				timer = null;
 			}, delay);
 		}
 	};

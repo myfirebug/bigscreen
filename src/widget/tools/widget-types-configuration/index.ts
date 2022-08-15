@@ -2,7 +2,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:01:56
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 20:27:21
+ * @Last Modified time: 2022-08-15 10:38:06
  */
 // 组配置
 import group from './group';
@@ -18,6 +18,8 @@ import pie from './pie';
 import radar from './radar';
 // funnel配置
 import funnel from './funnel';
+// scatter配置
+import scatter from './scatter';
 
 const widgetTypesConfiguration: any = {
 	group,
@@ -26,7 +28,8 @@ const widgetTypesConfiguration: any = {
 	bar,
 	pie,
 	radar,
-	funnel
+	funnel,
+	scatter
 };
 
 export default widgetTypesConfiguration;

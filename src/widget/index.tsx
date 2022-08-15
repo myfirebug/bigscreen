@@ -146,6 +146,18 @@ export const componentsClassify: any[] = [{
       name: '基础漏斗图'
     }
   ]
+},
+{
+  type: 'scatter',
+  icon: <RadarChartOutlined />,
+  name: '散点图',
+  datas: [
+    {
+      src: require('../assets/image/configuration/scatter/widgetBaseScatter.png'),
+      widgetName: 'widgetBaseScatter',
+      name: '基础散点图'
+    }
+  ]
 }]
 
 // 所有组件地址
@@ -163,7 +175,9 @@ const components: any = {
   // 雷达图
   radar: require('./radar').default,
   // 漏斗图
-  funnel: require('./funnel').default
+  funnel: require('./funnel').default,
+  // 散点图
+  scatter: require('./scatter').default
 }
 
 export default components
