@@ -21,7 +21,8 @@ export const componentsClassify: any[] = [{
 {
   type: 'image',
   icon: <FileImageOutlined />,
-  name: '图片'
+  name: '图片',
+  widgetName: 'widgetImage'
 },
 {
   type: 'link',
@@ -164,6 +165,8 @@ export const componentsClassify: any[] = [{
 const components: any = {
   // 文本框
   text: require('./text').default,
+  // 图片
+  image: require('./image').default,
   // 组
   group: require('./group').default,
   // 折线图

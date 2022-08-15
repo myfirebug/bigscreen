@@ -2,12 +2,14 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:01:56
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 10:38:06
+ * @Last Modified time: 2022-08-15 11:34:54
  */
 // 组配置
 import group from './group';
 // text配置
 import text from './text';
+// image配置
+import image from './image';
 // line配置
 import line from './line';
 // bar配置
@@ -24,6 +26,7 @@ import scatter from './scatter';
 const widgetTypesConfiguration: any = {
 	group,
 	text,
+	image,
 	line,
 	bar,
 	pie,

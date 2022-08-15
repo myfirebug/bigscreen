@@ -3,10 +3,11 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:21:13
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 10:35:57
+ * @Last Modified time: 2022-08-15 11:32:45
  */
 import widgetText from './widget-text';
 import widgetGroup from './widget-group';
+import widgetImage from './widget-image';
 // 折线图
 import line from './line/main';
 // 柱状图
@@ -23,6 +24,7 @@ import scatter from './scatter/main';
 const widgetConfiguration: any = {
 	widgetText,
 	widgetGroup,
+	widgetImage,
 	...line,
 	...bar,
 	...pie,

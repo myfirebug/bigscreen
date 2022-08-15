@@ -2,8 +2,8 @@
  * 动画配置
  * @Author: hejp
  * @Date: 2022-08-10 10:15:40
- * @Last Modified by:   hejp
- * @Last Modified time: 2022-08-10 10:15:40
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-15 11:49:28
  */
 const animate = {
 	configureValue: {
@@ -68,6 +68,7 @@ const animate = {
 						{ code: 'lightSpeedIn', name: 'lightSpeedIn' },
 						{ code: 'lightSpeedOut', name: 'lightSpeedOut' },
 						{ code: 'rotateIn', name: 'rotateIn' },
+						{ code: 'rotate', name: 'rotate' },
 						{ code: 'rotateInDownLeft', name: 'rotateInDownLeft' },
 						{ code: 'rotateInDownRight', name: 'rotateInDownRight' },
 						{ code: 'rotateInUpLeft', name: 'rotateInUpLeft' },
