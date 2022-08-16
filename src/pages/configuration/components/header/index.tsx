@@ -1,21 +1,9 @@
-import React, {
+import {
   FC, useCallback, useEffect
 } from 'react'
 import { message, Tooltip, Modal } from 'antd'
 import {
-  SaveOutlined,
-  EyeOutlined,
-  RotateLeftOutlined,
-  RotateRightOutlined,
-  ArrowUpOutlined,
   CloseOutlined,
-  ArrowDownOutlined,
-  ArrowRightOutlined,
-  ArrowLeftOutlined,
-  FolderOutlined,
-  FolderAddOutlined,
-  DeleteOutlined,
-  CopyOutlined,
   PictureOutlined,
   ExclamationCircleOutlined
 } from '@ant-design/icons'
@@ -225,7 +213,9 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
                 }
               }}
               key={item.type}>
-              {item.icon}
+              <span className="app-icon" dangerouslySetInnerHTML={{
+                __html: item.icon
+              }}></span>
               <p>{item.name}</p>
               {
                 item.datas && item.datas.length ?
@@ -262,7 +252,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={groupHandler}
             className={`${currentWidgetGroupId || !currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
             <Tooltip title="分组" placement="bottom">
-              <FolderAddOutlined />
+              <span className="app-icon">&#xe83f;</span>
               <p>分组</p>
             </Tooltip>
           </li>
@@ -270,7 +260,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={cancelGroupHandler}
             className={`${currentWidgetGroupId && currentWidgetGroupId === currentWidgetId ? '' : 'is-disabled'}`}>
             <Tooltip title="拆分" placement="bottom">
-              <FolderOutlined />
+              <span className='app-icon'>&#xe632;</span>
               <p>拆分</p>
             </Tooltip>
           </li>
@@ -280,7 +270,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={copyHandler}
             className={`${currentWidgetId && !currentWidgetId.includes(',') ? '' : 'is-disabled'}`}>
             <Tooltip title="复制" placement="bottom">
-              <CopyOutlined />
+              <span className='app-icon'>&#xe7bc;</span>
               <p>复制</p>
             </Tooltip>
           </li>
@@ -288,7 +278,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={delHandler}
             className={`${currentWidgetId && !currentWidgetId.includes(',') ? '' : 'is-disabled'}`}>
             <Tooltip title="删除(ctrl+delete)" placement="bottom">
-              <DeleteOutlined />
+              <span className='app-icon'>&#xe7c3;</span>
               <p>删除</p>
             </Tooltip>
           </li>
@@ -316,7 +306,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={() => moveHander('top')}
             className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
             <Tooltip title="上移(ctrl+↑)" placement="bottom">
-              <ArrowUpOutlined />
+              <span className="app-icon">&#xe7ef;</span>
               <p>上移</p>
             </Tooltip>
           </li>
@@ -324,7 +314,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={() => moveHander('bottom')}
             className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
             <Tooltip title="下移(ctrl+↓)" placement="bottom">
-              <ArrowDownOutlined />
+              <span className="app-icon">&#xe7f1;</span>
               <p>下移</p>
             </Tooltip>
           </li>
@@ -332,7 +322,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={() => moveHander('left')}
             className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
             <Tooltip title="左移(ctrl+←)" placement="bottom">
-              <ArrowLeftOutlined />
+              <span className="app-icon">&#xe7f0;</span>
               <p>左移</p>
             </Tooltip>
           </li>
@@ -340,7 +330,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             onClick={() => moveHander('right')}
             className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
             <Tooltip title="右移(ctrl+→)" placement="bottom">
-              <ArrowRightOutlined />
+              <span className="app-icon">&#xe7ee;</span>
               <p>右移</p>
             </Tooltip>
           </li>
@@ -348,13 +338,13 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         <ul className='shortcuts-group'>
           <li className={`${!currentPageId ? 'is-disabled' : ''}`}>
             <Tooltip title="保存(ctrl+s)" placement="bottom">
-              <SaveOutlined />
+              <span className="app-icon">&#xe791;</span>
               <p>保存</p>
             </Tooltip>
           </li>
           <li className={`${!currentPageId ? 'is-disabled' : ''}`}>
             <Tooltip title="预览(ctrl+p)" placement="bottom">
-              <EyeOutlined />
+              <span className="app-icon">&#xe78f;</span>
               <p>预览</p>
             </Tooltip>
           </li>

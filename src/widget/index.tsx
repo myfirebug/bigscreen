@@ -1,22 +1,10 @@
-import {
-  LineChartOutlined,
-  BarChartOutlined,
-  PieChartOutlined,
-  RadarChartOutlined,
-  FontSizeOutlined,
-  FileImageOutlined,
-  LinkOutlined,
-  ClockCircleOutlined,
-  TableOutlined,
-  DotChartOutlined
-} from '@ant-design/icons'
 import './index.scss'
 // 文本
 import text from './text'
 // 组件分类
 export const componentsClassify: any[] = [{
   type: 'text',
-  icon: <FontSizeOutlined />,
+  icon: '&#xe7f7;',
   name: '文本',
   datas: [{
     src: require('../assets/image/configuration/line/widgetBaseLine.png'),
@@ -34,18 +22,18 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'image',
-  icon: <FileImageOutlined />,
+  icon: '&#xe7de;',
   name: '图片',
   widgetName: 'widgetImage'
 },
 {
   type: 'table',
-  icon: <TableOutlined />,
+  icon: '&#xe7df;',
   name: '表格'
 },
 {
   type: 'line',
-  icon: <LineChartOutlined />,
+  icon: '&#xe7af;',
   name: '折线图',
   datas: [{
     src: require('../assets/image/configuration/line/widgetBaseLine.png'),
@@ -67,7 +55,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'bar',
-  icon: <BarChartOutlined />,
+  icon: '&#xe7b0;',
   name: '柱状图',
   datas: [{
     src: require('../assets/image/configuration/bar/widgetBaseBar.png'),
@@ -103,7 +91,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'pie',
-  icon: <PieChartOutlined />,
+  icon: '&#xe78e;',
   name: '饼图',
   datas: [
     {
@@ -125,7 +113,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'radar',
-  icon: <RadarChartOutlined />,
+  icon: '&#xe7dc;',
   name: '雷达图',
   datas: [
     {
@@ -142,7 +130,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'funnel',
-  icon: <RadarChartOutlined />,
+  icon: '&#xe6a9;',
   name: '漏斗图',
   datas: [
     {
@@ -154,7 +142,7 @@ export const componentsClassify: any[] = [{
 },
 {
   type: 'scatter',
-  icon: <DotChartOutlined />,
+  icon: '&#xe7b1;',
   name: '散点图',
   datas: [
     {

@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 15:48:54
+ * @Last Modified time: 2022-08-16 17:37:56
  */
 import baseConfiguration from '../../base-configuration';
 const { font, data, box } = baseConfiguration;
@@ -21,18 +21,18 @@ export default {
 		styleTextShadowC: '',
 		...font.configureValue,
 		...box.configureValue,
-		styleColor: 'orange',
+		styleColor: '#fc97af',
 		styleWidth: 50,
 		styleHeight: 50,
 		styleBorderBottomLeftRadius: 5,
 		styleBorderBottomRightRadius: 5,
-		styleBorderColor: 'rgba(35,216,157,1)',
+		styleBorderColor: '#fc97af',
 		styleBorderStyle: 'solid',
 		styleBorderTopLeftRadius: 5,
 		styleBorderTopRightRadius: 5,
 		styleBorderWidth: 1,
 		styleBoxInset: true,
-		styleBoxShadowC: 'rgba(43,147,118,1)',
+		styleBoxShadowC: '#fc97af',
 		styleBoxShadowF: 5,
 		styleBoxShadowX: 0,
 		styleBoxShadowY: 0
