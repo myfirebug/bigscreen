@@ -39,16 +39,6 @@ export const componentsClassify: any[] = [{
   widgetName: 'widgetImage'
 },
 {
-  type: 'link',
-  icon: <LinkOutlined />,
-  name: '链接'
-},
-{
-  type: 'date',
-  icon: <ClockCircleOutlined />,
-  name: '当前时间'
-},
-{
   type: 'table',
   icon: <TableOutlined />,
   name: '表格'

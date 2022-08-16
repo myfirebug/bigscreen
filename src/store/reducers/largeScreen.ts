@@ -67,7 +67,7 @@ const initialState = {
 		backgroundColor: 'rgba(0,0,0,.5)',
 		title: '大屏',
 		description: '描述',
-		auxiliaryBorderColor: '#ddd',
+		auxiliaryBorderColor: '#1890ff',
 		showAuxiliary: false,
 		backgroundImage: '',
 		horizontalNumber: 4,

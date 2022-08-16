@@ -89,7 +89,7 @@
         }
         .line-top {
             position: absolute;
-            border-left: 1px dashed #fff;
+            border-left: 1px dashed #1890ff;
             width: 0;
             height: 10000px;
             left: 0;
@@ -97,7 +97,7 @@
         }
         .line-left {
             position: absolute;
-            border-top: 1px dashed #fff;
+            border-top: 1px dashed #1890ff;
             width: 10000px;
             height: 0;
             top: 0;
@@ -109,7 +109,7 @@
             position: absolute;
             padding: 5px;
             transform: translate(-100%, -100%);
-            color: #fff;
+            color: #1890ff;
             font-size: 18px;
             white-space: nowrap;
             cursor: move;
@@ -126,7 +126,7 @@
         box-sizing: border-box;
     }
     @include e(item) {
-        border: 1px dashed #07B6F0;
+        border: 1px dashed #1890ff;
         margin: 10px;
     }
 }

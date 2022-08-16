@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 16:29:25
+ * @Last Modified time: 2022-08-16 16:13:46
  */
 // 获取本地环境的数据
 import baseConfiguration from '../base-configuration';
@@ -24,8 +24,8 @@ export default {
 	coordinateValue: {
 		left: 0,
 		top: 0,
-		width: 500,
-		height: 500
+		width: 467,
+		height: 346
 	},
 	// 数据值
 	dataValue: {

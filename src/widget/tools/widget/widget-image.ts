@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 11:42:14
+ * @Last Modified time: 2022-08-16 16:13:40
  */
 import baseConfiguration from '../base-configuration';
 const { font, animate, data, box } = baseConfiguration;
@@ -21,8 +21,8 @@ export default {
 	coordinateValue: {
 		left: 0,
 		top: 0,
-		width: 100,
-		height: 40
+		width: 467,
+		height: 346
 	},
 	// 数据值
 	dataValue: {

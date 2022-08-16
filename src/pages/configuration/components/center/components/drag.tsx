@@ -72,60 +72,68 @@ const Drag: FC<IDragProps> = ({
         top: 0,
         right: 0,
         bottom: 0,
-        border: 'dashed 2px #fff'
+        border: 'dashed 2px #1890ff'
       }}
       resizeHandleStyles={{
         bottom: {
           width: 20,
           height: 20,
-          background: '#fff',
+          background: '#1890ff',
           borderRadius: 10,
           left: '50%',
           bottom: -10,
-          marginLeft: -10
+          marginLeft: -10,
+          zIndex: 1
         },
         bottomLeft: {
-          background: '#fff',
-          borderRadius: 10
+          background: '#1890ff',
+          borderRadius: 10,
+          zIndex: 1
         },
         bottomRight: {
-          background: '#fff',
-          borderRadius: 10
+          background: '#1890ff',
+          borderRadius: 10,
+          zIndex: 1
         },
         left: {
           width: 20,
           height: 20,
-          background: '#fff',
+          background: '#1890ff',
           borderRadius: 10,
           top: '50%',
           left: -10,
-          marginTop: -10
+          marginTop: -10,
+          zIndex: 1
         },
         right: {
           width: 20,
           height: 20,
-          background: '#fff',
+          background: '#1890ff',
           borderRadius: 10,
           top: '50%',
           right: -10,
-          marginTop: -10
+          marginTop: -10,
+          zIndex: 1
         },
         top: {
           width: 20,
           height: 20,
-          background: '#fff',
+          background: '#1890ff',
           borderRadius: 10,
           left: '50%',
           top: -10,
-          marginLeft: -10
+          marginLeft: -10,
+          zIndex: 1
         },
         topLeft: {
-          background: '#fff',
-          borderRadius: 10
+          background: '#1890ff',
+          borderRadius: 10,
+          zIndex: 1
         },
         topRight: {
-          background: '#fff',
-          borderRadius: 10
+          background: '#1890ff',
+          borderRadius: 10,
+          zIndex: 1
         }
       }}
       size={{
