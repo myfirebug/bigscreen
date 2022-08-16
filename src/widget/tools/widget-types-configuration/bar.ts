@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 11:35:03
+ * @Last Modified time: 2022-08-16 17:13:24
  */
 import baseConfiguration from '../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -13,7 +13,7 @@ const bar = {
 		[
 			{
 				name: '柱状设置',
-				list: [...echarts.bar, echarts.seriesLabel, ...echarts.seriesStack]
+				list: [...echarts.seriesStack, ...echarts.bar, echarts.seriesLabel]
 			},
 			{
 				name: '标题',

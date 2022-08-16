@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:02
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 11:05:02
+ * @Last Modified time: 2022-08-16 17:26:08
  */
 const echarts = {
 	// 标题配置项值
@@ -1021,7 +1021,11 @@ const echarts = {
 	barValue: {
 		barWidth: 40,
 		barShowBackground: false,
-		barBorderRadius: 0
+		barBorderRadius: 0,
+		barBackgroundStyleColor: 'rgba(255,255,255, 0.1)',
+		barBackgroundStyleBorderColor: '',
+		barBackgroundStyleBorderWidth: 0,
+		barBackgroundStyleBorderType: 'solid'
 	},
 	// 柱状图配置项
 	bar: [
@@ -1033,19 +1037,66 @@ const echarts = {
 			placeholder: ''
 		},
 		{
-			componentName: 'Switch',
-			label: '显示柱条背景',
-			name: 'barShowBackground',
-			required: false,
-			placeholder: ''
-		},
-		{
 			componentName: 'Slider',
 			label: '圆角大小',
 			name: 'barBorderRadius',
 			required: false,
 			placeholder: ''
-		}
+		},
+		[
+			{
+				name: '柱条背景',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否显示',
+						name: 'barShowBackground',
+						required: false,
+						placeholder: ''
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '背景颜色',
+						name: 'barBackgroundStyleColor',
+						required: false,
+						placeholder: '请选择颜色',
+						relationFields: 'barShowBackground',
+						relationValues: 'true'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '边框颜色',
+						name: 'barBackgroundStyleBorderColor',
+						required: false,
+						placeholder: '请选择颜色',
+						relationFields: 'barShowBackground',
+						relationValues: 'true'
+					},
+					{
+						componentName: 'SketchPicker',
+						label: '边框大小',
+						name: 'barBackgroundStyleBorderWidth',
+						required: false,
+						placeholder: '请选择颜色',
+						relationFields: 'barShowBackground',
+						relationValues: 'true'
+					},
+					{
+						componentName: 'Select',
+						label: '描边类型',
+						name: 'barBackgroundStyleBorderType',
+						required: false,
+						placeholder: '请选择标签的位置',
+						relationFields: 'barShowBackground',
+						relationValues: 'true',
+						options: [
+							{ code: 'dashed', name: 'dashed' },
+							{ code: 'dotted', name: 'dotted' }
+						]
+					}
+				]
+			}
+		]
 	],
 	// 数据标签配置项值
 	seriesLabelValue: {

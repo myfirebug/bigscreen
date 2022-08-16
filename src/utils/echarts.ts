@@ -5,7 +5,7 @@ import { number } from 'echarts';
  * @Author: hejp
  * @Date: 2022-08-11 11:53:54
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 11:04:23
+ * @Last Modified time: 2022-08-16 17:24:51
  */
 interface result {
 	legendData: any[];
@@ -201,6 +201,13 @@ export function handleEchartsOption(style: any): any {
 				type: 'bar',
 				barWidth: style?.barWidth,
 				showBackground: style?.barShowBackground,
+				backgroundStyle: {
+					color: style?.barBackgroundStyleColor,
+					borderColor: style?.barBackgroundStyleBorderColor,
+					borderWidth: style?.barBackgroundStyleBorderWidth,
+					borderType: style?.barBackgroundStyleBorderType,
+					borderRadius: style?.barBorderRadius
+				},
 				itemStyle: {
 					borderRadius: style?.barBorderRadius || 0
 				},
