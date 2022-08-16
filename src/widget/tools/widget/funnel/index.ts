@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 14:04:10
+ * @Last Modified time: 2022-08-16 14:19:22
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -12,7 +12,7 @@ export default {
 	type: 'funnel',
 	// 配置项值
 	configureValue: {
-		display: 'block',
+		styleDisplay: 'block',
 		...animate.configureValue,
 		...echarts.titleValue,
 		...echarts.legendValue,

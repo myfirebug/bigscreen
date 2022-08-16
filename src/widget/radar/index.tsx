@@ -5,17 +5,18 @@ import CustomEcharts from '@src/components/echarts'
 import { IEchartConfig } from '@src/types'
 // 处理options
 import { handleEchartsOption, handleData } from '@src/utils/echarts'
+import { getStyles } from '@utils/tools'
 
 interface IRadarProps extends IEchartConfig {
-	style: any;
+	options: any;
 	data: any;
 	field: string;
 }
 
-const Radar: FC<IRadarProps> = ({ style, data, field }) => {
+const Radar: FC<IRadarProps> = ({ options, data, field }) => {
 	// 处理echarts数据
 	const getOption = useMemo(() => {
-		const configuration = handleEchartsOption(style);
+		const configuration = handleEchartsOption(options);
 		const currentData = data && data[field] ? data[field] : [];
 		const { legendData, xAxisData, yAxisData, series } =
 			handleData(currentData);
@@ -57,14 +58,11 @@ const Radar: FC<IRadarProps> = ({ style, data, field }) => {
 				}]
 				: []
 		};
-	}, [data, field, style]);
+	}, [data, field, options]);
 
 
 	return (
-		<CustomEcharts style={{
-			width: style.width,
-			height: style.height
-		}} options={getOption} />
+		<CustomEcharts style={getStyles(options)} options={getOption} />
 	)
 }
 

@@ -3,22 +3,22 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:14
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 16:16:28
+ * @Last Modified time: 2022-08-16 14:14:23
  */
 const box = {
 	configureValue: {
-		boxInset: false,
-		boxShadowX: 0,
-		boxShadowY: 0,
-		boxShadowF: 0,
-		boxShadowC: '',
-		borderStyle: 'none',
-		borderWidth: 0,
-		borderColor: '',
-		borderTopLeftRadius: 0,
-		borderTopRightRadius: 0,
-		borderBottomLeftRadius: 0,
-		borderBottomRightRadius: 0
+		styleBoxInset: false,
+		styleBoxShadowX: 0,
+		styleBoxShadowY: 0,
+		styleBoxShadowF: 0,
+		styleBoxShadowC: '',
+		styleBorderStyle: 'none',
+		styleBorderWidth: 0,
+		styleBorderColor: '',
+		styleBorderTopLeftRadius: 0,
+		styleBorderTopRightRadius: 0,
+		styleBorderBottomLeftRadius: 0,
+		styleBorderBottomRightRadius: 0
 	},
 	configure: [
 		{
@@ -27,35 +27,35 @@ const box = {
 				{
 					componentName: 'Switch',
 					label: '内阴影',
-					name: 'boxInset',
+					name: 'styleBoxInset',
 					required: false,
 					placeholder: ''
 				},
 				{
 					componentName: 'InputNumber',
 					label: 'X轴偏移',
-					name: 'boxShadowX',
+					name: 'styleBoxShadowX',
 					required: false,
 					placeholder: '请输入X轴偏移'
 				},
 				{
 					componentName: 'InputNumber',
 					label: 'Y轴偏移',
-					name: 'boxShadowY',
+					name: 'styleBoxShadowY',
 					required: false,
 					placeholder: '请输入Y轴偏移'
 				},
 				{
 					componentName: 'InputNumber',
 					label: '模糊值',
-					name: 'boxShadowF',
+					name: 'styleBoxShadowF',
 					required: false,
 					placeholder: '请输入模糊值'
 				},
 				{
 					componentName: 'SketchPicker',
 					label: '颜色',
-					name: 'boxShadowC',
+					name: 'styleBoxShadowC',
 					required: false,
 					placeholder: '请选择颜色'
 				}
@@ -67,7 +67,7 @@ const box = {
 				{
 					componentName: 'Select',
 					label: '边框样式',
-					name: 'borderStyle',
+					name: 'styleBorderStyle',
 					required: false,
 					placeholder: '请选择边框样式',
 					options: [
@@ -85,14 +85,14 @@ const box = {
 				{
 					componentName: 'InputNumber',
 					label: '边框尺寸',
-					name: 'borderWidth',
+					name: 'styleBorderWidth',
 					required: false,
 					placeholder: '请输入尺寸'
 				},
 				{
 					componentName: 'SketchPicker',
 					label: '颜色',
-					name: 'borderColor',
+					name: 'styleBorderColor',
 					required: false,
 					placeholder: '请选择边框颜色'
 				}
@@ -104,28 +104,28 @@ const box = {
 				{
 					componentName: 'InputNumber',
 					label: '左上',
-					name: 'borderTopLeftRadius',
+					name: 'styleBorderTopLeftRadius',
 					required: false,
 					placeholder: '请输入尺寸'
 				},
 				{
 					componentName: 'InputNumber',
 					label: '右上',
-					name: 'borderTopRightRadius',
+					name: 'styleBorderTopRightRadius',
 					required: false,
 					placeholder: '请输入尺寸'
 				},
 				{
 					componentName: 'InputNumber',
 					label: '左下',
-					name: 'borderBottomLeftRadius',
+					name: 'styleBorderBottomLeftRadius',
 					required: false,
 					placeholder: '请输入尺寸'
 				},
 				{
 					componentName: 'InputNumber',
 					label: '右下',
-					name: 'borderBottomRightRadius',
+					name: 'styleBorderBottomRightRadius',
 					required: false,
 					placeholder: '请输入尺寸'
 				}

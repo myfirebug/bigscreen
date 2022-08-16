@@ -217,8 +217,10 @@ export const largeScreen = (
 							...item,
 							configureValue: {
 								...item.configureValue,
-								display:
-									item.configureValue.display === 'block' ? 'none' : 'block'
+								styleDisplay:
+									item.configureValue.styleDisplay === 'block'
+										? 'none'
+										: 'block'
 							}
 						};
 					}
@@ -232,8 +234,10 @@ export const largeScreen = (
 							...item,
 							configureValue: {
 								...item.configureValue,
-								display:
-									item.configureValue.display === 'block' ? 'none' : 'block'
+								styleDisplay:
+									item.configureValue.styleDisplay === 'block'
+										? 'none'
+										: 'block'
 							}
 						};
 					}

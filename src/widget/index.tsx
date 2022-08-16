@@ -26,6 +26,10 @@ export const componentsClassify: any[] = [{
     src: require('../assets/image/configuration/line/widgetBaseLine.png'),
     widgetName: 'widgetTimeText',
     name: '时间文本'
+  }, {
+    src: require('../assets/image/configuration/line/widgetBaseLine.png'),
+    widgetName: 'widgetDigitalScroll',
+    name: '数字滚动'
   }]
 },
 {

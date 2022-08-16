@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-14 11:39:22
+ * @Last Modified time: 2022-08-16 14:19:29
  */
 import baseConfiguration from '../../base-configuration';
 const { echarts, animate, data } = baseConfiguration;
@@ -12,7 +12,7 @@ export default {
 	type: 'line',
 	// 配置项值
 	configureValue: {
-		display: 'block',
+		styleDisplay: 'block',
 		...animate.configureValue,
 		...echarts.titleValue,
 		...echarts.legendValue,

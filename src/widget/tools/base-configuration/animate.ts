@@ -3,15 +3,15 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:15:40
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 11:49:28
+ * @Last Modified time: 2022-08-16 15:04:48
  */
 const animate = {
 	configureValue: {
-		animateInfinite: false,
-		animateDelay: 0,
-		animateName: '',
-		animateTime: 1,
-		animateTiming: 'linear'
+		styleAnimateInfinite: false,
+		styleAnimationDelay: 0,
+		styleAnimationName: '',
+		styleAnimationDuration: 1,
+		styleAnimationTimingFunction: 'linear'
 	},
 	configure: [
 		{
@@ -20,7 +20,7 @@ const animate = {
 				{
 					componentName: 'Select',
 					label: '动画名称',
-					name: 'animateName',
+					name: 'styleAnimationName',
 					required: false,
 					placeholder: '请选择动画',
 					options: [
@@ -92,7 +92,7 @@ const animate = {
 				{
 					componentName: 'Select',
 					label: '动画属性',
-					name: 'animateTiming',
+					name: 'styleAnimationTimingFunction',
 					required: false,
 					placeholder: '请选择时间',
 					options: [
@@ -106,7 +106,7 @@ const animate = {
 				{
 					componentName: 'InputNumber',
 					label: '时间',
-					name: 'animateTime',
+					name: 'styleAnimationDuration',
 					required: false,
 					placeholder: '请选择时间',
 					min: 0,
@@ -115,7 +115,7 @@ const animate = {
 				{
 					componentName: 'InputNumber',
 					label: '延迟',
-					name: 'animateDelay',
+					name: 'styleAnimationDelay',
 					required: false,
 					placeholder: '请选择延迟时间',
 					min: 0,
@@ -124,7 +124,7 @@ const animate = {
 				{
 					componentName: 'Switch',
 					label: '循环播放',
-					name: 'animateInfinite',
+					name: 'styleAnimateInfinite',
 					required: false,
 					placeholder: '请选择是否循环播放'
 				}

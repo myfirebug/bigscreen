@@ -422,7 +422,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 onClick={(e) => modifyElement(e, item.id)}
                 className='show'>
                 {
-                  item.configureValue.display === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                  item.configureValue.styleDisplay === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
                 }
               </span>
               <span className="file">
@@ -447,7 +447,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 onClick={(e) => modifyElement(e, item.id, groudId)}
                 className='show'>
                 {
-                  item.configureValue.display === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
+                  item.configureValue.styleDisplay === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
                 }
               </span>
               <span className="file">

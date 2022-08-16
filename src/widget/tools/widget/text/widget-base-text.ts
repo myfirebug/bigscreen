@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 10:30:12
+ * @Last Modified time: 2022-08-16 14:18:50
  */
 import baseConfiguration from '../../base-configuration';
 const { font, animate, data, box } = baseConfiguration;
@@ -14,11 +14,11 @@ export default {
 	label: '基础文本',
 	// 配置项值
 	configureValue: {
-		display: 'block',
-		textShadowX: 0,
-		textShadowY: 0,
-		textShadowF: 0,
-		textShadowC: '',
+		styleDisplay: 'block',
+		styleTextShadowX: 0,
+		styleTextShadowY: 0,
+		styleTextShadowF: 0,
+		styleTextShadowC: '',
 		...box.configureValue,
 		...animate.configureValue,
 		...font.configureValue

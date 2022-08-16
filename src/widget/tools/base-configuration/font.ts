@@ -3,24 +3,24 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:14
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 11:21:13
+ * @Last Modified time: 2022-08-16 14:15:53
  */
 const font = {
 	configureValue: {
-		fontSize: 26,
-		letterSpacing: 0,
-		fontWeight: 'normal',
-		textAlign: 'center',
-		backgroundColor: '',
-		fontFamily: 'Microsoft YaHei',
-		lineHeight: 1,
-		color: '#fff'
+		styleFontSize: 26,
+		styleLetterSpacing: 0,
+		styleFontWeight: 'normal',
+		styleTextAlign: 'center',
+		styleBackgroundColor: '',
+		styleFontFamily: 'Microsoft YaHei',
+		styleLineHeight: 1,
+		styleColor: '#fff'
 	},
 	configure: [
 		{
 			componentName: 'InputNumber',
 			label: '字体大小',
-			name: 'fontSize',
+			name: 'styleFontSize',
 			required: false,
 			min: 12,
 			placeholder: ''
@@ -28,21 +28,21 @@ const font = {
 		{
 			componentName: 'InputNumber',
 			label: '字体间距',
-			name: 'letterSpacing',
+			name: 'styleLetterSpacing',
 			required: false,
 			placeholder: ''
 		},
 		{
 			componentName: 'InputNumber',
 			label: '行高',
-			name: 'lineHeight',
+			name: 'styleLineHeight',
 			required: false,
 			placeholder: ''
 		},
 		{
 			componentName: 'Select',
 			label: '字体样式',
-			name: 'fontFamily',
+			name: 'styleFontFamily',
 			required: false,
 			placeholder: '',
 			options: [
@@ -60,7 +60,7 @@ const font = {
 		{
 			componentName: 'Select',
 			label: '文字粗细',
-			name: 'fontWeight',
+			name: 'styleFontWeight',
 			required: false,
 			placeholder: '',
 			options: [
@@ -73,7 +73,7 @@ const font = {
 		{
 			componentName: 'Select',
 			label: '对齐方式',
-			name: 'textAlign',
+			name: 'styleFextAlign',
 			required: false,
 			placeholder: '',
 			options: [
@@ -85,14 +85,14 @@ const font = {
 		{
 			componentName: 'SketchPicker',
 			label: '字体颜色',
-			name: 'color',
+			name: 'styleColor',
 			required: false,
 			placeholder: '请选择字体颜色'
 		},
 		{
 			componentName: 'SketchPicker',
 			label: '背景颜色',
-			name: 'backgroundColor',
+			name: 'styleBackgroundColor',
 			required: false,
 			placeholder: '请选择背景颜色'
 		}

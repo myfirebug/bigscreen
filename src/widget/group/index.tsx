@@ -4,20 +4,21 @@ import {
   ReactNode
 } from 'react'
 import './index.scss'
+import { getStyles } from '@utils/tools'
 
 interface IGroupProps extends HTMLAttributes<HTMLDivElement> {
-  options?: any;
+  options: any;
   children: ReactNode
 }
 
 const Group: FC<IGroupProps> = ({
-  options = {},
-  className,
-  children,
-  ...rest
+  options,
+  children
 }) => {
   return (
-    <div className={`app-element app-element__group ${className || ''}`} {...rest}>{children}</div>
+    <div
+      style={getStyles(options)}
+      className="app-element app-element__group animated">{children}</div>
   )
 }
 export default Group

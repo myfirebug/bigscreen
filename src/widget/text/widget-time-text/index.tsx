@@ -1,23 +1,21 @@
 import {
   FC,
-  HTMLAttributes,
   useCallback,
   useEffect,
   useRef,
   useState
 } from 'react'
 import './index.scss'
+import { getStyles } from '@utils/tools'
 import { fmtDate } from '@src/utils/tools'
 
 
-interface ITimeTextProps extends HTMLAttributes<HTMLDivElement> {
-  style: any;
+interface ITimeTextProps {
+  options: any;
 }
 
 const TimeText: FC<ITimeTextProps> = ({
-  className,
-  style,
-  ...rest
+  options
 }) => {
   const timer = useRef<any>(null)
   // 初始化时间
@@ -26,8 +24,8 @@ const TimeText: FC<ITimeTextProps> = ({
   })
   // 获取时间
   const getText = useCallback(() => {
-    setText(fmtDate(new Date().getTime(), style.fmtDate || 'yyyy-MM-dd hh:mm:ss'))
-  }, [style.fmtDate])
+    setText(fmtDate(new Date().getTime(), options.fmtDate || 'yyyy-MM-dd hh:mm:ss'))
+  }, [options.fmtDate])
 
   useEffect(() => {
     timer.current = setInterval(getText, 1000)
@@ -37,7 +35,7 @@ const TimeText: FC<ITimeTextProps> = ({
   }, [timer, getText])
   return (
     <div
-      className="app-element app-element__timetext" style={style} {...rest}>
+      className="app-element app-element__timetext" style={getStyles(options)}>
       {text}
     </div>
   )

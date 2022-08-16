@@ -2,8 +2,8 @@
  * 坐标配置
  * @Author: hejp
  * @Date: 2022-08-10 10:15:52
- * @Last Modified by:   hejp
- * @Last Modified time: 2022-08-10 10:15:52
+ * @Last Modified by: hejp
+ * @Last Modified time: 2022-08-16 14:31:08
  */
 const coordinate = {
 	type: 'page',

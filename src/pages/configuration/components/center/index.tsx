@@ -36,22 +36,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   currentWidgetGroupId
 }) => {
 
-  // 渲染样式
-  const getStyle = (config: any) => {
-    return {
-      ...config,
-      width: config.width,
-      height: config.height,
-      animationName: config.animateName,
-      animationTimingFunction: config.animateTiming,
-      animationDelay: config.animateDelay + 's',
-      animationDuration: config.animateTime + 's',
-      animationIterationCount: config.animateInfinite ? 'infinite' : 1,
-      textShadow: `${config.textShadowX}px ${config.textShadowY}px ${config.textShadowF}px ${config.textShadowC}`,
-      boxShadow: `${config.boxShadowX}px ${config.boxShadowY}px ${config.boxShadowF}px ${config.boxShadowC} ${config.boxInset ? 'inset' : ''}`
-    }
-  }
-
   // 渲染组件
   const renderWidgets = (widgets: IWidget[], groupConfig?: any) => {
     return (
@@ -95,11 +79,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         render={(data) => {
                           return (
                             <Widget
-                              style={getStyle({
+                              options={{
                                 ...item.configureValue,
-                                width: item.coordinateValue.width,
-                                height: item.coordinateValue.height
-                              })}
+                                ...item.coordinateValue
+                              }}
                               className={item.id === currentWidgetGroupId ? 'is-active' : ''}>
                               {
                                 renderWidgets(item.widgets, {
@@ -168,11 +151,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                               className={`${item.configureValue.animateName}`}
                               field={item.dataValue.field}
                               data={datas}
-                              style={getStyle({
+                              options={{
                                 ...item.configureValue,
-                                width: item.coordinateValue.width,
-                                height: item.coordinateValue.height
-                              })} />
+                                ...item.coordinateValue
+                              }} />
                           )
                         }
                         }></Request>

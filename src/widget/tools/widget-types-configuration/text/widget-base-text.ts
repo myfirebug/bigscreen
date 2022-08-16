@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 10:31:28
+ * @Last Modified time: 2022-08-16 14:17:30
  */
 import baseConfiguration from '../../base-configuration';
 const { font, animate, data, box } = baseConfiguration;
@@ -20,28 +20,28 @@ const widgetBaseText = {
 					{
 						componentName: 'InputNumber',
 						label: 'X轴偏移',
-						name: 'textShadowX',
+						name: 'styleTextShadowX',
 						required: false,
 						placeholder: '请输入X轴偏移'
 					},
 					{
 						componentName: 'InputNumber',
 						label: 'Y轴偏移',
-						name: 'textShadowY',
+						name: 'styleTextShadowY',
 						required: false,
 						placeholder: '请输入Y轴偏移'
 					},
 					{
 						componentName: 'InputNumber',
 						label: '模糊值',
-						name: 'textShadowF',
+						name: 'styleTextShadowF',
 						required: false,
 						placeholder: '请输入模糊值'
 					},
 					{
 						componentName: 'SketchPicker',
 						label: '颜色',
-						name: 'textShadowC',
+						name: 'styleTextShadowC',
 						required: false,
 						placeholder: '请选择颜色'
 					}
