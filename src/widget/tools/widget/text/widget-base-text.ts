@@ -1,17 +1,17 @@
 /*
- * widget-text组件的默认配置值
+ * widget-base-text组件的默认配置值
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 16:09:53
+ * @Last Modified time: 2022-08-16 10:30:12
  */
-import baseConfiguration from '../base-configuration';
+import baseConfiguration from '../../base-configuration';
 const { font, animate, data, box } = baseConfiguration;
 
 export default {
-	code: 'widgetText',
+	code: 'widgetBaseText',
 	type: 'text',
-	label: '文本',
+	label: '基础文本',
 	// 配置项值
 	configureValue: {
 		display: 'block',

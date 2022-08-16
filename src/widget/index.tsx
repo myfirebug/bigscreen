@@ -11,13 +11,22 @@ import {
   DotChartOutlined
 } from '@ant-design/icons'
 import './index.scss'
-
+// 文本
+import text from './text'
 // 组件分类
 export const componentsClassify: any[] = [{
   type: 'text',
   icon: <FontSizeOutlined />,
   name: '文本',
-  widgetName: 'widgetText'
+  datas: [{
+    src: require('../assets/image/configuration/line/widgetBaseLine.png'),
+    widgetName: 'widgetBaseText',
+    name: '基础文本'
+  }, {
+    src: require('../assets/image/configuration/line/widgetBaseLine.png'),
+    widgetName: 'widgetTimeText',
+    name: '时间文本'
+  }]
 },
 {
   type: 'image',
@@ -164,8 +173,8 @@ export const componentsClassify: any[] = [{
 
 // 所有组件地址
 const components: any = {
-  // 文本框
-  text: require('./text').default,
+  // 文本
+  ...text,
   // 图片
   image: require('./image').default,
   // 组

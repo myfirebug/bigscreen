@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 11:36:11
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 10:29:29
+ * @Last Modified time: 2022-08-16 10:41:34
  */
 // 基础文本
 import widgetBaseText from './widget-base-text';
@@ -11,6 +11,6 @@ import widgetBaseText from './widget-base-text';
 import widgetTimeText from './widget-time-text';
 
 export default {
-  widgetBaseText,
-  widgetTimeText
+	widgetBaseText,
+	widgetTimeText
 };

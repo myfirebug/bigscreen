@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:16:14
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-10 10:40:11
+ * @Last Modified time: 2022-08-16 11:21:13
  */
 const font = {
 	configureValue: {
@@ -12,7 +12,7 @@ const font = {
 		fontWeight: 'normal',
 		textAlign: 'center',
 		backgroundColor: '',
-		fontFamily: 'SimSun',
+		fontFamily: 'Microsoft YaHei',
 		lineHeight: 1,
 		color: '#fff'
 	},

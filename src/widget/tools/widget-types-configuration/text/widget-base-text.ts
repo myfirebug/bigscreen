@@ -1,14 +1,14 @@
 /*
- * text类型的配置
+ * widget-base-text类型的配置
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-11 16:08:45
+ * @Last Modified time: 2022-08-16 10:31:28
  */
-import baseConfiguration from '../base-configuration';
+import baseConfiguration from '../../base-configuration';
 const { font, animate, data, box } = baseConfiguration;
 
-const text = {
+const widgetBaseText = {
 	// 基础配置项
 	configure: [
 		...font.configure,
@@ -53,4 +53,4 @@ const text = {
 	data: data.configure
 };
 
-export default text;
+export default widgetBaseText;

@@ -16,10 +16,9 @@ import {
   Slider,
   Button
 } from 'antd'
-import { SketchPicker, ChromePicker } from 'react-color'
+import { ChromePicker } from 'react-color'
 import { IPage, IScreen, IWidget } from '@src/store/actionType'
 import Wrapper from '@src/components/wrapper'
-import { guid } from '@src/utils/tools'
 import {
   LeftOutlined,
   RightOutlined,
@@ -527,45 +526,68 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 labelAlign="left"
               >
                 {
-                  widgetTypesConfiguration[currentWidget.type] ?
+                  widgetTypesConfiguration[currentWidget.code] ?
                     renderDynamicForm(
-                      widgetTypesConfiguration[currentWidget.type].configure || [],
+                      widgetTypesConfiguration[currentWidget.code].configure || [],
                       configureForm,
                       modifyLargeScreenElement,
                       'configureValue',
                       true
-                    ) : null
+                    ) : (
+                      widgetTypesConfiguration[currentWidget.type] ?
+                        renderDynamicForm(
+                          widgetTypesConfiguration[currentWidget.type].configure || [],
+                          configureForm,
+                          modifyLargeScreenElement,
+                          'configureValue',
+                          true
+                        ) : null
+                    )
                 }
               </Form>
             </TabPane>
-            <TabPane tab="数据" key="3">
-              <Form
-                preserve
-                form={dataForm}
-                labelCol={{ span: 6 }}
-                wrapperCol={{ span: 18 }}
-                autoComplete="off"
-                labelAlign="left"
-                onFinish={saveData}
-              >
-                {
-                  widgetTypesConfiguration[currentWidget.type] ?
-                    renderDynamicForm(
-                      widgetTypesConfiguration[currentWidget.type].data || [],
-                      dataForm,
-                      modifyLargeScreenElement,
-                      'dataValue',
-                      false
-                    ) : null
-                }
+            {/* 判断是否显示数据选项卡 */}
+            {
+              (widgetTypesConfiguration[currentWidget.code] && widgetTypesConfiguration[currentWidget.code].data) || (widgetTypesConfiguration[currentWidget.type] && widgetTypesConfiguration[currentWidget.type].data) ?
 
-                <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
-                  <Button type="primary" htmlType="submit" block>
-                    保存
-                  </Button>
-                </Form.Item>
-              </Form>
-            </TabPane>
+                <TabPane tab="数据" key="3">
+                  <Form
+                    preserve
+                    form={dataForm}
+                    labelCol={{ span: 6 }}
+                    wrapperCol={{ span: 18 }}
+                    autoComplete="off"
+                    labelAlign="left"
+                    onFinish={saveData}
+                  >
+                    {
+                      widgetTypesConfiguration[currentWidget.code] ?
+                        renderDynamicForm(
+                          widgetTypesConfiguration[currentWidget.code].data || [],
+                          dataForm,
+                          modifyLargeScreenElement,
+                          'dataValue',
+                          false
+                        ) : (
+                          widgetTypesConfiguration[currentWidget.type] ?
+                            renderDynamicForm(
+                              widgetTypesConfiguration[currentWidget.type].data || [],
+                              dataForm,
+                              modifyLargeScreenElement,
+                              'dataValue',
+                              false
+                            ) : null
+                        )
+                    }
+
+                    <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
+                      <Button type="primary" htmlType="submit" block>
+                        保存
+                      </Button>
+                    </Form.Item>
+                  </Form>
+                </TabPane> : null
+            }
             <TabPane tab="坐标" key="4">
               <Form
                 preserve

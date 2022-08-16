@@ -60,7 +60,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
           widgets.map((item: any, index: number) => {
             // 说明有group组件
             if (item.widgets) {
-              const Widget = components[item.type] || components[item.code]
+              const Widget = components[item.code] || components[item.type]
               if (Widget) {
                 return (
                   <Drag
@@ -119,7 +119,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
               }
             } else {
               // 没有group组件
-              const Widget = components[item.type] || components[item.code]
+              const Widget = components[item.code] || components[item.type]
               if (Widget) {
                 return (
                   <Drag

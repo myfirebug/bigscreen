@@ -3,9 +3,9 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:21:13
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-15 11:32:45
+ * @Last Modified time: 2022-08-16 10:11:02
  */
-import widgetText from './widget-text';
+import text from './text/main';
 import widgetGroup from './widget-group';
 import widgetImage from './widget-image';
 // 折线图
@@ -22,7 +22,7 @@ import funnel from './funnel/main';
 import scatter from './scatter/main';
 
 const widgetConfiguration: any = {
-	widgetText,
+	...text,
 	widgetGroup,
 	widgetImage,
 	...line,
