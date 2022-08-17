@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-17 12:03:15
+ * @Last Modified time: 2022-08-17 13:39:55
  */
 import baseConfiguration from '../base-configuration';
 const { data } = baseConfiguration;
@@ -24,6 +24,13 @@ const table = {
 			name: 'tableLineHeight',
 			required: false,
 			placeholder: ''
+		},
+		{
+			componentName: 'JsonEdit',
+			label: 'Column数据',
+			name: 'tableColumn',
+			required: false,
+			placeholder: '请输入Column数据'
 		},
 		[
 			{
