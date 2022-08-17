@@ -1,0 +1,15 @@
+@include b(table) {
+    border-collapse: collapse;
+    table-layout: fixed;
+    padding: 0;
+    background: none;
+    color: #fff;
+    table {
+        width: 100%;
+        border-collapse: collapse;
+    }
+    td,
+    th {
+        padding: 0 10px;
+    }
+}

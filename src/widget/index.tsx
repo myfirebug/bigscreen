@@ -29,7 +29,12 @@ export const componentsClassify: any[] = [{
 {
   type: 'table',
   icon: '&#xe7df;',
-  name: '表格'
+  name: '表格',
+  datas: [{
+    src: require('../assets/image/configuration/line/widgetBaseLine.png'),
+    widgetName: 'widgetBaseTable',
+    name: '基础表格'
+  }]
 },
 {
   type: 'line',
@@ -172,7 +177,9 @@ const components: any = {
   // 漏斗图
   funnel: require('./funnel').default,
   // 散点图
-  scatter: require('./scatter').default
+  scatter: require('./scatter').default,
+  // 表格
+  table: require('./table').default
 }
 
 export default components

@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:21:13
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-16 10:11:02
+ * @Last Modified time: 2022-08-17 11:09:30
  */
 import text from './text/main';
 import widgetGroup from './widget-group';
@@ -20,6 +20,8 @@ import radar from './radar/main';
 import funnel from './funnel/main';
 // 散点图
 import scatter from './scatter/main';
+// 表格
+import table from './table/main';
 
 const widgetConfiguration: any = {
 	...text,
@@ -30,7 +32,8 @@ const widgetConfiguration: any = {
 	...pie,
 	...radar,
 	...funnel,
-	...scatter
+	...scatter,
+	...table
 };
 
 export default widgetConfiguration;
