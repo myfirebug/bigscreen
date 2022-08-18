@@ -1,5 +1,5 @@
 import {
-  FC
+  FC, useCallback, useEffect, useRef, useState
 } from 'react'
 import { IAnyObject } from '@src/types'
 import './index.scss'
@@ -17,6 +17,44 @@ const Table: FC<ITableProps> = ({
   field = 'value',
   options
 }) => {
+  // 是否动画
+  const [animate, setAnimate] = useState(false)
+  // 定时器
+  const timmer = useRef<any>(null)
+  const [datas, setDatas] = useState([])
+
+  const hander = useCallback(() => {
+    setAnimate(true)
+    clearTimeout(timmer.current)
+    timmer.current = setTimeout(() => {
+      setDatas(state => {
+        const newList = [...state]
+        newList.push(newList[0])
+        newList.push(newList[0])
+        newList.shift()
+        newList.shift()
+        return newList
+      })
+      setAnimate(false)
+    }, 400);
+  }, [])
+
+  useEffect(() => {
+    if (data && data[field] && data[field] instanceof Array) {
+      setDatas(data[field])
+    }
+  }, [data, field])
+
+  useEffect(() => {
+    let intervalTimmer: any = null
+    if (datas.length > options.tableRows && options.tableRolling) {
+      intervalTimmer = setInterval(hander, 4000)
+    }
+    return () => {
+      clearInterval(intervalTimmer)
+    }
+  }, [options.tableRows, options.tableRolling, datas, hander])
+
   const { tableColumn = [] } = options
 
   return (
@@ -25,7 +63,7 @@ const Table: FC<ITableProps> = ({
         tableColumn.length ?
           <div className='app-table' style={{
             fontSize: options.tableFontSize,
-            lineHeight: options.tableLineHeight + 'px'
+            lineHeight: options.tableLineHeight - 2 + 'px'
           }}>
             {
               options.tableShowHeader ?
@@ -60,11 +98,17 @@ const Table: FC<ITableProps> = ({
                   </table>
                 </div> : null
             }
-            <div className="app-table__body">
+            <div
+              style={{
+                height: options.tableLineHeight * options.tableRows + 1,
+                transform: `translateY(${animate ? -options.tableLineHeight * 2 + 'px' : 0})`,
+                transition: `all ${animate ? 0.5 : 0}s`,
+                marginTop: -1
+              }}
+              className="app-table__body">
               <table
                 style={{
-                  color: options.tableTbodyColor,
-                  marginTop: '-1px'
+                  color: options.tableTbodyColor
                 }}
               >
                 <colgroup>
@@ -76,30 +120,30 @@ const Table: FC<ITableProps> = ({
                 </colgroup>
                 <tbody>
                   {
-                    data && data[field] && data[field] instanceof Array ?
-                      data[field].map((item: any, index: number) => (
-                        <tr
-                          style={{
-                            background: index % 2 === 0 ? options.tableTbodyEvenBackgroudColor : options.tableTbodyOddBackgroudColor
-                          }}
-                          key={index}>
-                          {
-                            tableColumn.map((subItem: any, subIndex: number) => (
-                              <td
-                                style={{
-                                  border: options.tableShowBorder ? `1px solid ${options.tableBorderColor}` : 'none'
-                                }}
-                                key={subIndex}
-                                align={subItem.align || 'left'}>
-                                {
-                                  typeof subItem.render === 'function' ?
-                                    subItem.render(item) : (item[subItem.dataIndex] || '-')
-                                }
-                              </td>
-                            ))
-                          }
-                        </tr>
-                      )) : null
+                    datas.map((item: any, index: number) => (
+                      <tr
+                        style={{
+                          background: index % 2 === 0 ? options.tableTbodyEvenBackgroudColor : options.tableTbodyOddBackgroudColor
+                        }}
+                        key={index}>
+                        {
+                          tableColumn.map((subItem: any, subIndex: number) => (
+                            <td
+                              style={{
+                                height: options.tableLineHeight,
+                                border: options.tableShowBorder ? `1px solid ${options.tableBorderColor}` : 'none'
+                              }}
+                              key={subIndex}
+                              align={subItem.align || 'left'}>
+                              {
+                                typeof subItem.render === 'function' ?
+                                  subItem.render(item) : (item[subItem.dataIndex] || '-')
+                              }
+                            </td>
+                          ))
+                        }
+                      </tr>
+                    ))
                   }
                 </tbody>
               </table>

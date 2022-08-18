@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 10:05:22
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-17 13:43:19
+ * @Last Modified time: 2022-08-18 10:07:26
  */
 import baseConfiguration from '../../base-configuration';
 const { data } = baseConfiguration;
@@ -24,6 +24,8 @@ export default {
 		tableTbodyColor: 'rgba(153,144,197,1)',
 		tableTbodyEvenBackgroudColor: 'rgba(40,34,89,1)',
 		tableTbodyOddBackgroudColor: 'rgba(98,68,244,1)',
+		tableRows: 5,
+		tableRolling: false,
 		tableColumn: [
 			{
 				title: '姓名',

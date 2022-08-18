@@ -3,7 +3,7 @@
  * @Author: hejp
  * @Date: 2022-08-10 09:57:10
  * @Last Modified by: hejp
- * @Last Modified time: 2022-08-17 13:39:55
+ * @Last Modified time: 2022-08-18 10:06:24
  */
 import baseConfiguration from '../base-configuration';
 const { data } = baseConfiguration;
@@ -23,6 +23,14 @@ const table = {
 			label: '行高',
 			name: 'tableLineHeight',
 			required: false,
+			placeholder: ''
+		},
+		{
+			componentName: 'InputNumber',
+			label: '最多显几行',
+			name: 'tableRows',
+			required: false,
+			min: 12,
 			placeholder: ''
 		},
 		{
@@ -107,6 +115,18 @@ const table = {
 						name: 'tableTbodyEvenBackgroudColor',
 						required: false,
 						placeholder: '请选择偶数行颜色'
+					}
+				]
+			},
+			{
+				name: '滚动',
+				list: [
+					{
+						componentName: 'Switch',
+						label: '是否滚动',
+						name: 'tableRolling',
+						required: false,
+						placeholder: ''
 					}
 				]
 			}
