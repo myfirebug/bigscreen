@@ -1,21 +1,14 @@
-import React, {
-  FC, useEffect
-} from 'react'
-import {
-  Button,
-  Form,
-  Input,
-  message
-} from 'antd'
+import React, { FC, useEffect } from 'react'
+import { Button, Form, Input, message } from 'antd'
 import { IPage } from '@src/store/actionType'
 import { guid } from '@src/utils/tools'
-import { useForm } from 'antd/lib/form/Form';
+import { useForm } from 'antd/lib/form/Form'
 
 interface IAddOrEditPageProps {
-  setModal: React.Dispatch<any>;
-  addLargeScreenPage: (data: IPage, callback?: Function) => void;
-  modifyLargeScreenPage: (id: string, data: IPage, callback?: Function) => void;
-  details: any;
+  setModal: React.Dispatch<any>
+  addLargeScreenPage: (data: IPage, callback?: Function) => void
+  modifyLargeScreenPage: (id: string, data: IPage, callback?: Function) => void
+  details: any
 }
 
 const AddOrEditPage: FC<IAddOrEditPageProps> = ({
@@ -24,7 +17,6 @@ const AddOrEditPage: FC<IAddOrEditPageProps> = ({
   modifyLargeScreenPage,
   details
 }) => {
-
   const [form] = useForm()
   // 编辑时回填表单数据
   useEffect(() => {
@@ -64,23 +56,14 @@ const AddOrEditPage: FC<IAddOrEditPageProps> = ({
   }
 
   return (
-    <Form
-      name="basic"
-      onFinish={onFinish}
-      autoComplete="off"
-      form={form}
-    >
+    <Form name='basic' onFinish={onFinish} autoComplete='off' form={form}>
       <Form.Item
-        name="name"
-        rules={[{ required: true, message: '请输入页面名称' }]}
-      >
+        name='name'
+        rules={[{ required: true, message: '请输入页面名称' }]}>
         <Input placeholder='请输入页面名称' />
       </Form.Item>
-      <Form.Item >
-        <Button
-          type="primary"
-          block
-          htmlType="submit">
+      <Form.Item>
+        <Button type='primary' block htmlType='submit'>
           保存
         </Button>
       </Form.Item>

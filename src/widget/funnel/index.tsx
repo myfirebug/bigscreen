@@ -8,18 +8,17 @@ import { handleEchartsOption, handleData } from '@src/utils/echarts'
 import { getStyles } from '@utils/tools'
 
 interface IFunnelProps extends IEchartConfig {
-  options: any;
-  data: any;
-  field: string;
+  options: any
+  data: any
+  field: string
 }
 
 const Funnel: FC<IFunnelProps> = ({ options, data, field }) => {
   // 处理echarts数据
   const getOption = useMemo(() => {
-    const configuration = handleEchartsOption(options);
-    const currentData = data && data[field] ? data[field] : [];
-    const { legendData, xAxisData, yAxisData, series } =
-      handleData(currentData);
+    const configuration = handleEchartsOption(options)
+    const currentData = data && data[field] ? data[field] : []
+    const { legendData, xAxisData, yAxisData, series } = handleData(currentData)
 
     console.log(configuration, currentData)
     return {
@@ -30,28 +29,26 @@ const Funnel: FC<IFunnelProps> = ({ options, data, field }) => {
       },
       series: series
         ? series.map((item, index) => ({
-          ...configuration.funnel.series,
-          name: item.name,
-          labelLine: {
-            length: 10,
-            lineStyle: {
-              width: 0,
-              type: 'solid'
-            }
-          },
-          itemStyle: {
-            borderColor: '#fff',
-            borderWidth: 0
-          },
-          data: currentData[index].data
-        }))
+            ...configuration.funnel.series,
+            name: item.name,
+            labelLine: {
+              length: 10,
+              lineStyle: {
+                width: 0,
+                type: 'solid'
+              }
+            },
+            itemStyle: {
+              borderColor: '#fff',
+              borderWidth: 0
+            },
+            data: currentData[index].data
+          }))
         : []
-    };
-  }, [data, field, options]);
+    }
+  }, [data, field, options])
 
-  return (
-    <CustomEcharts style={getStyles(options)} options={getOption} />
-  )
+  return <CustomEcharts style={getStyles(options)} options={getOption} />
 }
 
 export default Funnel

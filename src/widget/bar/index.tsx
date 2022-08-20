@@ -8,18 +8,17 @@ import { handleEchartsOption, handleData } from '@src/utils/echarts'
 import { getStyles } from '@utils/tools'
 
 interface IBarProps extends IEchartConfig {
-  options: any;
-  data: any;
-  field: string;
+  options: any
+  data: any
+  field: string
 }
 
 const Bar: FC<IBarProps> = ({ options, data, field }) => {
   // 处理echarts数据
   const getOption = useMemo(() => {
-    const configuration = handleEchartsOption(options);
-    const currentData = data && data[field] ? data[field] : [];
-    const { legendData, xAxisData, yAxisData, series } =
-      handleData(currentData);
+    const configuration = handleEchartsOption(options)
+    const currentData = data && data[field] ? data[field] : []
+    const { legendData, xAxisData, yAxisData, series } = handleData(currentData)
     return {
       ...configuration,
       legend: {
@@ -36,16 +35,14 @@ const Bar: FC<IBarProps> = ({ options, data, field }) => {
       },
       series: series
         ? series.map((item) => ({
-          ...configuration.bar.series,
-          ...item
-        }))
+            ...configuration.bar.series,
+            ...item
+          }))
         : []
-    };
-  }, [data, field, options]);
+    }
+  }, [data, field, options])
 
-  return (
-    <CustomEcharts style={getStyles(options)} options={getOption} />
-  )
+  return <CustomEcharts style={getStyles(options)} options={getOption} />
 }
 
 export default Bar
