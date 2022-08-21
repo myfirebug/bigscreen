@@ -1,6 +1,4 @@
-import React, {
-  FC, MouseEvent, useEffect, useState
-} from 'react'
+import React, { FC, MouseEvent, useEffect, useState } from 'react'
 import './index.scss'
 import {
   Tabs,
@@ -32,7 +30,8 @@ import configuration from '@src/widget/tools/main'
 // JSON编辑器
 import JsonEditor from '@src/components/json-editor'
 // 微件配置文件
-const { widgetTypesConfiguration, widgetConfiguration, baseConfiguration } = configuration
+const { widgetTypesConfiguration, widgetConfiguration, baseConfiguration } =
+  configuration
 
 const { TextArea } = Input
 const { TabPane } = Tabs
@@ -40,17 +39,17 @@ const { Option } = Select
 const { Panel } = Collapse
 
 interface IDesignBodyRightProps {
-  screen: IScreen;
-  modifyScreen: (datas: any) => void;
-  currentWidgetId: string;
-  currentWidget: IWidget;
-  modifyLargeScreenElement: (id: string, data: IWidget) => void;
-  currentPage: IPage;
-  setRightFlag: React.Dispatch<React.SetStateAction<boolean>>;
-  rightFlag: Boolean;
-  currentWidgetGroupId: string;
-  showOrHideLargeScreenElement: (id: string, groupId?: string) => void;
-  changeLargeScreenElement: (id: string, groupId?: string) => void;
+  screen: IScreen
+  modifyScreen: (datas: any) => void
+  currentWidgetId: string
+  currentWidget: IWidget
+  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  currentPage: IPage
+  setRightFlag: React.Dispatch<React.SetStateAction<boolean>>
+  rightFlag: Boolean
+  currentWidgetGroupId: string
+  showOrHideLargeScreenElement: (id: string, groupId?: string) => void
+  changeLargeScreenElement: (id: string, groupId?: string) => void
 }
 
 const DesignBodyRight: FC<IDesignBodyRightProps> = ({
@@ -93,17 +92,23 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   }
 
   /**
-   * 
+   *
    * @param callback 返回的方法
    * @param name 表单名
    * @param value 表单值
    * @param field 字段名
    */
-  const onChangeHandler = (callback: Function, name: string, value: any, field: string) => {
+  const onChangeHandler = (
+    callback: Function,
+    name: string,
+    value: any,
+    field: string
+  ) => {
     if (!field) {
-      callback && callback({
-        [name]: value
-      })
+      callback &&
+        callback({
+          [name]: value
+        })
     } else {
       const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
       newCurrentWidget[field][name] = value
@@ -118,7 +123,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
    * @param callback 返回方法
    * @param field 字段名
    * @param isUpdate 是否change更新
-   * @returns 
+   * @returns
    */
   const baseForm = (
     item: any,
@@ -129,110 +134,121 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   ) => {
     return (
       <>
-        {
-          item.componentName === 'Input' &&
+        {item.componentName === 'Input' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <Input
               allowClear
               disabled={item.disabled}
-              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
-              placeholder={item.placeholder} />
+              onBlur={(e) =>
+                isUpdate &&
+                onChangeHandler(callback, item.name, e.target.value, field)
+              }
+              placeholder={item.placeholder}
+            />
           </Form.Item>
-        }
-        {
-          item.componentName === 'InputNumber' &&
+        )}
+        {item.componentName === 'InputNumber' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <InputNumber
               disabled={item.disabled}
               min={item.min}
               max={item.max}
-              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value ? Number(e.target.value) : 0, field)}
+              onBlur={(e) =>
+                isUpdate &&
+                onChangeHandler(
+                  callback,
+                  item.name,
+                  e.target.value ? Number(e.target.value) : 0,
+                  field
+                )
+              }
               style={{ width: '100%' }}
-              placeholder={item.placeholder} />
+              placeholder={item.placeholder}
+            />
           </Form.Item>
-        }
-        {
-          item.componentName === 'TextArea' &&
+        )}
+        {item.componentName === 'TextArea' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <TextArea
               allowClear
               disabled={item.disabled}
-              onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
+              onBlur={(e) =>
+                isUpdate &&
+                onChangeHandler(callback, item.name, e.target.value, field)
+              }
               rows={8}
-              placeholder={item.placeholder} />
+              placeholder={item.placeholder}
+            />
           </Form.Item>
-        }
-        {
-          item.componentName === 'Switch' &&
+        )}
+        {item.componentName === 'Switch' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            valuePropName="checked"
-            rules={[{ required: item.require }]}
-          >
+            valuePropName='checked'
+            rules={[{ required: item.require }]}>
             <Switch
-              disabled={item.disabled}
-              onChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
+              disabled={
+                item.disabled ||
+                (item.name === 'useInterface' && !currentWidgetGroupId)
+              }
+              onChange={(value) =>
+                isUpdate && onChangeHandler(callback, item.name, value, field)
+              }
+            />
           </Form.Item>
-        }
-        {
-          item.componentName === 'Slider' &&
+        )}
+        {item.componentName === 'Slider' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <Slider
               min={item.min || 0}
               max={item.max || 100}
               disabled={item.disabled}
-              onAfterChange={(value) => isUpdate && onChangeHandler(callback, item.name, value, field)} />
+              onAfterChange={(value) =>
+                isUpdate && onChangeHandler(callback, item.name, value, field)
+              }
+            />
           </Form.Item>
-        }
-        {
-          item.componentName === 'Select' &&
+        )}
+        {item.componentName === 'Select' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <Select
               allowClear
               disabled={item.disabled}
-              onChange={(value: string) => isUpdate && onChangeHandler(callback, item.name, value, field)}
-              placeholder={item.placeholder}>
-              {
-                item.options.map((item: any) => (
-                  <Option
-                    key={item.code}
-                    value={item.code}>
-                    {item.name}
-                  </Option>
-                ))
+              onChange={(value: string) =>
+                isUpdate && onChangeHandler(callback, item.name, value, field)
               }
+              placeholder={item.placeholder}>
+              {item.options.map((item: any) => (
+                <Option key={item.code} value={item.code}>
+                  {item.name}
+                </Option>
+              ))}
             </Select>
           </Form.Item>
-        }
-        {
-          item.componentName === 'SketchPicker' &&
+        )}
+        {item.componentName === 'SketchPicker' && (
           <Form.Item label={item.label}>
             <Row>
               <Col span={12}>
@@ -240,57 +256,79 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                   noStyle
                   name={item.name}
                   tooltip={item.tooltip}
-                  rules={[{ required: item.require }]}
-                >
+                  rules={[{ required: item.require }]}>
                   <Input
                     allowClear
                     disabled={item.disabled}
-                    onBlur={e => isUpdate && onChangeHandler(callback, item.name, e.target.value, field)}
-                    placeholder={item.placeholder} />
+                    onBlur={(e) =>
+                      isUpdate &&
+                      onChangeHandler(
+                        callback,
+                        item.name,
+                        e.target.value,
+                        field
+                      )
+                    }
+                    placeholder={item.placeholder}
+                  />
                 </Form.Item>
               </Col>
               <Col span={11} offset={1}>
                 <Form.Item shouldUpdate noStyle>
-                  {
-                    () => (
-                      <div className='color-wrapper' style={{
+                  {() => (
+                    <div
+                      className='color-wrapper'
+                      style={{
                         background: form.getFieldValue(item.name),
                         width: '100%'
                       }}>
-                        获取颜色
-                        <div className='color'>
-                          <ChromePicker
-                            color={form.getFieldValue(item.name)}
-                            onChangeComplete={e => {
-                              form.setFieldsValue({
-                                [item.name]: `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`
-                              })
-                              isUpdate ? onChangeHandler(callback, item.name, `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`, field) : form.setFieldValue(item.name, `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`)
-                            }} />
-                        </div>
+                      获取颜色
+                      <div className='color'>
+                        <ChromePicker
+                          color={form.getFieldValue(item.name)}
+                          onChangeComplete={(e) => {
+                            form.setFieldsValue({
+                              [item.name]: `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`
+                            })
+                            isUpdate
+                              ? onChangeHandler(
+                                  callback,
+                                  item.name,
+                                  `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`,
+                                  field
+                                )
+                              : form.setFieldValue(
+                                  item.name,
+                                  `rgba(${e.rgb.r},${e.rgb.g},${e.rgb.b},${e.rgb.a})`
+                                )
+                          }}
+                        />
                       </div>
-                    )
-                  }
+                    </div>
+                  )}
                 </Form.Item>
               </Col>
             </Row>
           </Form.Item>
-        }
-        {
-          item.componentName === 'JsonEdit' &&
+        )}
+        {item.componentName === 'JsonEdit' && (
           <Form.Item
             label={item.label}
             name={item.name}
             tooltip={item.tooltip}
-            rules={[{ required: item.require }]}
-          >
+            rules={[{ required: item.require }]}>
             <Form.Item shouldUpdate noStyle>
               <JsonEditor
                 value={form.getFieldValue(item.name)}
-                onChange={e => isUpdate ? onChangeHandler(callback, item.name, e, field) : form.setFieldValue(item.name, e)} />
+                onChange={(e) =>
+                  isUpdate
+                    ? onChangeHandler(callback, item.name, e, field)
+                    : form.setFieldValue(item.name, e)
+                }
+              />
             </Form.Item>
           </Form.Item>
-        }
+        )}
       </>
     )
   }
@@ -302,74 +340,95 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
    * @param callback 返回函数
    * @param field 字段名
    * @param isUpdate 是否change更新
-   * @returns 
+   * @returns
    */
   const renderDynamicForm = (
     datas: any,
     form: FormInstance<any>,
     callback: Function,
     field: string,
-    isUpdate: boolean = true) => {
+    isUpdate: boolean = true
+  ) => {
     return datas.map((item: any, index: number) => {
       if (judgeType(item, '[object Object]')) {
-        const relationFields = item.relationFields !== undefined ? item.relationFields.split(',') : []
+        const relationFields =
+          item.relationFields !== undefined
+            ? item.relationFields.split(',')
+            : []
         return (
           <div key={index}>
-            {
-              !relationFields.length ?
-                baseForm(item, form, callback, field, isUpdate) :
-                <Form.Item
-                  noStyle
-                  shouldUpdate>
-                  {({ getFieldValue }) => {
-                    if (relationFields.every((subItem: string) => item.relationValues.includes(String(getFieldValue(subItem))))) {
-                      return (
-                        baseForm(item, form, callback, field, isUpdate)
-                      );
-                    }
-                  }}
-                </Form.Item>
-            }
-          </div >
+            {!relationFields.length ? (
+              baseForm(item, form, callback, field, isUpdate)
+            ) : (
+              <Form.Item noStyle shouldUpdate>
+                {({ getFieldValue }) => {
+                  if (
+                    relationFields.every((subItem: string) =>
+                      item.relationValues.includes(
+                        String(getFieldValue(subItem))
+                      )
+                    )
+                  ) {
+                    return baseForm(item, form, callback, field, isUpdate)
+                  }
+                }}
+              </Form.Item>
+            )}
+          </div>
         )
       }
       if (judgeType(item, '[object Array]')) {
         return (
           <div key={index}>
-            {
-              item.map((subItem: any, subIndex: number) => {
-                const relationFields = subItem.relationFields !== undefined ? subItem.relationFields.split(',') : []
-                return (
-                  <Collapse key={subIndex}>
-                    {
-                      subItem.relationFields === undefined ?
-                        <Panel header={subItem.name} key={subItem + subIndex}>
-                          {
-                            renderDynamicForm(subItem.list, form, callback, field, isUpdate)
-                          }
-                        </Panel> :
-                        <Form.Item
-                          noStyle
-                          shouldUpdate>
-                          {({ getFieldValue }) => {
-                            if (relationFields.every((subbItem: string) => subItem.relationValues.includes(String(getFieldValue(subbItem))))) {
-                              return (
-                                <Collapse key={subIndex}>
-                                  <Panel header={subItem.name} key={subItem + subIndex}>
-                                    {
-                                      renderDynamicForm(subItem.list, form, callback, field, isUpdate)
-                                    }
-                                  </Panel>
-                                </Collapse>
-                              );
-                            }
-                          }}
-                        </Form.Item>
-                    }
-                  </Collapse>
-                )
-              })
-            }
+            {item.map((subItem: any, subIndex: number) => {
+              const relationFields =
+                subItem.relationFields !== undefined
+                  ? subItem.relationFields.split(',')
+                  : []
+              return (
+                <Collapse key={subIndex}>
+                  {subItem.relationFields === undefined ? (
+                    <Panel header={subItem.name} key={subItem + subIndex}>
+                      {renderDynamicForm(
+                        subItem.list,
+                        form,
+                        callback,
+                        field,
+                        isUpdate
+                      )}
+                    </Panel>
+                  ) : (
+                    <Form.Item noStyle shouldUpdate>
+                      {({ getFieldValue }) => {
+                        if (
+                          relationFields.every((subbItem: string) =>
+                            subItem.relationValues.includes(
+                              String(getFieldValue(subbItem))
+                            )
+                          )
+                        ) {
+                          return (
+                            <Collapse key={subIndex}>
+                              <Panel
+                                header={subItem.name}
+                                key={subItem + subIndex}>
+                                {renderDynamicForm(
+                                  subItem.list,
+                                  form,
+                                  callback,
+                                  field,
+                                  isUpdate
+                                )}
+                              </Panel>
+                            </Collapse>
+                          )
+                        }
+                      }}
+                    </Form.Item>
+                  )}
+                </Collapse>
+              )
+            })}
           </div>
         )
       }
@@ -412,50 +471,48 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     return datas.map((item) => {
       if (item.widgets) {
         return (
-          <div
-            className="app-screen-disign__layer"
-            key={item.id}>
+          <div className='app-screen-disign__layer' key={item.id}>
             <div
               onClick={(e) => changeElement(e, item.id, item.id)}
-              className={`header ${item.id === currentWidgetId ? 'is-active' : ''}`}>
-              <span
-                onClick={(e) => modifyElement(e, item.id)}
-                className='show'>
-                {
-                  item.configureValue.styleDisplay === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
-                }
+              className={`header ${
+                item.id === currentWidgetId ? 'is-active' : ''
+              }`}>
+              <span onClick={(e) => modifyElement(e, item.id)} className='show'>
+                {item.configureValue.styleDisplay === 'block' ? (
+                  <EyeOutlined />
+                ) : (
+                  <EyeInvisibleOutlined />
+                )}
               </span>
-              <span className="file">
+              <span className='file'>
                 <FolderOpenOutlined />
               </span>
-              <span className="label">
-                {item.label}
-              </span>
+              <span className='label'>{item.label}</span>
             </div>
             {renderWidgetsTree(item.widgets, item.id)}
           </div>
         )
       } else {
         return (
-          <div
-            key={item.id}
-            className="app-screen-disign__layer--item">
+          <div key={item.id} className='app-screen-disign__layer--item'>
             <div
               onClick={(e) => changeElement(e, item.id, groudId)}
-              className={`header ${item.id === currentWidgetId ? 'is-active' : ''}`}>
+              className={`header ${
+                item.id === currentWidgetId ? 'is-active' : ''
+              }`}>
               <span
                 onClick={(e) => modifyElement(e, item.id, groudId)}
                 className='show'>
-                {
-                  item.configureValue.styleDisplay === 'block' ? <EyeOutlined /> : <EyeInvisibleOutlined />
-                }
+                {item.configureValue.styleDisplay === 'block' ? (
+                  <EyeOutlined />
+                ) : (
+                  <EyeInvisibleOutlined />
+                )}
               </span>
-              <span className="file">
+              <span className='file'>
                 <FolderOutlined />
               </span>
-              <span className="label">
-                {item.label}
-              </span>
+              <span className='label'>{item.label}</span>
             </div>
           </div>
         )
@@ -472,144 +529,139 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   // }, [currentWidgetId])
 
   return (
-    <div className='app-screen-disign__body--right' style={{
-      right: rightFlag ? 0 : -400
-    }}>
-      <div
-        onClick={() => setRightFlag(!rightFlag)}
-        className="operation">
-        {
-          rightFlag ? <LeftOutlined /> : <RightOutlined />
-        }
+    <div
+      className='app-screen-disign__body--right'
+      style={{
+        right: rightFlag ? 0 : -400
+      }}>
+      <div onClick={() => setRightFlag(!rightFlag)} className='operation'>
+        {rightFlag ? <LeftOutlined /> : <RightOutlined />}
       </div>
       <Tabs
         className='custom-tabs'
         activeKey={key}
-        onChange={key => setKey(key)}
+        onChange={(key) => setKey(key)}
         destroyInactiveTabPane>
-        <TabPane tab="图层管理" key="5">
+        <TabPane tab='图层管理' key='5'>
           <Wrapper
             loading={false}
             error={false}
-            nodata={Boolean((currentPage && currentPage.widgets && !currentPage.widgets.length))}>
-            <div className="app-screen-disign__layer">
-              {
-                renderWidgetsTree(currentPage.widgets || [])
-              }
+            nodata={Boolean(
+              currentPage && currentPage.widgets && !currentPage.widgets.length
+            )}>
+            <div className='app-screen-disign__layer'>
+              {renderWidgetsTree(currentPage.widgets || [])}
             </div>
           </Wrapper>
         </TabPane>
-        <TabPane tab="项目配置" key="1">
+        <TabPane tab='项目配置' key='1'>
           <Form
             preserve
             form={pageForm}
             labelCol={{ span: 6 }}
             wrapperCol={{ span: 18 }}
-            autoComplete="off"
-            labelAlign="left"
+            autoComplete='off'
+            labelAlign='left'
             initialValues={screen}
-          // onValuesChange={(changedValues, allValues) => modifyScreen(allValues)}
+            // onValuesChange={(changedValues, allValues) => modifyScreen(allValues)}
           >
-            {
-              renderDynamicForm(baseConfiguration.page.configure || [], pageForm, modifyScreen, '')
-            }
+            {renderDynamicForm(
+              baseConfiguration.page.configure || [],
+              pageForm,
+              modifyScreen,
+              ''
+            )}
           </Form>
         </TabPane>
-        {
-          currentWidgetId && !currentWidgetId.includes(',') && <>
-            <TabPane tab="配置" key="2">
+        {currentWidgetId && !currentWidgetId.includes(',') && (
+          <>
+            <TabPane tab='配置' key='2'>
               <Form
                 form={configureForm}
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
-                autoComplete="off"
-                labelAlign="left"
-              >
-                {
-                  widgetTypesConfiguration[currentWidget.code] ?
-                    renderDynamicForm(
-                      widgetTypesConfiguration[currentWidget.code].configure || [],
+                autoComplete='off'
+                labelAlign='left'>
+                {widgetTypesConfiguration[currentWidget.code]
+                  ? renderDynamicForm(
+                      widgetTypesConfiguration[currentWidget.code].configure ||
+                        [],
                       configureForm,
                       modifyLargeScreenElement,
                       'configureValue',
                       true
-                    ) : (
-                      widgetTypesConfiguration[currentWidget.type] ?
-                        renderDynamicForm(
-                          widgetTypesConfiguration[currentWidget.type].configure || [],
-                          configureForm,
-                          modifyLargeScreenElement,
-                          'configureValue',
-                          true
-                        ) : null
                     )
-                }
+                  : widgetTypesConfiguration[currentWidget.type]
+                  ? renderDynamicForm(
+                      widgetTypesConfiguration[currentWidget.type].configure ||
+                        [],
+                      configureForm,
+                      modifyLargeScreenElement,
+                      'configureValue',
+                      true
+                    )
+                  : null}
               </Form>
             </TabPane>
             {/* 判断是否显示数据选项卡 */}
-            {
-              (widgetTypesConfiguration[currentWidget.code] && widgetTypesConfiguration[currentWidget.code].data) || (widgetTypesConfiguration[currentWidget.type] && widgetTypesConfiguration[currentWidget.type].data) ?
+            {(widgetTypesConfiguration[currentWidget.code] &&
+              widgetTypesConfiguration[currentWidget.code].data) ||
+            (widgetTypesConfiguration[currentWidget.type] &&
+              widgetTypesConfiguration[currentWidget.type].data) ? (
+              <TabPane tab='数据' key='3'>
+                <Form
+                  preserve
+                  form={dataForm}
+                  labelCol={{ span: 6 }}
+                  wrapperCol={{ span: 18 }}
+                  autoComplete='off'
+                  labelAlign='left'
+                  onFinish={saveData}>
+                  {widgetTypesConfiguration[currentWidget.code]
+                    ? renderDynamicForm(
+                        widgetTypesConfiguration[currentWidget.code].data || [],
+                        dataForm,
+                        modifyLargeScreenElement,
+                        'dataValue',
+                        false
+                      )
+                    : widgetTypesConfiguration[currentWidget.type]
+                    ? renderDynamicForm(
+                        widgetTypesConfiguration[currentWidget.type].data || [],
+                        dataForm,
+                        modifyLargeScreenElement,
+                        'dataValue',
+                        false
+                      )
+                    : null}
 
-                <TabPane tab="数据" key="3">
-                  <Form
-                    preserve
-                    form={dataForm}
-                    labelCol={{ span: 6 }}
-                    wrapperCol={{ span: 18 }}
-                    autoComplete="off"
-                    labelAlign="left"
-                    onFinish={saveData}
-                  >
-                    {
-                      widgetTypesConfiguration[currentWidget.code] ?
-                        renderDynamicForm(
-                          widgetTypesConfiguration[currentWidget.code].data || [],
-                          dataForm,
-                          modifyLargeScreenElement,
-                          'dataValue',
-                          false
-                        ) : (
-                          widgetTypesConfiguration[currentWidget.type] ?
-                            renderDynamicForm(
-                              widgetTypesConfiguration[currentWidget.type].data || [],
-                              dataForm,
-                              modifyLargeScreenElement,
-                              'dataValue',
-                              false
-                            ) : null
-                        )
-                    }
-
-                    <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
-                      <Button type="primary" htmlType="submit" block>
-                        保存
-                      </Button>
-                    </Form.Item>
-                  </Form>
-                </TabPane> : null
-            }
-            <TabPane tab="坐标" key="4">
+                  <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
+                    <Button type='primary' htmlType='submit' block>
+                      保存
+                    </Button>
+                  </Form.Item>
+                </Form>
+              </TabPane>
+            ) : null}
+            <TabPane tab='坐标' key='4'>
               <Form
                 preserve
                 form={dynamicForm}
                 labelCol={{ span: 6 }}
                 wrapperCol={{ span: 18 }}
-                autoComplete="off"
-                labelAlign="left"
-              >
-                {
-                  renderDynamicForm(
-                    baseConfiguration.coordinate.configure || [],
-                    dynamicForm,
-                    modifyLargeScreenElement,
-                    'coordinateValue',
-                    true
-                  )
-                }
+                autoComplete='off'
+                labelAlign='left'>
+                {renderDynamicForm(
+                  baseConfiguration.coordinate.configure || [],
+                  dynamicForm,
+                  modifyLargeScreenElement,
+                  'coordinateValue',
+                  true
+                )}
               </Form>
             </TabPane>
           </>
-        }
+        )}
       </Tabs>
     </div>
   )

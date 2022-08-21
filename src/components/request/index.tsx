@@ -1,32 +1,27 @@
-import {
-  useEffect,
-  memo,
-  FC,
-  useState
-} from 'react'
+import { useEffect, memo, FC, useState } from 'react'
 import Wrapper from '@src/components/wrapper'
 import { useRequest } from 'ahooks'
 import axios from 'axios'
 
 interface IResult {
-  code: string;
-  data: any;
-  msg: string;
-  success: boolean;
+  code: string
+  data: any
+  msg: string
+  success: boolean
 
-  [propNames: string]: any;
+  [propNames: string]: any
 }
 
 interface IRequestProps {
   // 是否需要占位
-  isPlaceholder: Boolean;
+  isPlaceholder: Boolean
   // 类型
-  method: 'get' | 'post',
+  method: 'get' | 'post'
   // 接口地址
-  url: string;
+  url: string
   // 接口参数
-  params: string;
-  render: (data: any) => any;
+  params: string
+  render: (data: any, success: boolean) => any
 }
 
 const Request: FC<IRequestProps> = ({
@@ -40,6 +35,7 @@ const Request: FC<IRequestProps> = ({
   const [data, setData] = useState<any>(null)
   const [loading, setLoading] = useState(false)
   const [error, setError] = useState(false)
+  const [success, setSuccess] = useState(false)
 
   useEffect(() => {
     if (url) {
@@ -52,33 +48,28 @@ const Request: FC<IRequestProps> = ({
       })
         .then((res: any) => {
           setLoading(false)
+          setSuccess(true)
           setData(res.data.data || res.data)
         })
-        .catch(res => {
+        .catch((res) => {
           setLoading(false)
-          setError(true)
+          setSuccess(false)
+          setError(false)
         })
     }
   }, [url, params])
   return (
     <>
-      {
-        isPlaceholder ?
-          <Wrapper
-            loading={loading}
-            error={Boolean(error)}
-            nodata={false}
-          >
-            {
-              render(data)
-            }
-          </Wrapper>
-          : render(data)
-      }
+      {isPlaceholder ? (
+        <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
+          {render(data, success)}
+        </Wrapper>
+      ) : (
+        render(data, success)
+      )}
     </>
   )
 }
-
 
 // const Request = memo((props: IRequestProps) => {
 //   const {
