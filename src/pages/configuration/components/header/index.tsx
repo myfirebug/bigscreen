@@ -1,6 +1,4 @@
-import {
-  FC, useCallback, useEffect
-} from 'react'
+import { FC, useCallback, useEffect } from 'react'
 import { message, Tooltip, Modal } from 'antd'
 import {
   CloseOutlined,
@@ -14,28 +12,26 @@ import { componentsClassify } from '@src/widget'
 import { guid } from '@src/utils/tools'
 import './index.scss'
 import { IPage, IWidget } from '@src/store/actionType'
-import {
-  useHistory
-} from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 
 // 微件配置文件
 const { widgetConfiguration } = configuration
 
 interface IDesignHeaderProps {
-  addLargeScreenElement: (data: any) => void;
-  pastPage: IPage[];
-  futurePage: IPage[];
-  currentWidgetId: string;
-  currentWidget: IWidget;
-  currentPageId: string;
-  undoLargeScreen: () => void;
-  redoLargeScreen: () => void;
-  modifyLargeScreenElement: (id: string, data: IWidget) => void;
-  delLargeScreenElement: () => void;
-  copyLargeScreenElement: () => void;
-  currentWidgetGroupId: string;
-  group: () => void;
-  cancelGroup: () => void;
+  addLargeScreenElement: (data: any) => void
+  pastPage: IPage[]
+  futurePage: IPage[]
+  currentWidgetId: string
+  currentWidget: IWidget
+  currentPageId: string
+  undoLargeScreen: () => void
+  redoLargeScreen: () => void
+  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  delLargeScreenElement: () => void
+  copyLargeScreenElement: () => void
+  currentWidgetGroupId: string
+  group: () => void
+  cancelGroup: () => void
 }
 
 const DesignHeader: FC<IDesignHeaderProps> = ({
@@ -61,8 +57,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
       message.error('请先添加页面哦')
       return
     }
-    // const index = widgetConfigure.findIndex((item: any) => item.code === code)
-    console.log(widgetConfiguration, code)
     if (widgetConfiguration[code]) {
       addLargeScreenElement({
         id: guid(),
@@ -118,24 +112,32 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   }, [currentWidgetId])
 
   // 移动上移下移左移右移
-  const moveHander = useCallback((field: 'top' | 'left' | 'bottom' | 'right') => {
-    if (currentWidgetId) {
-      const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
-      switch (field) {
-        case 'top':
-          newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top - 1
-          break
-        case 'left':
-          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left - 1
-          break
-        case 'bottom': newCurrentWidget.coordinateValue.top = newCurrentWidget.coordinateValue.top + 1
-          break
-        default:
-          newCurrentWidget.coordinateValue.left = newCurrentWidget.coordinateValue.left + 1
+  const moveHander = useCallback(
+    (field: 'top' | 'left' | 'bottom' | 'right') => {
+      if (currentWidgetId) {
+        const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
+        switch (field) {
+          case 'top':
+            newCurrentWidget.coordinateValue.top =
+              newCurrentWidget.coordinateValue.top - 1
+            break
+          case 'left':
+            newCurrentWidget.coordinateValue.left =
+              newCurrentWidget.coordinateValue.left - 1
+            break
+          case 'bottom':
+            newCurrentWidget.coordinateValue.top =
+              newCurrentWidget.coordinateValue.top + 1
+            break
+          default:
+            newCurrentWidget.coordinateValue.left =
+              newCurrentWidget.coordinateValue.left + 1
+        }
+        modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
       }
-      modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
-    }
-  }, [currentWidgetId, currentWidget, modifyLargeScreenElement])
+    },
+    [currentWidgetId, currentWidget, modifyLargeScreenElement]
+  )
 
   // 确认框
   const showConfirm = (message: string, callback: Function) => {
@@ -197,69 +199,87 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
     return () => {
       document.removeEventListener('keyup', keyupHander)
     }
-  }, [undoHander, redoHandler, moveHander, delHandler, copyHandler, currentWidgetId, showConfirm])
+  }, [
+    undoHander,
+    redoHandler,
+    moveHander,
+    delHandler,
+    copyHandler,
+    currentWidgetId,
+    showConfirm
+  ])
 
   return (
     <div className='app-screen-disign__header'>
       {/* elements start */}
-      <ul className="app-screen-disign__header--left">
-        {
-          componentsClassify.map((item: any, index: number) => (
-            <li
-              className={`${!currentPageId ? 'is-disabled' : ''}`}
-              onClick={() => {
-                if (!item.datas) {
-                  addElement(item.widgetName)
-                }
-              }}
-              key={item.type}>
-              <span className="app-icon" dangerouslySetInnerHTML={{
+      <ul className='app-screen-disign__header--left'>
+        {componentsClassify.map((item: any, index: number) => (
+          <li
+            className={`${!currentPageId ? 'is-disabled' : ''}`}
+            onClick={() => {
+              if (!item.datas) {
+                addElement(item.widgetName)
+              }
+            }}
+            key={item.type}>
+            <span
+              className='app-icon'
+              dangerouslySetInnerHTML={{
                 __html: item.icon
               }}></span>
-              <p>{item.name}</p>
-              {
-                item.datas && item.datas.length ?
-                  <div className="elements">
-                    {
-                      item.datas.map((subItem: any, subIndex: string) => (
-                        <div
-                          onClick={() => {
-                            if (subItem.widgetName) {
-                              addElement(subItem.widgetName)
-                            }
-                          }}
-                          key={subIndex}>
-                          <div className="img">
-                            {
-                              subItem.src ? <img src={subItem.src} /> : <PictureOutlined />
-                            }
-                          </div>
-                          <div className="name" title={subItem.name}>{subItem.name}</div>
-                        </div>
-                      ))
-                    }
+            <p>{item.name}</p>
+            {item.datas && item.datas.length ? (
+              <div className='elements'>
+                {item.datas.map((subItem: any, subIndex: string) => (
+                  <div
+                    onClick={() => {
+                      if (subItem.widgetName) {
+                        addElement(subItem.widgetName)
+                      }
+                    }}
+                    key={subIndex}>
+                    <div className='img'>
+                      {subItem.src ? (
+                        <img src={subItem.src} />
+                      ) : (
+                        <PictureOutlined />
+                      )}
+                    </div>
+                    <div className='name' title={subItem.name}>
+                      {subItem.name}
+                    </div>
                   </div>
-                  : ''
-              }
-            </li>
-          ))
-        }
+                ))}
+              </div>
+            ) : (
+              ''
+            )}
+          </li>
+        ))}
       </ul>
       {/* elements end */}
       <div className='app-screen-disign__header--center'>
         <ul className='shortcuts-group'>
           <li
             onClick={groupHandler}
-            className={`${currentWidgetGroupId || !currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
-            <Tooltip title="分组" placement="bottom">
-              <span className="app-icon">&#xe83f;</span>
+            className={`${
+              currentWidgetGroupId || !currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <Tooltip title='分组' placement='bottom'>
+              <span className='app-icon'>&#xe83f;</span>
               <p>分组</p>
             </Tooltip>
           </li>
           <li
             onClick={cancelGroupHandler}
-            className={`${currentWidgetGroupId && currentWidgetGroupId === currentWidgetId ? '' : 'is-disabled'}`}>
-            <Tooltip title="拆分" placement="bottom">
+            className={`${
+              currentWidgetGroupId && currentWidgetGroupId === currentWidgetId
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <Tooltip title='拆分' placement='bottom'>
               <span className='app-icon'>&#xe632;</span>
               <p>拆分</p>
             </Tooltip>
@@ -268,16 +288,24 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         <ul className='shortcuts-group'>
           <li
             onClick={copyHandler}
-            className={`${currentWidgetId && !currentWidgetId.includes(',') ? '' : 'is-disabled'}`}>
-            <Tooltip title="复制" placement="bottom">
+            className={`${
+              currentWidgetId && !currentWidgetId.includes(',')
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <Tooltip title='复制' placement='bottom'>
               <span className='app-icon'>&#xe7bc;</span>
               <p>复制</p>
             </Tooltip>
           </li>
           <li
             onClick={delHandler}
-            className={`${currentWidgetId && !currentWidgetId.includes(',') ? '' : 'is-disabled'}`}>
-            <Tooltip title="删除(ctrl+delete)" placement="bottom">
+            className={`${
+              currentWidgetId && !currentWidgetId.includes(',')
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <Tooltip title='删除(ctrl+delete)' placement='bottom'>
               <span className='app-icon'>&#xe7c3;</span>
               <p>删除</p>
             </Tooltip>
@@ -304,54 +332,78 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         <ul className='shortcuts-group'>
           <li
             onClick={() => moveHander('top')}
-            className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
-            <Tooltip title="上移(ctrl+↑)" placement="bottom">
-              <span className="app-icon">&#xe7ef;</span>
+            className={`${
+              !currentWidgetId || currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <Tooltip title='上移(ctrl+↑)' placement='bottom'>
+              <span className='app-icon'>&#xe7ef;</span>
               <p>上移</p>
             </Tooltip>
           </li>
           <li
             onClick={() => moveHander('bottom')}
-            className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
-            <Tooltip title="下移(ctrl+↓)" placement="bottom">
-              <span className="app-icon">&#xe7f1;</span>
+            className={`${
+              !currentWidgetId || currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <Tooltip title='下移(ctrl+↓)' placement='bottom'>
+              <span className='app-icon'>&#xe7f1;</span>
               <p>下移</p>
             </Tooltip>
           </li>
           <li
             onClick={() => moveHander('left')}
-            className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
-            <Tooltip title="左移(ctrl+←)" placement="bottom">
-              <span className="app-icon">&#xe7f0;</span>
+            className={`${
+              !currentWidgetId || currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <Tooltip title='左移(ctrl+←)' placement='bottom'>
+              <span className='app-icon'>&#xe7f0;</span>
               <p>左移</p>
             </Tooltip>
           </li>
           <li
             onClick={() => moveHander('right')}
-            className={`${!currentWidgetId || currentWidgetId.includes(',') ? 'is-disabled' : ''}`}>
-            <Tooltip title="右移(ctrl+→)" placement="bottom">
-              <span className="app-icon">&#xe7ee;</span>
+            className={`${
+              !currentWidgetId || currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <Tooltip title='右移(ctrl+→)' placement='bottom'>
+              <span className='app-icon'>&#xe7ee;</span>
               <p>右移</p>
             </Tooltip>
           </li>
         </ul>
         <ul className='shortcuts-group'>
           <li className={`${!currentPageId ? 'is-disabled' : ''}`}>
-            <Tooltip title="保存(ctrl+s)" placement="bottom">
-              <span className="app-icon">&#xe791;</span>
+            <Tooltip title='保存(ctrl+s)' placement='bottom'>
+              <span className='app-icon'>&#xe791;</span>
               <p>保存</p>
             </Tooltip>
           </li>
-          <li className={`${!currentPageId ? 'is-disabled' : ''}`}>
-            <Tooltip title="预览(ctrl+p)" placement="bottom">
-              <span className="app-icon">&#xe78f;</span>
+          <li
+            onClick={() => {
+              if (currentPageId) {
+                history.push(`/frame/preview?pageId=${currentPageId}`)
+              }
+            }}
+            className={`${!currentPageId ? 'is-disabled' : ''}`}>
+            <Tooltip title='预览(ctrl+p)' placement='bottom'>
+              <span className='app-icon'>&#xe78f;</span>
               <p>预览</p>
             </Tooltip>
           </li>
         </ul>
       </div>
-      <ul className="app-screen-disign__header--right">
-        <li onClick={() => history.goBack()}><CloseOutlined /></li>
+      <ul className='app-screen-disign__header--right'>
+        <li onClick={() => history.goBack()}>
+          <CloseOutlined />
+        </li>
       </ul>
     </div>
   )

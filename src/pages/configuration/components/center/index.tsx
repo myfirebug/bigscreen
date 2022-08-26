@@ -149,7 +149,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         {item.coordinateValue.left},{item.coordinateValue.top}
                       </div>
                     </div>
-                    {console.log(groupConfig, 'item')}
                     <Request
                       isPlaceholder={true}
                       method={
@@ -166,11 +165,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       }
                       params={JSON.stringify(item.dataValue.params || {})}
                       render={(data, success) => {
-                        console.log(
-                          success,
-                          item.code,
-                          'groupConfig.dataValue.mock'
-                        )
                         // 确定数据
                         let datas: any = null
                         if (
@@ -187,7 +181,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                               ? data
                               : null
                         }
-                        console.log(datas, item.code)
                         return (
                           <Widget
                             className={`${item.configureValue.animateName}`}

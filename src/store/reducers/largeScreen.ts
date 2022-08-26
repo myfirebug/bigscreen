@@ -383,8 +383,6 @@ export const largeScreen = (
             }
           }
 
-          console.log(copyElement, 'copyElement')
-
           currentPage.widgets.splice(index + 1, 0, copyElement)
           copy.currentWidgetId = copyElementId
           copy.currentWidget = {

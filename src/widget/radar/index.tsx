@@ -20,8 +20,6 @@ const Radar: FC<IRadarProps> = ({ options, data, field }) => {
 		const currentData = data && data[field] ? data[field] : [];
 		const { legendData, xAxisData, yAxisData, series } =
 			handleData(currentData);
-
-		console.log(series, 'seriesseries')
 		return {
 			...configuration,
 			legend: {

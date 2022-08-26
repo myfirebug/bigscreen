@@ -20,7 +20,6 @@ const Funnel: FC<IFunnelProps> = ({ options, data, field }) => {
     const currentData = data && data[field] ? data[field] : []
     const { legendData, xAxisData, yAxisData, series } = handleData(currentData)
 
-    console.log(configuration, currentData)
     return {
       ...configuration,
       legend: {

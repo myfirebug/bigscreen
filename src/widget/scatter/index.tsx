@@ -8,19 +8,17 @@ import { handleEchartsOption, handleData } from '@src/utils/echarts'
 import { getStyles } from '@utils/tools'
 
 interface IScatterProps extends IEchartConfig {
-  options: any;
-  data: any;
-  field: string;
+  options: any
+  data: any
+  field: string
 }
 
 const Scatter: FC<IScatterProps> = ({ options, data, field }) => {
   // 处理echarts数据
   const getOption = useMemo(() => {
-    const configuration = handleEchartsOption(options);
-    const currentData = data && data[field] ? data[field] : [];
-    const { legendData, xAxisData, yAxisData, series } =
-      handleData(currentData);
-    console.log(configuration, 'configuration')
+    const configuration = handleEchartsOption(options)
+    const currentData = data && data[field] ? data[field] : []
+    const { legendData, xAxisData, yAxisData, series } = handleData(currentData)
     return {
       ...configuration,
       legend: {
@@ -37,16 +35,14 @@ const Scatter: FC<IScatterProps> = ({ options, data, field }) => {
       },
       series: series
         ? series.map((item) => ({
-          ...configuration.scatter.series,
-          ...item
-        }))
+            ...configuration.scatter.series,
+            ...item
+          }))
         : []
-    };
-  }, [data, field, options]);
+    }
+  }, [data, field, options])
 
-  return (
-    <CustomEcharts style={getStyles(options)} options={getOption} />
-  )
+  return <CustomEcharts style={getStyles(options)} options={getOption} />
 }
 
 export default Scatter

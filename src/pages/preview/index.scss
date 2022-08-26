@@ -1,0 +1,8 @@
+@include b(preview) {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  @include e(container) {
+    position: 'absolute';
+  }
+}

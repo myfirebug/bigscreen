@@ -22,7 +22,6 @@ const DigitalScroll: FC<IDigitalScrollProps> = ({
   field = 'value',
   options
 }) => {
-  console.log(options, 'options')
   const [arr, setArr] = useState<any[]>([0])
   useEffect(() => {
     if (data && data[field] && !isNaN(data[field])) {

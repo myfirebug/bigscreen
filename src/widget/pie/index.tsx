@@ -20,7 +20,6 @@ const Pie: FC<IPieProps> = ({ options, data, field }) => {
     const currentData = data && data[field] ? data[field] : [];
     const { legendData, xAxisData, yAxisData, series } =
       handleData(currentData);
-    console.log(currentData, series, 'series')
     return {
       ...configuration,
       legend: {

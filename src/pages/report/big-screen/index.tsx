@@ -200,7 +200,6 @@ const BigScreen: FC<IBigScreenProps> = ({
           labelWidth: 'auto'
         }}
         request={async (params = {}, sort, filter) => {
-          console.log(params, sort, filter)
           return Promise.resolve({
             data: [{
               id: 1,
