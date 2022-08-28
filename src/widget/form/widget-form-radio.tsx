@@ -1,0 +1,43 @@
+/*
+ * @Description: 页面描述
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2022-08-28 14:00:20
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2022-08-28 14:07:16
+ * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
+ * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
+ */
+import { FC } from 'react'
+import { IAnyObject } from '@src/types'
+import { getStyles } from '@utils/tools'
+import { Radio } from 'antd'
+
+interface IWidgetFormRadioProps {
+  // 数据，模拟跟真实数据都走这里
+  data: IAnyObject
+  // 字段名
+  field: string
+  options: any
+}
+
+const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
+  data = {},
+  field = 'value',
+  options
+}) => {
+  return (
+    <div
+      style={getStyles(options)}
+      className='app-element app-element__basetext animated'>
+      <Radio.Group
+        options={data && data[field] ? data[field] : '文本框'}
+        onChange={(e) => {
+          console.log(e)
+        }}
+        value={field || 'name'}
+      />
+    </div>
+  )
+}
+
+export default WidgetFormRadio
