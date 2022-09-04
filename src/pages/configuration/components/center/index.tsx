@@ -157,7 +157,9 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       url={
                         item.dataValue.useInterface
                           ? ''
-                          : groupConfig && groupConfig.dataValue.useInterface
+                          : groupConfig &&
+                            groupConfig.dataValue &&
+                            groupConfig.dataValue.useInterface
                           ? groupConfig.success
                             ? item.dataValue.url
                             : ''

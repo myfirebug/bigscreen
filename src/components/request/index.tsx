@@ -1,3 +1,12 @@
+/*
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2022-09-04 16:50:14
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2022-09-04 21:39:08
+ * @FilePath: \bigscreen\src\components\request\index.tsx
+ * @Description: 页面描述
+ * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
+ */
 import { useEffect, memo, FC, useState } from 'react'
 import Wrapper from '@src/components/wrapper'
 import { useRequest } from 'ahooks'
@@ -24,6 +33,53 @@ interface IRequestProps {
   render: (data: any, success: boolean) => any
 }
 
+// const Request: FC<IRequestProps> = ({
+//   method,
+//   url,
+//   params,
+//   isPlaceholder,
+//   render
+// }) => {
+//   // 获取数据
+//   const [data, setData] = useState<any>(null)
+//   const [loading, setLoading] = useState(false)
+//   const [error, setError] = useState(false)
+//   const [success, setSuccess] = useState(false)
+
+//   useEffect(() => {
+//     if (url) {
+//       setError(false)
+//       setLoading(true)
+//       axios({
+//         url: url,
+//         method: method,
+//         params: JSON.parse(params)
+//       })
+//         .then((res: any) => {
+//           setLoading(false)
+//           setSuccess(true)
+//           setData(res.data.data || res.data)
+//         })
+//         .catch((res) => {
+//           setLoading(false)
+//           setSuccess(false)
+//           setError(false)
+//         })
+//     }
+//   }, [url, params])
+//   return (
+//     <>
+//       {isPlaceholder ? (
+//         <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
+//           {render(data, success)}
+//         </Wrapper>
+//       ) : (
+//         render(data, success)
+//       )}
+//     </>
+//   )
+// }
+
 const Request: FC<IRequestProps> = ({
   method,
   url,
@@ -32,95 +88,39 @@ const Request: FC<IRequestProps> = ({
   render
 }) => {
   // 获取数据
-  const [data, setData] = useState<any>(null)
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  useEffect(() => {
-    if (url) {
-      setError(false)
-      setLoading(true)
-      axios({
-        url: url,
-        method: method,
-        params: JSON.parse(params)
-      })
-        .then((res: any) => {
-          setLoading(false)
-          setSuccess(true)
-          setData(res.data.data || res.data)
-        })
-        .catch((res) => {
-          setLoading(false)
-          setSuccess(false)
-          setError(false)
-        })
+  const { data, loading, error } = useRequest(
+    async () => {
+      return await new Promise(
+        (resolve: (data: IResult) => void, reject: (data: any) => void) => {
+          axios({
+            url: url,
+            method: method,
+            params: JSON.parse(params)
+          })
+            .then((res: any) => {
+              resolve(res.data.data || res.data)
+            })
+            .catch((res) => {
+              reject(res)
+            })
+        }
+      )
+    },
+    {
+      refreshDeps: [params],
+      ready: Boolean(url)
     }
-  }, [url, params])
+  )
   return (
     <>
       {isPlaceholder ? (
         <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
-          {render(data, success)}
+          {render(url ? data : null, url ? Boolean(data) : true)}
         </Wrapper>
       ) : (
-        render(data, success)
+        render(url ? data : null, url ? Boolean(data) : true)
       )}
     </>
   )
 }
-
-// const Request = memo((props: IRequestProps) => {
-//   const {
-//     method,
-//     url,
-//     params,
-//     isPlaceholder,
-//     render
-//   } = props
-//   // 获取数据
-//   const { data, loading, error, run } = useRequest(async () => {
-//     const { data } = await new Promise((resolve: (data: IResult) => void, reject: (data: any) => void) => {
-//       axios({
-//         url: url,
-//         method: method,
-//         params: JSON.parse(params)
-//       })
-//         .then((res: any) => {
-//           resolve(res.data.data || res.data)
-//         })
-//         .catch(res => {
-//           reject(res)
-//         })
-//     })
-//     return data
-//   }, {
-//     manual: true,
-//     refreshDeps: [params]
-//   })
-
-//   useEffect(() => {
-//     if (url) {
-//       run()
-//     }
-//   }, [run, url, params])
-//   return (
-//     <>
-//       {
-//         isPlaceholder ?
-//           <Wrapper
-//             loading={loading}
-//             error={Boolean(error)}
-//             nodata={false}
-//           >
-//             {
-//               data && render(data)
-//             }
-//           </Wrapper>
-//           : data && render(data)
-//       }
-//     </>
-//   )
-// })
 export default Request
