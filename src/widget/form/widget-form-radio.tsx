@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-28 14:00:20
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-04 18:24:47
+ * @LastEditTime: 2022-09-05 09:52:27
  * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -22,7 +22,7 @@ interface IWidgetFormRadioProps {
 
 const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
   data = {},
-  field = 'value',
+  field = 'radio',
   options
 }) => {
   return (
@@ -34,7 +34,7 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
         onChange={(e) => {
           console.log(e)
         }}
-        value={field || 'name'}
+        value={field || 'radio'}
       />
     </div>
   )

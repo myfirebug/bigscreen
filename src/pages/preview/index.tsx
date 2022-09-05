@@ -3,13 +3,14 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-04 21:07:42
+ * @LastEditTime: 2022-09-05 14:20:42
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
 import { FC, useRef, useState, useEffect } from 'react'
 import { ALL_STATE, IPage, IScreen, IWidget } from '@store/actionType'
 import { connect } from 'react-redux'
+import { Button } from 'antd'
 // 所有组件地址
 import components from '@src/widget'
 // 接口
@@ -78,24 +79,36 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(item.dataValue.params || {})}
-                    render={(data, success) => {
+                    render={(data, success, setP) => {
                       return (
-                        <Widget
-                          options={{
-                            ...item.configureValue,
-                            ...item.coordinateValue
-                          }}>
-                          {renderWidgets(item.widgets, {
-                            ...item,
-                            dataValue: {
-                              ...item.dataValue,
-                              mock: item.dataValue.useInterface
-                                ? data
-                                : item.dataValue.mock
-                            },
-                            success
-                          })}
-                        </Widget>
+                        <>
+                          <Button
+                            onClick={() =>
+                              setP &&
+                              setP((state: any) => ({
+                                ...state,
+                                a: new Date().getTime()
+                              }))
+                            }>
+                            chongxinjiazai
+                          </Button>
+                          <Widget
+                            options={{
+                              ...item.configureValue,
+                              ...item.coordinateValue
+                            }}>
+                            {renderWidgets(item.widgets, {
+                              ...item,
+                              dataValue: {
+                                ...item.dataValue,
+                                mock: item.dataValue.useInterface
+                                  ? data
+                                  : item.dataValue.mock
+                              },
+                              success
+                            })}
+                          </Widget>
+                        </>
                       )
                     }}></Request>
                 </div>
@@ -130,7 +143,12 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                           : ''
                         : item.dataValue.url
                     }
-                    params={JSON.stringify(item.dataValue.params || {})}
+                    params={JSON.stringify(
+                      {
+                        ...item.dataValue.params,
+                        ...groupConfig.dataValue.params
+                      } || {}
+                    )}
                     render={(data, success) => {
                       // 确定数据
                       let datas: any = null

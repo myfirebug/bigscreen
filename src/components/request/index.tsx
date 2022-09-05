@@ -2,12 +2,12 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-04 21:39:08
+ * @LastEditTime: 2022-09-05 16:29:17
  * @FilePath: \bigscreen\src\components\request\index.tsx
  * @Description: 页面描述
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
-import { useEffect, memo, FC, useState } from 'react'
+import React, { useEffect, memo, FC, useState } from 'react'
 import Wrapper from '@src/components/wrapper'
 import { useRequest } from 'ahooks'
 import axios from 'axios'
@@ -30,7 +30,7 @@ interface IRequestProps {
   url: string
   // 接口参数
   params: string
-  render: (data: any, success: boolean) => any
+  render: (data: any, success: boolean, setP?: React.Dispatch<any>) => any
 }
 
 // const Request: FC<IRequestProps> = ({
@@ -87,6 +87,9 @@ const Request: FC<IRequestProps> = ({
   isPlaceholder,
   render
 }) => {
+  console.log('request', url)
+  const [p, setP] = useState<any>({})
+
   // 获取数据
   const { data, loading, error } = useRequest(
     async () => {
@@ -95,7 +98,7 @@ const Request: FC<IRequestProps> = ({
           axios({
             url: url,
             method: method,
-            params: JSON.parse(params)
+            params: { ...JSON.parse(params), ...p }
           })
             .then((res: any) => {
               resolve(res.data.data || res.data)
@@ -107,18 +110,19 @@ const Request: FC<IRequestProps> = ({
       )
     },
     {
-      refreshDeps: [params],
+      refreshDeps: [JSON.stringify(p), params, url],
       ready: Boolean(url)
     }
   )
+
   return (
     <>
       {isPlaceholder ? (
         <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
-          {render(url ? data : null, url ? Boolean(data) : true)}
+          {render(url ? data : null, url ? Boolean(data) : true, setP)}
         </Wrapper>
       ) : (
-        render(url ? data : null, url ? Boolean(data) : true)
+        render(url ? data : null, url ? Boolean(data) : true, setP)
       )}
     </>
   )

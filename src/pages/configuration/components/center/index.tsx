@@ -1,4 +1,5 @@
 import { FC } from 'react'
+import { Button } from 'antd'
 import { IPage, IWidget } from '@store/actionType'
 // 所有组件地址
 import components from '@src/widget'
@@ -75,29 +76,32 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       method={item.dataValue.method}
                       url={item.dataValue.url}
                       params={JSON.stringify(item.dataValue.params || {})}
-                      render={(data, success) => {
+                      render={(data, success, setP) => {
                         return (
-                          <Widget
-                            options={{
-                              ...item.configureValue,
-                              ...item.coordinateValue
-                            }}
-                            className={
-                              item.id === currentWidgetGroupId
-                                ? 'is-active'
-                                : ''
-                            }>
-                            {renderWidgets(item.widgets, {
-                              ...item,
-                              dataValue: {
-                                ...item.dataValue,
-                                mock: item.dataValue.useInterface
-                                  ? data
-                                  : item.dataValue.mock
-                              },
-                              success
-                            })}
-                          </Widget>
+                          <>
+                            <Widget
+                              options={{
+                                ...item.configureValue,
+                                ...item.coordinateValue
+                              }}
+                              className={
+                                item.id === currentWidgetGroupId
+                                  ? 'is-active'
+                                  : ''
+                              }>
+                              {renderWidgets(item.widgets, {
+                                ...item,
+                                dataValue: {
+                                  ...item.dataValue,
+                                  mock: item.dataValue.useInterface
+                                    ? data
+                                    : item.dataValue.mock
+                                },
+                                success,
+                                setParams: setP
+                              })}
+                            </Widget>
+                          </>
                         )
                       }}></Request>
                   </div>
@@ -165,8 +169,14 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                             : ''
                           : item.dataValue.url
                       }
-                      params={JSON.stringify(item.dataValue.params || {})}
+                      params={JSON.stringify(
+                        {
+                          ...item.dataValue.params,
+                          ...groupConfig.dataValue.params
+                        } || {}
+                      )}
                       render={(data, success) => {
+                        console.log(groupConfig, 'groupConfig')
                         // 确定数据
                         let datas: any = null
                         if (
