@@ -3,14 +3,14 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 18:10:20
+ * @LastEditTime: 2022-09-06 20:50:22
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
 import { FC, useRef, useState, useEffect } from 'react'
 import { ALL_STATE, IPage, IScreen, IWidget } from '@store/actionType'
 import { connect } from 'react-redux'
-import { Button } from 'antd'
+import { modifyLargeScreenElement } from '@store/actions/largeScreen'
 // 所有组件地址
 import components from '@src/widget'
 // 接口
@@ -20,6 +20,7 @@ import './index.scss'
 interface IPreviewProps {
   currentPage: IPage
   screen: IScreen
+  modifyLargeScreenElement: (id: string, data: IWidget) => void
 }
 
 const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
@@ -79,7 +80,7 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(item.dataValue.params || {})}
-                    render={(data, success) => {
+                    render={(data, success, setParentParams) => {
                       return (
                         <>
                           <Widget
@@ -96,7 +97,8 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                                   : item.dataValue.mock
                               },
                               success,
-                              parentParams: item.dataValue.params
+                              parentParams: item.dataValue.params,
+                              setParentParams: setParentParams
                             })}
                           </Widget>
                         </>
@@ -163,7 +165,9 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                       }
                       return (
                         <Widget
-                          value={
+                          setParmas={groupConfig.setParentParams}
+                          paramName={item.dataValue.paramName}
+                          paramValue={
                             groupConfig &&
                             groupConfig.parentParams &&
                             item.dataValue.paramName
@@ -198,7 +202,7 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
         style={{
           width: screen.width,
           height: screen.height,
-          transform: `scale(${1})`,
+          transform: `scale(${cale})`,
           transformOrigin: '0 0',
           background: `url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%`
         }}>
@@ -219,6 +223,8 @@ const mapStateToProps = (state: ALL_STATE) => {
 }
 
 // 将 对应action 插入到组件的 props 中
-const mapDispatchToProps = {}
+const mapDispatchToProps = {
+  modifyLargeScreenElement
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Preview)

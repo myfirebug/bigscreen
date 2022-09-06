@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-28 14:00:20
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 19:50:27
+ * @LastEditTime: 2022-09-06 20:47:44
  * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
-import { FC } from 'react'
+import React, { FC, useState } from 'react'
 import { IAnyObject } from '@src/types'
 import { getStyles } from '@utils/tools'
 import { Radio } from 'antd'
@@ -18,15 +18,27 @@ interface IWidgetFormRadioProps {
   // 字段名
   field: string
   options: any
-  value: any
+  paramValue: any
+  paramName: any
+  setParmas: React.Dispatch<any>
 }
 
 const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
   data = {},
   field = 'radio',
   options,
-  value
+  paramValue,
+  paramName,
+  setParmas
 }) => {
+  const [value, setValue] = useState('')
+  const changeHandler = (val: any) => {
+    setValue(val)
+    setParmas((state: any) => ({
+      ...state,
+      [paramName]: val
+    }))
+  }
   return (
     <div
       style={getStyles(options)}
@@ -59,10 +71,8 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
         optionType='button'
         options={data && data[field] ? data[field] : []}
         size={options.radioSize}
-        onChange={(e) => {
-          console.log(e)
-        }}
-        value={value}
+        onChange={(e) => changeHandler(e.target.value)}
+        value={value || paramValue}
       />
     </div>
   )

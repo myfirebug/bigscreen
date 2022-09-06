@@ -76,7 +76,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       method={item.dataValue.method}
                       url={item.dataValue.url}
                       params={JSON.stringify(item.dataValue.params || {})}
-                      render={(data, success) => {
+                      render={(data, success, setParentParams) => {
                         return (
                           <>
                             <Widget
@@ -98,7 +98,8 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                                     : item.dataValue.mock
                                 },
                                 success,
-                                parentParams: item.dataValue.params
+                                parentParams: item.dataValue.params,
+                                setParentParams: setParentParams
                               })}
                             </Widget>
                           </>
@@ -194,13 +195,11 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                               ? data
                               : null
                         }
-                        console.log(
-                          groupConfig.parentParams,
-                          item.dataValue.paramName
-                        )
+
                         return (
                           <Widget
-                            value={
+                            paramName={item.dataValue.paramName}
+                            paramValue={
                               groupConfig &&
                               groupConfig.parentParams &&
                               item.dataValue.paramName
