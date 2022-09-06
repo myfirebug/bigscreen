@@ -171,6 +171,18 @@ export const componentsClassify: any[] = [
         name: '基础散点图'
       }
     ]
+  },
+  {
+    type: 'form',
+    icon: '&#xe7b1;',
+    name: '表单',
+    datas: [
+      {
+        src: require('../assets/image/configuration/scatter/widgetBaseScatter.png'),
+        widgetName: 'widgetFormRadio',
+        name: '单选'
+      }
+    ]
   }
 ]
 

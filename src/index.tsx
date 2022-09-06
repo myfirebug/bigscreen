@@ -1,3 +1,12 @@
+/*
+ * @Description: 页面描述
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2022-09-04 16:50:14
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2022-09-06 18:08:20
+ * @FilePath: \bigscreen\src\index.tsx
+ * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
+ */
 import ReactDOM from 'react-dom'
 import { ConfigProvider } from 'antd'
 import moment from 'moment'
@@ -7,6 +16,7 @@ import { PersistGate } from 'redux-persist/integration/react'
 import { Provider } from 'react-redux'
 import store from './store/index'
 import '@ant-design/pro-table/dist/table.css'
+// import 'default-passive-events'
 // 国际化
 import zhCN from 'antd/lib/locale/zh_CN'
 import 'moment/locale/zh-cn'
@@ -22,4 +32,6 @@ ReactDOM.render(
         <App />
       </ConfigProvider>
     </PersistGate>
-  </Provider>, document.getElementById('root'))
+  </Provider>,
+  document.getElementById('root')
+)

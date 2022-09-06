@@ -1,9 +1,4 @@
-import React, {
-  FC,
-  useEffect,
-  useState,
-  useRef
-} from 'react'
+import React, { FC, useEffect, useState, useRef } from 'react'
 import { ALL_STATE, IPage, IScreen, IWidget } from '@store/actionType'
 import { connect } from 'react-redux'
 import { Slider } from 'antd'
@@ -26,7 +21,6 @@ import {
   cancelGroup
 } from '@store/actions/largeScreen'
 
-
 // 头部
 import DesignHeader from './components/header'
 // 主题左边
@@ -41,29 +35,29 @@ import DesignBodyCenter from './components/center'
 import './index.scss'
 
 interface IDisignProps {
-  modifyScreen: (datas: any) => void;
-  screen: IScreen;
-  pages: IPage[];
-  addLargeScreenPage: (data: IPage, callback?: Function) => void;
-  delLargeScreenPage: (id: string, callback?: Function) => void;
-  modifyLargeScreenPage: (id: string, data: IPage, callback?: Function) => void;
-  changeLargeScreenPage: (id: string, callback?: Function) => void;
-  addLargeScreenElement: (data: any) => void;
-  modifyLargeScreenElement: (id: string, data: IWidget) => void;
-  changeLargeScreenElement: (id: string, groupId?: string) => void;
-  showOrHideLargeScreenElement: (id: string, groupId?: string) => void;
-  delLargeScreenElement: () => void;
-  copyLargeScreenElement: () => void;
-  group: () => void;
-  cancelGroup: () => void;
-  currentPage: IPage;
-  currentWidgetId: string;
-  currentWidget: IWidget;
-  pastPage: IPage[];
-  futurePage: IPage[];
-  undoLargeScreen: () => void;
-  redoLargeScreen: () => void;
-  currentWidgetGroupId: string;
+  modifyScreen: (datas: any) => void
+  screen: IScreen
+  pages: IPage[]
+  addLargeScreenPage: (data: IPage, callback?: Function) => void
+  delLargeScreenPage: (id: string, callback?: Function) => void
+  modifyLargeScreenPage: (id: string, data: IPage, callback?: Function) => void
+  changeLargeScreenPage: (id: string, callback?: Function) => void
+  addLargeScreenElement: (data: any) => void
+  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  changeLargeScreenElement: (id: string, groupId?: string) => void
+  showOrHideLargeScreenElement: (id: string, groupId?: string) => void
+  delLargeScreenElement: () => void
+  copyLargeScreenElement: () => void
+  group: () => void
+  cancelGroup: () => void
+  currentPage: IPage
+  currentWidgetId: string
+  currentWidget: IWidget
+  pastPage: IPage[]
+  futurePage: IPage[]
+  undoLargeScreen: () => void
+  redoLargeScreen: () => void
+  currentWidgetGroupId: string
 }
 
 const Disign: FC<IDisignProps> = ({
@@ -91,7 +85,6 @@ const Disign: FC<IDisignProps> = ({
   cancelGroup,
   showOrHideLargeScreenElement
 }) => {
-
   // 获取装组件的盒子，这里需要获取他的宽度
   const elementsWrapper = useRef<HTMLDivElement>(null)
   const [elementsWrapperAttr, setElementsWrapperAttr] = useState<any>({})
@@ -105,7 +98,9 @@ const Disign: FC<IDisignProps> = ({
   // 这里主要设置默认的缩放比例
   useEffect(() => {
     if (elementsWrapperAttr.width && screen.width) {
-      setCale(Number((elementsWrapperAttr.width / Number(screen.width)).toFixed(4)))
+      setCale(
+        Number((elementsWrapperAttr.width / Number(screen.width)).toFixed(4))
+      )
     }
   }, [screen.width, elementsWrapperAttr.width])
 
@@ -149,7 +144,8 @@ const Disign: FC<IDisignProps> = ({
         currentWidgetGroupId={currentWidgetGroupId}
         group={group}
         cancelGroup={cancelGroup}
-        currentWidget={currentWidget} />
+        currentWidget={currentWidget}
+      />
       {/* 内容区 */}
       <div className='app-screen-disign__body'>
         {/* 左边 */}
@@ -169,15 +165,12 @@ const Disign: FC<IDisignProps> = ({
             paddingRight: rightFlag && pages.length ? 400 : 0
           }}
           className='app-screen-disign__body--center'>
-          <div
-            className="body"
-            ref={elementsWrapper}>
-            <div
-              className='elements-wrap'>
+          <div className='body' ref={elementsWrapper}>
+            <div className='elements-wrap'>
               <Ruler />
               <div
                 onClick={cancelSelectedElementHander}
-                className="elements-wrap-canvas"
+                className='elements-wrap-canvas'
                 style={{
                   position: 'absolute',
                   zIndex: 1,
@@ -197,11 +190,12 @@ const Disign: FC<IDisignProps> = ({
                   currentWidgetGroupId={currentWidgetGroupId}
                   changeLargeScreenElement={changeLargeScreenElement}
                   currentWidget={currentWidget}
-                  modifyLargeScreenElement={modifyLargeScreenElement} />
+                  modifyLargeScreenElement={modifyLargeScreenElement}
+                />
               </div>
             </div>
           </div>
-          <div className="footer">
+          <div className='footer'>
             <span>缩放比例：</span>
             <Slider
               style={{
@@ -211,25 +205,26 @@ const Disign: FC<IDisignProps> = ({
               max={100}
               tipFormatter={(value) => `${value}%`}
               onChange={(value) => setCale(value / 100)}
-              value={cale * 100} />
+              value={cale * 100}
+            />
           </div>
         </div>
         {/* 右边 */}
-        {
-          pages.length ?
-            <DesignBodyRight
-              rightFlag={rightFlag}
-              setRightFlag={setRightFlag}
-              screen={screen}
-              currentPage={currentPage}
-              modifyLargeScreenElement={modifyLargeScreenElement}
-              modifyScreen={modifyScreen}
-              currentWidget={currentWidget}
-              showOrHideLargeScreenElement={showOrHideLargeScreenElement}
-              changeLargeScreenElement={changeLargeScreenElement}
-              currentWidgetGroupId={currentWidgetGroupId}
-              currentWidgetId={currentWidgetId} /> : null
-        }
+        {pages.length ? (
+          <DesignBodyRight
+            rightFlag={rightFlag}
+            setRightFlag={setRightFlag}
+            screen={screen}
+            currentPage={currentPage}
+            modifyLargeScreenElement={modifyLargeScreenElement}
+            modifyScreen={modifyScreen}
+            currentWidget={currentWidget}
+            showOrHideLargeScreenElement={showOrHideLargeScreenElement}
+            changeLargeScreenElement={changeLargeScreenElement}
+            currentWidgetGroupId={currentWidgetGroupId}
+            currentWidgetId={currentWidgetId}
+          />
+        ) : null}
       </div>
     </div>
   )
@@ -247,7 +242,7 @@ const mapStateToProps = (state: ALL_STATE) => {
     currentWidget: state.largeScreen.currentWidget,
     currentWidgetGroupId: state.largeScreen.currentWidgetGroupId
   }
-};
+}
 
 // 将 对应action 插入到组件的 props 中
 const mapDispatchToProps = {
@@ -267,10 +262,6 @@ const mapDispatchToProps = {
   group,
   cancelGroup,
   showOrHideLargeScreenElement
-};
+}
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(Disign)
+export default connect(mapStateToProps, mapDispatchToProps)(Disign)

@@ -234,7 +234,12 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
                   <div
                     onClick={() => {
                       if (subItem.widgetName) {
-                        addElement(subItem.widgetName)
+                        if (
+                          (item.type === 'form' && currentWidgetGroupId) ||
+                          item.type !== 'form'
+                        ) {
+                          addElement(subItem.widgetName)
+                        }
                       }
                     }}
                     key={subIndex}>

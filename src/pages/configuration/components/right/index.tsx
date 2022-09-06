@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useEffect, useState } from 'react'
+import React, { FC, MouseEvent, useEffect, useMemo, useState } from 'react'
 import './index.scss'
 import {
   Tabs,
@@ -520,13 +520,34 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     })
   }
 
-  // useEffect(() => {
-  //   if (currentWidgetId && !currentWidgetId.includes(',')) {
-  //     setKey('2')
-  //   } else {
-  //     setKey('1')
-  //   }
-  // }, [currentWidgetId])
+  // 获取接口字段数据
+  const getParamsData: any[] = useMemo(() => {
+    let result: any[] = []
+    if (currentWidgetGroupId) {
+      const index = currentPage.widgets.findIndex(
+        (item) => item.id === currentWidgetGroupId
+      )
+      if (
+        index !== -1 &&
+        currentPage.widgets[index].dataValue &&
+        currentPage.widgets[index].dataValue.params
+      ) {
+        for (let field in currentPage.widgets[index].dataValue.params) {
+          result.push(field)
+        }
+      }
+    }
+    console.log(result)
+    return result
+  }, [currentWidgetGroupId, currentPage])
+
+  useEffect(() => {
+    if (currentWidgetId) {
+      setKey('2')
+    } else {
+      setKey('1')
+    }
+  }, [currentWidgetId])
 
   return (
     <div
@@ -542,7 +563,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         activeKey={key}
         onChange={(key) => setKey(key)}
         destroyInactiveTabPane>
-        <TabPane tab='图层管理' key='5'>
+        <TabPane tab='图层管理' key='5' style={{ position: 'relative' }}>
           <Wrapper
             loading={false}
             error={false}
@@ -634,7 +655,18 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                         false
                       )
                     : null}
-
+                  {currentWidget.type === 'form' ? (
+                    <Form.Item
+                      label='接口字段'
+                      name='paramName'
+                      tooltip='从组组件的参数中选择'>
+                      <Select placeholder='请选择'>
+                        {getParamsData.map((item) => (
+                          <Option key={item}>{item}</Option>
+                        ))}
+                      </Select>
+                    </Form.Item>
+                  ) : null}
                   <Form.Item wrapperCol={{ offset: 6, span: 18 }}>
                     <Button type='primary' htmlType='submit' block>
                       保存

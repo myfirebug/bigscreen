@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-05 14:20:42
+ * @LastEditTime: 2022-09-06 18:10:20
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -79,19 +79,9 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(item.dataValue.params || {})}
-                    render={(data, success, setP) => {
+                    render={(data, success) => {
                       return (
                         <>
-                          <Button
-                            onClick={() =>
-                              setP &&
-                              setP((state: any) => ({
-                                ...state,
-                                a: new Date().getTime()
-                              }))
-                            }>
-                            chongxinjiazai
-                          </Button>
                           <Widget
                             options={{
                               ...item.configureValue,
@@ -105,7 +95,8 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                                   ? data
                                   : item.dataValue.mock
                               },
-                              success
+                              success,
+                              parentParams: item.dataValue.params
                             })}
                           </Widget>
                         </>
@@ -144,10 +135,14 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                         : item.dataValue.url
                     }
                     params={JSON.stringify(
-                      {
-                        ...item.dataValue.params,
-                        ...groupConfig.dataValue.params
-                      } || {}
+                      Object.assign(
+                        { ...item.dataValue.params },
+                        groupConfig &&
+                          groupConfig.dataValue &&
+                          groupConfig.dataValue.params
+                          ? groupConfig.dataValue.params
+                          : {}
+                      ) || {}
                     )}
                     render={(data, success) => {
                       // 确定数据
@@ -168,6 +163,15 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                       }
                       return (
                         <Widget
+                          value={
+                            groupConfig &&
+                            groupConfig.parentParams &&
+                            item.dataValue.paramName
+                              ? groupConfig.parentParams[
+                                  item.dataValue.paramName
+                                ]
+                              : ''
+                          }
                           className={`${item.configureValue.animateName}`}
                           field={item.dataValue.field}
                           data={datas}
@@ -194,7 +198,7 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
         style={{
           width: screen.width,
           height: screen.height,
-          transform: `scale(${cale})`,
+          transform: `scale(${1})`,
           transformOrigin: '0 0',
           background: `url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%`
         }}>

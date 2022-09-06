@@ -2,7 +2,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-05 16:29:17
+ * @LastEditTime: 2022-09-05 19:58:29
  * @FilePath: \bigscreen\src\components\request\index.tsx
  * @Description: 页面描述
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
@@ -87,7 +87,6 @@ const Request: FC<IRequestProps> = ({
   isPlaceholder,
   render
 }) => {
-  console.log('request', url)
   const [p, setP] = useState<any>({})
 
   // 获取数据
@@ -119,10 +118,10 @@ const Request: FC<IRequestProps> = ({
     <>
       {isPlaceholder ? (
         <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
-          {render(url ? data : null, url ? Boolean(data) : true, setP)}
+          {render(url ? data : null, url ? !error : true, setP)}
         </Wrapper>
       ) : (
-        render(url ? data : null, url ? Boolean(data) : true, setP)
+        render(url ? data : null, url ? !error : true, setP)
       )}
     </>
   )

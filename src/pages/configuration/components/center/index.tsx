@@ -76,7 +76,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       method={item.dataValue.method}
                       url={item.dataValue.url}
                       params={JSON.stringify(item.dataValue.params || {})}
-                      render={(data, success, setP) => {
+                      render={(data, success) => {
                         return (
                           <>
                             <Widget
@@ -98,7 +98,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                                     : item.dataValue.mock
                                 },
                                 success,
-                                setParams: setP
+                                parentParams: item.dataValue.params
                               })}
                             </Widget>
                           </>
@@ -170,13 +170,14 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                           : item.dataValue.url
                       }
                       params={JSON.stringify(
-                        {
-                          ...item.dataValue.params,
-                          ...groupConfig.dataValue.params
-                        } || {}
+                        Object.assign(
+                          { ...item.dataValue.params },
+                          groupConfig && groupConfig.parentParams
+                            ? groupConfig.parentParams
+                            : {}
+                        ) || {}
                       )}
                       render={(data, success) => {
-                        console.log(groupConfig, 'groupConfig')
                         // 确定数据
                         let datas: any = null
                         if (
@@ -193,8 +194,21 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                               ? data
                               : null
                         }
+                        console.log(
+                          groupConfig.parentParams,
+                          item.dataValue.paramName
+                        )
                         return (
                           <Widget
+                            value={
+                              groupConfig &&
+                              groupConfig.parentParams &&
+                              item.dataValue.paramName
+                                ? groupConfig.parentParams[
+                                    item.dataValue.paramName
+                                  ]
+                                : ''
+                            }
                             className={`${item.configureValue.animateName}`}
                             field={item.dataValue.field}
                             data={datas}

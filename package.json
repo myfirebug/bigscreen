@@ -62,6 +62,7 @@
     "build-plugin-icestark": "^2.5.3",
     "cross-env": "^7.0.3",
     "customize-cra": "^1.0.0",
+    "default-passive-events": "^2.0.0",
     "echarts": "^5.3.2",
     "ice": "^3.7.71",
     "jsoneditor": "^9.9.0",

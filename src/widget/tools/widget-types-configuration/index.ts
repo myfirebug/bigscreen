@@ -5,37 +5,40 @@
  * @Last Modified time: 2022-08-17 11:11:09
  */
 // 组配置
-import group from './group';
+import group from './group'
 // text配置
-import text from './text/main';
+import text from './text/main'
 // image配置
-import image from './image';
+import image from './image'
 // line配置
-import line from './line';
+import line from './line'
 // bar配置
-import bar from './bar';
+import bar from './bar'
 // pie配置
-import pie from './pie';
+import pie from './pie'
 // radar配置
-import radar from './radar';
+import radar from './radar'
 // funnel配置
-import funnel from './funnel';
+import funnel from './funnel'
 // scatter配置
-import scatter from './scatter';
+import scatter from './scatter'
 // table配置
-import table from './table';
+import table from './table'
+// form配置
+import form from './form/main'
 
 const widgetTypesConfiguration: any = {
-	group,
-	...text,
-	image,
-	line,
-	bar,
-	pie,
-	radar,
-	funnel,
-	scatter,
-	table
-};
+  group,
+  ...text,
+  image,
+  line,
+  bar,
+  pie,
+  radar,
+  funnel,
+  scatter,
+  table,
+  ...form
+}
 
-export default widgetTypesConfiguration;
+export default widgetTypesConfiguration
