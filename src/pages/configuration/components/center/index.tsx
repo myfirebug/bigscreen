@@ -34,7 +34,11 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   currentWidgetGroupId
 }) => {
   // 渲染组件
-  const renderWidgets = (widgets: IWidget[], groupConfig?: any) => {
+  const renderWidgets = (
+    widgets: IWidget[],
+    groupConfig?: any,
+    group?: IWidget
+  ) => {
     return (
       <>
         {widgets.map((item: any, index: number) => {
@@ -76,7 +80,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       method={item.dataValue.method}
                       url={item.dataValue.url}
                       params={JSON.stringify(item.dataValue.params || {})}
-                      render={(data, success, setParentParams) => {
+                      render={(data, success) => {
                         return (
                           <>
                             <Widget
@@ -89,18 +93,21 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                                   ? 'is-active'
                                   : ''
                               }>
-                              {renderWidgets(item.widgets, {
-                                ...item,
-                                dataValue: {
-                                  ...item.dataValue,
-                                  mock: item.dataValue.useInterface
-                                    ? data
-                                    : item.dataValue.mock
+                              {renderWidgets(
+                                item.widgets,
+                                {
+                                  ...item,
+                                  dataValue: {
+                                    ...item.dataValue,
+                                    mock: item.dataValue.useInterface
+                                      ? data
+                                      : item.dataValue.mock
+                                  },
+                                  success,
+                                  parentParams: item.dataValue.params
                                 },
-                                success,
-                                parentParams: item.dataValue.params,
-                                setParentParams: setParentParams
-                              })}
+                                item
+                              )}
                             </Widget>
                           </>
                         )
@@ -179,6 +186,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         ) || {}
                       )}
                       render={(data, success) => {
+                        console.log(group, 'ddsfd')
                         // 确定数据
                         let datas: any = null
                         if (
@@ -198,6 +206,8 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
 
                         return (
                           <Widget
+                            modifyLargeScreenElement={modifyLargeScreenElement}
+                            parentWidget={group}
                             paramName={item.dataValue.paramName}
                             paramValue={
                               groupConfig &&

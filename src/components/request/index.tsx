@@ -2,7 +2,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-05 19:58:29
+ * @LastEditTime: 2022-09-06 22:19:11
  * @FilePath: \bigscreen\src\components\request\index.tsx
  * @Description: 页面描述
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
@@ -87,7 +87,8 @@ const Request: FC<IRequestProps> = ({
   isPlaceholder,
   render
 }) => {
-  const [p, setP] = useState<any>({})
+  // const [p, setP] = useState<any>({})
+  console.log(params, url, 'params, url')
 
   // 获取数据
   const { data, loading, error } = useRequest(
@@ -97,7 +98,7 @@ const Request: FC<IRequestProps> = ({
           axios({
             url: url,
             method: method,
-            params: { ...JSON.parse(params), ...p }
+            params: { ...JSON.parse(params) }
           })
             .then((res: any) => {
               resolve(res.data.data || res.data)
@@ -109,7 +110,7 @@ const Request: FC<IRequestProps> = ({
       )
     },
     {
-      refreshDeps: [JSON.stringify(p), params, url],
+      refreshDeps: [params, url],
       ready: Boolean(url)
     }
   )
@@ -118,10 +119,10 @@ const Request: FC<IRequestProps> = ({
     <>
       {isPlaceholder ? (
         <Wrapper loading={loading} error={Boolean(error)} nodata={false}>
-          {render(url ? data : null, url ? !error : true, setP)}
+          {render(url ? data : null, url ? !error : true)}
         </Wrapper>
       ) : (
-        render(url ? data : null, url ? !error : true, setP)
+        render(url ? data : null, url ? !error : true)
       )}
     </>
   )

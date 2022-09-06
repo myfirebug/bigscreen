@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 20:50:22
+ * @LastEditTime: 2022-09-06 22:22:12
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -23,7 +23,11 @@ interface IPreviewProps {
   modifyLargeScreenElement: (id: string, data: IWidget) => void
 }
 
-const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
+const Preview: FC<IPreviewProps> = ({
+  currentPage,
+  screen,
+  modifyLargeScreenElement
+}) => {
   const elementsWrapper = useRef<HTMLDivElement>(null)
   // 获取放大缩小比例
   const [cale, setCale] = useState(0)
@@ -56,7 +60,11 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
     }
   }, [elementsWrapper.current])
   // 渲染组件
-  const renderWidgets = (widgets: IWidget[], groupConfig?: any) => {
+  const renderWidgets = (
+    widgets: IWidget[],
+    groupConfig?: any,
+    group?: IWidget
+  ) => {
     return (
       <>
         {widgets.map((item: any, index: number) => {
@@ -80,7 +88,7 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(item.dataValue.params || {})}
-                    render={(data, success, setParentParams) => {
+                    render={(data, success) => {
                       return (
                         <>
                           <Widget
@@ -88,18 +96,21 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                               ...item.configureValue,
                               ...item.coordinateValue
                             }}>
-                            {renderWidgets(item.widgets, {
-                              ...item,
-                              dataValue: {
-                                ...item.dataValue,
-                                mock: item.dataValue.useInterface
-                                  ? data
-                                  : item.dataValue.mock
+                            {renderWidgets(
+                              item.widgets,
+                              {
+                                ...item,
+                                dataValue: {
+                                  ...item.dataValue,
+                                  mock: item.dataValue.useInterface
+                                    ? data
+                                    : item.dataValue.mock
+                                },
+                                success,
+                                parentParams: item.dataValue.params
                               },
-                              success,
-                              parentParams: item.dataValue.params,
-                              setParentParams: setParentParams
-                            })}
+                              item
+                            )}
                           </Widget>
                         </>
                       )
@@ -165,7 +176,8 @@ const Preview: FC<IPreviewProps> = ({ currentPage, screen }) => {
                       }
                       return (
                         <Widget
-                          setParmas={groupConfig.setParentParams}
+                          modifyLargeScreenElement={modifyLargeScreenElement}
+                          parentWidget={group}
                           paramName={item.dataValue.paramName}
                           paramValue={
                             groupConfig &&

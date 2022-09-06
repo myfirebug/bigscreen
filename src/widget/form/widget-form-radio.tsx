@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-28 14:00:20
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 20:47:44
+ * @LastEditTime: 2022-09-06 22:14:30
  * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -11,6 +11,7 @@ import React, { FC, useState } from 'react'
 import { IAnyObject } from '@src/types'
 import { getStyles } from '@utils/tools'
 import { Radio } from 'antd'
+import { IWidget } from '@store/actionType'
 
 interface IWidgetFormRadioProps {
   // 数据，模拟跟真实数据都走这里
@@ -20,7 +21,8 @@ interface IWidgetFormRadioProps {
   options: any
   paramValue: any
   paramName: any
-  setParmas: React.Dispatch<any>
+  parentWidget: IWidget
+  modifyLargeScreenElement: (id: string, data: IWidget) => void
 }
 
 const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
@@ -29,15 +31,15 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
   options,
   paramValue,
   paramName,
-  setParmas
+  parentWidget,
+  modifyLargeScreenElement
 }) => {
-  const [value, setValue] = useState('')
   const changeHandler = (val: any) => {
-    setValue(val)
-    setParmas((state: any) => ({
-      ...state,
-      [paramName]: val
-    }))
+    if (parentWidget && paramName) {
+      const widget = JSON.parse(JSON.stringify(parentWidget))
+      widget.dataValue.params[paramName] = val
+      modifyLargeScreenElement(parentWidget.id, widget)
+    }
   }
   return (
     <div
@@ -72,7 +74,7 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
         options={data && data[field] ? data[field] : []}
         size={options.radioSize}
         onChange={(e) => changeHandler(e.target.value)}
-        value={value || paramValue}
+        value={paramValue}
       />
     </div>
   )
