@@ -15,7 +15,7 @@ export default {
   label: '组件',
   // 配置项值
   configureValue: {
-    display: 'block',
+    styleDisplay: 'block',
     backgroundColor: '',
     ...animate.configureValue,
     ...box.configureValue

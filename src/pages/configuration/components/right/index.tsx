@@ -112,7 +112,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     } else {
       const newCurrentWidget = JSON.parse(JSON.stringify(currentWidget))
       newCurrentWidget[field][name] = value
-      callback && callback(currentWidgetId, newCurrentWidget)
+      callback &&
+        callback(currentWidgetId, currentWidgetGroupId, newCurrentWidget)
     }
   }
 
