@@ -1,4 +1,4 @@
-import { FC, useEffect, useMemo } from 'react'
+import { FC, useEffect, useMemo, useState } from 'react'
 import { ALL_STATE, IRouter, IMenu, IBreadCrumbsItem } from '@store/actionType'
 import { connect } from 'react-redux'
 import { getMenu } from '@src/store/actions/authorization'
@@ -9,6 +9,7 @@ import Routers from './components/routers'
 import BreadCrumbs from './components/bread-crumbs'
 import CustomMenu from './components/menu'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
+import session from '@src/utils/session-storage'
 
 import './index.scss'
 
@@ -27,6 +28,10 @@ const Frame: FC<IFrameProps> = ({
   ...rest
 }) => {
   const history = useHistory()
+  // 展开收起菜单
+  const [collapsed, setCollapsed] = useState(() => {
+    return Boolean(session.getItem('collapsed'))
+  })
   // 判断全屏的路由
   const isFullscreen = useMemo(() => {
     const map = ['/frame/configuration', '/frame/preview']
@@ -41,6 +46,10 @@ const Frame: FC<IFrameProps> = ({
       getMenu()
     }
   }, [getMenu, menu])
+
+  useEffect(() => {
+    session.setItem('collapsed', collapsed)
+  }, [collapsed])
 
   // 退出登录
   const loginOut = () => {
@@ -63,8 +72,8 @@ const Frame: FC<IFrameProps> = ({
       {!isFullscreen ? (
         <>
           <header className='app-screen-layout__header'>
-            <div className='left'>
-              <div className='logo'></div>
+            <div className={`left ${collapsed ? 'is-close' : ''}`}>
+              <div className='app-icon logo'>&#xe605;</div>
               <div className='sitename'>大屏后台管理系统</div>
             </div>
             <div className='center'></div>
@@ -85,6 +94,8 @@ const Frame: FC<IFrameProps> = ({
           <section className='app-screen-layout__body'>
             <div className='app-screen-layout__left'>
               <CustomMenu
+                collapsed={collapsed}
+                setCollapsed={setCollapsed}
                 menu={menu}
                 routers={routers}
                 currPageTabKey={rest.location?.pathname as string}

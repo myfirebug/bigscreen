@@ -1,131 +1,159 @@
 @include b(screen-layout) {
-    padding-top: 50px;
-    @include e(header) {
-        position: fixed;
-        left: 0;
-        top: 0;
-        right: 0;
-        z-index: 1000;
+  padding-top: 50px;
+  @include e(header) {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    height: 50px;
+    background: #1890ff;
+    overflow: hidden;
+    .left {
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      width: 200px;
+      height: 100%;
+      padding: 0 10px;
+      line-height: 1.2;
+      color: #fff;
+      background: rgba(0, 0, 0, 0.15);
+      box-shadow: 0 0 5px rgba(0, 0, 0, 0.2) inset;
+      transition: all 0.25s ease 0s;
+      @include when(close) {
+        width: 80px;
+        text-align: center;
+        .logo {
+          width: 100%;
+        }
+        .sitename {
+          width: 0;
+          padding: 0;
+          opacity: 0;
+        }
+      }
+      .logo {
+        width: 24px;
+        text-align: center;
+        font-size: 20px;
+        transition: all 0.25s ease 0s;
+      }
+      .sitename {
+        flex: 1;
+        padding-left: 10px;
+        font-size: 16px;
+        font-weight: bold;
+        white-space: nowrap;
+        overflow: hidden;
+        transition: all 0.25s ease 0s;
+      }
+    }
+    .center {
+      flex: 1;
+    }
+    .right {
+      display: flex;
+      padding: 0 20px;
+      color: rgba(255, 255, 255, 0.8);
+      line-height: 50px;
+      .operation {
         display: flex;
         align-items: center;
-        height: 50px;
-        background: #1890ff;
+      }
+      .avatar {
+        width: 30px;
+        height: 30px;
+        margin: 0 20px;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 50%;
         overflow: hidden;
-        .left {
-            display: flex;
-            align-items: center;
-            width: 200px;
-            height: 100%;
-            padding: 0 5px;
-            line-height: 1.2;
-            color: #fff;
-            background: rgba(0, 0, 0, .15);
-            box-shadow: 0 0 5px rgba(0, 0, 0, .2) inset;
-            transition: all .25s ease 0s;
+        img {
+          width: 100%;
+          height: 100%;
+          vertical-align: top;
         }
-        .center {
-            flex: 1;
+      }
+      .message,
+      .exit {
+        color: rgba(255, 255, 255, 0.7);
+        margin-left: 20px;
+        cursor: pointer;
+        transition: all 0.25s ease 0s;
+        &:hover {
+          color: #fff;
         }
-        .right {
-            display: flex;
-            padding: 0 20px;
-            color: rgba(255, 255, 255, 0.8);
-            line-height: 50px;
-            .operation {
-                display: flex;
-                align-items: center;
-            }
-            .avatar {
-                width: 30px;
-                height: 30px;
-                margin: 0 20px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 50%;
-                overflow: hidden;
-                img {
-                    width: 100%;
-                    height: 100%;
-                    vertical-align: top;
-                }
-            }
-            .message,
-            .exit {
-                color: rgba(255, 255, 255, 0.7);
-                margin-left: 20px;
-                cursor: pointer;
-                transition: all 0.25s ease 0s;
-                &:hover {
-                    color: #fff;
-                }
-            }
+      }
+    }
+  }
+  @include e(body) {
+    display: flex;
+  }
+  @include e(left) {
+    height: calc(100vh - 50px);
+    background: #001529;
+    .bg-menus {
+      position: relative;
+      height: 100%;
+      width: 200px;
+      transition: all 0.25s ease 0s;
+      @include when(close) {
+        width: 80px;
+      }
+      .switch {
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        right: 0;
+        height: 36px;
+        line-height: 36px;
+        cursor: pointer;
+        text-align: center;
+        color: #fff;
+        opacity: 0.8;
+        transition: all 0.25s ease 0s;
+        &:hover {
+          opacity: 1;
         }
+      }
     }
-    @include e(body) {
-        display: flex;
+  }
+  @include e(right) {
+    flex: 1;
+    background-color: #f5f5f5;
+  }
+  @include e(breadcrumb) {
+    padding: 10px;
+    background: #fff;
+    @include m(text) {
+      .title {
+        margin-right: 12px;
+        margin-bottom: 0;
+        color: rgba(0, 0, 0, 0.85);
+        font-weight: 600;
+        font-size: 20px;
+        line-height: 32px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .sub-title {
+        margin-right: 12px;
+        color: rgba(0, 0, 0, 0.45);
+        font-size: 14px;
+        line-height: 1.5715;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
     }
-    @include e(left) {
-        height: calc(100vh - 50px);
-        background: #001529;
-        .bg-menus {
-            position: relative;
-            height: 100%;
-            width: 200px;
-            transition: all .25s ease 0s;
-            @include when(close) {
-                width: 80px;
-            }
-            .switch {
-                position: absolute;
-                left: 0;
-                bottom: 0;
-                right: 0;
-                height: 36px;
-                line-height: 36px;
-                cursor: pointer;
-                text-align: center;
-                color: #fff;
-                opacity: 0.8;
-                transition: all .25s ease 0s;
-                &:hover {
-                    opacity: 1;
-                }
-            }
-        }
+  }
+  @include e(main) {
+    padding: 10px;
+    @include m(content) {
+      background-color: #fff;
     }
-    @include e(right) {
-        flex: 1;
-        background-color: #f5f5f5;
-    }
-    @include e(breadcrumb) {
-        padding: 10px;
-        background: #fff;
-        @include m(text) {
-            .title {
-                margin-right: 12px;
-                margin-bottom: 0;
-                color: rgba(0, 0, 0, .85);
-                font-weight: 600;
-                font-size: 20px;
-                line-height: 32px;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-            .sub-title {
-                margin-right: 12px;
-                color: rgba(0, 0, 0, .45);
-                font-size: 14px;
-                line-height: 1.5715;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-            }
-        }
-    }
-    @include e(main) {
-        padding: 10px;
-        @include m(content) {
-            background-color: #fff;
-        }
-    }
+  }
 }
