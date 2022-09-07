@@ -97,6 +97,7 @@ export interface IShowOrHideLargeScreenElementAction {
 export interface IModifyLargeScreenElementAction {
   type: MODIFY_LARGESCREEN_ELEMENT_TYPE
   id: string
+  groupId: string
   data: IWidget
 }
 
@@ -215,10 +216,12 @@ const actionShowOrHideLargeScreenElement = (
 // 修改元素数据的方法
 const actionModifyLargeScreenElement = (
   id: string,
+  groupId: string,
   data: IWidget
 ): IModifyLargeScreenElementAction => ({
   type: MODIFY_LARGESCREEN_ELEMENT,
   id,
+  groupId,
   data
 })
 
@@ -315,8 +318,8 @@ export const showOrHideLargeScreenElement =
 
 // 修改元素数据
 export const modifyLargeScreenElement =
-  (id: string, data: IWidget) => (dispatch: Dispatch) => {
-    dispatch(actionModifyLargeScreenElement(id, data))
+  (id: string, groupId: string, data: IWidget) => (dispatch: Dispatch) => {
+    dispatch(actionModifyLargeScreenElement(id, groupId, data))
   }
 
 // 切换元素数据

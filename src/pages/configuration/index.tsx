@@ -43,7 +43,7 @@ interface IDisignProps {
   modifyLargeScreenPage: (id: string, data: IPage, callback?: Function) => void
   changeLargeScreenPage: (id: string, callback?: Function) => void
   addLargeScreenElement: (data: any) => void
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
   changeLargeScreenElement: (id: string, groupId?: string) => void
   showOrHideLargeScreenElement: (id: string, groupId?: string) => void
   delLargeScreenElement: () => void

@@ -26,7 +26,7 @@ interface IDesignHeaderProps {
   currentPageId: string
   undoLargeScreen: () => void
   redoLargeScreen: () => void
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
   delLargeScreenElement: () => void
   copyLargeScreenElement: () => void
   currentWidgetGroupId: string
@@ -133,7 +133,11 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             newCurrentWidget.coordinateValue.left =
               newCurrentWidget.coordinateValue.left + 1
         }
-        modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
+        modifyLargeScreenElement(
+          currentWidgetId,
+          currentWidgetGroupId,
+          newCurrentWidget
+        )
       }
     },
     [currentWidgetId, currentWidget, modifyLargeScreenElement]

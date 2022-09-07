@@ -17,7 +17,7 @@ interface IDesignBodyCenterProps {
   currentWidgetId: string
   currentWidget: IWidget
   cale: number
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
   changeLargeScreenElement: (id: string, groupId?: string) => void
   screen: any
   currentWidgetGroupId: string
@@ -50,6 +50,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                 <Drag
                   item={item}
                   currentWidgetId={currentWidgetId}
+                  currentWidgetGroupId={currentWidgetGroupId}
                   currentWidget={currentWidget}
                   cale={cale}
                   modifyLargeScreenElement={modifyLargeScreenElement}
@@ -123,6 +124,7 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
               return (
                 <Drag
                   item={item}
+                  currentWidgetGroupId={currentWidgetGroupId}
                   currentWidgetId={currentWidgetId}
                   currentWidget={currentWidget}
                   cale={cale}

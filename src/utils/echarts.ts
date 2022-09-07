@@ -18,11 +18,11 @@ interface result {
  */
 export function handleEchartsOption(style: any): any {
   return {
-    toolbox: {
-      feature: {
-        saveAsImage: {}
-      }
-    },
+    // toolbox: {
+    //   feature: {
+    //     saveAsImage: {}
+    //   }
+    // },
     color: [
       style?.themeColor1,
       style?.themeColor2,

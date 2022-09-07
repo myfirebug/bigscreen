@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-28 14:00:20
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 22:14:30
+ * @LastEditTime: 2022-09-06 23:16:31
  * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -22,7 +22,7 @@ interface IWidgetFormRadioProps {
   paramValue: any
   paramName: any
   parentWidget: IWidget
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
 }
 
 const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
@@ -38,7 +38,7 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
     if (parentWidget && paramName) {
       const widget = JSON.parse(JSON.stringify(parentWidget))
       widget.dataValue.params[paramName] = val
-      modifyLargeScreenElement(parentWidget.id, widget)
+      modifyLargeScreenElement(parentWidget.id, parentWidget.id, widget)
     }
   }
   return (

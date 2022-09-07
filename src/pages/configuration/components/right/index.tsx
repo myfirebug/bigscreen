@@ -43,7 +43,7 @@ interface IDesignBodyRightProps {
   modifyScreen: (datas: any) => void
   currentWidgetId: string
   currentWidget: IWidget
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
   currentPage: IPage
   setRightFlag: React.Dispatch<React.SetStateAction<boolean>>
   rightFlag: Boolean
@@ -447,7 +447,11 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
       ...widgetConfiguration[newCurrentWidget.code].dataValue,
       ...values
     }
-    modifyLargeScreenElement(currentWidgetId, newCurrentWidget)
+    modifyLargeScreenElement(
+      currentWidgetId,
+      currentWidgetGroupId,
+      newCurrentWidget
+    )
   }
 
   // 切换元素

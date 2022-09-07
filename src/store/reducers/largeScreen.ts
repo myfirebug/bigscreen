@@ -251,13 +251,10 @@ export const largeScreen = (
       const currentPage: IPage = copy.currentPage
       // 找组下标
       const groupIndex = currentPage.widgets.findIndex(
-        (item) => item.id === copy.currentWidgetGroupId
+        (item) => item.id === action.groupId
       )
       // 如果有分组，则找分组下面的widget
-      if (
-        groupIndex !== -1 &&
-        copy.currentWidgetGroupId !== copy.currentWidgetId
-      ) {
+      if (groupIndex !== -1 && action.groupId !== action.id) {
         // console.log(currentPage.widgets[groupIndex].widgets);
         currentPage.widgets[groupIndex].widgets = currentPage.widgets[
           groupIndex

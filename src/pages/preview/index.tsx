@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 22:22:12
+ * @LastEditTime: 2022-09-07 09:47:20
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -20,7 +20,7 @@ import './index.scss'
 interface IPreviewProps {
   currentPage: IPage
   screen: IScreen
-  modifyLargeScreenElement: (id: string, data: IWidget) => void
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
 }
 
 const Preview: FC<IPreviewProps> = ({
@@ -84,7 +84,7 @@ const Preview: FC<IPreviewProps> = ({
                     top: item.coordinateValue.top
                   }}>
                   <Request
-                    isPlaceholder={true}
+                    isPlaceholder={false}
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(item.dataValue.params || {})}

@@ -1,17 +1,16 @@
-import {
-  FC, ReactNode
-} from 'react'
+import { FC, ReactNode } from 'react'
 import { Rnd } from 'react-rnd'
 import { IWidget } from '@src/store/actionType'
 
 interface IDragProps {
-  item: any;
-  currentWidgetId: string;
-  currentWidget: IWidget;
-  cale: number;
-  modifyLargeScreenElement: (id: string, data: IWidget) => void;
-  children: ReactNode;
-  className: string;
+  item: any
+  currentWidgetId: string
+  currentWidget: IWidget
+  cale: number
+  modifyLargeScreenElement: (id: string, groupId: string, data: IWidget) => void
+  children: ReactNode
+  className: string
+  currentWidgetGroupId: string
 }
 
 const Drag: FC<IDragProps> = ({
@@ -21,12 +20,12 @@ const Drag: FC<IDragProps> = ({
   currentWidget,
   modifyLargeScreenElement,
   children,
-  className
+  className,
+  currentWidgetGroupId
 }) => {
-
   // 移动时
   const dragStopHandle = (e: any, d: any) => {
-    modifyLargeScreenElement(currentWidgetId, {
+    modifyLargeScreenElement(currentWidgetId, currentWidgetGroupId, {
       ...currentWidget,
       coordinateValue: {
         ...currentWidget.coordinateValue,
@@ -37,8 +36,14 @@ const Drag: FC<IDragProps> = ({
   }
 
   // 改变盒子的比例时
-  const resizeHandle = (e: any, direction: any, ref: any, delta: any, position: any) => {
-    modifyLargeScreenElement(currentWidgetId, {
+  const resizeHandle = (
+    e: any,
+    direction: any,
+    ref: any,
+    delta: any,
+    position: any
+  ) => {
+    modifyLargeScreenElement(currentWidgetId, currentWidgetGroupId, {
       ...currentWidget,
       coordinateValue: {
         width: ref.offsetWidth,
@@ -54,7 +59,11 @@ const Drag: FC<IDragProps> = ({
       style={{
         display: item.configureValue.display
       }}
-      className={item.id !== currentWidgetId ? `react-draggable-disabled ${className}` : className}
+      className={
+        item.id !== currentWidgetId
+          ? `react-draggable-disabled ${className}`
+          : className
+      }
       default={{
         x: item.coordinateValue.left,
         y: item.coordinateValue.top,
@@ -65,7 +74,7 @@ const Drag: FC<IDragProps> = ({
         x: item.coordinateValue.left,
         y: item.coordinateValue.top
       }}
-      resizeHandleWrapperClass="handle"
+      resizeHandleWrapperClass='handle'
       resizeHandleWrapperStyle={{
         position: 'absolute',
         left: 0,
@@ -145,8 +154,7 @@ const Drag: FC<IDragProps> = ({
       disableDragging={item.id !== currentWidgetId}
       onDragStop={dragStopHandle}
       onResizeStop={resizeHandle}
-      bounds="parent"
-    >
+      bounds='parent'>
       {children}
     </Rnd>
   )
