@@ -242,7 +242,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             <span className='name'>复制图层</span>
           </li>
           <li
-            onClick={delHandler}
+            onClick={() => showConfirm('删除', delHandler)}
             className={`app-content-menu__item is-border ${
               currentWidgetId && !currentWidgetId.includes(',')
                 ? ''
@@ -387,7 +387,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             </Tooltip>
           </li>
           <li
-            onClick={delHandler}
+            onClick={() => showConfirm('删除', delHandler)}
             className={`${
               currentWidgetId && !currentWidgetId.includes(',')
                 ? ''
