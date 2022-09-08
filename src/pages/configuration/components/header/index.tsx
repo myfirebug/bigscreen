@@ -1,4 +1,4 @@
-import { FC, useCallback, useEffect } from 'react'
+import { FC, MouseEvent, useCallback, useEffect } from 'react'
 import { message, Tooltip, Modal } from 'antd'
 import {
   CloseOutlined,
@@ -9,6 +9,8 @@ import {
 import configuration from '@src/widget/tools/main'
 // 获取组件分类
 import { componentsClassify } from '@src/widget'
+// CreatePortal
+import CreatePortal from '@components/create-portal'
 import { guid } from '@src/utils/tools'
 import './index.scss'
 import { IPage, IWidget } from '@src/store/actionType'
@@ -80,36 +82,52 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   }, [futurePage.length, redoLargeScreen])
 
   // 删除
-  const delHandler = useCallback(() => {
-    if (currentWidgetId && !currentWidgetId.includes(',')) {
-      delLargeScreenElement()
-      message.success('删除成功')
-    }
-  }, [currentWidgetId])
+  const delHandler = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation()
+      if (currentWidgetId && !currentWidgetId.includes(',')) {
+        delLargeScreenElement()
+        message.success('删除成功')
+      }
+    },
+    [currentWidgetId]
+  )
 
   // 复制
-  const copyHandler = useCallback(() => {
-    if (currentWidgetId && !currentWidgetId.includes(',')) {
-      copyLargeScreenElement()
-      message.success('复制成功')
-    }
-  }, [currentWidgetId])
+  const copyHandler = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation()
+      if (currentWidgetId && !currentWidgetId.includes(',')) {
+        copyLargeScreenElement()
+        message.success('复制成功')
+      }
+    },
+    [currentWidgetId]
+  )
 
   // 分组
-  const groupHandler = useCallback(() => {
-    if (currentWidgetId && currentWidgetId.includes(',')) {
-      group()
-      message.success('分组成功')
-    }
-  }, [currentWidgetId])
+  const groupHandler = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation()
+      if (currentWidgetId && currentWidgetId.includes(',')) {
+        group()
+        message.success('分组成功')
+      }
+    },
+    [currentWidgetId]
+  )
 
   // 取消分组
-  const cancelGroupHandler = useCallback(() => {
-    if (currentWidgetId && !currentWidgetId.includes(',')) {
-      cancelGroup()
-      message.success('取消分组成功')
-    }
-  }, [currentWidgetId])
+  const cancelGroupHandler = useCallback(
+    (e: MouseEvent) => {
+      e.stopPropagation()
+      if (currentWidgetId && currentWidgetGroupId === currentWidgetId) {
+        cancelGroup()
+        message.success('取消分组成功')
+      }
+    },
+    [currentWidgetId]
+  )
 
   // 移动上移下移左移右移
   const moveHander = useCallback(
@@ -215,6 +233,71 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
 
   return (
     <div className='app-screen-disign__header'>
+      <CreatePortal>
+        <ul className='app-content-menu' id='js-content-menu'>
+          <li
+            onClick={copyHandler}
+            className={`app-content-menu__item ${
+              currentWidgetId && !currentWidgetId.includes(',')
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <span className='app-icon'>&#xe7bc;</span>
+            <span className='name'>复制图层</span>
+          </li>
+          <li
+            onClick={delHandler}
+            className={`app-content-menu__item is-border ${
+              currentWidgetId && !currentWidgetId.includes(',')
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <span className='app-icon'>&#xe7c3;</span>
+            <span className='name'>删除图层</span>
+            <span>delete</span>
+          </li>
+          <li className='app-content-menu__item'>
+            <span className='app-icon'>&#xe7ef;</span>
+            <span className='name'>上移一层</span>
+            <span>alt+↑</span>
+          </li>
+          <li className='app-content-menu__item'>
+            <span className='app-icon'>&#xe7f1;</span>
+            <span className='name'>下移一层</span>
+            <span>alt+↓</span>
+          </li>
+          <li className='app-content-menu__item'>
+            <span className='app-icon'>&#xe786;</span>
+            <span className='name'>置顶图层</span>
+            <span>ctrl+shfit+↑</span>
+          </li>
+          <li className='app-content-menu__item is-border'>
+            <span className='app-icon'>&#xe742;</span>
+            <span className='name'>置底图层</span>
+            <span>ctrl+shfit+↓</span>
+          </li>
+          <li
+            onClick={groupHandler}
+            className={`app-content-menu__item  ${
+              currentWidgetGroupId || !currentWidgetId.includes(',')
+                ? 'is-disabled'
+                : ''
+            }`}>
+            <span className='app-icon'>&#xe83f;</span>
+            <span className='name'>分组</span>
+          </li>
+          <li
+            onClick={cancelGroupHandler}
+            className={`app-content-menu__item  ${
+              currentWidgetGroupId && currentWidgetGroupId === currentWidgetId
+                ? ''
+                : 'is-disabled'
+            }`}>
+            <span className='app-icon'>&#xe632;</span>
+            <span className='name'>拆分</span>
+          </li>
+        </ul>
+      </CreatePortal>
       {/* elements start */}
       <ul className='app-screen-disign__header--left'>
         {componentsClassify.map((item: any, index: number) => (

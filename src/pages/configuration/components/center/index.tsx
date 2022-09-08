@@ -1,5 +1,4 @@
-import { FC } from 'react'
-import { Button } from 'antd'
+import { FC, MouseEvent, useEffect, useRef } from 'react'
 import { IPage, IWidget } from '@store/actionType'
 // 所有组件地址
 import components from '@src/widget'
@@ -33,6 +32,72 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   screen,
   currentWidgetGroupId
 }) => {
+  const timer = useRef<any>(null)
+  // 隐藏菜单
+  const hideContentMenu = () => {
+    document
+      .querySelector('#js-content-menu')
+      ?.setAttribute('style', 'display: none')
+  }
+  // 组组件单击时触发
+  const groupWidgetClickHander = (e: MouseEvent, item: IWidget) => {
+    e.preventDefault()
+    e.stopPropagation()
+    hideContentMenu()
+    if (item.id !== currentWidgetId) {
+      changeLargeScreenElement(item.id, item.id)
+    }
+  }
+  //非组组件单击时触发
+  const widgetClickHander = (
+    e: MouseEvent,
+    item: IWidget,
+    groupConfig?: any
+  ) => {
+    e.preventDefault()
+    e.stopPropagation()
+    hideContentMenu()
+    if (item.id !== currentWidgetId) {
+      if (e.ctrlKey && !groupConfig && !currentWidgetGroupId) {
+        changeLargeScreenElement(
+          currentWidgetId ? `${currentWidgetId},${item.id}` : item.id
+        )
+      } else {
+        changeLargeScreenElement(item.id, groupConfig?.id)
+      }
+    }
+  }
+  // 右键事件
+  const contentMenuHandler = (e: any) => {
+    e.preventDefault()
+    e.stopPropagation()
+    timer.current = setTimeout(() => {
+      const dom = document.querySelector('#js-content-menu')
+      if (dom) {
+        dom.setAttribute(
+          'style',
+          `display:block;left:${e.pageX}px;top:${e.pageY}px;`
+        )
+      }
+    }, 0)
+  }
+
+  useEffect(() => {
+    const clickHander = (e: any) => {
+      e.preventDefault()
+      hideContentMenu()
+    }
+    const wrap = document.querySelector('#js-elements-body')
+    window.addEventListener('click', clickHander)
+    window.addEventListener('contextmenu', clickHander)
+    wrap?.addEventListener('scroll', clickHander)
+    return () => {
+      window.removeEventListener('click', clickHander)
+      window.removeEventListener('contextmenu', clickHander)
+      wrap?.removeEventListener('scroll', clickHander)
+      clearTimeout(timer.current)
+    }
+  }, [])
   // 渲染组件
   const renderWidgets = (
     widgets: IWidget[],
@@ -57,13 +122,11 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                   key={item.id}
                   className='react-draggable-group'>
                   <div
-                    onClick={(e: any) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      if (item.id !== currentWidgetId) {
-                        changeLargeScreenElement(item.id, item.id)
-                      }
+                    onContextMenu={(e) => {
+                      groupWidgetClickHander(e, item)
+                      contentMenuHandler(e)
                     }}
+                    onClick={(e: any) => groupWidgetClickHander(e, item)}
                     className={`app-widget__item ${
                       currentWidgetId.includes(item.id) ? 'is-active' : ''
                     }`}>
@@ -132,25 +195,11 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                   key={item.id}
                   className=''>
                   <div
-                    onClick={(e) => {
-                      e.preventDefault()
-                      e.stopPropagation()
-                      if (item.id !== currentWidgetId) {
-                        if (
-                          e.ctrlKey &&
-                          !groupConfig &&
-                          !currentWidgetGroupId
-                        ) {
-                          changeLargeScreenElement(
-                            currentWidgetId
-                              ? `${currentWidgetId},${item.id}`
-                              : item.id
-                          )
-                        } else {
-                          changeLargeScreenElement(item.id, groupConfig?.id)
-                        }
-                      }
+                    onContextMenu={(e) => {
+                      contentMenuHandler(e)
+                      widgetClickHander(e, item, groupConfig)
                     }}
+                    onClick={(e) => widgetClickHander(e, item, groupConfig)}
                     className={`app-widget__item ${
                       currentWidgetId.includes(item.id) ? 'is-active' : ''
                     }`}>
@@ -188,7 +237,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                         ) || {}
                       )}
                       render={(data, success) => {
-                        console.log(group, 'ddsfd')
                         // 确定数据
                         let datas: any = null
                         if (

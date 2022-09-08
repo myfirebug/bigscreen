@@ -165,7 +165,7 @@ const Disign: FC<IDisignProps> = ({
             paddingRight: rightFlag && pages.length ? 400 : 0
           }}
           className='app-screen-disign__body--center'>
-          <div className='body' ref={elementsWrapper}>
+          <div className='body' id='js-elements-body' ref={elementsWrapper}>
             <div className='elements-wrap'>
               <Ruler />
               <div

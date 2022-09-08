@@ -547,11 +547,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   }, [currentWidgetGroupId, currentPage])
 
   useEffect(() => {
-    if (currentWidgetId) {
-      setKey('2')
-    } else {
-      setKey('1')
-    }
+    setKey('5')
   }, [currentWidgetId])
 
   return (

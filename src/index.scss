@@ -1,107 +1,150 @@
 /*公用搜索样式*/
 
 @include b(search) {
-    margin-bottom: 10px;
-    padding: 15px 10px 0 10px;
-    background: #fff;
-    border-radius: 5px;
-    @include e(list) {
-        display: flex;
-        flex-wrap: wrap;
+  margin-bottom: 10px;
+  padding: 15px 10px 0 10px;
+  background: #fff;
+  border-radius: 5px;
+  @include e(list) {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  @include e(item) {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    padding-bottom: 15px;
+    overflow: hidden;
+    .label {
+      width: 100px;
+      text-align: right;
     }
-    @include e(item) {
-        width: 300px;
-        display: flex;
-        align-items: center;
-        padding-bottom: 15px;
-        overflow: hidden;
-        .label {
-            width: 100px;
-            text-align: right;
-        }
-        .value {
-            flex: 1;
-            overflow: hidden;
-        }
+    .value {
+      flex: 1;
+      overflow: hidden;
     }
+  }
 }
-
 
 /*公用表格*/
 
 @include b(table) {
-    @include e(operation) {
-        position: relative;
-        left: -5px;
-        display: flex;
-        align-items: center;
-        .link {
-            opacity: 1;
-            color: #1890ff;
-            cursor: pointer;
-            margin: 0 5px;
-            transition: all .25s ease 0s;
-            &:hover {
-                opacity: 0.8;
-            }
-        }
-        .num {
-            display: inline;
-            min-width: 60px;
-            color: #333;
-        }
+  @include e(operation) {
+    position: relative;
+    left: -5px;
+    display: flex;
+    align-items: center;
+    .link {
+      opacity: 1;
+      color: #1890ff;
+      cursor: pointer;
+      margin: 0 5px;
+      transition: all 0.25s ease 0s;
+      &:hover {
+        opacity: 0.8;
+      }
     }
+    .num {
+      display: inline;
+      min-width: 60px;
+      color: #333;
+    }
+  }
 }
 
 .link {
-    color: #1890ff;
-    transition: all .25s ease 0s;
-    cursor: pointer;
-    &:hover {
-        color: #40a9ff
-    }
+  color: #1890ff;
+  transition: all 0.25s ease 0s;
+  cursor: pointer;
+  &:hover {
+    color: #40a9ff;
+  }
 }
-
 
 /* 设置滚动条的样式 */
 
 ::-webkit-scrollbar {
-    width: 6px;
-    height: 6px;
+  width: 6px;
+  height: 6px;
 }
-
 
 /* 滚动槽 */
 
 ::-webkit-scrollbar-track {
-    border-radius: 6px;
+  border-radius: 6px;
 }
-
 
 /* 滚动条滑块 */
 
 ::-webkit-scrollbar-thumb {
-    border-radius: 6px;
-    background: rgba(255, 255, 255, .5);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.5);
 }
 
 ::-webkit-scrollbar-thumb:window-inactive {
-    background: rgba(255, 255, 255, .5);
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .ant-pro-table .ant-pro-table-search {
-    margin-bottom: 10px;
+  margin-bottom: 10px;
 }
 
 .ant-tabs-content-left .ant-tabs-tabpane {
-    padding-left: 10px!important;
+  padding-left: 10px !important;
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0);
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+// 右击菜单样式
+@include b(content-menu) {
+  display: none;
+  position: fixed;
+  left: 300px;
+  top: 200px;
+  z-index: 99999;
+  width: 200px;
+  background-color: #666;
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  border-radius: 5px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+  @include e(item) {
+    display: flex;
+    padding: 0 10px;
+    line-height: 30px;
+    cursor: pointer;
+    color: rgba(255, 255, 255, 0.8);
+    transition: all 0.25s ease 0s;
+    &:hover {
+      color: #fff;
+      background-color: #444;
     }
-    100% {
-        transform: rotate(360deg);
+    .app-icon {
+      padding-right: 10px;
     }
+    .name {
+      flex: 1;
+    }
+    &:last-child {
+      border: none;
+    }
+    @include when(disabled) {
+      cursor: no-drop;
+      color: rgba(255, 255, 255, 0.4);
+      &:hover {
+        color: rgba(255, 255, 255, 0.4);
+        background-color: #666;
+      }
+    }
+    @include when(border) {
+      border-bottom: 1px solid rgba(0, 0, 0, 0.4);
+    }
+  }
 }

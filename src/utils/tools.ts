@@ -595,7 +595,6 @@ export const getStyles = (config: IAnyObject) => {
   }
   result.animationDelay = config.styleAnimationDelay + 's'
   result.animationDuration = config.styleAnimationDuration + 's'
-  console.log(result, 'result')
   return result
 }
 
