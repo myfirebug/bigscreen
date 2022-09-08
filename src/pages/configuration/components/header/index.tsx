@@ -84,7 +84,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 删除
   const delHandler = useCallback(
     (e: MouseEvent) => {
-      e.stopPropagation()
       if (currentWidgetId && !currentWidgetId.includes(',')) {
         delLargeScreenElement()
         message.success('删除成功')
@@ -96,7 +95,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 复制
   const copyHandler = useCallback(
     (e: MouseEvent) => {
-      e.stopPropagation()
       if (currentWidgetId && !currentWidgetId.includes(',')) {
         copyLargeScreenElement()
         message.success('复制成功')
@@ -108,7 +106,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 分组
   const groupHandler = useCallback(
     (e: MouseEvent) => {
-      e.stopPropagation()
       if (currentWidgetId && currentWidgetId.includes(',')) {
         group()
         message.success('分组成功')
@@ -120,7 +117,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 取消分组
   const cancelGroupHandler = useCallback(
     (e: MouseEvent) => {
-      e.stopPropagation()
       if (currentWidgetId && currentWidgetGroupId === currentWidgetId) {
         cancelGroup()
         message.success('取消分组成功')

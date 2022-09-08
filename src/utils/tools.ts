@@ -600,3 +600,49 @@ export const getStyles = (config: IAnyObject) => {
 
 // 路由前缀，主要用于部署时
 export const routePrefix = '/manamage'
+
+/**
+ * 右击处理菜单
+ * @param e 事件对像
+ */
+export const contentMenuHandler = (e: any) => {
+  e.preventDefault()
+  e.stopPropagation()
+  const dom: any = document.querySelector('#js-content-menu')
+  let timer: any = null
+  if (timer) {
+    clearTimeout(timer)
+  }
+  timer = setTimeout(() => {
+    if (dom) {
+      const clickX = e.clientX
+      const clickY = e.clientY //事件发生时鼠标的Y坐标
+      const screenW = window.innerWidth //文档显示区的宽度
+      const screenH = window.innerHeight
+      const rootW = 200 //右键菜单本身元素的宽度
+      const rootH = 244
+      const right = screenW - clickX > rootW
+      const left = !right
+      const top = screenH - clickY > rootH
+      const bottom = !top
+      let style = ''
+      style += 'display:block;'
+      if (right) {
+        style += `left:${clickX + 15}px;`
+      }
+
+      if (left) {
+        style += `left:${clickX - rootW - 15}px;`
+      }
+
+      if (top) {
+        style += `top:${clickY + 15}px;`
+      }
+
+      if (bottom) {
+        style += `top:${clickY - rootH - 15}px;`
+      }
+      dom.style = style
+    }
+  }, 0)
+}

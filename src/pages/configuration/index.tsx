@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState, useRef } from 'react'
+import React, { FC, useEffect, useState, useRef, MouseEvent } from 'react'
 import { ALL_STATE, IPage, IScreen, IWidget } from '@store/actionType'
 import { connect } from 'react-redux'
 import { Slider } from 'antd'
@@ -122,9 +122,9 @@ const Disign: FC<IDisignProps> = ({
   }, [elementsWrapper.current])
 
   // 取消选中元素或者组
-  const cancelSelectedElementHander = (e: any) => {
+  const cancelSelectedElementHander = (e: MouseEvent) => {
     if (currentWidgetId) {
-      changeLargeScreenElement('')
+      // changeLargeScreenElement('')
     }
   }
   return (

@@ -1,5 +1,6 @@
 import { FC, MouseEvent, useEffect, useRef } from 'react'
 import { IPage, IWidget } from '@store/actionType'
+import { contentMenuHandler } from '@utils/tools'
 // 所有组件地址
 import components from '@src/widget'
 // 接口
@@ -32,7 +33,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
   screen,
   currentWidgetGroupId
 }) => {
-  const timer = useRef<any>(null)
   // 隐藏菜单
   const hideContentMenu = () => {
     document
@@ -67,24 +67,9 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
       }
     }
   }
-  // 右键事件
-  const contentMenuHandler = (e: any) => {
-    e.preventDefault()
-    e.stopPropagation()
-    timer.current = setTimeout(() => {
-      const dom = document.querySelector('#js-content-menu')
-      if (dom) {
-        dom.setAttribute(
-          'style',
-          `display:block;left:${e.pageX}px;top:${e.pageY}px;`
-        )
-      }
-    }, 0)
-  }
 
   useEffect(() => {
     const clickHander = (e: any) => {
-      e.preventDefault()
       hideContentMenu()
     }
     const wrap = document.querySelector('#js-elements-body')
@@ -95,7 +80,6 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
       window.removeEventListener('click', clickHander)
       window.removeEventListener('contextmenu', clickHander)
       wrap?.removeEventListener('scroll', clickHander)
-      clearTimeout(timer.current)
     }
   }, [])
   // 渲染组件

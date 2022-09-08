@@ -25,6 +25,8 @@ const Drag: FC<IDragProps> = ({
 }) => {
   // 移动时
   const dragStopHandle = (e: any, d: any) => {
+    e.preventDefault()
+    e.stopPropagation()
     modifyLargeScreenElement(currentWidgetId, currentWidgetGroupId, {
       ...currentWidget,
       coordinateValue: {
@@ -43,6 +45,8 @@ const Drag: FC<IDragProps> = ({
     delta: any,
     position: any
   ) => {
+    e.preventDefault()
+    e.stopPropagation()
     modifyLargeScreenElement(currentWidgetId, currentWidgetGroupId, {
       ...currentWidget,
       coordinateValue: {

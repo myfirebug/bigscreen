@@ -1,3 +1,12 @@
+/*
+ * @Description: 页面描述
+ * @Author: hejp 378540660@qq.com
+ * @Date: 2022-09-04 16:50:14
+ * @LastEditors: hejp 378540660@qq.com
+ * @LastEditTime: 2022-09-08 12:41:00
+ * @FilePath: \bigscreen\src\pages\configuration\components\add-or-edit-page\index.tsx
+ * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
+ */
 import React, { FC, useEffect } from 'react'
 import { Button, Form, Input, message } from 'antd'
 import { IPage } from '@src/store/actionType'

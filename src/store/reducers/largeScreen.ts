@@ -124,6 +124,13 @@ export const largeScreen = (
       }
     // 切换页面
     case CHANGE_LARGESCREEN_PAGE: {
+      // 保存上一页数据到pages里
+      const prevPageIndex = copy.pages.findIndex(
+        (item) => item.id === copy.currentPage.id
+      )
+      if (prevPageIndex !== -1) {
+        copy.pages[prevPageIndex] = copy.currentPage
+      }
       // 这里首页判断当前currentPage在pages里的下标，然后替换数据
       const currentPageIndex = copy.pages.findIndex(
         (item) => item.id === action.id

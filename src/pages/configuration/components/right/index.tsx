@@ -25,6 +25,7 @@ import {
   FolderOutlined,
   FolderOpenOutlined
 } from '@ant-design/icons'
+import { contentMenuHandler } from '@utils/tools'
 // 配置文件
 import configuration from '@src/widget/tools/main'
 // JSON编辑器
@@ -459,6 +460,9 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   const changeElement = (e: MouseEvent, id: string, groupId?: string) => {
     e.stopPropagation()
     e.preventDefault()
+    document
+      .querySelector('#js-content-menu')
+      ?.setAttribute('style', 'display: none')
     if (id !== currentWidgetId) {
       changeLargeScreenElement(id, groupId)
     }
@@ -478,6 +482,10 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         return (
           <div className='app-screen-disign__layer' key={item.id}>
             <div
+              onContextMenu={(e) => {
+                changeElement(e, item.id, item.id)
+                contentMenuHandler(e)
+              }}
               onClick={(e) => changeElement(e, item.id, item.id)}
               className={`header ${
                 item.id === currentWidgetId ? 'is-active' : ''
@@ -501,6 +509,10 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         return (
           <div key={item.id} className='app-screen-disign__layer--item'>
             <div
+              onContextMenu={(e) => {
+                changeElement(e, item.id, groudId)
+                contentMenuHandler(e)
+              }}
               onClick={(e) => changeElement(e, item.id, groudId)}
               className={`header ${
                 item.id === currentWidgetId ? 'is-active' : ''
