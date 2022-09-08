@@ -31,6 +31,14 @@ import {
   GROUP_TYPE,
   CANCEL_GROUP,
   CANCEL_GROUP_TYPE,
+  UP_LARGESCREEN_ELEMENT,
+  UP_LARGESCREEN_ELEMENT_TYPE,
+  DOWN_LARGESCREEN_ELEMENT,
+  DOWN_LARGESCREEN_ELEMENT_TYPE,
+  TOP_LARGESCREEN_ELEMENT,
+  TOP_LARGESCREEN_ELEMENT_TYPE,
+  BOTTOM_LARGESCREEN_ELEMENT,
+  BOTTOM_LARGESCREEN_ELEMENT_TYPE,
   IPage,
   IScreen,
   IWidget
@@ -133,8 +141,31 @@ export interface ICancelGroupAction {
   type: CANCEL_GROUP_TYPE
 }
 
+// 上移一层
+export interface IUpLargescreenElementAction {
+  type: UP_LARGESCREEN_ELEMENT_TYPE
+}
+
+// 下移一层
+export interface IDownLargescreenElementAction {
+  type: DOWN_LARGESCREEN_ELEMENT_TYPE
+}
+
+// 置顶
+export interface ITopLargescreenElementAction {
+  type: TOP_LARGESCREEN_ELEMENT_TYPE
+}
+// 置底
+export interface IBottomLargescreenElementAction {
+  type: BOTTOM_LARGESCREEN_ELEMENT_TYPE
+}
+
 // 定义 ModifyAction 类型
 export type ModifyAction =
+  | IUpLargescreenElementAction
+  | IDownLargescreenElementAction
+  | ITopLargescreenElementAction
+  | IBottomLargescreenElementAction
   | ILargeScreenAction
   | IAddLargeScreenPageAction
   | IDelLargeScreenPageAction
@@ -266,6 +297,26 @@ const actionModifyScreen = (datas: IScreen): IModifyScreenAction => ({
   datas
 })
 
+// 上移一层的方法
+const actionUpLargescreenElement = (): IUpLargescreenElementAction => ({
+  type: UP_LARGESCREEN_ELEMENT
+})
+
+// 下移一层的方法
+const actionDownLargescreenElement = (): IDownLargescreenElementAction => ({
+  type: DOWN_LARGESCREEN_ELEMENT
+})
+
+// 置顶的方法
+const actionTopLargescreenElement = (): ITopLargescreenElementAction => ({
+  type: TOP_LARGESCREEN_ELEMENT
+})
+
+// 置底的方法
+const actionBottomLargescreenElement = (): IBottomLargescreenElementAction => ({
+  type: BOTTOM_LARGESCREEN_ELEMENT
+})
+
 // 获取当前项目所有页面
 export const getLargeScreenPages = (datas: IPage[]) => (dispatch: Dispatch) => {
   dispatch(actionLargeScreen(datas))
@@ -356,4 +407,24 @@ export const group = () => (dispatch: Dispatch) => {
 // 拆分
 export const cancelGroup = () => (dispatch: Dispatch) => {
   dispatch(actionCancelGroup())
+}
+
+// 上移一层
+export const upLargescreenElement = () => (dispatch: Dispatch) => {
+  dispatch(actionUpLargescreenElement())
+}
+
+// 下移一层
+export const downLargescreenElement = () => (dispatch: Dispatch) => {
+  dispatch(actionDownLargescreenElement())
+}
+
+// 置顶
+export const topLargescreenElement = () => (dispatch: Dispatch) => {
+  dispatch(actionTopLargescreenElement())
+}
+
+// 置底
+export const bottomLargescreenElement = () => (dispatch: Dispatch) => {
+  dispatch(actionBottomLargescreenElement())
 }

@@ -1,4 +1,4 @@
-import { FC, MouseEvent, useCallback, useEffect } from 'react'
+import { FC, MouseEvent, useCallback, useEffect, useMemo } from 'react'
 import { message, Tooltip, Modal } from 'antd'
 import {
   CloseOutlined,
@@ -33,7 +33,12 @@ interface IDesignHeaderProps {
   copyLargeScreenElement: () => void
   currentWidgetGroupId: string
   group: () => void
+  currentPage: IPage
   cancelGroup: () => void
+  topLargescreenElement: () => void
+  bottomLargescreenElement: () => void
+  upLargescreenElement: () => void
+  downLargescreenElement: () => void
 }
 
 const DesignHeader: FC<IDesignHeaderProps> = ({
@@ -50,7 +55,12 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   delLargeScreenElement,
   copyLargeScreenElement,
   group,
-  cancelGroup
+  cancelGroup,
+  currentPage,
+  topLargescreenElement,
+  bottomLargescreenElement,
+  upLargescreenElement,
+  downLargescreenElement
 }) => {
   const history = useHistory()
   // 向页面添加组件
@@ -227,6 +237,58 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
     showConfirm
   ])
 
+  // 上移一层
+  const isUp = useMemo(() => {
+    let flag = false
+    // 找组下标
+    const groupIndex = currentPage.widgets.findIndex(
+      (item) => item.id === currentWidgetGroupId
+    )
+    // 如果有分组，则找分组下面的widget
+    if (groupIndex !== -1 && currentWidgetGroupId !== currentWidgetId) {
+      if (
+        currentPage.widgets[groupIndex].widgets.findIndex(
+          (item) => item.id === currentWidgetId
+        ) > 0
+      ) {
+        return true
+      }
+    } else if (
+      currentPage.widgets.findIndex((item) => item.id === currentWidgetId) > 0
+    ) {
+      return true
+    }
+
+    return flag
+  }, [currentPage, currentWidgetGroupId, currentWidgetId])
+
+  // 上移一层
+  const isDown = useMemo(() => {
+    let flag = false
+    // 找组下标
+    const groupIndex = currentPage.widgets.findIndex(
+      (item) => item.id === currentWidgetGroupId
+    )
+    // 如果有分组，则找分组下面的widget
+    if (groupIndex !== -1 && currentWidgetGroupId !== currentWidgetId) {
+      if (
+        currentPage.widgets[groupIndex].widgets.findIndex(
+          (item) => item.id === currentWidgetId
+        ) !=
+        currentPage.widgets[groupIndex].widgets.length - 1
+      ) {
+        return true
+      }
+    } else if (
+      currentPage.widgets.findIndex((item) => item.id === currentWidgetId) !==
+      currentPage.widgets.length - 1
+    ) {
+      return true
+    }
+
+    return flag
+  }, [currentPage, currentWidgetGroupId, currentWidgetId])
+
   return (
     <div className='app-screen-disign__header'>
       <CreatePortal>
@@ -252,22 +314,44 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             <span className='name'>删除图层</span>
             <span>delete</span>
           </li>
-          <li className='app-content-menu__item'>
+          <li
+            onClick={() => {
+              isUp && upLargescreenElement()
+            }}
+            className={`app-content-menu__item ${!isUp ? 'is-disabled' : ''}`}>
             <span className='app-icon'>&#xe7ef;</span>
             <span className='name'>上移一层</span>
             <span>alt+↑</span>
           </li>
-          <li className='app-content-menu__item'>
+          <li
+            onClick={() => {
+              isDown && downLargescreenElement()
+            }}
+            className={`app-content-menu__item ${
+              !isDown ? 'is-disabled' : ''
+            }`}>
             <span className='app-icon'>&#xe7f1;</span>
             <span className='name'>下移一层</span>
             <span>alt+↓</span>
           </li>
-          <li className='app-content-menu__item'>
+
+          <li
+            onClick={() => {
+              isUp && topLargescreenElement()
+            }}
+            className={`app-content-menu__item ${!isUp ? 'is-disabled' : ''}`}>
             <span className='app-icon'>&#xe786;</span>
             <span className='name'>置顶图层</span>
             <span>ctrl+shfit+↑</span>
           </li>
-          <li className='app-content-menu__item is-border'>
+
+          <li
+            onClick={() => {
+              isDown && bottomLargescreenElement()
+            }}
+            className={`app-content-menu__item is-border ${
+              !isDown ? 'is-disabled' : ''
+            }`}>
             <span className='app-icon'>&#xe742;</span>
             <span className='name'>置底图层</span>
             <span>ctrl+shfit+↓</span>

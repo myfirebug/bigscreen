@@ -19,7 +19,11 @@ import {
   GROUP,
   CANCEL_GROUP,
   IPage,
-  IWidget
+  IWidget,
+  UP_LARGESCREEN_ELEMENT,
+  DOWN_LARGESCREEN_ELEMENT,
+  TOP_LARGESCREEN_ELEMENT,
+  BOTTOM_LARGESCREEN_ELEMENT
 } from '../actionType'
 // 配置文件
 import configuration from '@src/widget/tools/main'
@@ -51,6 +55,84 @@ function getCoordinates(datas: IWidget[]) {
   })
 
   return result
+}
+
+/**
+ *
+ * @param index 当前下标
+ * @param type 类型
+ * @returns 替换的下标
+ */
+function getReplaceIndex(
+  index: number,
+  type: 'up' | 'down' | 'top' | 'bottom',
+  len: number
+) {
+  let replaceIndex = 0
+  switch (type) {
+    case 'up':
+      replaceIndex = index - 1
+      break
+    case 'down':
+      replaceIndex = index + 1
+      break
+    case 'top':
+      replaceIndex = 0
+      break
+    default:
+      replaceIndex = len - 1
+      break
+  }
+  return replaceIndex
+}
+
+/**
+ * 上移，下移，置顶，置底
+ * @param copy 数据
+ * @param type  类型
+ * @returns 新数据
+ */
+function upDownTopLeft(
+  copy: LARGESCREEN_STATE,
+  type: 'up' | 'down' | 'top' | 'bottom'
+) {
+  const currentPage: IPage = copy.currentPage
+  // 找组下标
+  const groupIndex = currentPage.widgets.findIndex(
+    (item) => item.id === copy.currentWidgetGroupId
+  )
+  // 如果有分组，则找分组下面的widget
+  if (groupIndex !== -1 && copy.currentWidgetGroupId !== copy.currentWidgetId) {
+    const index = currentPage.widgets[groupIndex].widgets.findIndex(
+      (item) => item.id === copy.currentWidgetId
+    )
+    if (index !== -1) {
+      const replaceIndex: number = getReplaceIndex(
+        index,
+        type,
+        currentPage.widgets[groupIndex].widgets.length
+      )
+      const temp = currentPage.widgets[groupIndex].widgets[index]
+      currentPage.widgets[groupIndex].widgets[index] =
+        currentPage.widgets[groupIndex].widgets[replaceIndex]
+      currentPage.widgets[groupIndex].widgets[replaceIndex] = temp
+    }
+  } else {
+    const index = currentPage.widgets.findIndex(
+      (item) => item.id === copy.currentWidgetId
+    )
+    if (index !== -1) {
+      const replaceIndex: number = getReplaceIndex(
+        index,
+        type,
+        currentPage.widgets.length
+      )
+      const temp = currentPage.widgets[index]
+      currentPage.widgets[index] = currentPage.widgets[replaceIndex]
+      currentPage.widgets[replaceIndex] = temp
+    }
+  }
+  return copy
 }
 
 // 处理并返回 state
@@ -496,7 +578,7 @@ export const largeScreen = (
       )
       if (index !== -1 && copy.currentWidgetGroupId === copy.currentWidgetId) {
         // 找到当前组下的所有组件，并且将当前组件的left,top与组的left,top相加
-        const insertWidgets = currentPage.widgets[index].widgets.map(
+        const insertWidgets: IWidget[] = currentPage.widgets[index].widgets.map(
           (item) => ({
             ...item,
             dataValue: {
@@ -522,6 +604,22 @@ export const largeScreen = (
         currentWidgetGroupId: '',
         currentWidgetId: ''
       }
+    }
+
+    case UP_LARGESCREEN_ELEMENT: {
+      return upDownTopLeft(copy, 'up')
+    }
+
+    case DOWN_LARGESCREEN_ELEMENT: {
+      return upDownTopLeft(copy, 'down')
+    }
+
+    case TOP_LARGESCREEN_ELEMENT: {
+      return upDownTopLeft(copy, 'top')
+    }
+
+    case BOTTOM_LARGESCREEN_ELEMENT: {
+      return upDownTopLeft(copy, 'bottom')
     }
     default:
       return state

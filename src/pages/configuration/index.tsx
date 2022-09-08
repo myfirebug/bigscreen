@@ -18,7 +18,11 @@ import {
   changeLargeScreenElement,
   showOrHideLargeScreenElement,
   group,
-  cancelGroup
+  cancelGroup,
+  topLargescreenElement,
+  bottomLargescreenElement,
+  upLargescreenElement,
+  downLargescreenElement
 } from '@store/actions/largeScreen'
 
 // 头部
@@ -58,6 +62,10 @@ interface IDisignProps {
   undoLargeScreen: () => void
   redoLargeScreen: () => void
   currentWidgetGroupId: string
+  topLargescreenElement: () => void
+  bottomLargescreenElement: () => void
+  upLargescreenElement: () => void
+  downLargescreenElement: () => void
 }
 
 const Disign: FC<IDisignProps> = ({
@@ -83,7 +91,11 @@ const Disign: FC<IDisignProps> = ({
   copyLargeScreenElement,
   group,
   cancelGroup,
-  showOrHideLargeScreenElement
+  showOrHideLargeScreenElement,
+  topLargescreenElement,
+  bottomLargescreenElement,
+  upLargescreenElement,
+  downLargescreenElement
 }) => {
   // 获取装组件的盒子，这里需要获取他的宽度
   const elementsWrapper = useRef<HTMLDivElement>(null)
@@ -124,7 +136,7 @@ const Disign: FC<IDisignProps> = ({
   // 取消选中元素或者组
   const cancelSelectedElementHander = (e: MouseEvent) => {
     if (currentWidgetId) {
-      // changeLargeScreenElement('')
+      changeLargeScreenElement('')
     }
   }
   return (
@@ -142,7 +154,12 @@ const Disign: FC<IDisignProps> = ({
         delLargeScreenElement={delLargeScreenElement}
         copyLargeScreenElement={copyLargeScreenElement}
         currentWidgetGroupId={currentWidgetGroupId}
+        topLargescreenElement={topLargescreenElement}
+        bottomLargescreenElement={bottomLargescreenElement}
+        upLargescreenElement={upLargescreenElement}
+        downLargescreenElement={downLargescreenElement}
         group={group}
+        currentPage={currentPage}
         cancelGroup={cancelGroup}
         currentWidget={currentWidget}
       />
@@ -261,7 +278,11 @@ const mapDispatchToProps = {
   copyLargeScreenElement,
   group,
   cancelGroup,
-  showOrHideLargeScreenElement
+  showOrHideLargeScreenElement,
+  topLargescreenElement,
+  bottomLargescreenElement,
+  upLargescreenElement,
+  downLargescreenElement
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(Disign)
