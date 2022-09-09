@@ -577,6 +577,11 @@ export const largeScreen = (
         (item) => item.id === copy.currentWidgetId
       )
       if (index !== -1 && copy.currentWidgetGroupId === copy.currentWidgetId) {
+        // 这里需要去掉所有type为form有组件
+        currentPage.widgets[index].widgets = currentPage.widgets[
+          index
+        ].widgets.filter((item) => item.type !== 'form')
+
         // 找到当前组下的所有组件，并且将当前组件的left,top与组的left,top相加
         const insertWidgets: IWidget[] = currentPage.widgets[index].widgets.map(
           (item) => ({

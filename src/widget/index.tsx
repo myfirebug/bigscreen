@@ -174,7 +174,7 @@ export const componentsClassify: any[] = [
   },
   {
     type: 'form',
-    icon: '&#xe7b1;',
+    icon: '&#xe63d;',
     name: '表单',
     datas: [
       {
