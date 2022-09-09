@@ -240,6 +240,9 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 上移一层
   const isUp = useMemo(() => {
     let flag = false
+    if (!currentPage.widgets) {
+      return flag
+    }
     // 找组下标
     const groupIndex = currentPage.widgets.findIndex(
       (item) => item.id === currentWidgetGroupId
@@ -265,6 +268,9 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 上移一层
   const isDown = useMemo(() => {
     let flag = false
+    if (!currentPage.widgets) {
+      return flag
+    }
     // 找组下标
     const groupIndex = currentPage.widgets.findIndex(
       (item) => item.id === currentWidgetGroupId
