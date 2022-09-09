@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-07 09:47:20
+ * @LastEditTime: 2022-09-09 20:54:42
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -122,6 +122,17 @@ const Preview: FC<IPreviewProps> = ({
             // 没有group组件
             const Widget = components[item.code] || components[item.type]
             if (Widget) {
+              console.log(item.label, item.code, 'item.name')
+              let params = {}
+              for (let i = 0; i < currentPage.widgets.length; i++) {
+                if (currentPage.widgets[i].linkageIds.includes(item.id)) {
+                  params = {
+                    ...params,
+                    ...currentPage.widgets[i].dataValue.params
+                  }
+                }
+              }
+
               return (
                 <div
                   key={item.id}
@@ -150,6 +161,7 @@ const Preview: FC<IPreviewProps> = ({
                     params={JSON.stringify(
                       Object.assign(
                         { ...item.dataValue.params },
+                        params,
                         groupConfig &&
                           groupConfig.dataValue &&
                           groupConfig.dataValue.params

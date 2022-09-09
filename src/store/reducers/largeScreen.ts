@@ -168,6 +168,10 @@ export const largeScreen = (
     case LARGE_SCREEN:
       return state
     case MODIFY_SCREEN:
+      console.log({
+        ...copy.screen,
+        ...action.datas
+      })
       return {
         ...copy,
         screen: {
@@ -537,6 +541,7 @@ export const largeScreen = (
       const groupsElements = {
         ...widgetConfiguration.widgetGroup,
         id: groupId,
+        linkageIds: '',
         widgets: subWidgets.map((item) => ({
           ...item,
           dataValue: {
@@ -581,6 +586,9 @@ export const largeScreen = (
         currentPage.widgets[index].widgets = currentPage.widgets[
           index
         ].widgets.filter((item) => item.type !== 'form')
+
+        // 清空关联的组件ID信息
+        currentPage.widgets[index].linkageIds = ''
 
         // 找到当前组下的所有组件，并且将当前组件的left,top与组的left,top相加
         const insertWidgets: IWidget[] = currentPage.widgets[index].widgets.map(

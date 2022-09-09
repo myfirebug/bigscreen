@@ -72,6 +72,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
     if (widgetConfiguration[code]) {
       addLargeScreenElement({
         id: guid(),
+        linkageIds: '',
         ...widgetConfiguration[code]
       })
     } else {

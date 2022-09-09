@@ -18,7 +18,18 @@ export default {
     styleDisplay: 'block',
     backgroundColor: '',
     ...animate.configureValue,
-    ...box.configureValue
+    styleBoxInset: true,
+    styleBoxShadowX: 0,
+    styleBoxShadowY: 0,
+    styleBoxShadowF: 10,
+    styleBoxShadowC: 'rgba(15,32,212,0.5)',
+    styleBorderStyle: 'solid',
+    styleBorderWidth: 1,
+    styleBorderColor: 'rgba(15,32,212, 1)',
+    styleBorderTopLeftRadius: 5,
+    styleBorderTopRightRadius: 5,
+    styleBorderBottomLeftRadius: 5,
+    styleBorderBottomRightRadius: 5
   },
   // 坐标值
   coordinateValue: {

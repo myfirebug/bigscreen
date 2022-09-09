@@ -75,6 +75,8 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   const [dynamicForm] = Form.useForm()
   // 数据
   const [dataForm] = Form.useForm()
+  // 联动
+  const [linkageForm] = Form.useForm()
 
   useEffect(() => {
     if (currentWidget.configureValue) {
@@ -85,6 +87,9 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
     }
     if (currentWidget.dataValue) {
       dataForm.setFieldsValue(currentWidget.dataValue)
+    }
+    if (currentWidget.linkageIds) {
+      linkageForm.setFieldsValue(currentWidget.linkageIds.split(','))
     }
   }, [currentWidget])
   // 判断数据是Array 或者 object
@@ -559,8 +564,31 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   }, [currentWidgetGroupId, currentPage])
 
   useEffect(() => {
-    setKey('5')
+    setKey('1')
   }, [currentWidgetId])
+
+  // 判断是否显示联动组件
+  const isShowLinkageForm = useMemo(() => {
+    let flag = false
+
+    if (!currentPage.widgets) {
+      return flag
+    }
+
+    if (currentWidgetId === currentWidgetGroupId) {
+      const index = currentPage.widgets.findIndex(
+        (item) => item.id === currentWidgetGroupId
+      )
+      if (
+        index !== -1 &&
+        currentPage.widgets[index].widgets.some((item) => item.type === 'form')
+      ) {
+        return true
+      }
+    }
+
+    return flag
+  }, [currentPage, currentWidgetId, currentWidgetGroupId])
 
   return (
     <div
@@ -576,7 +604,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         activeKey={key}
         onChange={(key) => setKey(key)}
         destroyInactiveTabPane>
-        <TabPane tab='图层管理' key='5' style={{ position: 'relative' }}>
+        <TabPane tab='图层管理' key='1' style={{ position: 'relative' }}>
           <Wrapper
             loading={false}
             error={false}
@@ -588,7 +616,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
             </div>
           </Wrapper>
         </TabPane>
-        <TabPane tab='项目配置' key='1'>
+        <TabPane tab='项目配置' key='2'>
           <Form
             preserve
             form={pageForm}
@@ -609,7 +637,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         </TabPane>
         {currentWidgetId && !currentWidgetId.includes(',') && (
           <>
-            <TabPane tab='配置' key='2'>
+            <TabPane tab='配置' key='3'>
               <Form
                 form={configureForm}
                 labelCol={{ span: 6 }}
@@ -642,7 +670,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               widgetTypesConfiguration[currentWidget.code].data) ||
             (widgetTypesConfiguration[currentWidget.type] &&
               widgetTypesConfiguration[currentWidget.type].data) ? (
-              <TabPane tab='数据' key='3'>
+              <TabPane tab='数据' key='4'>
                 <Form
                   preserve
                   form={dataForm}
@@ -688,7 +716,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
                 </Form>
               </TabPane>
             ) : null}
-            <TabPane tab='坐标' key='4'>
+            <TabPane tab='坐标' key='5'>
               <Form
                 preserve
                 form={dynamicForm}
@@ -707,6 +735,44 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
             </TabPane>
           </>
         )}
+        {isShowLinkageForm ? (
+          <TabPane tab='联动' key='6'>
+            <Form
+              form={linkageForm}
+              labelCol={{ span: 6 }}
+              wrapperCol={{ span: 18 }}
+              autoComplete='off'
+              labelAlign='left'>
+              <Form.Item label='联动组件' name='linkageIds'>
+                <Select
+                  onChange={(e: any) =>
+                    modifyLargeScreenElement(
+                      currentWidgetId,
+                      currentWidgetGroupId,
+                      {
+                        ...currentWidget,
+                        linkageIds: e.join(',')
+                      }
+                    )
+                  }
+                  mode='multiple'
+                  placeholder='请选择联动组件'>
+                  {currentPage && currentPage.widgets
+                    ? currentPage.widgets.map((item) => {
+                        if (item.id !== currentWidgetGroupId) {
+                          return (
+                            <Option key={item.id} value={item.id}>
+                              {item.label}
+                            </Option>
+                          )
+                        }
+                      })
+                    : null}
+                </Select>
+              </Form.Item>
+            </Form>
+          </TabPane>
+        ) : null}
       </Tabs>
     </div>
   )

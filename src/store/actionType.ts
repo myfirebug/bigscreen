@@ -87,8 +87,6 @@ export interface IWidget extends IAnyObject {
   configure: any[]
   // 坐标值
   coordinateValue: any
-  // 是否是是组
-  isGroup: boolean
   // 组件
   widgets: IWidget[]
 }
