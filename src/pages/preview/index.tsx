@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-09 20:54:42
+ * @LastEditTime: 2022-09-10 12:40:41
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -28,6 +28,7 @@ const Preview: FC<IPreviewProps> = ({
   screen,
   modifyLargeScreenElement
 }) => {
+  console.log(currentPage, 'currentPage')
   const elementsWrapper = useRef<HTMLDivElement>(null)
   // 获取放大缩小比例
   const [cale, setCale] = useState(0)
@@ -72,6 +73,15 @@ const Preview: FC<IPreviewProps> = ({
           if (item.widgets) {
             const Widget = components[item.code] || components[item.type]
             if (Widget) {
+              let params = {}
+              for (let i = 0; i < currentPage.widgets.length; i++) {
+                if (currentPage.widgets[i].linkageIds.includes(item.id)) {
+                  params = {
+                    ...params,
+                    ...currentPage.widgets[i].dataValue.params
+                  }
+                }
+              }
               return (
                 <div
                   key={item.id}
@@ -87,7 +97,12 @@ const Preview: FC<IPreviewProps> = ({
                     isPlaceholder={false}
                     method={item.dataValue.method}
                     url={item.dataValue.url}
-                    params={JSON.stringify(item.dataValue.params || {})}
+                    params={JSON.stringify(
+                      {
+                        ...item.dataValue.params,
+                        ...params
+                      } || {}
+                    )}
                     render={(data, success) => {
                       return (
                         <>
@@ -107,7 +122,10 @@ const Preview: FC<IPreviewProps> = ({
                                     : item.dataValue.mock
                                 },
                                 success,
-                                parentParams: item.dataValue.params
+                                parentParams: {
+                                  ...item.dataValue.params,
+                                  ...params
+                                }
                               },
                               item
                             )}
@@ -122,7 +140,6 @@ const Preview: FC<IPreviewProps> = ({
             // 没有group组件
             const Widget = components[item.code] || components[item.type]
             if (Widget) {
-              console.log(item.label, item.code, 'item.name')
               let params = {}
               for (let i = 0; i < currentPage.widgets.length; i++) {
                 if (currentPage.widgets[i].linkageIds.includes(item.id)) {
@@ -132,7 +149,6 @@ const Preview: FC<IPreviewProps> = ({
                   }
                 }
               }
-
               return (
                 <div
                   key={item.id}
@@ -161,12 +177,12 @@ const Preview: FC<IPreviewProps> = ({
                     params={JSON.stringify(
                       Object.assign(
                         { ...item.dataValue.params },
-                        params,
                         groupConfig &&
                           groupConfig.dataValue &&
                           groupConfig.dataValue.params
                           ? groupConfig.dataValue.params
-                          : {}
+                          : {},
+                        params
                       ) || {}
                     )}
                     render={(data, success) => {

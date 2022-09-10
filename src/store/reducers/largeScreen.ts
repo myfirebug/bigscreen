@@ -375,7 +375,8 @@ export const largeScreen = (
         // pastPage: [...copy.pastPage, currentPage],
         currentPage: currentPage,
         currentWidget: action.data,
-        currentWidgetId: action.id
+        currentWidgetId: action.id,
+        currentWidgetGroupId: action.groupId
       }
     }
     // 切换元素
@@ -432,10 +433,13 @@ export const largeScreen = (
         )
         // 复制的是group里的某一个组件
         if (index !== -1) {
+          const oldElement: IWidget = JSON.parse(
+            JSON.stringify(currentPage.widgets[groupIndex].widgets[index])
+          )
           const copyElement = {
-            ...currentPage.widgets[groupIndex].widgets[index],
+            ...oldElement,
             id: copyElementId,
-            label: `[复制]${currentPage.widgets[groupIndex].widgets[index].label}`
+            label: `[复制]${oldElement.label}`
           }
           currentPage.widgets[groupIndex].widgets.splice(
             index + 1,
@@ -453,31 +457,32 @@ export const largeScreen = (
           (item) => item.id === copy.currentWidgetId
         )
         if (index !== -1) {
+          const oldElement: IWidget = JSON.parse(
+            JSON.stringify(currentPage.widgets[index])
+          )
           // 说明复制的是group组件包含里面的子组件，这时需要把子组件的Id都给重置一次，不然在选择group里的子组件时，会有多个存在
           if (copy.currentWidgetGroupId === copy.currentWidgetId) {
             copy.currentWidgetGroupId = copyElementId
             copyElement = {
-              ...currentPage.widgets[index],
+              ...oldElement,
               id: copyElementId,
-              label: `[复制]${currentPage.widgets[index].label}`,
-              widgets: currentPage.widgets[index].widgets.map((item) => ({
+              label: `[复制]${oldElement.label}`,
+              widgets: oldElement.widgets.map((item) => ({
                 ...item,
                 id: guid()
               }))
             }
           } else {
             copyElement = {
-              ...currentPage.widgets[index],
+              ...oldElement,
               id: copyElementId,
-              label: `[复制]${currentPage.widgets[index].label}`
+              label: `[复制]${oldElement.label}`
             }
           }
 
           currentPage.widgets.splice(index + 1, 0, copyElement)
           copy.currentWidgetId = copyElementId
-          copy.currentWidget = {
-            ...copyElement
-          }
+          copy.currentWidget = copyElement
         }
       }
 

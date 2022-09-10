@@ -89,7 +89,9 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
       dataForm.setFieldsValue(currentWidget.dataValue)
     }
     if (currentWidget.linkageIds) {
-      linkageForm.setFieldsValue(currentWidget.linkageIds.split(','))
+      linkageForm.setFieldsValue({
+        linkageIds: currentWidget.linkageIds.split(',')
+      })
     }
   }, [currentWidget])
   // 判断数据是Array 或者 object

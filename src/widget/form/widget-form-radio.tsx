@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-28 14:00:20
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 23:16:31
+ * @LastEditTime: 2022-09-10 11:45:18
  * @FilePath: \bigscreen\src\widget\form\widget-form-radio.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -36,8 +36,10 @@ const WidgetFormRadio: FC<IWidgetFormRadioProps> = ({
 }) => {
   const changeHandler = (val: any) => {
     if (parentWidget && paramName) {
-      const widget = JSON.parse(JSON.stringify(parentWidget))
+      const widget = parentWidget
+      console.log(widget.dataValue.params, 'before')
       widget.dataValue.params[paramName] = val
+      console.log(widget.dataValue.params, 'after')
       modifyLargeScreenElement(parentWidget.id, parentWidget.id, widget)
     }
   }
