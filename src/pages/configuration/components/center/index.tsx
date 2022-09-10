@@ -185,6 +185,15 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
             // 没有group组件
             const Widget = components[item.code] || components[item.type]
             if (Widget) {
+              let params = {}
+              for (let i = 0; i < currentPage.widgets.length; i++) {
+                if (currentPage.widgets[i].linkageIds.includes(item.id)) {
+                  params = {
+                    ...params,
+                    ...currentPage.widgets[i].dataValue.params
+                  }
+                }
+              }
               return (
                 <Drag
                   item={item}
@@ -234,7 +243,8 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                           { ...item.dataValue.params },
                           groupConfig && groupConfig.parentParams
                             ? groupConfig.parentParams
-                            : {}
+                            : {},
+                          params
                         ) || {}
                       )}
                       render={(data, success) => {

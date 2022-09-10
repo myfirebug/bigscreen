@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-10 19:43:52
+ * @LastEditTime: 2022-09-10 12:40:41
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -179,7 +179,8 @@ const Preview: FC<IPreviewProps> = ({
                         { ...item.dataValue.params },
                         groupConfig && groupConfig.parentParams
                           ? groupConfig.parentParams
-                          : {}
+                          : {},
+                        params
                       ) || {}
                     )}
                     render={(data, success) => {
