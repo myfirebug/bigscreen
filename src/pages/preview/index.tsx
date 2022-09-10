@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-10 12:40:41
+ * @LastEditTime: 2022-09-10 19:43:52
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -177,12 +177,9 @@ const Preview: FC<IPreviewProps> = ({
                     params={JSON.stringify(
                       Object.assign(
                         { ...item.dataValue.params },
-                        groupConfig &&
-                          groupConfig.dataValue &&
-                          groupConfig.dataValue.params
-                          ? groupConfig.dataValue.params
-                          : {},
-                        params
+                        groupConfig && groupConfig.parentParams
+                          ? groupConfig.parentParams
+                          : {}
                       ) || {}
                     )}
                     render={(data, success) => {

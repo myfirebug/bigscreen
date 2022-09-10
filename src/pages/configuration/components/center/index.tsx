@@ -95,6 +95,15 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
           if (item.widgets) {
             const Widget = components[item.code] || components[item.type]
             if (Widget) {
+              let params = {}
+              for (let i = 0; i < currentPage.widgets.length; i++) {
+                if (currentPage.widgets[i].linkageIds.includes(item.id)) {
+                  params = {
+                    ...params,
+                    ...currentPage.widgets[i].dataValue.params
+                  }
+                }
+              }
               return (
                 <Drag
                   item={item}
@@ -127,7 +136,12 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                       isPlaceholder={true}
                       method={item.dataValue.method}
                       url={item.dataValue.url}
-                      params={JSON.stringify(item.dataValue.params || {})}
+                      params={JSON.stringify(
+                        {
+                          ...item.dataValue.params,
+                          ...params
+                        } || {}
+                      )}
                       render={(data, success) => {
                         return (
                           <>
@@ -152,7 +166,10 @@ const DesignBodyCenter: FC<IDesignBodyCenterProps> = ({
                                       : item.dataValue.mock
                                   },
                                   success,
-                                  parentParams: item.dataValue.params
+                                  parentParams: {
+                                    ...item.dataValue.params,
+                                    ...params
+                                  }
                                 },
                                 item
                               )}
