@@ -24,6 +24,8 @@ import scatter from './scatter/main'
 import table from './table/main'
 // 表单
 import form from './form/main'
+// echart地图
+import emap from './emap/main'
 
 const widgetConfiguration: any = {
   ...text,
@@ -36,7 +38,8 @@ const widgetConfiguration: any = {
   ...funnel,
   ...scatter,
   ...table,
-  ...form
+  ...form,
+  ...emap
 }
 
 export default widgetConfiguration

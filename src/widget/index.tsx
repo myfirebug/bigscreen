@@ -183,6 +183,18 @@ export const componentsClassify: any[] = [
         name: '单选'
       }
     ]
+  },
+  {
+    type: 'emap',
+    icon: '&#xe63d;',
+    name: 'echart地图',
+    datas: [
+      {
+        src: require('../assets/image/configuration/scatter/widgetBaseScatter.png'),
+        widgetName: 'widgetEmap',
+        name: '基础地图'
+      }
+    ]
   }
 ]
 
@@ -192,6 +204,8 @@ const components: any = {
   ...text,
   // 表单
   ...form,
+  // echarts地图
+  emap: require('./emap').default,
   // 图片
   image: require('./image').default,
   // 组
