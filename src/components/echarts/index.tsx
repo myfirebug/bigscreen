@@ -40,6 +40,7 @@ const Echarts = memo(
     // data change update echart
     useEffect(() => {
       if (echartsInstance.current && JSON.stringify(options) !== '{}') {
+        echartsInstance.current.hideLoading()
         echartsInstance.current.setOption(
           {
             ...options,
@@ -149,6 +150,16 @@ const Echarts = memo(
 
     // 销毁图表
     useEffect(() => {
+      if (echartsInstance.current) {
+        echartsInstance.current.showLoading('default', {
+          text: '加载中...',
+          color: '#1890ff',
+          maskColor: 'rgba(0,0,0,0)',
+          textColor: '#1890ff',
+          spinnerRadius: 6,
+          lineWidth: 3
+        })
+      }
       return () => {
         if (echartsInstance.current) {
           echartsInstance.current.dispose()

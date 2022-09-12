@@ -7,6 +7,10 @@
  * @FilePath: \bigscreen\src\widget\tools\widget\emap\widget-emap-base.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
-import barConfig from './index'
+import emapConfig from './index'
 
-export default {}
+export default {
+  code: 'widgetEmapBase',
+  label: '基础Echarts图表',
+  ...emapConfig
+}

@@ -296,6 +296,35 @@ export function handleEchartsOption(style: any): any {
         }
       }
     },
+    emap: {
+      config: {
+        geo: {
+          type: 'map',
+          map: '100000', //chinaMap需要和registerMap中的第一个参数保持一致
+          roam: true, // 设置允许缩放以及拖动的效果
+          label: {
+            show: style?.emapLabelShow, //展示标签
+            color: style?.emapFontColor,
+            fontSize: style?.emapFontSize || 12
+          },
+          itemStyle: {
+            borderColor: style?.emapBorderColor,
+            areaColor: style?.emapAreaColor,
+            borderWidth: style?.emapBorderSize
+          },
+          emphasis: {
+            label: {
+              color: style?.emapHighFontColor
+            },
+            itemStyle: {
+              areaColor: style?.emapHighAreaColor,
+              borderColor: style?.emapHighBorderColor
+            }
+          },
+          zoom: style?.emapZoom || 1 //设置初始化的缩放比例
+        }
+      }
+    },
     series: []
   }
 }

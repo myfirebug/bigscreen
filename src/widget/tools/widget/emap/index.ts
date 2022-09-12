@@ -10,6 +10,27 @@ const { data } = baseConfiguration
 
 export default {
   type: 'emap',
+  // 配置项值
+  configureValue: {
+    styleDisplay: 'block',
+    emapZoom: 1,
+    emapLabelShow: true,
+    emapFontSize: 12,
+    emapFontColor: 'rgba(255,255,255,.5)',
+    emapHighFontColor: '#fff',
+    emapBorderSize: 1,
+    emapBorderColor: '#666',
+    emapHighBorderColor: '#fff',
+    emapAreaColor: '#333',
+    emapHighAreaColor: '#000'
+  },
+  // 坐标值
+  coordinateValue: {
+    left: 0,
+    top: 0,
+    width: 467,
+    height: 346
+  },
   // 数据值
   dataValue: {
     ...data.configureValue,

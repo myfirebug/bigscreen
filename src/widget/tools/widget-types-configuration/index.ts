@@ -26,6 +26,8 @@ import scatter from './scatter'
 import table from './table'
 // form配置
 import form from './form/main'
+// emap配置
+import emap from './emap/main'
 
 const widgetTypesConfiguration: any = {
   group,
@@ -38,7 +40,8 @@ const widgetTypesConfiguration: any = {
   funnel,
   scatter,
   table,
-  ...form
+  ...form,
+  ...emap
 }
 
 export default widgetTypesConfiguration

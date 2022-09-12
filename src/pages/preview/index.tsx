@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-10 12:40:41
+ * @LastEditTime: 2022-09-12 21:37:41
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -28,7 +28,6 @@ const Preview: FC<IPreviewProps> = ({
   screen,
   modifyLargeScreenElement
 }) => {
-  console.log(currentPage, 'currentPage')
   const elementsWrapper = useRef<HTMLDivElement>(null)
   // 获取放大缩小比例
   const [cale, setCale] = useState(0)
@@ -240,7 +239,7 @@ const Preview: FC<IPreviewProps> = ({
         style={{
           width: screen.width,
           height: screen.height,
-          transform: `scale(${cale})`,
+          transform: `scale(${1})`,
           transformOrigin: '0 0',
           background: `url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%`
         }}>

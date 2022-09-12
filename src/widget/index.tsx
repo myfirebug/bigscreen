@@ -191,7 +191,7 @@ export const componentsClassify: any[] = [
     datas: [
       {
         src: require('../assets/image/configuration/scatter/widgetBaseScatter.png'),
-        widgetName: 'widgetEmap',
+        widgetName: 'widgetEmapBase',
         name: '基础地图'
       }
     ]
