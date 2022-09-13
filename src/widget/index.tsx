@@ -187,10 +187,10 @@ export const componentsClassify: any[] = [
   {
     type: 'emap',
     icon: '&#xe63d;',
-    name: 'echart地图',
+    name: 'emap',
     datas: [
       {
-        src: require('../assets/image/configuration/scatter/widgetBaseScatter.png'),
+        src: require('../assets/image/configuration/emap/widgetEmapBase.png'),
         widgetName: 'widgetEmapBase',
         name: '基础地图'
       }

@@ -230,6 +230,7 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
               min={item.min || 0}
               max={item.max || 100}
               disabled={item.disabled}
+              step={item.step || 1}
               onAfterChange={(value) =>
                 isUpdate && onChangeHandler(callback, item.name, value, field)
               }

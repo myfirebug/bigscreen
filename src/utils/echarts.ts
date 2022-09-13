@@ -18,11 +18,6 @@ interface result {
  */
 export function handleEchartsOption(style: any): any {
   return {
-    // toolbox: {
-    //   feature: {
-    //     saveAsImage: {}
-    //   }
-    // },
     color: [
       style?.themeColor1,
       style?.themeColor2,
@@ -298,10 +293,31 @@ export function handleEchartsOption(style: any): any {
     },
     emap: {
       config: {
+        visualMap: style?.emapVisualMapShow
+          ? {
+              show: style?.emapVisualMapShow,
+              itemWidth: 10,
+              itemHeight: 80,
+              color: [
+                style?.emapVisualMapStartColor,
+                style?.emapVisualMapEndColor
+              ],
+              textStyle: {
+                color: style?.emapVisualMapFontColor
+              },
+              text: ['高', '低'],
+              left: style?.emapVisualMapLeft,
+              orient: style?.emapVisualMapOrient,
+              handleStyle: {
+                opacity: 0
+              }
+            }
+          : null,
         geo: {
           type: 'map',
           map: '100000', //chinaMap需要和registerMap中的第一个参数保持一致
-          roam: true, // 设置允许缩放以及拖动的效果
+          roam: false, // 设置允许缩放以及拖动的效果
+          top: style?.emapTop ? `${style?.emapTop}%` : '0%',
           label: {
             show: style?.emapLabelShow, //展示标签
             color: style?.emapFontColor,
@@ -321,9 +337,20 @@ export function handleEchartsOption(style: any): any {
               borderColor: style?.emapHighBorderColor
             }
           },
-          zoom: style?.emapZoom || 1 //设置初始化的缩放比例
+          select: {
+            label: {
+              color: style?.emapFontColor,
+              fontSize: style?.emapFontSize || 12
+            },
+            itemStyle: {
+              borderColor: style?.emapBorderColor,
+              areaColor: style?.emapAreaColor
+            }
+          },
+          zoom: style?.emapZoom || 1
         }
-      }
+      },
+      series: {}
     },
     series: []
   }

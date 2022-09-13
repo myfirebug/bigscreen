@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-12 21:37:41
+ * @LastEditTime: 2022-09-13 10:08:07
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
