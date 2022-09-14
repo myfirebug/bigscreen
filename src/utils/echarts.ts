@@ -129,7 +129,10 @@ export function handleEchartsOption(style: any): any {
       boundaryGap: style?.yAxisBoundaryGap,
       axisTick: {
         show: style?.yAxisTickShow,
-        alignWithLabel: style?.yAxisAlignWithLabel
+        alignWithLabel: style?.yAxisAlignWithLabel,
+        lineStyle: {
+          color: style?.axisLineColor
+        }
       },
       axisLine: {
         show: style?.yAxisLineShow,
