@@ -319,7 +319,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             }`}>
             <span className='app-icon'>&#xe7c3;</span>
             <span className='name'>删除图层</span>
-            <span>delete</span>
           </li>
           <li
             onClick={() => {
@@ -328,7 +327,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             className={`app-content-menu__item ${!isUp ? 'is-disabled' : ''}`}>
             <span className='app-icon'>&#xe7ef;</span>
             <span className='name'>上移一层</span>
-            <span>alt+↑</span>
           </li>
           <li
             onClick={() => {
@@ -339,7 +337,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             }`}>
             <span className='app-icon'>&#xe7f1;</span>
             <span className='name'>下移一层</span>
-            <span>alt+↓</span>
           </li>
 
           <li
@@ -349,7 +346,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             className={`app-content-menu__item ${!isUp ? 'is-disabled' : ''}`}>
             <span className='app-icon'>&#xe786;</span>
             <span className='name'>置顶图层</span>
-            <span>ctrl+shfit+↑</span>
           </li>
 
           <li
@@ -361,7 +357,6 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
             }`}>
             <span className='app-icon'>&#xe742;</span>
             <span className='name'>置底图层</span>
-            <span>ctrl+shfit+↓</span>
           </li>
           <li
             onClick={groupHandler}
@@ -484,7 +479,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
                 ? ''
                 : 'is-disabled'
             }`}>
-            <Tooltip title='删除(ctrl+delete)' placement='bottom'>
+            <Tooltip title='删除(delete)' placement='bottom'>
               <span className='app-icon'>&#xe7c3;</span>
               <p>删除</p>
             </Tooltip>

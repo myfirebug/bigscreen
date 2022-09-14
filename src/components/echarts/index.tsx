@@ -43,11 +43,11 @@ const Echarts = memo(
         // echartsInstance.current.hideLoading()
         echartsInstance.current.setOption(
           {
-            toolbox: {
-              feature: {
-                saveAsImage: {}
-              }
-            },
+            // toolbox: {
+            //   feature: {
+            //     saveAsImage: {}
+            //   }
+            // },
             ...options,
             tooltip: {
               trigger: 'axis',

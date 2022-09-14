@@ -144,9 +144,9 @@ const initialState = {
   currentWidgetId: '',
   currentWidget: {} as IWidget,
   screen: {
-    width: 1920,
-    height: 1080,
-    backgroundColor: 'rgba(0,0,0,.5)',
+    width: 1366,
+    height: 768,
+    backgroundColor: '#090548',
     title: '大屏',
     description: '描述',
     auxiliaryBorderColor: '#1890ff',
@@ -168,10 +168,6 @@ export const largeScreen = (
     case LARGE_SCREEN:
       return state
     case MODIFY_SCREEN:
-      console.log({
-        ...copy.screen,
-        ...action.datas
-      })
       return {
         ...copy,
         screen: {

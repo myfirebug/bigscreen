@@ -25,7 +25,7 @@ export default {
   coordinateValue: {
     left: 0,
     top: 0,
-    width: 100,
+    width: 300,
     height: 40
   },
   // 数据值
