@@ -144,6 +144,7 @@ const initialState = {
   currentWidgetId: '',
   currentWidget: {} as IWidget,
   screen: {
+    projectName: '',
     width: 1366,
     height: 768,
     backgroundColor: '#090548',

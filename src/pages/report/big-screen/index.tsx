@@ -1,10 +1,10 @@
+import { FC, useRef, useState, useEffect } from 'react'
 import {
-  FC,
-  useRef,
-  useState,
-  useEffect
-} from 'react'
-import { ActionType, ProColumns, ProTable, TableDropdown } from '@ant-design/pro-table'
+  ActionType,
+  ProColumns,
+  ProTable,
+  TableDropdown
+} from '@ant-design/pro-table'
 import tableConfig from '@src/config/table-config'
 import { ALL_STATE } from '@store/actionType'
 import { connect } from 'react-redux'
@@ -19,28 +19,24 @@ import PopConfirm from '@src/components/pop-confirm'
 // 表格字段的类型
 type TableItem = {
   // 报表id
-  id: number;
+  id: number
   // 报表标题
-  title: string;
+  title: string
   // 报表状态
-  state: string;
+  state: string
   // 报表描述
-  describe: string;
+  describe: string
   // 创建时间
-  createdAt: string;
+  createdAt: string
 }
 
 interface IBigScreenProps {
-  strategy: IAnyObject;
-  getStrategy: (key: string) => void;
+  strategy: IAnyObject
+  getStrategy: (key: string) => void
   path: string
 }
 
-const BigScreen: FC<IBigScreenProps> = ({
-  strategy,
-  getStrategy,
-  path
-}) => {
+const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
   // 获取策略
   useEffect(() => {
     getStrategy(path)
@@ -123,7 +119,7 @@ const BigScreen: FC<IBigScreenProps> = ({
           return {
             startTime: value[0],
             endTime: value[1]
-          };
+          }
         }
       }
     },
@@ -133,19 +129,24 @@ const BigScreen: FC<IBigScreenProps> = ({
         return (
           <div className='app-table__operation'>
             <span
-              onClick={() => message.error('对不起你没有编辑权限')}
-              className='link'>编辑</span>
-            <PopConfirm text='删除'
-              requestName="aaa"
+              onClick={() =>
+                history.push(`/frame/configuration?id=${record.id}`)
+              }
+              className='link'>
+              编辑
+            </span>
+            <PopConfirm
+              text='删除'
+              requestName='aaa'
               params={{
                 ids: [record.id]
               }}
               reload={actionRef.current?.reloadAndRest}></PopConfirm>
-            <TableDropdown
+            {/* <TableDropdown
               style={{
                 marginLeft: 10
               }}
-              key="actionGroup"
+              key='actionGroup'
               onSelect={(value) => {
                 if (value === 'design') {
                   history.push(`/frame/configuration?id=${record.id}`)
@@ -154,14 +155,14 @@ const BigScreen: FC<IBigScreenProps> = ({
               menus={[
                 { key: 'preview', name: '预览' },
                 { key: 'design', name: '设计' }
-              ]}
-            >更多</TableDropdown>
+              ]}>
+              更多
+            </TableDropdown> */}
           </div>
         )
       }
     }
   ]
-
 
   // 选中的数据
   const [selectedRowKeys, setSelectedRowKeys] = useState<any[]>([])
@@ -170,6 +171,10 @@ const BigScreen: FC<IBigScreenProps> = ({
     onChange: (selectedRowKeys: any) => {
       setSelectedRowKeys(selectedRowKeys)
     }
+  }
+
+  const addProject = () => {
+    history.push('/frame/configuration')
   }
   return (
     <>
@@ -184,74 +189,76 @@ const BigScreen: FC<IBigScreenProps> = ({
           padding: 0,
           background: '#535353'
         }}
-        onClose={() => setDrawer((state: any) => ({
-          ...state,
-          visible: false
-        }))} visible={drawer.visible}>
+        onClose={() =>
+          setDrawer((state: any) => ({
+            ...state,
+            visible: false
+          }))
+        }
+        visible={drawer.visible}>
         12312
       </Drawer>
       <ProTable<TableItem>
         {...tableConfig}
         columns={columns}
         actionRef={actionRef}
-        headerTitle="报表管理"
+        headerTitle='报表管理'
         cardBordered
         search={{
           labelWidth: 'auto'
         }}
         request={async (params = {}, sort, filter) => {
           return Promise.resolve({
-            data: [{
-              id: 1,
-              title: 'xxx测试大屏',
-              state: 'open',
-              describe: '我是测试的描述哟',
-              createdAt: '2020-05-26T04:25:59Z'
-            }],
+            data: [
+              {
+                id: 1,
+                title: 'xxx测试大屏',
+                state: 'open',
+                describe: '我是测试的描述哟',
+                createdAt: '2020-05-26T04:25:59Z'
+              }
+            ],
             total: 20,
             success: true
-          });
+          })
         }}
         rowSelection={{ ...rowSelection }}
         toolBarRender={() => {
           const arr = [
             <Button
-              key="button"
+              key='button'
               icon={<PlusOutlined />}
-              type="primary">
+              onClick={addProject}
+              type='primary'>
               添加
-            </Button>]
+            </Button>
+          ]
           return arr
-        }
-        }
+        }}
         tableAlertOptionRender={() => {
           return (
             <Space size={16}>
-              <PopConfirm text='批量删除'
-                requestName="aaa"
+              <PopConfirm
+                text='批量删除'
+                requestName='aaa'
                 params={{
                   ids: [selectedRowKeys]
                 }}
                 reload={actionRef.current?.reloadAndRest}></PopConfirm>
             </Space>
-          );
-        }}
-      ></ProTable>
+          )
+        }}></ProTable>
     </>
   )
 }
 // 对应的statemkjh m,
 const mapStateToProps = (state: ALL_STATE) => ({
   strategy: state.authorization.strategy
-});
+})
 
 // 将 对应action 插入到组件的 props 中
 const mapDispatchToProps = {
   getStrategy
-};
+}
 
-
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(BigScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(BigScreen)

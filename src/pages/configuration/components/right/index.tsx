@@ -567,7 +567,11 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
   }, [currentWidgetGroupId, currentPage])
 
   useEffect(() => {
-    setKey('1')
+    if (currentWidgetId) {
+      setKey('1')
+    } else {
+      setKey('2')
+    }
   }, [currentWidgetId])
 
   // 判断是否显示联动组件
@@ -607,18 +611,14 @@ const DesignBodyRight: FC<IDesignBodyRightProps> = ({
         activeKey={key}
         onChange={(key) => setKey(key)}
         destroyInactiveTabPane>
-        <TabPane tab='图层管理' key='1' style={{ position: 'relative' }}>
-          <Wrapper
-            loading={false}
-            error={false}
-            nodata={Boolean(
-              currentPage && currentPage.widgets && !currentPage.widgets.length
-            )}>
+        {currentPage && currentPage.widgets && currentPage.widgets.length ? (
+          <TabPane tab='图层管理' key='1' style={{ position: 'relative' }}>
             <div className='app-screen-disign__layer'>
               {renderWidgetsTree(currentPage.widgets || [])}
             </div>
-          </Wrapper>
-        </TabPane>
+          </TabPane>
+        ) : null}
+
         <TabPane tab='项目配置' key='2'>
           <Form
             preserve

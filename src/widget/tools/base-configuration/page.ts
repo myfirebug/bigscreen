@@ -10,6 +10,13 @@ const page = {
   label: '页面配置',
   configure: [
     {
+      componentName: 'Input',
+      label: '项目名称',
+      name: 'projectName',
+      required: false,
+      placeholder: '请输入项目名称'
+    },
+    {
       componentName: 'InputNumber',
       label: '屏幕宽度',
       name: 'width',

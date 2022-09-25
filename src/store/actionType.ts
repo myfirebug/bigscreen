@@ -99,6 +99,7 @@ export interface IPage {
 }
 
 export interface IScreen {
+  projectName: string
   width: number | string
   height: number | string
   horizontalNumber: number
