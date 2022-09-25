@@ -1,55 +1,135 @@
-# 基于 React 拖动配置大屏的后台管理系统
-
-# 目录结构
-
-[一、框架使用技术](#1.框架使用技术)
-
-[二、学习文档](#2.学习文档)
-
-[三、依赖安装、启动、打包](#3.依赖安装、启动、打包)
-
-[四、目录结构](#4.目录结构)
-
-[五、文件路径依赖引用简写如下](#4.文件路径依赖引用简写如下)
-
-# 1.框架使用技术
-
-- 框架为`create-react-app`构架，搭配`react-router-dom`、`redux`、`react-redux`、`redux-thunk`、`redux-persist`、`redux-logger`、`axios`，UI 框架为`antd@4.19.3`
-
-# 2.学习文档
-
-- [react 中文官网](https://react.docschina.org 'react中文官网')
-- [react 英文官网](https://reactjs.org 'react英文官网')
-- [redux 中文官网](http://cn.redux.js.org 'redux中文官网')
-- [redux 英文官网](https://redux.js.org 'redux英文官网')
-- [create-react-app 中文文档](https://www.html.cn/create-react-app/docs/getting-started/ 'create-react-app中文文档')
-- [antd 官网](https://3x.ant.design/index-cn 'antd官网')
-- [react-app-rewired](https://github.com/timarney/react-app-rewired#readme '在不npm run inject的情况下修改webpack')
-- [webpack-bundle-analyzer 分析 SPA 应用](https://github.com/webpack-contrib/webpack-bundle-analyzer 'webpack-bundle-analyzer分析SPA应用')
-
-# 3.依赖安装、启动、打包
-
-## 克隆
-
-``
-
-## 启动开发环境（开发调试时使用）
-
-### `npm start`
-
-## 构建测试项目
-
-## `npm build:test`
-
-## 构建正式项目
-
-### `npm build:production`
-
-# 4.目录结构
-
-```
 bigscreen
 ├── README.md
+├── bash.exe.stackdump
+├── build
+│   ├── asset-manifest.json
+│   ├── css
+│   │   └── animate.min.css
+│   ├── favicon.ico
+│   ├── index.html
+│   ├── logo192.png
+│   ├── logo512.png
+│   ├── manifest.json
+│   ├── mock
+│   │   ├── configuration.json
+│   │   └── menu.json
+│   ├── robots.txt
+│   └── static
+│       ├── css
+│       │   ├── 141.608915a2.css
+│       │   ├── 274.3012e76e.css
+│       │   ├── 359.2e6f8b5b.css
+│       │   ├── 361.3b125d30.css
+│       │   ├── 372.55afcbeb.css
+│       │   ├── 381.8b5fa6b1.css
+│       │   ├── 397.fbee23b6.css
+│       │   ├── 431.c2ae0206.css
+│       │   ├── 447.d7028b6f.css
+│       │   ├── 451.43ddc525.css
+│       │   ├── 492.08aa40d2.css
+│       │   ├── 517.2e6f8b5b.css
+│       │   ├── 536.3b125d30.css
+│       │   ├── 574.608915a2.css
+│       │   ├── 731.56f09a70.css
+│       │   ├── 757.08aa40d2.css
+│       │   ├── 769.d860a45c.css
+│       │   ├── 774.bcf5a00c.css
+│       │   ├── 943.6af75784.css
+│       │   ├── 990.fbee23b6.css
+│       │   ├── frame.05637a4c.css
+│       │   ├── login.3b125d30.css
+│       │   └── main.02bf1364.css
+│       ├── js
+│       │   ├── 141.2fc784a3.js
+│       │   ├── 175.a2eceec3.js
+│       │   ├── 250.951fed9e.js
+│       │   ├── 255.f0556d44.js
+│       │   ├── 26.efd5806b.js
+│       │   ├── 274.a5745dc4.js
+│       │   ├── 359.a3eeeb8a.js
+│       │   ├── 372.19f12e18.js
+│       │   ├── 378.ffc5b91c.js
+│       │   ├── 381.3de59421.js
+│       │   ├── 397.e8b7737c.js
+│       │   ├── 410.0d0aeef4.js
+│       │   ├── 422.76debbae.js
+│       │   ├── 431.32ad0b52.js
+│       │   ├── 447.c43caca4.js
+│       │   ├── 448.29f31132.js
+│       │   ├── 492.e0c8fa83.js
+│       │   ├── 517.e05210bc.js
+│       │   ├── 536.8307dfd7.js
+│       │   ├── 574.2b489e2d.js
+│       │   ├── 657.e2445703.js
+│       │   ├── 694.99882801.js
+│       │   ├── 729.01a3bc73.js
+│       │   ├── 730.21f357ee.js
+│       │   ├── 731.28432fd9.js
+│       │   ├── 757.a23454b6.js
+│       │   ├── 769.050eebe7.js
+│       │   ├── 774.7fb34a75.js
+│       │   ├── 781.e3773fd2.js
+│       │   ├── 808.8ca614a1.js
+│       │   ├── 851.96688009.js
+│       │   ├── 943.7088f922.js
+│       │   ├── 959.de806a6a.js
+│       │   ├── 988.363cc197.js
+│       │   ├── 990.69f9db3a.js
+│       │   ├── frame.fda3d2e7.js
+│       │   └── main.40843b8a.js
+│       └── media
+│           ├── bg.2c2f278aeeac35634bee.jpg
+│           ├── default.003f90b383291c3b90da.less
+│           ├── index.055e59921ebceeb1d504.less
+│           ├── index.05d6b3d413fbb98edfbf.less
+│           ├── index.0b3b51807c0b7672113d.less
+│           ├── index.204904264d1d037ba67d.less
+│           ├── index.23f27607b65091a93957.less
+│           ├── index.24d39731f50c09e35197.less
+│           ├── index.2d9fb415ffc012c89574.less
+│           ├── index.37b17263a36cd79805f2.less
+│           ├── index.3f817bd961500245f7ff.less
+│           ├── index.47036e1a27612a289690.less
+│           ├── index.4eac1d48a8120a7cd0e7.less
+│           ├── index.512735b3dccd7d4b3088.less
+│           ├── index.5636ef18afd6dc74c2d2.less
+│           ├── index.57db1704a579f540d45f.less
+│           ├── index.5c257f6dcc9bf7a41173.less
+│           ├── index.5ef9f8b6b37164777e6c.less
+│           ├── index.809a5ffcace15c2e835c.less
+│           ├── index.9190556357d57a70558d.less
+│           ├── index.92fcb87e2176cac36a55.less
+│           ├── index.97aa5de5dc90a95deda8.less
+│           ├── index.a3d92676a7b4217268bf.less
+│           ├── index.a5dc92314ecf7a2ac6dd.less
+│           ├── index.afe805950916a7c1c76c.less
+│           ├── index.c3888364f2e9d135a023.less
+│           ├── index.d53f1fd81d28a0faf934.less
+│           ├── index.d94a7ca0bbf6d89f57ff.less
+│           ├── index.e16b9e9f2a163b06b650.less
+│           ├── index.e2b6f656131e1ac6614d.less
+│           ├── index.e69db6d427cabb0d33a0.less
+│           ├── index.f2583e3d11d99f46dfed.less
+│           ├── index.f40673272480945eb1ba.less
+│           ├── jsoneditor-icons.15f2789dd231f36d43a4.svg
+│           ├── widgetAlignmentBar.9a20d71b65eb51733311.png
+│           ├── widgetAnnulusPie.7c357abb4763af02cdd3.png
+│           ├── widgetBackgroudBar.73e928625341b630f2d8.png
+│           ├── widgetBaseAreaLine.077e1f12fd578d7ed9d1.png
+│           ├── widgetBaseBar.7453e1c02ceb3b189074.png
+│           ├── widgetBaseFunnel.8d63ffa0f9e382e8a0e6.png
+│           ├── widgetBaseLengthwaysLine.8b4ffe871d49534970c5.png
+│           ├── widgetBaseLine.3802b0bc3072f49db18d.png
+│           ├── widgetBasePie.e40740ce3eaacb5f97d7.png
+│           ├── widgetBaseRadar.dcc630595e82c5201d4e.png
+│           ├── widgetBaseScatter.c16fdbdbf7e03d416b25.png
+│           ├── widgetBaseSmoothLine.4ec2cb008509ad6bf5b3.png
+│           ├── widgetCircleRadar.836bd5c5e78ba2f47382.png
+│           ├── widgetEmapBase.0ed960870fddb76f4aa1.png
+│           ├── widgetLengthwaysBar.57d45c5cc19b9252b80c.png
+│           ├── widgetRadiusBar.5c7baa8188e5089c5ed1.png
+│           ├── widgetRosetypePie.f2c5189d06e253a96786.png
+│           └── widgetStackBar.55c0bf09ff12ace813ec.png
 ├── config-overrides.js
 ├── package-lock.json
 ├── package.json
@@ -353,82 +433,3 @@ bigscreen
 ├── tree.md
 ├── tsconfig.json
 └── yarn.lock
-
-
-```
-
-# 5.文件路径依赖引用简写如下
-
-> 如：引入 components/loading 组件方法库路径：import Loading from '@src/components/loading'
-
-```
-'@src': path.resolve(__dirname, 'src'),
-'@assets': path.resolve(__dirname, 'src/assets'),
-'@utils': path.resolve(__dirname, 'src/utils'),
-'@pages': path.resolve(__dirname, 'src/pages'),
-'@service': path.resolve(__dirname, 'src/service'),
-'@types': path.resolve(__dirname, 'src/types'),
-'@store': path.resolve(__dirname, 'src/store')
-```
-
-# 6.特殊规范
-
-## 6.1. page 里页面文件夹命名规范
-
-这里必须以`xxx-xxx`方式命令文件夹，每个文件夹里都包含`index.js`,`index.scss`即该文件夹的入口文件
-
-> 比如：`system-management`
-
-```
-├─system-management
-|   ├─dictionary                   // 字典模块
-|   |  └index.tsx                  // 字典模块入口文件
-|   |  └index.scss                 // 字典模块页面样式
-```
-
-## 6.2 页面及组件样式规范
-
-- 强制使用`BEM`方式
-  BEM 配置的命名空间统一为后台 简写：bg，这里可以在 src/assets/scss/mixin/config.scss 里修改,最好不要修改
-
-## 6.3 菜单管理（路由）
-
-> 这里请注意无子路由时，`subResource:[]`,有子路由时`components`麻烦值为空
-
-> 注意这里的`components`找的是 page 文件夹下面的文件
-
-> path 里是必须是一级一级取的，比如系统菜单`/system-management`,订单中心->字典管理`/system-management/├─dictionary`,这主要是为了设置动态面包屑使用
-
-```
-[{
-  "components": "home",
-  "isMemu": 1,
-  "resIcon": "e6fa",
-  "resTitle": "首页",
-  "resUrl": "/home",
-  "status": 1,
-  "subResource": []
-  },
-  {
-  "components": "",
-  "isMemu": 2,
-  "resIcon": "e6fa",
-  "resTitle": "系统管理",
-  "resUrl": "/system-management",
-  "status": 1,
-  "subResource": [{
-    "components": "system-management/dictionary",
-    "isMemu": 1,
-    "resIcon": "",
-    "resTitle": "字典管理",
-    "resUrl": "/system-management/dictionary",
-    "status": 1
-  }]
-}]
-```
-
-## 6.4 面包屑
-
-不能自己设置面包屑上的中文
-
-> 直接是根据菜单自动生成的
