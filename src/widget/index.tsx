@@ -186,13 +186,25 @@ export const componentsClassify: any[] = [
   },
   {
     type: 'emap',
-    icon: '&#xe63d;',
+    icon: '&#xe67d;',
     name: 'emap',
     datas: [
       {
         src: require('../assets/image/configuration/emap/widgetEmapBase.png'),
         widgetName: 'widgetEmapBase',
         name: '基础地图'
+      }
+    ]
+  },
+  {
+    type: 'wrodCloud',
+    icon: '&#xe608;',
+    name: '词云',
+    datas: [
+      {
+        src: require('../assets/image/configuration/emap/widgetEmapBase.png'),
+        widgetName: 'widgetEmapBase',
+        name: '基础词云'
       }
     ]
   }
@@ -223,7 +235,9 @@ const components: any = {
   // 散点图
   scatter: require('./scatter').default,
   // 表格
-  table: require('./table').default
+  table: require('./table').default,
+  // 词云
+  wordcloud: require('./wordcloud').default
 }
 
 export default components

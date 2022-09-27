@@ -64,6 +64,7 @@
     "customize-cra": "^1.0.0",
     "default-passive-events": "^2.0.0",
     "echarts": "^5.3.2",
+    "echarts-wordcloud": "^2.0.0",
     "http-proxy-middleware": "^2.0.6",
     "ice": "^3.7.71",
     "jsoneditor": "^9.9.0",

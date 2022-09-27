@@ -26,6 +26,8 @@ import table from './table/main'
 import form from './form/main'
 // echart地图
 import emap from './emap/main'
+// 词云
+import wrodcloud from './wordcloud/main'
 
 const widgetConfiguration: any = {
   ...text,
@@ -39,7 +41,8 @@ const widgetConfiguration: any = {
   ...scatter,
   ...table,
   ...form,
-  ...emap
+  ...emap,
+  ...wrodcloud
 }
 
 export default widgetConfiguration
