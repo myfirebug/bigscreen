@@ -355,6 +355,35 @@ export function handleEchartsOption(style: any): any {
       },
       series: {}
     },
+    wordcloud: {
+      series: {
+        type: 'wordCloud',
+        shape: 'circle',
+        width: '100%',
+        height: '100%',
+        gridSize: style?.wordcloudGridSize || 0,
+        sizeRange: [10, style?.wordcloudMaxFontSize || 32],
+        rotationRange: [-90, 90],
+        textStyle: {
+          fontFamily: style?.wordcloudFontFamily,
+          fontWeight: style?.wordcloudFontWeight,
+          color: function () {
+            return (
+              'rgb(' +
+              [
+                Math.round(Math.random() * 255),
+                Math.round(Math.random() * 255),
+                Math.round(Math.random() * 255)
+              ].join(',') +
+              ')'
+            )
+          }
+        },
+        emphasis: {
+          focus: 'self'
+        }
+      }
+    },
     series: []
   }
 }

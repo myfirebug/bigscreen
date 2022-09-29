@@ -2,6 +2,7 @@ import { memo, useRef, useEffect, useCallback } from 'react'
 import { IEchartConfig } from '@src/types'
 import themes from '@src/theme/index'
 import * as echarts from 'echarts'
+import '@src/utils/echarts-wordcloud'
 
 const Echarts = memo(
   (props: IEchartConfig) => {

@@ -28,6 +28,8 @@ import table from './table'
 import form from './form/main'
 // emap配置
 import emap from './emap/main'
+// wordcloud配置
+import wordcloud from './wordcloud'
 
 const widgetTypesConfiguration: any = {
   group,
@@ -41,7 +43,8 @@ const widgetTypesConfiguration: any = {
   scatter,
   table,
   ...form,
-  ...emap
+  ...emap,
+  wordcloud
 }
 
 export default widgetTypesConfiguration
