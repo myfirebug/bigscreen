@@ -69,6 +69,7 @@
     "ice": "^3.7.71",
     "jsoneditor": "^9.9.0",
     "node-sass": "^7.0.1",
+    "progress-bar-webpack-plugin": "^2.1.0",
     "react-app-rewired": "^2.2.1",
     "react-json-view": "^1.21.3",
     "react-redux": "^7.2.8",
@@ -80,6 +81,7 @@
     "redux-thunk": "^2.4.1",
     "sass-loader": "^12.6.0",
     "sass-resources-loader": "^2.2.4",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "webpack-bundle-analyzer": "^4.5.0"
   },
   "homepage": "."
