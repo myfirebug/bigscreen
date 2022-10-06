@@ -13,6 +13,8 @@ const ProgressBarPlugin = require('progress-bar-webpack-plugin')
 // 打包速度分析
 const SpeedMeasureWebpackPlugin = require('speed-measure-webpack-plugin')
 
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+
 const smp = new SpeedMeasureWebpackPlugin()
 
 /**
@@ -87,6 +89,7 @@ module.exports = override(
       })
     }
 
-    return smp.wrap(config)
+    // return smp.wrap(config)
+    return config
   }
 )

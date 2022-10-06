@@ -68,6 +68,7 @@
     "http-proxy-middleware": "^2.0.6",
     "ice": "^3.7.71",
     "jsoneditor": "^9.9.0",
+    "mini-css-extract-plugin": "^2.6.1",
     "node-sass": "^7.0.1",
     "progress-bar-webpack-plugin": "^2.1.0",
     "react-app-rewired": "^2.2.1",

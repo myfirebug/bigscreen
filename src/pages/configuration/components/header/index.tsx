@@ -100,7 +100,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         message.success('删除成功')
       }
     },
-    [currentWidgetId]
+    [currentWidgetId, delLargeScreenElement]
   )
 
   // 复制
@@ -111,7 +111,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         message.success('复制成功')
       }
     },
-    [currentWidgetId]
+    [currentWidgetId, copyLargeScreenElement]
   )
 
   // 分组
@@ -122,7 +122,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         message.success('分组成功')
       }
     },
-    [currentWidgetId]
+    [currentWidgetId, group]
   )
 
   // 取消分组
@@ -133,7 +133,7 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         message.success('取消分组成功')
       }
     },
-    [currentWidgetId]
+    [currentWidgetId, cancelGroup]
   )
 
   // 移动上移下移左移右移
@@ -165,7 +165,12 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         )
       }
     },
-    [currentWidgetId, currentWidget, modifyLargeScreenElement]
+    [
+      currentWidgetId,
+      currentWidget,
+      currentWidgetGroupId,
+      modifyLargeScreenElement
+    ]
   )
 
   // 确认框

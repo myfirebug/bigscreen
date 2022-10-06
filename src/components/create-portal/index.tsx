@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-07 20:16:24
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-07 20:46:55
+ * @LastEditTime: 2022-10-06 21:12:19
  * @FilePath: \bigscreen\src\components\create-portal\index.tsx
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
@@ -21,7 +21,7 @@ const CreatePortal: FC<CreatePortalProps> = ({ children }) => {
     return () => {
       document.body.removeChild(el.current)
     }
-  }, [])
+  }, [el])
   return ReactDOM.createPortal(children, el.current)
 }
 

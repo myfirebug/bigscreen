@@ -37,7 +37,7 @@ const Echarts = memo(
         // 这里主要外面需要获取echarts实例
         typeof getEchart === 'function' && getEchart(echartsInstance.current)
       }
-    }, [getEchart, theme, echartsRef.current])
+    }, [getEchart, theme, echartsRef])
     // data change update echart
     useEffect(() => {
       if (echartsInstance.current && JSON.stringify(options) !== '{}') {

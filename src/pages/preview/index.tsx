@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-13 10:08:07
+ * @LastEditTime: 2022-10-02 16:40:47
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -239,7 +239,7 @@ const Preview: FC<IPreviewProps> = ({
         style={{
           width: screen.width,
           height: screen.height,
-          transform: `scale(${1})`,
+          transform: `scale(${cale})`,
           transformOrigin: '0 0',
           background: `url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%`
         }}>
