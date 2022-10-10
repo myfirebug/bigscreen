@@ -178,6 +178,15 @@ export const largeScreen = (
       }
     // 新增页面
     case ADD_LARGESCREEN_PAGE:
+      if (copy.currentPage) {
+        const index = copy.pages.findIndex(
+          (item) => item.id === copy.currentPage.id
+        )
+        if (index !== -1) {
+          copy.pages[index] = copy.currentPage
+        }
+      }
+
       return {
         ...copy,
         pages: [...copy.pages, action.data],
