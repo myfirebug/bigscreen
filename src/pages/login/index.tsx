@@ -3,11 +3,11 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-11 11:51:22
+ * @LastEditTime: 2022-10-11 22:29:28
  * @FilePath: \bigscreen\src\pages\login\index.tsx
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
-import { FC } from 'react'
+import { FC, useCallback, useEffect } from 'react'
 import { Form, Input, Checkbox, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { connect } from 'react-redux'
@@ -17,6 +17,7 @@ import './index.scss'
 import { userinfo } from '@src/store/actions/userinfo'
 import Ajax from '@src/service'
 import { IAnyObject } from '@src/types/index'
+import session from '@src/utils/session-storage'
 
 interface ILoginProps {
   saveUserInfo: (data: IAnyObject) => void
@@ -28,16 +29,25 @@ const Login: FC<ILoginProps> = ({ saveUserInfo, userinfo }) => {
   let history = useHistory()
   // 获取form实例
   const [loginForm] = Form.useForm()
+
+  const jumpHome = useCallback(() => {
+    history.replace('/frame/home')
+  }, [history])
   // 登录
   const onFinish = (values: any) => {
     Ajax.login(values).then((res) => {
       if (res) {
         saveUserInfo(res)
-        // session.setItem('token', values.username + values.password)
-        history.replace('/frame/home')
+        session.setItem('token', res.token)
+        jumpHome()
       }
     })
   }
+  useEffect(() => {
+    if (session.getItem('token')) {
+      jumpHome()
+    }
+  }, [jumpHome])
   return (
     <div className='app-login'>
       <div className='app-login__form'>

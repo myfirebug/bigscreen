@@ -136,7 +136,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
             </span>
             <PopConfirm
               text='删除'
-              requestName='aaa'
+              requestName='reportDelete'
               params={{
                 ids: [record.id]
               }}
@@ -214,7 +214,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
             <Space size={16}>
               <PopConfirm
                 text='批量删除'
-                requestName='aaa'
+                requestName='reportDelete'
                 params={{
                   ids: [selectedRowKeys]
                 }}

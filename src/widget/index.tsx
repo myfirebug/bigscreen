@@ -202,7 +202,7 @@ export const componentsClassify: any[] = [
     name: '词云',
     datas: [
       {
-        src: require('../assets/image/configuration/emap/widgetEmapBase.png'),
+        src: require('../assets/image/configuration/wordcloud/widgetBaseWordcloud.png'),
         widgetName: 'widgetBaseWordcloud',
         name: '基础词云'
       }
