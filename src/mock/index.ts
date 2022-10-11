@@ -3,15 +3,21 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-10-10 20:59:35
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-11 10:50:48
+ * @LastEditTime: 2022-10-11 20:22:31
  * @FilePath: \bigscreen\src\mock\index.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
 import Mock from 'mockjs'
 // 登录模块
 import * as login from './modules/login'
+// 模拟数据接口
+import * as configuration from './modules/configuration'
+// 简报数据接口
+import * as report from './modules/report'
 
 create(login)
+create(configuration)
+create(report)
 /**
  * 根据模块创建接口
  * @param mod m模块

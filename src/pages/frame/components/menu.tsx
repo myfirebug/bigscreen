@@ -104,7 +104,7 @@ const CustomMenu = memo((props: ICustomMenuProps) => {
   }
 
   return (
-    <div className={`bg-menus ${collapsed ? 'is-close' : ''}`}>
+    <div className='bg-menus'>
       <div
         className='switch'
         onClick={() => {

@@ -90,8 +90,20 @@
   }
   @include e(body) {
     display: flex;
+    @include when(close) {
+      .bg-menus {
+        width: 80px;
+      }
+      .app-screen-layout__right {
+        padding-left: 80px;
+      }
+    }
   }
   @include e(left) {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    top: 50px;
     height: calc(100vh - 50px);
     background: #001529;
     .bg-menus {
@@ -99,9 +111,6 @@
       height: 100%;
       width: 200px;
       transition: all 0.25s ease 0s;
-      @include when(close) {
-        width: 80px;
-      }
       .switch {
         position: absolute;
         left: 0;
@@ -121,8 +130,10 @@
     }
   }
   @include e(right) {
+    padding-left: 200px;
     flex: 1;
     background-color: #f5f5f5;
+    transition: all 0.25s ease 0s;
   }
   @include e(breadcrumb) {
     padding: 10px;

@@ -94,7 +94,10 @@ const Frame: FC<IFrameProps> = ({
               </div>
             </div>
           </header>
-          <section className='app-screen-layout__body'>
+          <section
+            className={`app-screen-layout__body ${
+              collapsed ? 'is-close' : ''
+            }`}>
             <div className='app-screen-layout__left'>
               <CustomMenu
                 collapsed={collapsed}

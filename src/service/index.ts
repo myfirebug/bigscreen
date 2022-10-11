@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-11 12:40:03
+ * @LastEditTime: 2022-10-11 20:16:08
  * @FilePath: \bigscreen\src\service\index.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
@@ -26,6 +26,15 @@ const api: IApi = {
   login(params: any) {
     return post({
       url: `/login`,
+      loading: true,
+      data: params,
+      servicePrefix: 'local'
+    })
+  },
+  // 简报列表
+  report(params: any) {
+    return get({
+      url: `/report`,
       loading: true,
       data: params,
       servicePrefix: 'local'

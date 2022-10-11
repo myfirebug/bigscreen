@@ -10,24 +10,19 @@ import { ALL_STATE } from '@store/actionType'
 import { connect } from 'react-redux'
 import { getStrategy } from '@store/actions/authorization'
 import { IAnyObject } from '@src/types'
-import { Button, Space, message, Drawer } from 'antd'
+import { Button, Space, Drawer } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
+import Ajax from '@src/service'
 // pop配置
 import PopConfirm from '@src/components/pop-confirm'
 
 // 表格字段的类型
-type TableItem = {
+interface TableItem extends IAnyObject {
   // 报表id
   id: number
   // 报表标题
   title: string
-  // 报表状态
-  state: string
-  // 报表描述
-  describe: string
-  // 创建时间
-  createdAt: string
 }
 
 interface IBigScreenProps {
@@ -74,44 +69,47 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
     },
     {
       title: '报表描述',
-      dataIndex: 'describe',
+      dataIndex: 'description',
       ellipsis: true,
       search: false
     },
     {
-      title: '状态',
-      dataIndex: 'state',
-      valueType: 'select',
-      fieldProps: {
-        placeholder: '请选择状态'
-      },
-      valueEnum: {
-        all: { text: '全部', status: 'Default' },
-        open: {
-          text: '未解决',
-          status: 'Error'
-        },
-        closed: {
-          text: '已解决',
-          status: 'Success'
-        },
-        processing: {
-          text: '解决中',
-          status: 'Processing'
-        }
+      title: '屏幕尺寸',
+      dataIndex: 'description',
+      ellipsis: true,
+      search: false,
+      render(dom, record, index, action, schema) {
+        return (
+          <>
+            {record.width}*{record.height}
+          </>
+        )
+      }
+    },
+    {
+      title: '屏幕比例',
+      dataIndex: 'description',
+      ellipsis: true,
+      search: false,
+      render(dom, record, index, action, schema) {
+        return (
+          <>
+            {record.horizontalNumber}*{record.verticalNumber}
+          </>
+        )
       }
     },
     {
       title: '创建时间',
-      key: 'showTime',
-      dataIndex: 'createdAt',
+      key: 'createTime',
+      dataIndex: 'createTime',
       valueType: 'dateTime',
       sorter: true,
       hideInSearch: true
     },
     {
       title: '创建时间',
-      dataIndex: 'createdAt',
+      dataIndex: 'createTime',
       valueType: 'dateRange',
       hideInTable: true,
       search: {
@@ -125,6 +123,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
     },
     {
       title: '操作',
+      search: false,
       render(dom, record, index, action, schema) {
         return (
           <div className='app-table__operation'>
@@ -142,22 +141,11 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
                 ids: [record.id]
               }}
               reload={actionRef.current?.reloadAndRest}></PopConfirm>
-            {/* <TableDropdown
-              style={{
-                marginLeft: 10
-              }}
-              key='actionGroup'
-              onSelect={(value) => {
-                if (value === 'design') {
-                  history.push(`/frame/configuration?id=${record.id}`)
-                }
-              }}
-              menus={[
-                { key: 'preview', name: '预览' },
-                { key: 'design', name: '设计' }
-              ]}>
-              更多
-            </TableDropdown> */}
+            <span
+              onClick={() => history.push(`/frame/preview?id=${record.id}`)}
+              className='link'>
+              预览
+            </span>
           </div>
         )
       }
@@ -195,9 +183,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
             visible: false
           }))
         }
-        visible={drawer.visible}>
-        12312
-      </Drawer>
+        visible={drawer.visible}></Drawer>
       <ProTable<TableItem>
         {...tableConfig}
         columns={columns}
@@ -208,19 +194,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
           labelWidth: 'auto'
         }}
         request={async (params = {}, sort, filter) => {
-          return Promise.resolve({
-            data: [
-              {
-                id: 1,
-                title: 'xxx测试大屏',
-                state: 'open',
-                describe: '我是测试的描述哟',
-                createdAt: '2020-05-26T04:25:59Z'
-              }
-            ],
-            total: 20,
-            success: true
-          })
+          return Ajax.report()
         }}
         rowSelection={{ ...rowSelection }}
         toolBarRender={() => {
