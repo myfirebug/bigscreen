@@ -10,6 +10,7 @@ import BreadCrumbs from './components/bread-crumbs'
 import CustomMenu from './components/menu'
 import { ExclamationCircleOutlined } from '@ant-design/icons'
 import session from '@src/utils/session-storage'
+import { IAnyObject } from '@src/types/index'
 
 import './index.scss'
 
@@ -17,6 +18,7 @@ interface IFrameProps extends RouteProps {
   routers: IRouter[]
   getMenu: (menu?: IMenu[]) => void
   menu: IMenu[]
+  userinfo: IAnyObject
   breadCrumbs: IBreadCrumbsItem[]
 }
 
@@ -25,6 +27,7 @@ const Frame: FC<IFrameProps> = ({
   getMenu,
   menu,
   breadCrumbs,
+  userinfo,
   ...rest
 }) => {
   const history = useHistory()
@@ -80,9 +83,9 @@ const Frame: FC<IFrameProps> = ({
             <div className='right'>
               <div className='operation'>
                 <span className='avatar'>
-                  <img src='' alt='头像' />
+                  <img src={userinfo.avatar} alt='头像' />
                 </span>
-                <span className='username'>欢迎xxxx</span>
+                <span className='username'>欢迎{userinfo.username}</span>
                 <LogoutOutlined
                   className='exit'
                   style={{ fontSize: 20 }}
@@ -123,7 +126,8 @@ const Frame: FC<IFrameProps> = ({
 const mapStateToProps = (state: ALL_STATE) => ({
   routers: state.authorization.routers,
   menu: state.authorization.menu,
-  breadCrumbs: state.authorization.breadCrumbs
+  breadCrumbs: state.authorization.breadCrumbs,
+  userinfo: state.userinfo
 })
 
 // 将 对应action 插入到组件的 props 中

@@ -10,20 +10,9 @@ export type INCREMENT_TYPE = typeof INCREMENT
 export const DECREMENT = 'DECREMENT'
 export type DECREMENT_TYPE = typeof DECREMENT
 
-// 用户信息里的insInfos接口
-export interface IUserInfoItem {
-  insSn: string
-  insName: string
-  roleCode: string
-  roleName: string
-  notes: string
-}
 // 获取用户信息
 export const USERINFO = 'USERINFO'
 export type USERINFO_TYPE = typeof USERINFO
-// 编辑用户信息
-export const UPDATE_USERINFO = 'UPDATE_USERINFO'
-export type UPDATE_USERINFO_TYPE = typeof UPDATE_USERINFO
 
 // 菜单接口
 export interface IMenu {
@@ -203,7 +192,7 @@ export type BOTTOM_LARGESCREEN_ELEMENT_TYPE = typeof BOTTOM_LARGESCREEN_ELEMENT
 export type ALL_STATE = {
   counter: COUNTER_STATE
   authorization: IAuthorization
-  userInfo: IAnyObject
+  userinfo: IAnyObject
   largeScreen: LARGESCREEN_STATE
 }
 

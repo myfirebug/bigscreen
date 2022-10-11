@@ -148,3 +148,23 @@
     }
   }
 }
+
+#js_loading {
+  position: fixed;
+  left: 50%;
+  top: 59%;
+  transform: translate(-50%, -100px);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 10px;
+  background: rgba(0, 0, 0, 0.85);
+  .ant-spin {
+    color: #fff;
+  }
+  .ant-spin-dot-item {
+    background: #fff;
+  }
+}

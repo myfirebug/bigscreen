@@ -44,7 +44,6 @@ import {
   IWidget
 } from '../actionType'
 import { Dispatch } from 'redux'
-import { debug } from 'console'
 
 // 获取大屏页面数据
 export interface ILargeScreenAction {

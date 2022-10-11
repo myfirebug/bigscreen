@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-06 18:08:20
+ * @LastEditTime: 2022-10-10 21:06:49
  * @FilePath: \bigscreen\src\index.tsx
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
@@ -22,6 +22,7 @@ import zhCN from 'antd/lib/locale/zh_CN'
 import 'moment/locale/zh-cn'
 import 'antd/dist/antd.min.css'
 import './index.scss'
+import './mock'
 moment.locale('zh-cn')
 const persistor = persistStore(store)
 
