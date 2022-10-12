@@ -4,6 +4,8 @@ bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将�
 
 项目纯前端-Demo 地址：[https://myfirebug.github.io/bigscreen/index.html#/login](https://myfirebug.github.io/bigscreen/index.html#/login)
 
+用户名：admin, 密码：123456
+
 # 目录结构
 
 [一、框架使用技术](#1.框架使用技术)
