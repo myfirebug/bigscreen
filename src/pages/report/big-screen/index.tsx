@@ -14,6 +14,7 @@ import { Button, Space, Drawer } from 'antd'
 import { PlusOutlined } from '@ant-design/icons'
 import { useHistory } from 'react-router-dom'
 import Ajax from '@src/service'
+import { getLargeScreenPages } from '@store/actions/largeScreen'
 // pop配置
 import PopConfirm from '@src/components/pop-confirm'
 
@@ -29,9 +30,15 @@ interface IBigScreenProps {
   strategy: IAnyObject
   getStrategy: (key: string) => void
   path: string
+  getLargeScreenPages: (data: any) => void
 }
 
-const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
+const BigScreen: FC<IBigScreenProps> = ({
+  strategy,
+  getStrategy,
+  path,
+  getLargeScreenPages
+}) => {
   // 获取策略
   useEffect(() => {
     getStrategy(path)
@@ -128,9 +135,27 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
         return (
           <div className='app-table__operation'>
             <span
-              onClick={() =>
+              onClick={() => {
+                console.log(record.pages, 'record.pages')
+                getLargeScreenPages({
+                  pages: record.pages,
+                  screen: {
+                    auxiliaryBorderColor: record.auxiliaryBorderColor,
+                    backgroundColor: record.backgroundColor,
+                    backgroundImage: record.backgroundImage,
+                    description: record.description,
+                    height: record.height,
+                    horizontalNumber: record.horizontalNumber,
+                    interval: record.interval,
+                    projectName: record.projectName,
+                    showAuxiliary: record.showAuxiliary,
+                    title: record.title,
+                    verticalNumber: record.verticalNumber,
+                    width: record.width
+                  }
+                })
                 history.push(`/frame/configuration?id=${record.id}`)
-              }
+              }}
               className='link'>
               编辑
             </span>
@@ -142,7 +167,26 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
               }}
               reload={actionRef.current?.reloadAndRest}></PopConfirm>
             <span
-              onClick={() => history.push(`/frame/preview?id=${record.id}`)}
+              onClick={() => {
+                getLargeScreenPages({
+                  pages: record.pages,
+                  screen: {
+                    auxiliaryBorderColor: record.auxiliaryBorderColor,
+                    backgroundColor: record.backgroundColor,
+                    backgroundImage: record.backgroundImage,
+                    description: record.description,
+                    height: record.height,
+                    horizontalNumber: record.horizontalNumber,
+                    interval: record.interval,
+                    projectName: record.projectName,
+                    showAuxiliary: record.showAuxiliary,
+                    title: record.title,
+                    verticalNumber: record.verticalNumber,
+                    width: record.width
+                  }
+                })
+                history.push(`/frame/preview?id=${record.id}`)
+              }}
               className='link'>
               预览
             </span>
@@ -162,6 +206,7 @@ const BigScreen: FC<IBigScreenProps> = ({ strategy, getStrategy, path }) => {
   }
 
   const addProject = () => {
+    getLargeScreenPages(null)
     history.push('/frame/configuration')
   }
   return (
@@ -232,7 +277,8 @@ const mapStateToProps = (state: ALL_STATE) => ({
 
 // 将 对应action 插入到组件的 props 中
 const mapDispatchToProps = {
-  getStrategy
+  getStrategy,
+  getLargeScreenPages
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(BigScreen)

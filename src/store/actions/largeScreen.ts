@@ -48,7 +48,7 @@ import { Dispatch } from 'redux'
 // 获取大屏页面数据
 export interface ILargeScreenAction {
   type: LARGE_SCREEN_TYPE
-  datas: IPage[]
+  data: any
 }
 
 // 修改屏幕数据
@@ -183,9 +183,9 @@ export type ModifyAction =
   | ICancelGroupAction
 
 // 获取页面数据的方法
-const actionLargeScreen = (datas: IPage[]): ILargeScreenAction => ({
+const actionLargeScreen = (data: any): ILargeScreenAction => ({
   type: LARGE_SCREEN,
-  datas
+  data
 })
 
 // 新增页面数据的方法
@@ -317,8 +317,8 @@ const actionBottomLargescreenElement = (): IBottomLargescreenElementAction => ({
 })
 
 // 获取当前项目所有页面
-export const getLargeScreenPages = (datas: IPage[]) => (dispatch: Dispatch) => {
-  dispatch(actionLargeScreen(datas))
+export const getLargeScreenPages = (data: any) => (dispatch: Dispatch) => {
+  dispatch(actionLargeScreen(data))
 }
 
 // 新增页面数据

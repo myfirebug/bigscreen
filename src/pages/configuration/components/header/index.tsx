@@ -106,12 +106,10 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
   // 复制
   const copyHandler = useCallback(
     (e: MouseEvent) => {
-      if (currentWidgetId && !currentWidgetId.includes(',')) {
-        copyLargeScreenElement()
-        message.success('复制成功')
-      }
+      copyLargeScreenElement()
+      message.success('复制成功')
     },
-    [currentWidgetId, copyLargeScreenElement]
+    [copyLargeScreenElement]
   )
 
   // 分组
@@ -222,7 +220,9 @@ const DesignHeader: FC<IDesignHeaderProps> = ({
         switch (e.keyCode) {
           // 删除
           case 46:
-            showConfirm('删除', delHandler)
+            if (currentWidgetId && !currentWidgetId.includes(',')) {
+              showConfirm('删除', delHandler)
+            }
             break
           default:
         }

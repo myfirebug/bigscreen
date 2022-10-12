@@ -167,7 +167,15 @@ export const largeScreen = (
   const copy: LARGESCREEN_STATE = JSON.parse(JSON.stringify(state))
   switch (action.type) {
     case LARGE_SCREEN:
-      return state
+      if (action.data) {
+        return {
+          ...copy,
+          ...action.data,
+          currentPage: action.data.pages ? action.data.pages[0] : {}
+        }
+      } else {
+        return initialState
+      }
     case MODIFY_SCREEN:
       return {
         ...copy,
@@ -176,6 +184,7 @@ export const largeScreen = (
           ...action.datas
         }
       }
+
     // 新增页面
     case ADD_LARGESCREEN_PAGE:
       if (copy.currentPage) {

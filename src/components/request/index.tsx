@@ -2,7 +2,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-09-10 11:22:50
+ * @LastEditTime: 2022-10-12 13:59:58
  * @FilePath: \bigscreen\src\components\request\index.tsx
  * @Description: 页面描述
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
@@ -98,7 +98,8 @@ const Request: FC<IRequestProps> = ({
             params: JSON.parse(params)
           })
             .then((res: any) => {
-              resolve(res.data.data || res.data)
+              // resolve(res.data.data || res.data)
+              resolve(res)
             })
             .catch((res) => {
               reject(res)
