@@ -1,5 +1,9 @@
 # 基于 React 拖动配置大屏的后台管理系统
 
+bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将图表或页面元素封装为基础组件，无需编写代码即可制作数据大屏，减少心智负担。
+
+项目纯前端-Demo 地址：[https://myfirebug.github.io/bigscreen/index.html#/login](https://myfirebug.github.io/bigscreen/index.html#/login)
+
 # 目录结构
 
 [一、框架使用技术](#1.框架使用技术)
