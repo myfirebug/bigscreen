@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-02 16:40:47
+ * @LastEditTime: 2022-10-12 16:34:01
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -234,14 +234,20 @@ const Preview: FC<IPreviewProps> = ({
 
   return (
     <div className='app-preview' ref={elementsWrapper}>
+      <style
+        dangerouslySetInnerHTML={{
+          __html: `
+          body {
+            background: url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%
+          }`
+        }}></style>
       <div
         className='app-preview__container'
         style={{
           width: screen.width,
           height: screen.height,
           transform: `scale(${cale})`,
-          transformOrigin: '0 0',
-          background: `url(${screen.backgroundImage}) no-repeat ${screen.backgroundColor}  0% 0% / 100% 100%`
+          transformOrigin: '0 0'
         }}>
         {currentPage && currentPage.widgets
           ? renderWidgets(currentPage.widgets)

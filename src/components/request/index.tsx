@@ -2,7 +2,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-09-04 16:50:14
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-12 13:59:58
+ * @LastEditTime: 2022-10-12 16:28:34
  * @FilePath: \bigscreen\src\components\request\index.tsx
  * @Description: 页面描述
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
@@ -90,10 +90,15 @@ const Request: FC<IRequestProps> = ({
   // 获取数据
   const { data, loading, error } = useRequest(
     async () => {
+      console.log(url, process.env.REACT_APP_ENV === 'production', 'urlurl')
       return await new Promise(
         (resolve: (data: IResult) => void, reject: (data: any) => void) => {
           axios({
-            url: url,
+            url:
+              process.env.REACT_APP_ENV === 'production' &&
+              url === 'http://localhost:6001/configuration'
+                ? 'https://myfirebug.github.io/bigscreen/configuration'
+                : url,
             method: method,
             params: JSON.parse(params)
           })
