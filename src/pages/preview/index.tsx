@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-12 16:34:01
+ * @LastEditTime: 2022-10-12 18:52:43
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -93,7 +93,7 @@ const Preview: FC<IPreviewProps> = ({
                     top: item.coordinateValue.top
                   }}>
                   <Request
-                    isPlaceholder={false}
+                    isPlaceholder={true}
                     method={item.dataValue.method}
                     url={item.dataValue.url}
                     params={JSON.stringify(
