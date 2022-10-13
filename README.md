@@ -34,11 +34,11 @@ bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将�
 | ---- | ------- | ---- | ------ |
 | node | 16.17.0 | npm  | 8.15.0 |
 
-# 1.框架使用技术
+# 框架使用技术
 
 - 框架为`create-react-app`构架，搭配`react-router-dom`、`redux`、`react-redux`、`redux-thunk`、`redux-persist`、`redux-logger`、`axios`，UI 框架为`antd@4.19.3`
 
-# 2.学习文档
+# 学习文档
 
 - [react 中文官网](https://react.docschina.org 'react中文官网')
 - [react 英文官网](https://reactjs.org 'react英文官网')
@@ -49,7 +49,7 @@ bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将�
 - [react-app-rewired](https://github.com/timarney/react-app-rewired#readme '在不npm run inject的情况下修改webpack')
 - [webpack-bundle-analyzer 分析 SPA 应用](https://github.com/webpack-contrib/webpack-bundle-analyzer 'webpack-bundle-analyzer分析SPA应用')
 
-# 3.依赖安装、启动、打包
+# 依赖安装、启动、打包
 
 ## 克隆
 
@@ -67,7 +67,7 @@ bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将�
 
 ### `npm build:production`
 
-# 4.目录结构
+# 目录结构
 
 ```
 bigscreen
@@ -90,7 +90,7 @@ bigscreen
 │   └── widget                       // 组件及其配置
 ```
 
-# 5.文件路径依赖引用简写如下
+# 文件路径依赖引用简写如下
 
 > 如：引入 components/loading 组件方法库路径：import Loading from '@src/components/loading'
 
@@ -104,9 +104,9 @@ bigscreen
 '@store': path.resolve(__dirname, 'src/store')
 ```
 
-# 6.特殊规范
+# 特殊规范
 
-## 6.1. page 里页面文件夹命名规范
+## page 里页面文件夹命名规范
 
 这里必须以`xxx-xxx`方式命令文件夹，每个文件夹里都包含`index.js`,`index.scss`即该文件夹的入口文件
 
@@ -119,12 +119,12 @@ bigscreen
 |   |  └index.scss                 // 字典模块页面样式
 ```
 
-## 6.2 页面及组件样式规范
+## 页面及组件样式规范
 
 - 强制使用`BEM`方式
   BEM 配置的命名空间统一为后台 简写：bg，这里可以在 src/assets/scss/mixin/config.scss 里修改,最好不要修改
 
-## 6.3 菜单管理（路由）
+## 菜单管理（路由）
 
 > 这里请注意无子路由时，`subResource:[]`,有子路由时`components`麻烦值为空
 
@@ -160,7 +160,7 @@ bigscreen
 }]
 ```
 
-## 6.4 面包屑
+## 面包屑
 
 不能自己设置面包屑上的中文
 
