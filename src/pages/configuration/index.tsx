@@ -97,9 +97,6 @@ const Disign: FC<IDisignProps> = ({
   upLargescreenElement,
   downLargescreenElement
 }) => {
-  // 获取装组件的盒子，这里需要获取他的宽度
-  const elementsWrapper = useRef<HTMLDivElement>(null)
-  const [elementsWrapperAttr, setElementsWrapperAttr] = useState<any>({})
   // 获取放大缩小比例
   const [cale, setCale] = useState(0)
   // 显示隐藏左侧
@@ -109,29 +106,14 @@ const Disign: FC<IDisignProps> = ({
 
   // 这里主要设置默认的缩放比例
   useEffect(() => {
-    if (elementsWrapperAttr.width && screen.width) {
+    if (screen.width) {
       setCale(
-        Number((elementsWrapperAttr.width / Number(screen.width)).toFixed(4))
+        Number(
+          ((Number(screen.width) - 600 - 132) / Number(screen.width)).toFixed(4)
+        )
       )
     }
-  }, [screen.width, elementsWrapperAttr.width])
-
-  // 获取elementsWrapper的宽度
-  useEffect(() => {
-    const resizeHander = () => {
-      setElementsWrapperAttr({
-        width: elementsWrapper.current?.offsetWidth
-      })
-    }
-    resizeHander()
-    // 绑定resize事件
-    window.addEventListener('resize', resizeHander)
-
-    return () => {
-      // 清除resize事件
-      window.removeEventListener('resize', resizeHander)
-    }
-  }, [elementsWrapper.current])
+  }, [screen.width])
 
   // 取消选中元素或者组
   const cancelSelectedElementHander = (e: MouseEvent) => {
@@ -182,7 +164,7 @@ const Disign: FC<IDisignProps> = ({
             paddingRight: rightFlag && pages.length ? 400 : 0
           }}
           className='app-screen-disign__body--center'>
-          <div className='body' id='js-elements-body' ref={elementsWrapper}>
+          <div className='body' id='js-elements-body'>
             <div className='elements-wrap'>
               <Ruler />
               <div

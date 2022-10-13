@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-10-11 08:53:06
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-12 16:08:53
+ * @LastEditTime: 2022-10-13 09:31:38
  * @FilePath: \bigscreen\src\mock\modules\report.ts
  * Copyright (c) 2022 by hejp 378540660@qq.com, All Rights Reserved.
  */
@@ -71,7 +71,8 @@ export const reportList = {
                     params: { a: 2 }
                   },
                   id: 'c2c48cbd=d833=4d78=8dd9=f8b11589ddb4',
-                  linkageIds: '',
+                  linkageIds:
+                    '16046c2f=b05b=4775=8194=7ef191d977b4,6160a544=1a50=4f80=93c4=bdf63cc15842,72cfd138=6fa0=4e33=9c11=ab5da2337e2b,edeeeb69=11cf=4c20=8c01=7e3c6523f37a,b2340442=a94e=4878=ba03=74cb916f4524,c610cdbf=95ba=4798=863e=50c9682950fd,d927f513=f853=4377=87fa=b73c66f07a6a,a5c20d1f=1f9c=4c7a=95ad=6e3203ac8521',
                   widgets: [
                     {
                       id: '5eea6dfc=63a9=4be2=8382=41528e043c53',

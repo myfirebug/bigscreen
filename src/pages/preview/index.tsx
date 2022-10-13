@@ -3,7 +3,7 @@
  * @Author: hejp 378540660@qq.com
  * @Date: 2022-08-26 21:26:44
  * @LastEditors: hejp 378540660@qq.com
- * @LastEditTime: 2022-10-12 18:52:43
+ * @LastEditTime: 2022-10-13 09:28:47
  * @FilePath: \bigscreen\src\pages\preview\index.tsx
  * Copyright (c) 2022 by hejp email: 378540660@qq.com, All Rights Reserved.
  */
@@ -11,6 +11,7 @@ import { FC, useRef, useState, useEffect } from 'react'
 import { ALL_STATE, IPage, IScreen, IWidget } from '@store/actionType'
 import { connect } from 'react-redux'
 import { modifyLargeScreenElement } from '@store/actions/largeScreen'
+import { getStyles } from '@utils/tools'
 // 所有组件地址
 import components from '@src/widget'
 // 接口
@@ -90,7 +91,11 @@ const Preview: FC<IPreviewProps> = ({
                     width: item.coordinateValue.width,
                     height: item.coordinateValue.height,
                     left: item.coordinateValue.left,
-                    top: item.coordinateValue.top
+                    top: item.coordinateValue.top,
+                    ...getStyles({
+                      ...item.configureValue,
+                      ...item.coordinateValue
+                    })
                   }}>
                   <Request
                     isPlaceholder={true}
@@ -107,7 +112,6 @@ const Preview: FC<IPreviewProps> = ({
                         <>
                           <Widget
                             options={{
-                              ...item.configureValue,
                               ...item.coordinateValue
                             }}>
                             {renderWidgets(
