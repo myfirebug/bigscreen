@@ -6,6 +6,43 @@ bigscreen 是一个高效的拖拽式低代码数据可视化开发平台，将�
 
 用户名：admin, 密码：123456
 
+**工作台**
+
+![RUNOOB 图标](https://myfirebug.github.io/example-images/bigscreen/0.jpg)
+
+**大屏展示**
+
+![RUNOOB 图标](https://myfirebug.github.io/example-images/bigscreen/1.jpg)
+
+**主要依赖：**
+
+| 名称              | 版本   |
+| ----------------- | ------ |
+| react             | 18.0.0 |
+| react-dom         | 18.0.0 |
+| typescript        | 4.6.3  |
+| jsoneditor        | 9.9.0  |
+| redux             | 4.1.2  |
+| react-redux       | 7.2.8  |
+| react-rnd         | 10.3.7 |
+| redux-logger      | 3.0.6  |
+| redux-persist     | 6.0.0  |
+| redux-thunk       | 2.4.1  |
+| react-app-rewire  | 2.2.1  |
+| echarts           | 5.3.2  |
+| echarts-wordcloud | 2.0.0  |
+| axios             | 0.26.1 |
+| cross-env         | 7.0.3  |
+| customize-cra     | 1.0.0  |
+| antd              | 4.19.3 |
+
+**开发环境**
+
+| 名称 | 版本    |
+| ---- | ------- |
+| node | 16.17.0 |
+| npm  | 8.15.0  |
+
 # 目录结构
 
 [一、框架使用技术](#1.框架使用技术)
