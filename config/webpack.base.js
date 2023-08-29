@@ -111,6 +111,7 @@ module.exports = {
       "@service": path.resolve(__dirname, "../src/service/"),
       "@pages": path.resolve(__dirname, "../src/pages/"),
       "@core": path.resolve(__dirname, "../src/core/"),
+      "@components": path.resolve(__dirname, "../src/components/"),
     },
   },
 };

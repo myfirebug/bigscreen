@@ -1,5 +1,11 @@
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
+const path = require("path");
 const NODE_ENV = process.env.NODE_ENV;
+const SITE = process.env.SIYE;
+// 所有站点
+const sites = ["default"];
+// 站点类型
+const siteTypes = ["web", "mobile"];
 const isDev = NODE_ENV === "development";
 const isProd = NODE_ENV === "production";
 /**
@@ -20,6 +26,12 @@ function getStyleLoader(pre) {
       },
     },
     pre,
+    pre === "sass-loader" && {
+      loader: "sass-resources-loader",
+      options: {
+        resources: [path.resolve(__dirname, "../src/assets/scss/index.scss")],
+      },
+    },
   ].filter(Boolean);
 }
 
@@ -62,4 +74,7 @@ exports.tools = {
   isDev,
   isProd,
   fmtDate,
+  SITE,
+  sites,
+  siteTypes,
 };
