@@ -1,5 +1,12 @@
 import React, { useEffect, useRef } from "react";
+import { Button, Form, Input } from "antd";
+import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import "./index.scss";
+
+type FieldType = {
+  username?: string;
+  password?: string;
+};
 
 function Login() {
   const particles = useRef<HTMLDivElement>(null);
@@ -118,6 +125,11 @@ function Login() {
       });
     }
   }, [particles]);
+
+  const onFinish = (values: any) => {
+    console.log("Success:", values);
+  };
+
   return (
     <div className="cms-login">
       <div className="cms-login__mask" ref={particles} id="js_particles"></div>
@@ -127,6 +139,44 @@ function Login() {
       </div>
       <div className="cms-login__right">
         <h2>账户登录</h2>
+        <Form
+          name="basic"
+          wrapperCol={{ span: 24 }}
+          style={{ maxWidth: 600 }}
+          initialValues={{ remember: true }}
+          onFinish={onFinish}
+          autoComplete="off"
+        >
+          <Form.Item<FieldType>
+            label=""
+            name="username"
+            rules={[{ required: true, message: "请输入用户名" }]}
+          >
+            <Input
+              size="large"
+              placeholder="用户名"
+              prefix={<UserOutlined className="site-form-item-icon" />}
+            />
+          </Form.Item>
+
+          <Form.Item<FieldType>
+            label=""
+            name="password"
+            rules={[{ required: true, message: "请输入密码" }]}
+          >
+            <Input.Password
+              size="large"
+              placeholder="密码"
+              prefix={<LockOutlined className="site-form-item-icon" />}
+            />
+          </Form.Item>
+
+          <Form.Item>
+            <Button type="primary" htmlType="submit" block size="large">
+              登录
+            </Button>
+          </Form.Item>
+        </Form>
       </div>
     </div>
   );
