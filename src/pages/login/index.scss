@@ -1,0 +1,56 @@
+@include b(login) {
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: linear-gradient(
+    to bottom,
+    rgb(59, 117, 252) 0%,
+    rgb(16, 70, 191) 100%
+  );
+  @include e(left) {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    padding: 15vh 0 0 15vw;
+    background: url(./assets/bg02.png) 15% 50% no-repeat;
+    background-size: auto 66%;
+    color: #fff;
+    box-sizing: border-box;
+    h1,
+    p {
+      margin: 0;
+      padding: 0;
+    }
+    h1 {
+      font-size: 40px;
+    }
+    p {
+      padding-top: 20px;
+      font-size: 16px;
+    }
+  }
+  @include e(right) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    padding: 0 60px;
+    transform: translate(30%, -50%);
+    width: 428px;
+    height: 480px;
+    background: #fff;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+    box-sizing: border-box;
+  }
+  @include e(mask) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+  }
+}
