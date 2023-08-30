@@ -1,6 +1,6 @@
 module.exports = {
   // 站点名称
-  sitename: "大屏的后台管理系统",
+  sitename: "大屏管理系统",
   // 站点标题
   title: "基于 React 拖动配置大屏的后台管理系统",
   // 站点描述

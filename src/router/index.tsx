@@ -15,7 +15,7 @@ const PrivateRoute: FC<IPrivateRoute> = ({ children, auth, title }) => {
   }
   // 处理未登录情况时跳首页
   if (auth) {
-    return <Navigate to="/home" />;
+    return <Navigate to="/login" />;
   }
   return children;
 };

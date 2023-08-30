@@ -8,6 +8,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import "@src/assets/scss/base/normalize.css";
 import zhCN from "antd/locale/zh_CN";
+import { Header } from "./components";
 
 dayjs.locale("zh-cn");
 
@@ -25,11 +26,7 @@ function App() {
         // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
       }}
     >
-      <Layout
-        className="cms-layout-default"
-        paddingTop="50px"
-        mainMinHeight="calc(100vh - 50px)"
-      >
+      <Layout className="cms-layout-default" Header={<Header />}>
         <Routes />
       </Layout>
     </ConfigProvider>
