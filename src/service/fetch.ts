@@ -8,7 +8,7 @@ export interface IBaseReponse<T> {
   data: T;
 }
 
-axios.defaults.baseURL = "https://cnodejs.org/api/v1";
+axios.defaults.baseURL = "http://192.168.101.79:3000";
 
 // 正在进行中的请求列表
 const requestList: string[] = [];
@@ -70,11 +70,10 @@ axios.interceptors.request.use(
 
 // 添加响应拦截器
 axios.interceptors.response.use(
-  (response: AxiosResponse<IBaseReponse<any>>) => {
+  (response: AxiosResponse<any, any>) => {
     // 2xx 范围内的状态码都会触发该函数。
     // 对响应数据做点什么
     const { config, status } = response;
-    console.log(config, "config");
     if (config) {
       allowRequest(
         `${config.url}?${Qs.stringify(config.params)}&method=${config.method}`
@@ -84,7 +83,7 @@ axios.interceptors.response.use(
       throw new Error("请求出现异常, HTTP 状态码不为 200");
     }
 
-    return response.data.data;
+    return response.data;
   },
   (error) => {
     const { config } = error;
