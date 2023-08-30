@@ -1,16 +1,13 @@
 import React, { useEffect, useRef } from "react";
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
+import { ILoginForm } from "@src/service";
+import { useLogin } from "@src/core/hook";
 import "./index.scss";
 
-type FieldType = {
-  username?: string;
-  password?: string;
-};
-
 function Login() {
+  const { loginLoading, login } = useLogin();
   const particles = useRef<HTMLDivElement>(null);
-  console.log(particles.current, "particles");
   useEffect(() => {
     if (particles.current) {
       window.particlesJS?.(particles.current.id, {
@@ -126,8 +123,8 @@ function Login() {
     }
   }, [particles]);
 
-  const onFinish = (values: any) => {
-    console.log("Success:", values);
+  const onFinish = (values: ILoginForm) => {
+    login(values);
   };
 
   return (
@@ -142,29 +139,29 @@ function Login() {
         <Form
           name="basic"
           wrapperCol={{ span: 24 }}
-          style={{ maxWidth: 600 }}
-          initialValues={{ remember: true }}
           onFinish={onFinish}
           autoComplete="off"
         >
-          <Form.Item<FieldType>
+          <Form.Item<ILoginForm>
             label=""
             name="username"
             rules={[{ required: true, message: "请输入用户名" }]}
           >
             <Input
+              allowClear
               size="large"
               placeholder="用户名"
               prefix={<UserOutlined className="site-form-item-icon" />}
             />
           </Form.Item>
 
-          <Form.Item<FieldType>
+          <Form.Item<ILoginForm>
             label=""
             name="password"
             rules={[{ required: true, message: "请输入密码" }]}
           >
             <Input.Password
+              allowClear
               size="large"
               placeholder="密码"
               prefix={<LockOutlined className="site-form-item-icon" />}
@@ -172,7 +169,13 @@ function Login() {
           </Form.Item>
 
           <Form.Item>
-            <Button type="primary" htmlType="submit" block size="large">
+            <Button
+              type="primary"
+              htmlType="submit"
+              block
+              size="large"
+              loading={loginLoading}
+            >
               登录
             </Button>
           </Form.Item>
