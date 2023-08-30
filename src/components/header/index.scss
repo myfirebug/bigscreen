@@ -1,0 +1,64 @@
+@include b(header) {
+  display: flex;
+  height: 55px;
+  background-color: var(--module-background-color);
+  box-shadow: 0 0 10px var(--module-box-shadow-color);
+  transition: all 0.25s ease 0s;
+  @include e(left) {
+    display: flex;
+    align-items: center;
+    width: 220px;
+    padding: 0 15px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    box-sizing: border-box;
+    .title {
+      margin: 0;
+      padding: 0;
+      font-size: 24px;
+    }
+    .cms-icon {
+      padding-right: 10px;
+      font-size: 24px;
+    }
+  }
+  @include e(right) {
+    display: flex;
+    flex: 1;
+    padding: 0 15px;
+    @include m(left) {
+      display: flex;
+      align-items: center;
+      flex: 1;
+      .anticon {
+        font-size: 20px;
+      }
+    }
+    @include m(right) {
+      display: flex;
+      align-items: center;
+      .ant-dropdown-trigger {
+        height: 24px;
+        padding-left: 10px;
+        line-height: 24px;
+        margin-left: 20px;
+        border-left: 1px solid #ddd;
+      }
+      .user {
+        display: flex;
+        align-items: center;
+      }
+      .user-name {
+        padding: 0 10px;
+      }
+    }
+  }
+}
+
+@include b(avatar) {
+  width: 36px;
+  height: 36px;
+  background: var(--module-dark-background-color);
+  border-radius: 50%;
+  overflow: hidden;
+}
