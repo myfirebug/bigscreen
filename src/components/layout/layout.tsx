@@ -1,8 +1,6 @@
 import React, { FC, HtmlHTMLAttributes, ReactNode } from "react";
-
+import "./index.scss";
 interface ILayout extends HtmlHTMLAttributes<HTMLDivElement> {
-  paddingTop?: number | string;
-  mainMinHeight?: string | number;
   Header?: ReactNode;
   Footer?: ReactNode;
   Sidder?: ReactNode;
@@ -13,18 +11,14 @@ const Layout: FC<ILayout> = ({
   Header,
   Footer,
   Sidder,
-  paddingTop,
-  mainMinHeight,
   className,
   children,
+  style,
 }) => {
   return (
-    <div className="cms-layout" style={{ paddingTop: paddingTop }}>
+    <div className={`cms-layout ${className || ""}`}>
       {Header}
-      <div
-        className={`cms-layout__main ${className || ""}`}
-        style={{ minHeight: mainMinHeight }}
-      >
+      <div className="cms-layout__main" style={style}>
         {Sidder}
         {children}
       </div>

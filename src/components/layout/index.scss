@@ -1,2 +1,19 @@
 @include b(layout) {
+  @include when(collapsed) {
+    .cms-header__left {
+      width: 80px;
+      .cms-icon {
+        padding-left: 14px;
+      }
+      .title {
+        display: none;
+      }
+    }
+    .cms-sidder {
+      width: 80px;
+    }
+  }
+  @include e(main) {
+    transition: all 0.25s ease 0s;
+  }
 }
