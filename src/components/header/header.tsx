@@ -1,14 +1,21 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { FC } from "react";
-import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import {
+  MenuFoldOutlined,
+  MenuUnfoldOutlined,
+  LoginOutlined,
+  DownOutlined,
+} from "@ant-design/icons";
 import { Theme } from "@src/components";
-import { DownOutlined, SmileOutlined } from "@ant-design/icons";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import "./index.scss";
-interface IHeader {}
+interface IHeader {
+  collapsed: boolean;
+  setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-const Header: FC<IHeader> = () => {
+const Header: FC<IHeader> = ({ collapsed, setCollapsed }) => {
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -18,41 +25,10 @@ const Header: FC<IHeader> = () => {
           rel="noopener noreferrer"
           href="https://www.antgroup.com"
         >
-          1st menu item
+          <LoginOutlined />
+          退出登录
         </a>
       ),
-    },
-    {
-      key: "2",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.aliyun.com"
-        >
-          2nd menu item (disabled)
-        </a>
-      ),
-      icon: <SmileOutlined />,
-      disabled: true,
-    },
-    {
-      key: "3",
-      label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.luohanacademy.com"
-        >
-          3rd menu item (disabled)
-        </a>
-      ),
-      disabled: true,
-    },
-    {
-      key: "4",
-      danger: true,
-      label: "a danger item",
     },
   ];
   return (
@@ -63,7 +39,9 @@ const Header: FC<IHeader> = () => {
       </div>
       <div className="cms-header__right">
         <div className="cms-header__right--left">
-          <MenuUnfoldOutlined /> <MenuFoldOutlined />
+          <span onClick={() => setCollapsed(!collapsed)}>
+            {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+          </span>
         </div>
         <div className="cms-header__right--right">
           <Theme />
