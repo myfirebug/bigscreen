@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { ConfigProvider, theme } from "antd";
 import Routes from "./router";
 import { Layout } from "@src/components";
@@ -8,11 +8,12 @@ import dayjs from "dayjs";
 import "dayjs/locale/zh-cn";
 import "@src/assets/scss/base/normalize.css";
 import zhCN from "antd/locale/zh_CN";
-import { Header } from "./components";
+import { Header, Sidder } from "./components";
 
 dayjs.locale("zh-cn");
 
 function App() {
+  const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
   console.log(location, "location1");
   return (
@@ -26,7 +27,15 @@ function App() {
         // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
       }}
     >
-      <Layout className="cms-layout-default" Header={<Header />}>
+      <Layout
+        className={collapsed ? "is-collapsed" : ""}
+        Header={<Header collapsed={collapsed} setCollapsed={setCollapsed} />}
+        Sidder={<Sidder collapsed={collapsed} />}
+        style={{
+          paddingTop: "55px",
+          paddingLeft: collapsed ? "80px" : "200px",
+        }}
+      >
         <Routes />
       </Layout>
     </ConfigProvider>
