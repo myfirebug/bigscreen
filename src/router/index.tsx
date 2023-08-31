@@ -11,7 +11,7 @@ interface IPrivateRoute {
 
 const PrivateRoute: FC<IPrivateRoute> = ({ children, auth, title }) => {
   if (title) {
-    document.title = title;
+    document.title = `${window.CONFIG.title}-${title}`;
   }
   // 处理未登录情况时跳首页
   if (auth) {

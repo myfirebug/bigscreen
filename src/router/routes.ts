@@ -11,6 +11,7 @@ export interface IRoute extends NonIndexRouteObject {
   children?: IRoute[];
   // 访问的兄弟路由不存在时，重定向到该路由
   redirect?: string;
+  fullScreen?: boolean;
   state?: any;
 }
 
@@ -22,17 +23,18 @@ const routerDatas: IRoute[] = [
     auth: false,
     children: [
       {
-        path: "/home",
-        title: "首页",
-        redirect: "/home",
-        modulePath: "home",
-        auth: false,
-      },
-      {
         path: "/login",
         title: "登录",
         modulePath: "login",
         auth: false,
+        fullScreen: true,
+      },
+      {
+        path: "/home",
+        title: "首页",
+        redirect: "/home",
+        modulePath: "home",
+        auth: true,
       },
       {
         path: "*",
