@@ -11,7 +11,7 @@ import zhCN from "antd/locale/zh_CN";
 import { Header, Sidder } from "./components";
 import { connect } from "react-redux";
 import { ALL_STATE } from "./store/actionType";
-import { IThemeName, setTheme } from "@core/theme";
+import { IThemeName, setTheme, getCurrentPrimaryColor } from "@core/theme";
 
 dayjs.locale("zh-cn");
 
@@ -27,10 +27,14 @@ const App: FC<IApp> = ({ currentTheme }) => {
   useEffect(() => {
     setTheme(currentTheme);
   }, [currentTheme]);
+
   return (
     <ConfigProvider
       locale={zhCN}
       theme={{
+        token: {
+          colorPrimary: getCurrentPrimaryColor(currentTheme),
+        },
         // 1. 单独使用暗色算法
         algorithm: currentTheme.includes("_dark")
           ? theme.darkAlgorithm

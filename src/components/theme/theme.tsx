@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import "./index.scss";
-import { themeList, IThemeName } from "@core/theme";
+import { themeList, IThemeName, getCurrentPrimaryColor } from "@core/theme";
 import { ALL_STATE } from "@src/store/actionType";
 import { setCurrentTheme } from "@src/store/actions/theme";
 import { connect } from "react-redux";
@@ -19,14 +19,13 @@ const Theme: FC<ITheme> = ({ currentTheme, setCurrentTheme }) => {
     ) as IThemeName;
     setCurrentTheme(currentThemeName);
   };
-
-  const getColor = () => {
-    return themeList.find((item) => item.name === currentTheme)?.color;
-  };
   return (
     <div className="cms-theme">
       <div className="cms-theme__select">
-        <div className="hd" style={{ background: getColor() }}></div>
+        <div
+          className="hd"
+          style={{ background: getCurrentPrimaryColor(currentTheme) }}
+        ></div>
         <div className="bd">
           {themeList
             .filter((item) => !item.name.includes("_dark"))
@@ -35,7 +34,13 @@ const Theme: FC<ITheme> = ({ currentTheme, setCurrentTheme }) => {
                 title={item.name}
                 className="option"
                 key={item.name}
-                onClick={() => console.log(item)}
+                onClick={() =>
+                  setCurrentTheme(
+                    (currentTheme.includes("_dark")
+                      ? `${item.name.split("_")[0]}_dark`
+                      : `${item.name.split("_")[0]}_light`) as IThemeName
+                  )
+                }
                 style={{ background: item.color }}
               ></div>
             ))}

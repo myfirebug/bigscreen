@@ -27,12 +27,15 @@
       transform: scale(0);
       transform-origin: top center;
       position: absolute;
-      top: 40px;
+      top: 25px;
       left: 0;
       padding: 10px;
       border-radius: 3px;
       background: var(--module-background-color);
       box-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+      .option {
+        margin-top: 5px;
+      }
       .option:first-child {
         margin: 0;
       }

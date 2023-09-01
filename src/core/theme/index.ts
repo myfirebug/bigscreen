@@ -1,4 +1,4 @@
-import { themes, IThemeName } from "./themes";
+import { themes, IThemeName, themeList } from "./themes";
 import cssVars from "css-vars-ponyfill";
 export * from "./themes";
 // 判断浏览器是否支持cssVar
@@ -56,4 +56,9 @@ export function setTheme(theme: IThemeName) {
       onlyLegacy: false,
     });
   }
+}
+
+// 通过主题获取主color
+export function getCurrentPrimaryColor(theme: IThemeName) {
+  return themeList.find((item) => item.name === theme)?.color;
 }
