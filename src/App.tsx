@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, FC, useEffect } from "react";
 import { ConfigProvider, theme } from "antd";
 import Routes from "./router";
 import { Layout } from "@src/components";
@@ -9,19 +9,32 @@ import "dayjs/locale/zh-cn";
 import "@src/assets/scss/base/normalize.css";
 import zhCN from "antd/locale/zh_CN";
 import { Header, Sidder } from "./components";
+import { connect } from "react-redux";
+import { ALL_STATE } from "./store/actionType";
+import { IThemeName, setTheme } from "@core/theme";
 
 dayjs.locale("zh-cn");
 
-function App() {
+interface IApp {
+  currentTheme: IThemeName;
+}
+
+const App: FC<IApp> = ({ currentTheme }) => {
   const [collapsed, setCollapsed] = useState(false);
   const location = useLocation();
-  console.log(location, "location1");
+  console.log(location, "location1", currentTheme);
+
+  useEffect(() => {
+    setTheme(currentTheme);
+  }, [currentTheme]);
   return (
     <ConfigProvider
       locale={zhCN}
       theme={{
         // 1. 单独使用暗色算法
-        algorithm: theme.darkAlgorithm,
+        algorithm: currentTheme.includes("_dark")
+          ? theme.darkAlgorithm
+          : theme.defaultAlgorithm,
 
         // 2. 组合使用暗色算法与紧凑算法
         // algorithm: [theme.darkAlgorithm, theme.compactAlgorithm],
@@ -40,6 +53,13 @@ function App() {
       </Layout>
     </ConfigProvider>
   );
-}
+};
 
-export default App;
+const mapStateToProps = (state: ALL_STATE) => ({
+  currentTheme: state.currentTheme,
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

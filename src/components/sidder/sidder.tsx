@@ -8,9 +8,13 @@ import {
   PieChartOutlined,
 } from "@ant-design/icons";
 import "./index.scss";
+import { connect } from "react-redux";
+import { ALL_STATE } from "@src/store/actionType";
+import { IThemeName } from "@src/core/theme";
 
 interface ISidder {
   collapsed: boolean;
+  currentTheme: IThemeName;
 }
 
 type MenuItem = Required<MenuProps>["items"][number];
@@ -54,17 +58,27 @@ const items: MenuItem[] = [
   ]),
 ];
 
-const Sidder: FC<ISidder> = ({ collapsed }) => {
+const Sidder: FC<ISidder> = ({ collapsed, currentTheme }) => {
   return (
     <div className="cms-sidder">
       <Menu
+        className="cms-menu"
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         mode="inline"
+        theme={currentTheme.includes("_dark") ? "dark" : "light"}
         inlineCollapsed={collapsed}
         items={items}
       />
     </div>
   );
 };
-export default Sidder;
+
+const mapStateToProps = (state: ALL_STATE) => ({
+  currentTheme: state.currentTheme,
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Sidder);

@@ -7,4 +7,9 @@
   transition: all 0.25s ease 0s;
   background-color: var(--module-background-color);
   box-shadow: 0 0 10px var(--module-box-shadow-color);
+  .cms-menu {
+    height: 100%;
+    overflow: hidden;
+    overflow-y: auto;
+  }
 }

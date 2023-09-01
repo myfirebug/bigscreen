@@ -1,5 +1,5 @@
 // 主题01
-export const theme01 = {
+export const theme01_light = {
   /* ------------------切换白天夜间模式不变的变量start------------------ */
   // 主色
   "--primary-color": "#1677ff",

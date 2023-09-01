@@ -1,33 +1,32 @@
-import React, { FC, useEffect, useState } from "react";
+import React, { FC } from "react";
 import "./index.scss";
-import { themeList, IThemeItem, setTheme, IThemeName } from "@core/theme";
-interface ITheme {}
+import { themeList, IThemeName } from "@core/theme";
+import { ALL_STATE } from "@src/store/actionType";
+import { setCurrentTheme } from "@src/store/actions/theme";
+import { connect } from "react-redux";
+interface ITheme {
+  currentTheme: IThemeName;
+  setCurrentTheme: (data: IThemeName) => void;
+}
 
-const Theme: FC<ITheme> = () => {
-  const [currentTheme, setCurrentTheme] = useState<IThemeItem>(() => {
-    return (
-      themeList.find((item) => item.name === window.CONFIG.theme) ||
-      themeList[0]
-    );
-  });
-  useEffect(() => {
-    setTheme(currentTheme.name);
-  }, [currentTheme.name]);
-
+const Theme: FC<ITheme> = ({ currentTheme, setCurrentTheme }) => {
   const modeHandler = () => {
-    let isMoon = currentTheme.name.includes("_dark");
+    let isMoon = currentTheme.includes("_dark");
     let currentThemeName = (
-      isMoon ? currentTheme.name.split("_")[0] : `${currentTheme.name}_dark`
+      isMoon
+        ? `${currentTheme.split("_")[0]}_light`
+        : `${currentTheme.split("_")[0]}_dark`
     ) as IThemeName;
-    setCurrentTheme((state) => ({
-      ...state,
-      name: currentThemeName,
-    }));
+    setCurrentTheme(currentThemeName);
+  };
+
+  const getColor = () => {
+    return themeList.find((item) => item.name === currentTheme)?.color;
   };
   return (
     <div className="cms-theme">
       <div className="cms-theme__select">
-        <div className="hd" style={{ background: currentTheme.color }}></div>
+        <div className="hd" style={{ background: getColor() }}></div>
         <div className="bd">
           {themeList
             .filter((item) => !item.name.includes("_dark"))
@@ -36,14 +35,7 @@ const Theme: FC<ITheme> = () => {
                 title={item.name}
                 className="option"
                 key={item.name}
-                onClick={() =>
-                  setCurrentTheme((state) => ({
-                    color: item.color,
-                    name: (state.name.includes("_dark")
-                      ? `${item.name}_dark`
-                      : item.name) as IThemeName,
-                  }))
-                }
+                onClick={() => console.log(item)}
                 style={{ background: item.color }}
               ></div>
             ))}
@@ -52,7 +44,7 @@ const Theme: FC<ITheme> = () => {
       <div
         title="切换模式"
         className={`cms-theme__mode ${
-          currentTheme.name.includes("_dark") ? "is-moon" : ""
+          currentTheme.includes("_dark") ? "is-moon" : ""
         }`}
         onClick={modeHandler}
       ></div>
@@ -60,4 +52,13 @@ const Theme: FC<ITheme> = () => {
   );
 };
 
-export default Theme;
+const mapStateToProps = (state: ALL_STATE) => ({
+  currentTheme: state.currentTheme,
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {
+  setCurrentTheme,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Theme);

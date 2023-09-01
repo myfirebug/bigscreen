@@ -1,4 +1,4 @@
-import { theme01 } from "./theme01";
+import { theme01_light } from "./theme01";
 import { theme01_dark } from "./theme01_dark";
 
 type IThemes = {
@@ -7,7 +7,7 @@ type IThemes = {
   };
 };
 
-export type IThemeName = "theme01" | "theme01_dark";
+export type IThemeName = "theme01_light" | "theme01_dark";
 
 export interface IThemeItem {
   name: IThemeName;
@@ -16,8 +16,8 @@ export interface IThemeItem {
 
 export const themeList: IThemeItem[] = [
   {
-    name: "theme01",
-    color: theme01["--primary-color"],
+    name: "theme01_light",
+    color: theme01_light["--primary-color"],
   },
   {
     name: "theme01_dark",
@@ -26,6 +26,6 @@ export const themeList: IThemeItem[] = [
 ];
 
 export const themes: IThemes = {
-  theme01,
+  theme01_light,
   theme01_dark,
 };
