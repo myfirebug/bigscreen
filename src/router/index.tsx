@@ -1,20 +1,20 @@
 import React, { Suspense, FC, memo } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
-import routes, { IRoute } from "./routes";
+import routes, { IRoute, IMeta } from "./routes";
 import { lazyLoad } from "@src/components";
 
 interface IPrivateRoute {
   children: JSX.Element;
-  auth: boolean;
+  meta: IMeta;
   title: string;
 }
 
-const PrivateRoute: FC<IPrivateRoute> = ({ children, auth, title }) => {
+const PrivateRoute: FC<IPrivateRoute> = ({ children, meta, title }) => {
   if (title) {
     document.title = `${window.CONFIG.title}-${title}`;
   }
   // 处理未登录情况时跳首页
-  if (auth) {
+  if (meta.auth) {
     return <Navigate to="/login" />;
   }
   return children;
@@ -26,15 +26,16 @@ const PrivateRoute: FC<IPrivateRoute> = ({ children, auth, title }) => {
  * @returns
  */
 const routeTree = (datas: IRoute[]) => {
-  return datas.map(({ path, children, modulePath, title, auth, redirect }) => {
+  return datas.map(({ path, children, modulePath, title, meta, redirect }) => {
     return children && children.length ? (
       <Route
-        handle={auth}
         path={path}
         element={
-          <PrivateRoute title={title} auth={auth}>
-            {lazyLoad(modulePath)}
-          </PrivateRoute>
+          modulePath ? (
+            <PrivateRoute title={title} meta={meta}>
+              {lazyLoad(modulePath)}
+            </PrivateRoute>
+          ) : null
         }
         key={modulePath}
       >
@@ -51,11 +52,12 @@ const routeTree = (datas: IRoute[]) => {
     ) : (
       <Route
         path={path}
-        handle={auth}
         element={
-          <PrivateRoute title={title} auth={auth}>
-            {lazyLoad(modulePath)}
-          </PrivateRoute>
+          modulePath ? (
+            <PrivateRoute title={title} meta={meta}>
+              {lazyLoad(modulePath)}
+            </PrivateRoute>
+          ) : null
         }
         key={modulePath}
       ></Route>

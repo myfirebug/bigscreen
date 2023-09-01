@@ -61,7 +61,6 @@ const Sidder: FC<ISidder> = ({ collapsed }) => {
         defaultSelectedKeys={["1"]}
         defaultOpenKeys={["sub1"]}
         mode="inline"
-        theme="dark"
         inlineCollapsed={collapsed}
         items={items}
       />

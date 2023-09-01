@@ -46,6 +46,11 @@ module.exports = merge.merge(baseConfig, {
           priority: 40, // 权重（越大越高）
           name: "chunk-react",
         },
+        antd: {
+          test: /[\\/]node_modules[\\/]antd(.*)?[\\/]/, // 需要打包到一起的模块
+          priority: 40, // 权重（越大越高）
+          name: "chunk-antd",
+        },
         // 其他的一起打包
         lib: {
           test: /[\\/]node_modules[\\/][\\/]/,

@@ -5,11 +5,7 @@
   top: 0;
   bottom: 0;
   right: 0;
-  background: linear-gradient(
-    to bottom,
-    rgb(59, 117, 252) 0%,
-    rgb(16, 70, 191) 100%
-  );
+  background: var(--change-primary-color);
   @include e(left) {
     position: relative;
     width: 100vw;
@@ -41,7 +37,7 @@
     transform: translate(30%, -50%);
     width: 380px;
     height: 400px;
-    background: #fff;
+    background: var(--module-background-color);
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
     box-sizing: border-box;
     border-radius: 24px;
@@ -50,7 +46,7 @@
       margin: 60px 0 30px 0;
     }
     .site-form-item-icon {
-      color: #999;
+      color: var(--light-font-color);
     }
   }
   @include e(mask) {
