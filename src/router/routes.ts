@@ -14,12 +14,13 @@ export interface IRoute extends NonIndexRouteObject {
   title: string;
   // 模块路径在template模块下的路径
   modulePath: string;
+  meta: IMeta;
   // 子路由
   children?: IRoute[];
   // 访问的兄弟路由不存在时，重定向到该路由
   redirect?: string;
   state?: any;
-  meta: IMeta;
+  icon?: string;
 }
 
 const routerDatas: IRoute[] = [
@@ -46,6 +47,7 @@ const routerDatas: IRoute[] = [
         path: "/home",
         title: "首页",
         modulePath: "home",
+        icon: "&#xe8b9;",
         meta: {
           auth: false,
           menu: true,
@@ -54,6 +56,7 @@ const routerDatas: IRoute[] = [
       {
         path: "/web",
         title: "电脑端",
+        icon: "&#xe61f;",
         modulePath: "",
         meta: {
           auth: true,
@@ -62,7 +65,7 @@ const routerDatas: IRoute[] = [
         children: [
           {
             path: "/web/project-list",
-            title: "电脑端-项目列表",
+            title: "项目",
             modulePath: "home",
             meta: {
               auth: true,
@@ -71,7 +74,7 @@ const routerDatas: IRoute[] = [
           },
           {
             path: "/web/widget-list",
-            title: "电脑端-微件模版列表",
+            title: "微件模版",
             modulePath: "home",
             meta: {
               auth: true,
@@ -80,7 +83,7 @@ const routerDatas: IRoute[] = [
           },
           {
             path: "/web/page-list",
-            title: "电脑端-页面模版列表",
+            title: "页面模版",
             modulePath: "home",
             meta: {
               auth: true,
@@ -92,6 +95,7 @@ const routerDatas: IRoute[] = [
       {
         path: "/mobile",
         title: "移动端",
+        icon: "&#xe6b2;",
         modulePath: "",
         meta: {
           auth: true,
@@ -100,7 +104,7 @@ const routerDatas: IRoute[] = [
         children: [
           {
             path: "/mobile/project-list",
-            title: "移动端-项目列表",
+            title: "项目",
             modulePath: "home",
             meta: {
               auth: true,
@@ -109,7 +113,7 @@ const routerDatas: IRoute[] = [
           },
           {
             path: "/mobile/widget-list",
-            title: "移动端-微件模版列表",
+            title: "微件模版",
             modulePath: "home",
             meta: {
               auth: true,
@@ -118,7 +122,7 @@ const routerDatas: IRoute[] = [
           },
           {
             path: "/mobile/page-list",
-            title: "移动端-页面模版列表",
+            title: "页面模版",
             modulePath: "home",
             meta: {
               auth: true,
