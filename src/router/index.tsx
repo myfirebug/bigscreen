@@ -4,12 +4,13 @@ import routes, { IRoute, IMeta } from "./routes";
 import { lazyLoad } from "@src/components";
 
 interface IPrivateRoute {
-  children: JSX.Element;
+  children: JSX.Element | null;
   meta: IMeta;
   title: string;
+  path: string | undefined;
 }
 
-const PrivateRoute: FC<IPrivateRoute> = ({ children, meta, title }) => {
+const PrivateRoute: FC<IPrivateRoute> = ({ children, meta, title, path }) => {
   if (title) {
     document.title = `${window.CONFIG.title}-${title}`;
   }
@@ -32,7 +33,7 @@ const routeTree = (datas: IRoute[]) => {
         path={path}
         element={
           modulePath ? (
-            <PrivateRoute title={title} meta={meta}>
+            <PrivateRoute title={title} meta={meta} path={path}>
               {lazyLoad(modulePath)}
             </PrivateRoute>
           ) : null
@@ -53,8 +54,10 @@ const routeTree = (datas: IRoute[]) => {
       <Route
         path={path}
         element={
-          modulePath ? (
-            <PrivateRoute title={title} meta={meta}>
+          (path as string) === "*" ? (
+            <Navigate to="/404" replace />
+          ) : modulePath ? (
+            <PrivateRoute title={title} meta={meta} path={path}>
               {lazyLoad(modulePath)}
             </PrivateRoute>
           ) : null
