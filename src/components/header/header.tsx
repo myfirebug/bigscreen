@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -10,15 +10,32 @@ import { Theme } from "@src/components";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
 import { clearToken } from "@src/store/actions/token";
+import { setUserInfo } from "@src/store/actions/userInfo";
 import "./index.scss";
 import { connect } from "react-redux";
+import { ALL_STATE } from "@src/store/actionType";
+import { IuserInfo } from "@src/service";
+import { useInfo } from "@src/core/hook";
 interface IHeader {
   clearToken: () => void;
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
+  setUserInfo: (data: IuserInfo) => void;
+  userInfo: IuserInfo;
 }
 
-const Header: FC<IHeader> = ({ collapsed, setCollapsed, clearToken }) => {
+const Header: FC<IHeader> = ({
+  collapsed,
+  setCollapsed,
+  clearToken,
+  setUserInfo,
+  userInfo,
+}) => {
+  const { getUserInfo } = useInfo();
+  useEffect(() => {
+    getUserInfo(setUserInfo);
+  }, [getUserInfo, setUserInfo]);
+
   const items: MenuProps["items"] = [
     {
       key: "1",
@@ -46,8 +63,10 @@ const Header: FC<IHeader> = ({ collapsed, setCollapsed, clearToken }) => {
           <Theme />
           <Dropdown menu={{ items }}>
             <div className="user">
-              <div className="cms-avatar"></div>
-              <span className="user-name">欢迎admin</span>
+              <div className="cms-avatar">
+                <img src={userInfo.avatar} alt="" />
+              </div>
+              <span className="user-name">欢迎{userInfo.username}</span>
               <DownOutlined />
             </div>
           </Dropdown>
@@ -57,11 +76,14 @@ const Header: FC<IHeader> = ({ collapsed, setCollapsed, clearToken }) => {
   );
 };
 
-const mapStateToProps = () => ({});
+const mapStateToProps = (state: ALL_STATE) => ({
+  userInfo: state.userInfo,
+});
 
 // 将 对应action 插入到组件的 props 中
 const mapDispatchToProps = {
   clearToken: clearToken,
+  setUserInfo: setUserInfo,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header);

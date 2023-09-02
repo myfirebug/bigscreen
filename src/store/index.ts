@@ -21,7 +21,7 @@ const persistConfig = {
   // 某个reducer,不持久化
   // blacklist: ['development'],
   // 需要持久化的模块
-  whitelist: ["counter", "currentTheme", "token"],
+  whitelist: ["counter", "currentTheme", "token", "userInfo"],
 };
 
 const persistedReducer = persistReducer(persistConfig, reducers);

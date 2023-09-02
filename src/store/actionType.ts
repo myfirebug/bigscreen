@@ -1,4 +1,5 @@
 import { IThemeName } from "@core/theme";
+import { IuserInfo } from "@src/service";
 
 // counter state数据类型
 export type COUNTER_STATE = number;
@@ -22,9 +23,14 @@ export type SETTOKEN_TYPE = typeof SETTOKEN;
 export const CLEARTOKEN = "CLEARTOKEN";
 export type CLEARTOKEN_TYPE = typeof CLEARTOKEN;
 
+// 定义 userInfo 类型常量
+export const USERINFO = "USERINFO";
+export type USERINFO_TYPE = typeof USERINFO;
+
 // 所有的数据的数据类型, 注意这里每加一个state模块都必须在这里进行申明
 export type ALL_STATE = {
   counter: COUNTER_STATE;
   currentTheme: IThemeName;
   token: string;
+  userInfo: IuserInfo;
 };
