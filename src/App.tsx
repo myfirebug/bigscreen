@@ -12,6 +12,8 @@ import { Header, Sidder } from "./components";
 import { connect } from "react-redux";
 import { ALL_STATE } from "./store/actionType";
 import { IThemeName, setTheme, getCurrentPrimaryColor } from "@core/theme";
+import { getGroupById } from "@src/utils";
+import routerDatas, { IRoute } from "./router/routes";
 
 dayjs.locale("zh-cn");
 
@@ -21,8 +23,12 @@ interface IApp {
 
 const App: FC<IApp> = ({ currentTheme }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const location = useLocation();
-  console.log(location, "location1", currentTheme);
+  const { pathname } = useLocation();
+  console.log(pathname, "location1");
+
+  const fullScreen: IRoute = getGroupById(routerDatas, pathname, "path");
+
+  console.log(fullScreen, routerDatas, "fullScreen");
 
   useEffect(() => {
     setTheme(currentTheme);
@@ -46,11 +52,23 @@ const App: FC<IApp> = ({ currentTheme }) => {
     >
       <Layout
         className={collapsed ? "is-collapsed" : ""}
-        Header={<Header collapsed={collapsed} setCollapsed={setCollapsed} />}
-        Sidder={<Sidder collapsed={collapsed} />}
+        Header={
+          !fullScreen?.meta?.fullScreen ? (
+            <Header collapsed={collapsed} setCollapsed={setCollapsed} />
+          ) : null
+        }
+        Sidder={
+          !fullScreen?.meta?.fullScreen ? (
+            <Sidder collapsed={collapsed} />
+          ) : null
+        }
         style={{
-          paddingTop: "55px",
-          paddingLeft: collapsed ? "80px" : "200px",
+          paddingTop: fullScreen?.meta?.fullScreen ? "0px" : "55px",
+          paddingLeft: fullScreen?.meta?.fullScreen
+            ? "0px"
+            : collapsed
+            ? "80px"
+            : "200px",
         }}
       >
         <Routes />

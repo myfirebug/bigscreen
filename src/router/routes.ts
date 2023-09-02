@@ -49,7 +49,7 @@ const routerDatas: IRoute[] = [
         modulePath: "home",
         icon: "&#xe8b9;",
         meta: {
-          auth: false,
+          auth: true,
           menu: true,
         },
       },
@@ -59,7 +59,7 @@ const routerDatas: IRoute[] = [
         icon: "&#xe61f;",
         modulePath: "",
         meta: {
-          auth: false,
+          auth: true,
           menu: true,
         },
         children: [
@@ -68,7 +68,7 @@ const routerDatas: IRoute[] = [
             title: "项目",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },
@@ -77,7 +77,7 @@ const routerDatas: IRoute[] = [
             title: "微件模版",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },
@@ -86,7 +86,7 @@ const routerDatas: IRoute[] = [
             title: "页面模版",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },
@@ -98,7 +98,7 @@ const routerDatas: IRoute[] = [
         icon: "&#xe6b2;",
         modulePath: "",
         meta: {
-          auth: false,
+          auth: true,
           menu: true,
         },
         children: [
@@ -107,7 +107,7 @@ const routerDatas: IRoute[] = [
             title: "项目",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },
@@ -116,7 +116,7 @@ const routerDatas: IRoute[] = [
             title: "微件模版",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },
@@ -125,7 +125,7 @@ const routerDatas: IRoute[] = [
             title: "页面模版",
             modulePath: "home",
             meta: {
-              auth: false,
+              auth: true,
               menu: true,
             },
           },

@@ -9,25 +9,24 @@ import {
 import { Theme } from "@src/components";
 import type { MenuProps } from "antd";
 import { Dropdown } from "antd";
+import { clearToken } from "@src/store/actions/token";
 import "./index.scss";
+import { connect } from "react-redux";
 interface IHeader {
+  clearToken: () => void;
   collapsed: boolean;
   setCollapsed: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const Header: FC<IHeader> = ({ collapsed, setCollapsed }) => {
+const Header: FC<IHeader> = ({ collapsed, setCollapsed, clearToken }) => {
   const items: MenuProps["items"] = [
     {
       key: "1",
       label: (
-        <a
-          target="_blank"
-          rel="noopener noreferrer"
-          href="https://www.antgroup.com"
-        >
+        <div onClick={clearToken}>
           <LoginOutlined />
           退出登录
-        </a>
+        </div>
       ),
     },
   ];
@@ -58,4 +57,11 @@ const Header: FC<IHeader> = ({ collapsed, setCollapsed }) => {
   );
 };
 
-export default Header;
+const mapStateToProps = () => ({});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {
+  clearToken: clearToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

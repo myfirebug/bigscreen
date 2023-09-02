@@ -2,24 +2,38 @@ import React, { Suspense, FC, memo } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import routes, { IRoute, IMeta } from "./routes";
 import { lazyLoad } from "@src/components";
+import { connect } from "react-redux";
+import { ALL_STATE } from "@src/store/actionType";
 
 interface IPrivateRoute {
   children: JSX.Element | null;
   meta: IMeta;
   title: string;
-  path: string | undefined;
+  token: string;
 }
 
-const PrivateRoute: FC<IPrivateRoute> = ({ children, meta, title, path }) => {
+const PrivateRoute: FC<IPrivateRoute> = ({ children, meta, title, token }) => {
   if (title) {
     document.title = `${window.CONFIG.title}-${title}`;
   }
   // 处理未登录情况时跳首页
-  if (meta.auth) {
+  if (meta.auth && !token) {
     return <Navigate to="/login" />;
   }
   return children;
 };
+
+const mapStateToProps = (state: ALL_STATE) => ({
+  token: state.token,
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {};
+
+const NewPrivateRoute = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(PrivateRoute);
 
 /**
  * 递归路由
@@ -33,9 +47,9 @@ const routeTree = (datas: IRoute[]) => {
         path={path}
         element={
           modulePath ? (
-            <PrivateRoute title={title} meta={meta} path={path}>
+            <NewPrivateRoute title={title} meta={meta}>
               {lazyLoad(modulePath)}
-            </PrivateRoute>
+            </NewPrivateRoute>
           ) : null
         }
         key={modulePath}
@@ -57,9 +71,9 @@ const routeTree = (datas: IRoute[]) => {
           (path as string) === "*" ? (
             <Navigate to="/404" replace />
           ) : modulePath ? (
-            <PrivateRoute title={title} meta={meta} path={path}>
+            <NewPrivateRoute title={title} meta={meta}>
               {lazyLoad(modulePath)}
-            </PrivateRoute>
+            </NewPrivateRoute>
           ) : null
         }
         key={modulePath}

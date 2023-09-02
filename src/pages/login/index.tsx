@@ -1,11 +1,21 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, FC } from "react";
 import { Button, Form, Input } from "antd";
 import { LockOutlined, UserOutlined } from "@ant-design/icons";
 import { ILoginForm } from "@src/service";
 import { useLogin } from "@src/core/hook";
+import { setToken } from "@src/store/actions/token";
 import "./index.scss";
+import { connect } from "react-redux";
+import { ALL_STATE } from "@src/store/actionType";
+import { useNavigate } from "react-router-dom";
 
-function Login() {
+interface ILogin {
+  token: string;
+  setToken: (data: string) => void;
+}
+
+const Login: FC<ILogin> = ({ setToken, token }) => {
+  const navigate = useNavigate();
   const { loginLoading, login } = useLogin();
   const particles = useRef<HTMLDivElement>(null);
   useEffect(() => {
@@ -123,8 +133,14 @@ function Login() {
     }
   }, [particles]);
 
-  const onFinish = (values: ILoginForm) => {
-    login(values);
+  useEffect(() => {
+    if (token) {
+      navigate("/home");
+    }
+  }, [token, navigate]);
+
+  const onFinish = async (values: ILoginForm) => {
+    login(values, setToken);
   };
 
   return (
@@ -183,6 +199,15 @@ function Login() {
       </div>
     </div>
   );
-}
+};
 
-export default Login;
+const mapStateToProps = (state: ALL_STATE) => ({
+  token: state.token,
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {
+  setToken: setToken,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Login);
