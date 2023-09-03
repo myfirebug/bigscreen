@@ -26,9 +26,7 @@ const App: FC<IApp> = ({ currentTheme }) => {
   const { pathname } = useLocation();
   console.log(pathname, "location1");
 
-  const fullScreen: IRoute = getGroupById(routerDatas, pathname, "path");
-
-  console.log(fullScreen, routerDatas, "fullScreen");
+  const currentRoute: IRoute = getGroupById(routerDatas, pathname, "path");
 
   useEffect(() => {
     setTheme(currentTheme);
@@ -53,18 +51,18 @@ const App: FC<IApp> = ({ currentTheme }) => {
       <Layout
         className={collapsed ? "is-collapsed" : ""}
         Header={
-          !fullScreen?.meta?.fullScreen ? (
+          !currentRoute?.meta?.fullScreen ? (
             <Header collapsed={collapsed} setCollapsed={setCollapsed} />
           ) : null
         }
         Sidder={
-          !fullScreen?.meta?.fullScreen ? (
+          !currentRoute?.meta?.fullScreen ? (
             <Sidder collapsed={collapsed} />
           ) : null
         }
         style={{
-          paddingTop: fullScreen?.meta?.fullScreen ? "0px" : "55px",
-          paddingLeft: fullScreen?.meta?.fullScreen
+          paddingTop: currentRoute?.meta?.fullScreen ? "0px" : "55px",
+          paddingLeft: currentRoute?.meta?.fullScreen
             ? "0px"
             : collapsed
             ? "80px"

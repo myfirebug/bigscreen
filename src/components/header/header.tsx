@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { FC, useEffect } from "react";
+import React, { FC, useEffect, useState } from "react";
 import {
   MenuFoldOutlined,
   MenuUnfoldOutlined,
@@ -7,7 +7,7 @@ import {
   DownOutlined,
 } from "@ant-design/icons";
 import { Theme } from "@src/components";
-import type { MenuProps } from "antd";
+import { Breadcrumb, MenuProps } from "antd";
 import { Dropdown } from "antd";
 import { clearToken } from "@src/store/actions/token";
 import { setUserInfo } from "@src/store/actions/userInfo";
@@ -16,6 +16,10 @@ import { connect } from "react-redux";
 import { ALL_STATE } from "@src/store/actionType";
 import { IuserInfo } from "@src/service";
 import { useInfo } from "@src/core/hook";
+import { useLocation, useNavigate } from "react-router-dom";
+import { getParentsById } from "@src/utils";
+import routerDatas, { IRoute } from "@src/router/routes";
+
 interface IHeader {
   clearToken: () => void;
   collapsed: boolean;
@@ -31,7 +35,18 @@ const Header: FC<IHeader> = ({
   setUserInfo,
   userInfo,
 }) => {
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
   const { getUserInfo } = useInfo();
+
+  const [breadcrumb, setBreadcrumb] = useState<any[]>([]);
+
+  useEffect(() => {
+    setBreadcrumb(
+      getParentsById(routerDatas[0].children as IRoute[], pathname).reverse()
+    );
+  }, [pathname]);
+
   useEffect(() => {
     getUserInfo(setUserInfo);
   }, [getUserInfo, setUserInfo]);
@@ -47,6 +62,12 @@ const Header: FC<IHeader> = ({
       ),
     },
   ];
+
+  const go = (path: string) => {
+    if (path) {
+      navigate(path);
+    }
+  };
   return (
     <div className="cms-header">
       <div className="cms-header__left">
@@ -58,6 +79,16 @@ const Header: FC<IHeader> = ({
           <span onClick={() => setCollapsed(!collapsed)}>
             {collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
           </span>
+
+          {breadcrumb && breadcrumb.length ? (
+            <Breadcrumb>
+              {breadcrumb.map((item: any) => (
+                <Breadcrumb.Item key={item.path} onClick={() => go(item.path)}>
+                  {item.name}
+                </Breadcrumb.Item>
+              ))}
+            </Breadcrumb>
+          ) : null}
         </div>
         <div className="cms-header__right--right">
           <Theme />

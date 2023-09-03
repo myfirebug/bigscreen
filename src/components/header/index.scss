@@ -39,6 +39,9 @@
       display: flex;
       align-items: center;
       flex: 1;
+      > span {
+        margin-right: 20px;
+      }
       .anticon {
         font-size: 24px;
         color: var(--light-font-color);
@@ -47,6 +50,9 @@
         &:hover {
           color: var(--primary-color);
         }
+      }
+      .ant-breadcrumb-link {
+        cursor: pointer;
       }
     }
     @include m(right) {
