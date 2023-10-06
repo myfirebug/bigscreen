@@ -19,13 +19,16 @@ export type THEME_TYPE = typeof THEME;
 export const SETTOKEN = "SETTOKEN";
 export type SETTOKEN_TYPE = typeof SETTOKEN;
 
-// 定义 settoken 类型常量
+// 定义 cleartoken 类型常量
 export const CLEARTOKEN = "CLEARTOKEN";
 export type CLEARTOKEN_TYPE = typeof CLEARTOKEN;
 
 // 定义 userInfo 类型常量
 export const USERINFO = "USERINFO";
 export type USERINFO_TYPE = typeof USERINFO;
+// 定义 clearUserInfo 类型常量
+export const CLEARUSERINFO = "CLEARUSERINFO";
+export type CLEARUSERINFO_TYPE = typeof CLEARUSERINFO;
 
 // 所有的数据的数据类型, 注意这里每加一个state模块都必须在这里进行申明
 export type ALL_STATE = {

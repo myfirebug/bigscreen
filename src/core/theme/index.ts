@@ -1,5 +1,5 @@
 import { themes, IThemeName, themeList } from "./themes";
-import cssVars from "css-vars-ponyfill";
+// import cssVars from "css-vars-ponyfill";
 export * from "./themes";
 // 判断浏览器是否支持cssVar
 const isSupportCssVar =
@@ -50,10 +50,12 @@ export function setTheme(theme: IThemeName) {
     cssRootVar(themes[theme]);
   } else {
     document.documentElement.setAttribute("data-theme", theme);
-    cssVars({
-      watch: true,
-      variables: themes[theme],
-      onlyLegacy: false,
+    import("css-vars-ponyfill").then((cssVars) => {
+      cssVars.default({
+        watch: true,
+        variables: themes[theme],
+        onlyLegacy: false,
+      });
     });
   }
 }

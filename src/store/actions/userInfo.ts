@@ -1,4 +1,9 @@
-import { USERINFO, USERINFO_TYPE } from "../actionType";
+import {
+  USERINFO,
+  USERINFO_TYPE,
+  CLEARUSERINFO,
+  CLEARUSERINFO_TYPE,
+} from "../actionType";
 import { Dispatch } from "redux";
 import { IuserInfo } from "@src/service";
 
@@ -8,14 +13,25 @@ export interface IUserInfoAction {
   data: IuserInfo;
 }
 
-export type ModifyAction = IUserInfoAction;
+export interface IClearUserInfoAction {
+  type: CLEARUSERINFO_TYPE;
+}
 
-// 增加 state 次数据的方法
+export type ModifyAction = IUserInfoAction | IClearUserInfoAction;
+
 const actionUserInfo = (data: IuserInfo): IUserInfoAction => ({
   type: USERINFO,
   data,
 });
 
+const actionClearUserInfo = (): IClearUserInfoAction => ({
+  type: CLEARUSERINFO,
+});
+
 export const setUserInfo = (data: IuserInfo) => (dispatch: Dispatch) => {
   dispatch(actionUserInfo(data));
+};
+
+export const clearUserInfo = () => (dispatch: Dispatch) => {
+  dispatch(actionClearUserInfo());
 };

@@ -1,6 +1,8 @@
 import axios, { AxiosResponse, CancelTokenSource } from "axios";
 import Qs from "qs";
 
+const NODE_ENV = process.env.NODE_ENV;
+
 export interface IBaseReponse<T> {
   // 状态码
   success: boolean;
@@ -8,7 +10,12 @@ export interface IBaseReponse<T> {
   data: T;
 }
 
-axios.defaults.baseURL = "http://192.168.101.79:3000";
+console.log(NODE_ENV);
+
+axios.defaults.baseURL =
+  NODE_ENV === "development"
+    ? "http://192.168.101.79:3000"
+    : "https://myfirebug.github.io";
 
 // 正在进行中的请求列表
 const requestList: string[] = [];

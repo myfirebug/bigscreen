@@ -20,7 +20,7 @@ const Layout: FC<ILayout> = ({
       {Header}
       <div className="cms-layout__main" style={style}>
         {Sidder}
-        {children}
+        <div className="cms-content">{children}</div>
       </div>
       {Footer}
     </div>

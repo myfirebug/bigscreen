@@ -3,6 +3,7 @@ import {
   SETTOKEN_TYPE,
   CLEARTOKEN,
   CLEARTOKEN_TYPE,
+  CLEARUSERINFO,
 } from "../actionType";
 import { Dispatch } from "redux";
 
@@ -32,4 +33,7 @@ export const setToken = (data: string) => (dispatch: Dispatch) => {
 
 export const clearToken = () => (dispatch: Dispatch) => {
   dispatch(actionClearTheme());
+  dispatch({
+    type: CLEARUSERINFO,
+  });
 };

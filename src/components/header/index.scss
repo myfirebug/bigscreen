@@ -51,9 +51,6 @@
           color: var(--primary-color);
         }
       }
-      .ant-breadcrumb-link {
-        cursor: pointer;
-      }
     }
     @include m(right) {
       display: flex;

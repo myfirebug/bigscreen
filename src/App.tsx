@@ -61,7 +61,7 @@ const App: FC<IApp> = ({ currentTheme }) => {
           ) : null
         }
         style={{
-          paddingTop: currentRoute?.meta?.fullScreen ? "0px" : "55px",
+          paddingTop: currentRoute?.meta?.fullScreen ? "0px" : "48px",
           paddingLeft: currentRoute?.meta?.fullScreen
             ? "0px"
             : collapsed
