@@ -50,9 +50,11 @@ const Sidder: FC<ISidder> = ({ collapsed, currentTheme }) => {
             }}
           ></span>
         ),
-        children: Array.isArray(item.children)
-          ? recursionTree(item.children)
-          : null,
+        children:
+          Array.isArray(item.children) &&
+          item.children.findIndex((subItem) => subItem.meta.menu) !== -1
+            ? recursionTree(item.children)
+            : null,
       }));
   };
 
