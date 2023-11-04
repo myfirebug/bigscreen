@@ -64,6 +64,16 @@ const routerDatas: IRoute[] = [
         },
       },
       {
+        path: "/widget",
+        title: "微件",
+        modulePath: "widget",
+        icon: "&#xe634;",
+        meta: {
+          auth: true,
+          menu: true,
+        },
+      },
+      {
         path: "/web",
         title: "电脑端",
         icon: "&#xe61f;",
@@ -76,16 +86,7 @@ const routerDatas: IRoute[] = [
           {
             path: "/web/project-list",
             title: "项目",
-            modulePath: "home",
-            meta: {
-              auth: true,
-              menu: true,
-            },
-          },
-          {
-            path: "/web/widget-list",
-            title: "微件模版",
-            modulePath: "home",
+            modulePath: "web/projectList",
             meta: {
               auth: true,
               menu: true,
@@ -94,7 +95,7 @@ const routerDatas: IRoute[] = [
           {
             path: "/web/page-list",
             title: "页面模版",
-            modulePath: "home",
+            modulePath: "web/pageList",
             meta: {
               auth: true,
               menu: true,
@@ -115,16 +116,7 @@ const routerDatas: IRoute[] = [
           {
             path: "/mobile/project-list",
             title: "项目",
-            modulePath: "home",
-            meta: {
-              auth: true,
-              menu: true,
-            },
-          },
-          {
-            path: "/mobile/widget-list",
-            title: "微件模版",
-            modulePath: "home",
+            modulePath: "mobile/projectList",
             meta: {
               auth: true,
               menu: true,
@@ -133,7 +125,7 @@ const routerDatas: IRoute[] = [
           {
             path: "/mobile/page-list",
             title: "页面模版",
-            modulePath: "home",
+            modulePath: "mobile/pageList",
             meta: {
               auth: true,
               menu: true,
