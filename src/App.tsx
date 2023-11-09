@@ -15,6 +15,8 @@ import { IThemeName, setTheme, getCurrentPrimaryColor } from "@core/theme";
 import { getGroupById } from "@src/utils";
 import routerDatas, { IRoute } from "./router/routes";
 
+const { useToken } = theme;
+
 dayjs.locale("zh-cn");
 
 interface IApp {
@@ -22,6 +24,7 @@ interface IApp {
 }
 
 const App: FC<IApp> = ({ currentTheme }) => {
+  const { token } = useToken();
   const [collapsed, setCollapsed] = useState(false);
   const { pathname } = useLocation();
   console.log(pathname, "location1");
@@ -31,6 +34,8 @@ const App: FC<IApp> = ({ currentTheme }) => {
   useEffect(() => {
     setTheme(currentTheme);
   }, [currentTheme]);
+
+  console.log(token, "theme");
 
   return (
     <ConfigProvider

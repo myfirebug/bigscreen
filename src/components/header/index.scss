@@ -6,7 +6,8 @@
   z-index: 100;
   display: flex;
   height: 48px;
-  background-color: var(--module-background-color);
+  color: var(--white);
+  background-color: var(--change-primary-color);
   box-shadow: 0 0 10px var(--module-box-shadow-color);
   transition: all 0.25s ease 0s;
   @include e(left) {
@@ -14,11 +15,10 @@
     align-items: center;
     width: 200px;
     padding: 0 15px;
-    background-color: var(--change-primary-color);
-    color: var(--white);
     box-sizing: border-box;
     transition: all 0.25s ease 0s;
     overflow: hidden;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.12);
     .title {
       margin: 0;
       padding: 0;
@@ -44,11 +44,12 @@
       }
       .anticon {
         font-size: 24px;
-        color: var(--light-font-color);
+        color: var(--white);
+        opacity: 0.8;
         cursor: pointer;
         transition: all 0.25s ease 0s;
         &:hover {
-          color: var(--primary-color);
+          opacity: 1;
         }
       }
     }
@@ -60,7 +61,7 @@
         padding-left: 15px;
         line-height: 24px;
         margin-left: 15px;
-        border-left: 1px solid var(--border-color);
+        border-left: 1px solid var(--white);
       }
       .user {
         display: flex;
@@ -68,7 +69,7 @@
       }
       .user-name {
         padding: 0 10px;
-        color: var(--light-font-color);
+        color: var(--white);
       }
     }
   }
@@ -85,4 +86,17 @@
     width: 100%;
     height: 100%;
   }
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-breadcrumb
+  .ant-breadcrumb-separator {
+  color: rgba(255, 255, 255, 0.45);
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-breadcrumb a {
+  color: rgba(255, 255, 255, 0.45);
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-breadcrumb li:last-child {
+  color: rgba(255, 255, 255, 0.88);
+}
+:where(.css-dev-only-do-not-override-190m0jy).ant-breadcrumb a:hover {
+  color: var(--white);
 }

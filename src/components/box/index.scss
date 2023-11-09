@@ -1,0 +1,20 @@
+@include b(box) {
+  margin-top: 16px;
+  background: var(--module-background-color);
+  transition: all 0.25s ease 0s;
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 40px;
+    padding: 0 20px;
+    .title {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+  @include e(body) {
+    padding: 0 20px;
+    min-height: 300px;
+  }
+}

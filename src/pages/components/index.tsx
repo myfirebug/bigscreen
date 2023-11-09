@@ -8,7 +8,7 @@ import "./index.scss";
 
 function Widget() {
   return (
-    <div className="cms-widget">
+    <div className="cms-components">
       <Row gutter={16}>
         <Total />
         <Col span={18}>

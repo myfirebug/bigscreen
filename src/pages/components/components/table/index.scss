@@ -1,0 +1,28 @@
+:where(.css-dev-only-do-not-override-190m0jy).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:first-child,
+:where(.css-dev-only-do-not-override-lzncpa).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:first-child {
+  border-start-start-radius: 0;
+}
+:where(.css-dev-only-do-not-override-lzncpa).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:last-child,
+:where(.css-dev-only-do-not-override-190m0jy).ant-table-wrapper
+  .ant-table-container
+  table
+  > thead
+  > tr:first-child
+  > *:last-child {
+  border-start-end-radius: 0;
+}

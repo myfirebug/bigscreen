@@ -1,3 +1,8 @@
+:where(.css-dev-only-do-not-override-lzncpa).ant-menu-dark,
+:where(.css-dev-only-do-not-override-lzncpa).ant-menu-dark > .ant-menu {
+  background: var(--module-background-color);
+}
+
 @include b(sidder) {
   position: fixed;
   left: 0;

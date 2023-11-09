@@ -56,7 +56,7 @@ const routerDatas: IRoute[] = [
       {
         path: "/components",
         title: "组件",
-        modulePath: "home",
+        modulePath: "components",
         icon: "&#xe640;",
         meta: {
           auth: true,

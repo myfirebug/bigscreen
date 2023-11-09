@@ -1,0 +1,39 @@
+@include b(widget) {
+  @include e(card) {
+    position: relative;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 60px;
+    padding: 20px;
+    color: var(--html-font-color);
+    background: var(--module-background-color);
+    transition: all 0.25s ease 0s;
+    .name {
+      position: relative;
+      z-index: 1;
+      font-weight: bold;
+    }
+    .total {
+      position: relative;
+      z-index: 1;
+      color: var(--light-font-color);
+      transition: all 0.25s ease 0s;
+      b {
+        padding-right: 5px;
+        color: var(--primary-color);
+        font-size: 30px;
+        transition: all 0.25s ease 0s;
+      }
+    }
+    .bg-font {
+      position: absolute;
+      right: 20px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 40px;
+      color: var(--lighter-font-color);
+      transition: all 0.25s ease 0s;
+    }
+  }
+}

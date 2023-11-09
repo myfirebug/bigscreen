@@ -9,15 +9,17 @@ export const theme01_dark = {
 
   /* ------------------切换白天夜间模式变化的变量start------------------ */
   // html背景颜色
-  "--html-background-color": "#222",
+  "--html-background-color": "rgba(0,0,0,.85)",
   // html字体颜色
   "--html-font-color": "#fff",
   // 变色主色
-  "--change-primary-color": "#001529",
+  "--change-primary-color": "#1677ff",
   // 浅色字体颜色
   "--light-font-color": "#999",
+  // 更浅色字体颜色
+  "--lighter-font-color": "rgba(255,255,255,.05)",
   // 浅色模块背景
-  "--module-background-color": "#001529",
+  "--module-background-color": "#141414",
   // 深色模块背景
   "--module-dark-background-color": "#333",
   // 模块阴影
