@@ -3,9 +3,12 @@ import Mock from "mockjs";
 import * as login from "./login.mock";
 // 用户模块
 import * as userInfo from "./userInfo.mock";
+// 组件模块
+import * as components from "./components.mock";
 
 create(login);
 create(userInfo);
+create(components);
 /**
  * 根据模块创建接口
  * @param mod m模块
