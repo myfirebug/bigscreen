@@ -1,8 +1,9 @@
 import { useCallback, useState } from "react";
-import { IComponentsTotalItem } from "@src/service";
+import { IComponentsTotalItem, IComponentstrendItem } from "@src/service";
 import { API } from "@service/index";
 
 export function useComponents() {
+  // 统计
   const [total, setTotal] = useState<{
     loading: boolean;
     datas: IComponentsTotalItem[];
@@ -34,8 +35,42 @@ export function useComponents() {
       });
   }, []);
 
+  // 新增组件统计图
+  const [trend, setTrend] = useState<{
+    loading: boolean;
+    datas: IComponentstrendItem[];
+  }>({
+    loading: false,
+    datas: [],
+  });
+
+  const getTrend = useCallback(() => {
+    setTrend((state) => ({
+      ...state,
+      loading: true,
+    }));
+    API.componentsService
+      .trendChart()
+      .then((res) => {
+        setTimeout(() => {
+          setTrend({
+            loading: false,
+            datas: res.data,
+          });
+        }, 2000);
+      })
+      .catch(() => {
+        setTrend((state) => ({
+          ...state,
+          loading: false,
+        }));
+      });
+  }, []);
+
   return {
     total,
     getTotal,
+    trend,
+    getTrend,
   };
 }

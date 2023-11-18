@@ -1,5 +1,10 @@
 import { components } from "../api";
-import { IComponentsTotalItem, IComponentsTotalResult } from "../interface";
+import {
+  IComponentsTotalItem,
+  IComponentsTotalResult,
+  IComponentstrendItem,
+  IComponentstrendResult,
+} from "../interface";
 import axios from "../fetch";
 
 const ComponentsService = {
@@ -7,6 +12,12 @@ const ComponentsService = {
   total() {
     return axios.get<IComponentsTotalItem[], IComponentsTotalResult>(
       components.total
+    );
+  },
+  // 新增组件统计图
+  trendChart() {
+    return axios.get<IComponentstrendItem[], IComponentstrendResult>(
+      components.trendChart
     );
   },
 };
