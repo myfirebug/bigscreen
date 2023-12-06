@@ -92,3 +92,45 @@ export const componentsTrendChart = {
     ],
   }),
 };
+
+// 使用排行榜TOP8
+export const componentsLeaderboard = {
+  url: "/components-leaderboard",
+  method: "get",
+  data: Mock.mock({
+    data: [
+      {
+        name: "文本",
+        "value|1-100": 100,
+      },
+      {
+        name: "折线图",
+        "value|1-100": 100,
+      },
+      {
+        name: "图片",
+        "value|1-100": 100,
+      },
+      {
+        name: "柱状图",
+        "value|1-100": 100,
+      },
+      {
+        name: "饼图",
+        "value|1-100": 100,
+      },
+      {
+        name: "下拉框",
+        "value|1-100": 100,
+      },
+      {
+        name: "单选框",
+        "value|1-100": 100,
+      },
+      {
+        name: "雷达图",
+        "value|1-100": 100,
+      },
+    ],
+  }),
+};

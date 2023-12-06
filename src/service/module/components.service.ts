@@ -4,6 +4,8 @@ import {
   IComponentsTotalResult,
   IComponentstrendItem,
   IComponentstrendResult,
+  IComponentsTeaderboardItem,
+  IComponentsTeaderboardResult,
 } from "../interface";
 import axios from "../fetch";
 
@@ -19,6 +21,13 @@ const ComponentsService = {
     return axios.get<IComponentstrendItem[], IComponentstrendResult>(
       components.trendChart
     );
+  },
+  // 使用排行榜TOP5
+  leaderboard() {
+    return axios.get<
+      IComponentsTeaderboardItem[],
+      IComponentsTeaderboardResult
+    >(components.leaderboard);
   },
 };
 

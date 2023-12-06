@@ -1,6 +1,8 @@
 import React, { memo, useCallback, useEffect, useRef } from "react";
 import * as echarts from "echarts";
+import { ALL_STATE } from "@src/store/actionType";
 import { init as initChart } from "echarts/core";
+import { connect } from "react-redux";
 import {
   Option,
   Theme,
@@ -27,7 +29,7 @@ interface IEchartsProps {
 const Echarts = memo(
   (props: IEchartsProps) => {
     const {
-      theme = "light",
+      theme,
       group,
       initOptions,
       option,
@@ -95,7 +97,7 @@ const Echarts = memo(
       <div
         className="cms-echarts"
         ref={dom}
-        style={{ width: "100%", height: "300px" }}
+        style={{ width: "100%", height: "250px" }}
       ></div>
     );
   },
@@ -107,4 +109,11 @@ const Echarts = memo(
   }
 );
 
-export default Echarts;
+const mapStateToProps = (state: ALL_STATE) => ({
+  theme: state.currentTheme.includes("_light") ? "light" : "dark",
+});
+
+// 将 对应action 插入到组件的 props 中
+const mapDispatchToProps = {};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Echarts);

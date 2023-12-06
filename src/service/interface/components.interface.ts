@@ -26,3 +26,17 @@ export interface IComponentstrendResult {
   data: IComponentstrendItem[];
   message: string;
 }
+
+// 使用排行榜TOP5
+export interface IComponentsTeaderboardItem {
+  name: string;
+  value: number;
+}
+
+export interface IComponentsTeaderboardResult {
+  // 结果
+  result: boolean;
+  // 后台返回的token
+  data: IComponentsTeaderboardItem[];
+  message: string;
+}

@@ -25,30 +25,37 @@ const TrendChart = memo(
       setSeriesData(seriesArr);
     }, [datas]);
     return (
-      <Box title="新增走势">
+      <Box title="使用排行榜TOP8">
         {loading ? (
           <Skeleton active />
         ) : (
           <Echarts
             loading={loading}
             option={{
+              color: ["#1677ff"],
+              backgroundColor: "rgba(0,0,0,0)",
               tooltip: {},
               xAxis: {
+                type: "value",
+              },
+              yAxis: {
                 data: xAxisData,
+                type: "category",
               },
               grid: {
-                left: 30,
+                left: 50,
                 top: 20,
                 bottom: 30,
-                right: 0,
+                right: 20,
               },
-              yAxis: {},
               series: [
                 {
-                  name: "新增组件",
+                  name: "使用排行榜TOP8",
                   type: "bar",
                   data: seriesData,
-                  barMaxWidth: 50,
+                  itemStyle: {
+                    borderRadius: [10, 10, 10, 10],
+                  },
                 },
               ],
             }}
