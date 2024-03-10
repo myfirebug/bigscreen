@@ -1,0 +1,45 @@
+@include b(components) {
+  @include e(list) {
+    // padding: 20px;
+    margin-top: 16px;
+    // background: var(--module-background-color);
+    overflow: hidden;
+    @include m(body) {
+      width: calc(100% + 20px);
+      display: flex;
+      flex-wrap: wrap;
+    }
+  }
+  .ant-empty {
+    margin: 40px auto 0 auto;
+  }
+  @include e(item) {
+    position: relative;
+    top: 0;
+    width: 230px;
+    margin-top: 20px;
+    margin-right: 20px;
+    padding-bottom: 10px;
+    cursor: pointer;
+    background: var(--module-background-color);
+    transition: all 0.25s ease 0s;
+    border-radius: 5px;
+    overflow: hidden;
+    &:hover {
+      top: -10px;
+    }
+    .picture {
+      img {
+        width: 100%;
+      }
+    }
+    .name {
+      padding: 10px 10px 0 10px;
+    }
+    .createtime,
+    .type {
+      padding: 10px 10px 0 10px;
+      color: var(--light-font-color);
+    }
+  }
+}

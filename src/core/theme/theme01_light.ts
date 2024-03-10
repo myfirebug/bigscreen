@@ -18,8 +18,10 @@ export const theme01_light = {
   "--lighter-font-color": "#eee",
   // 变色主色
   "--change-primary-color": "#1677ff",
-  // 浅色模块背景
+  // 模块背景
   "--module-background-color": "#fff",
+  // 浅色模块背景
+  "--module-light-background-color": "#eee",
   // 深色模块背景
   "--module-dark-background-color": "#ccc",
   // 模块阴影

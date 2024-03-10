@@ -1,0 +1,45 @@
+@include b(side-box) {
+  height: calc(100vh - 48px);
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 50px;
+    padding: 0 10px;
+    border-bottom: 1px solid var(--border-color);
+    .controls {
+      display: flex;
+      align-items: center;
+    }
+    .close {
+      position: relative;
+      width: 20px;
+      height: 20px;
+      transform: rotate(45deg);
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+      &:hover {
+        transform: rotate(135deg);
+      }
+      &:after,
+      &:before {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin: -6px 0 0 - 1px;
+        content: "";
+        width: 2px;
+        height: 12px;
+        background: var(--border-color);
+      }
+      &:after {
+        transform: rotate(90deg);
+      }
+    }
+  }
+  @include e(body) {
+    height: calc(100% - 50px);
+    overflow: hidden;
+    overflow-y: auto;
+  }
+}

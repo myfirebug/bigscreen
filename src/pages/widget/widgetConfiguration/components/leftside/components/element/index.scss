@@ -1,0 +1,65 @@
+@include b(element) {
+  width: 400px;
+  .cms-side-box__body {
+    display: flex;
+    background: var(--module-light-background-color);
+  }
+  @include e(level1) {
+    height: 100%;
+    width: 60px;
+    text-align: center;
+    background: var(--module-background-color);
+    .cms-icon {
+      width: 60px;
+      height: 50px;
+      line-height: 50px;
+      font-size: 24px;
+      color: var(--light-font-color);
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+      &:hover,
+      &.is-active {
+        color: var(--html-font-color);
+      }
+    }
+  }
+  @include e(level2) {
+    height: 100%;
+    width: 70px;
+    padding: 0 10px;
+    text-align: center;
+    color: var(--light-font-color);
+    .item {
+      margin-top: 10px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+      &:hover,
+      &.is-active {
+        background: var(--module-background-color);
+        color: var(--html-font-color);
+        border-radius: 5px;
+      }
+    }
+  }
+  @include e(content) {
+    flex: 1;
+    overflow: hidden;
+    overflow-y: auto;
+    .item {
+      margin-top: 10px;
+      padding-right: 10px;
+    }
+    .picture {
+      img {
+        width: 100%;
+      }
+    }
+    .name {
+      text-align: center;
+      padding-top: 5px;
+    }
+  }
+}

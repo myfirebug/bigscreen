@@ -134,3 +134,89 @@ export const componentsLeaderboard = {
     ],
   }),
 };
+
+// 获取组件类型
+export const componentsType = {
+  url: "/components-types",
+  method: "get",
+  data: {
+    data: [
+      {
+        name: "全部",
+        value: "",
+        level: 1,
+        id: 1,
+      },
+      {
+        name: "echarts",
+        value: "echarts",
+        level: 1,
+        id: 2,
+        children: [
+          {
+            name: "全部",
+            value: "",
+            level: 2,
+            id: 21,
+          },
+          {
+            name: "折线图",
+            value: "line",
+            level: 2,
+            id: 22,
+          },
+          {
+            name: "柱状图",
+            value: "bar",
+            level: 2,
+            id: 23,
+          },
+          {
+            name: "饼图",
+            value: "pie",
+            level: 2,
+            id: 24,
+          },
+        ],
+      },
+      {
+        name: "文本",
+        value: "text",
+        level: 1,
+        id: 3,
+      },
+      {
+        name: "图片",
+        value: "image",
+        level: 1,
+        id: 4,
+      },
+      {
+        name: "表格",
+        value: "table",
+        level: 1,
+        id: 5,
+      },
+    ],
+  },
+};
+
+// 获取组件类型
+export const componentsList = {
+  url: "/components-list",
+  method: "get",
+  data: {
+    data: [
+      {
+        id: 1,
+        name: "基础文本",
+        level1Type: "text",
+        level2Type: "",
+        images:
+          "https://p3-tt.byteimg.com/origin/pgc-image/5017bca3cfee4172abc1a1622f464c09?from=pc",
+        count: 0,
+        createTime: new Date().getTime(),
+      },
+    ],
+  },
+};

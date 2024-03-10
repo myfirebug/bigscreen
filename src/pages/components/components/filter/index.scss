@@ -1,0 +1,38 @@
+@include b(selector) {
+  border: 1px solid var(--border-color);
+  background: var(--module-background-color);
+  border-radius: 5px;
+  .cms-selector__selectorLine:last-child {
+    border: none;
+  }
+  @include e(selectorLine) {
+    display: flex;
+    align-items: center;
+    padding: 15px 10px;
+    font-size: 14px;
+    border-bottom: 1px solid var(--border-color);
+
+    @include m(name) {
+      width: 80px;
+      padding: 0 10px;
+    }
+    @include m(value) {
+      display: flex;
+      span {
+        padding: 0 10px;
+        margin-right: 10px;
+        height: 30px;
+        line-height: 30px;
+        border-radius: 3px;
+        cursor: pointer;
+        color: var(--light-font-color);
+        transition: all 0.25s ease 0s;
+        &:hover,
+        &.is-active {
+          background-color: var(--primary-color);
+          color: var(--white);
+        }
+      }
+    }
+  }
+}

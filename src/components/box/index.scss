@@ -2,6 +2,7 @@
   margin-top: 16px;
   background: var(--module-background-color);
   transition: all 0.25s ease 0s;
+  border-radius: 5px;
   @include e(header) {
     display: flex;
     align-items: center;

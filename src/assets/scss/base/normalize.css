@@ -354,3 +354,34 @@ template {
 [hidden] {
   display: none;
 }
+
+ul,
+li,
+dl,
+dt,
+dd {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+/* 修改整体轨道的宽度 */
+::-webkit-scrollbar {
+  width: 4px; /* 根据需要调整大小 */
+}
+
+/* 修改滑块的样式 */
+::-webkit-scrollbar-thumb {
+  background-color: #999; /* 根据需要调整颜色 */
+  border-radius: 4px; /* 根据需要调整边角形状 */
+}
+
+/* 当滑块处于活动状态时的样式 */
+::-webkit-scrollbar-thumb:hover {
+  background-color: #666; /* 根据需要调整颜色 */
+}
+
+/* 添加按钮（向左/向右）的样式 */
+::-webkit-scrollbar-button {
+  display: none; /* 不显示按钮 */
+}

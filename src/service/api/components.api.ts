@@ -5,4 +5,8 @@ export const components = {
   trendChart: "/components-trend-chart",
   // 使用排行榜TOP5
   leaderboard: "/components-leaderboard",
+  // 获取组件类型
+  types: "/components-types",
+  // 获取组件列表
+  list: "/components-list",
 };

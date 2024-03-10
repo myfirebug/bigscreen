@@ -1,0 +1,150 @@
+@include b(configuration) {
+  position: fixed;
+  left: 0;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  @include e(header) {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 48px;
+    padding: 0 15px;
+    background: var(--module-background-color);
+    border-bottom: 1px solid var(--border-color);
+    @include m(left) {
+      display: flex;
+      align-items: center;
+      .type {
+        padding-right: 5px;
+        font-size: 28px;
+        color: var(--primary-color);
+      }
+      .edit {
+        padding-left: 5px;
+        color: var(--primary-color);
+        cursor: pointer;
+        transition: all 0.25s ease 0s;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+    }
+    @include m(right) {
+      display: flex;
+      align-items: center;
+      font-size: 12px;
+      .cms-icon {
+        font-size: 12px;
+        padding-right: 5px;
+      }
+      .publish,
+      .preview {
+        height: 20px;
+        padding: 0 10px;
+        line-height: 20px;
+        margin-left: 10px;
+        background: var(--module-dark-background-color);
+        border-radius: 5px;
+        cursor: pointer;
+        transition: all 0.25s ease 0s;
+        &:hover {
+          opacity: 0.9;
+        }
+      }
+
+      .publish {
+        background: var(--primary-color);
+        color: var(--white);
+      }
+    }
+  }
+  @include e(main) {
+    height: calc(100vh - 48px);
+    display: flex;
+  }
+  @include e(leftside) {
+    display: flex;
+    background: var(--module-background-color);
+    @include m(tabs) {
+      width: 60px;
+      height: 100%;
+      font-size: 12px;
+      border-right: 1px solid var(--border-color);
+    }
+    @include m(tabitem) {
+      display: flex;
+      flex-direction: column;
+      padding: 10px 0;
+      text-align: center;
+      list-style: none;
+      cursor: pointer;
+      &.is-active,
+      &:hover {
+        .cms-icon {
+          color: var(--primary-color);
+        }
+        .name {
+          color: var(--html-font-color);
+        }
+      }
+      .cms-icon {
+        color: var(--light-font-color);
+        font-size: 18px;
+      }
+      .name {
+        padding-top: 5px;
+        color: var(--light-font-color);
+      }
+    }
+    @include m(tabcontent) {
+    }
+  }
+  @include e(rightside) {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    background: var(--module-background-color);
+    border-left: 1px solid var(--border-color);
+    @include m(tabs) {
+      width: 60px;
+      height: 100%;
+      font-size: 12px;
+      border-left: 1px solid var(--border-color);
+    }
+    @include m(item) {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      padding: 10px 0;
+      text-align: center;
+      color: var(--light-font-color);
+      cursor: pointer;
+      &.is-active,
+      &:hover {
+        .cms-icon {
+          color: var(--primary-color);
+        }
+        .name {
+          color: var(--html-font-color);
+        }
+      }
+      .cms-icon {
+        font-size: 18px;
+      }
+      .name {
+        padding-top: 5px;
+      }
+    }
+    @include m(content) {
+    }
+  }
+  @include e(content) {
+    position: relative;
+    flex: 1;
+    background-color: var(--module-dark-background-color);
+    background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOAQMAAAAlhr+SAAAABlBMVEUqLjNSXWS1zSUzAAAAD0lEQVQI12NgwADMYIQBAACrAAd4ROv5AAAAAElFTkSuQmCC)
+      repeat;
+  }
+}

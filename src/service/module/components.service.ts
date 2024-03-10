@@ -6,6 +6,10 @@ import {
   IComponentstrendResult,
   IComponentsTeaderboardItem,
   IComponentsTeaderboardResult,
+  IComponentsTypeItem,
+  IComponentsTypeResult,
+  IComponentsItem,
+  IComponentsResult,
 } from "../interface";
 import axios from "../fetch";
 
@@ -28,6 +32,16 @@ const ComponentsService = {
       IComponentsTeaderboardItem[],
       IComponentsTeaderboardResult
     >(components.leaderboard);
+  },
+  // 获取组件类型
+  types() {
+    return axios.get<IComponentsTypeItem[], IComponentsTypeResult>(
+      components.types
+    );
+  },
+  // 获取组件列表
+  list() {
+    return axios.get<IComponentsItem[], IComponentsResult>(components.list);
   },
 };
 

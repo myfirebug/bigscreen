@@ -74,9 +74,19 @@ const routerDatas: IRoute[] = [
         },
       },
       {
-        path: "/widget/create-widget",
-        title: "创建微件",
-        modulePath: "widget/createWidget",
+        path: "/widget/configuration",
+        title: "微件配置",
+        modulePath: "widget/widgetConfiguration",
+        meta: {
+          fullScreen: true,
+          auth: true,
+          menu: false,
+        },
+      },
+      {
+        path: "/configuration",
+        title: "配置中心",
+        modulePath: "configuration",
         meta: {
           fullScreen: true,
           auth: true,

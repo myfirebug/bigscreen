@@ -23,10 +23,10 @@ interface IApp {
 
 const App: FC<IApp> = ({ currentTheme }) => {
   const [collapsed, setCollapsed] = useState(false);
-  const { pathname } = useLocation();
-  console.log(pathname, "location1");
+  const a = useLocation();
+  console.log(a, "location1");
 
-  const currentRoute: IRoute = getGroupById(routerDatas, pathname, "path");
+  const currentRoute: IRoute = getGroupById(routerDatas, a.pathname, "path");
 
   useEffect(() => {
     setTheme(currentTheme);

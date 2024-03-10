@@ -20,6 +20,8 @@ export const theme01_dark = {
   "--lighter-font-color": "rgba(255,255,255,.05)",
   // 浅色模块背景
   "--module-background-color": "#141414",
+  // 浅色模块背景
+  "--module-light-background-color": "#222",
   // 深色模块背景
   "--module-dark-background-color": "#333",
   // 模块阴影

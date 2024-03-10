@@ -25,6 +25,8 @@
       padding-left: 10px;
       font-size: 22px;
       white-space: nowrap;
+      overflow: hidden;
+      transition: all 0.25s ease 0s;
     }
     .cms-icon {
       font-size: 22px;
