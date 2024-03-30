@@ -1,0 +1,21 @@
+@include b(drag-line) {
+  width: 20px;
+  height: 60px;
+  background: red;
+
+  @include when(vertical) {
+    cursor: row-resize;
+  }
+
+  @include when(horizontal) {
+    cursor: col-resize;
+  }
+
+  &.active,
+  &:hover {
+    background: blue;
+  }
+}
+.dragging {
+  user-select: none; // 内容不可选择
+}

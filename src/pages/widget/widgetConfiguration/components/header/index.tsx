@@ -1,22 +1,27 @@
 import React, { memo, useState } from "react";
 import { Theme } from "@src/components";
 import ModifyName from "./components/modifyName";
+import { useWidget } from "../../widgetContext";
 import "../../index.scss";
 
 interface IHeader {}
 
 const Header = memo((props: IHeader) => {
   const [isModalNameOpen, setIsModalNameOpen] = useState(false);
+  const widget = useWidget();
   return (
     <div className="cms-configuration__header">
       <div className="cms-configuration__header--left">
-        <span className="cms-icon type">&#xe625;</span> 未命名微件
-        <span
-          className="cms-icon edit"
-          onClick={() => setIsModalNameOpen(true)}
-        >
-          &#xec88;
-        </span>
+        <span className="cms-icon type">&#xe625;</span>{" "}
+        {widget?.widget?.name || "未命名微件"}
+        {widget?.widget && (
+          <span
+            className="cms-icon edit"
+            onClick={() => setIsModalNameOpen(true)}
+          >
+            &#xec88;
+          </span>
+        )}
       </div>
       <div className="cms-configuration__header--right">
         <Theme />
@@ -32,9 +37,9 @@ const Header = memo((props: IHeader) => {
       </div>
       <ModifyName
         open={isModalNameOpen}
-        a={1}
         title="修改微件名称"
         onCancel={() => setIsModalNameOpen(false)}
+        onClose={() => setIsModalNameOpen(false)}
       />
     </div>
   );

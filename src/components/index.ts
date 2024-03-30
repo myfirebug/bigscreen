@@ -5,3 +5,4 @@ export * from "./theme";
 export * from "./sidder";
 export * from "./box";
 export * from "./echarts";
+export * from "./drag";

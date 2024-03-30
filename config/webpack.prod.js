@@ -3,9 +3,13 @@ const TerserWebpackPlugin = require("terser-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 const CssMinimizerPlugin = require("css-minimizer-webpack-plugin");
 const CopyPlugin = require("copy-webpack-plugin");
+const SpeedMeasureWebpackPlugin = require("speed-measure-webpack-plugin");
+const BundleAnalyzerPlugin =
+  require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
 const merge = require("webpack-merge");
 const baseConfig = require("./webpack.base.js");
 const path = require("path");
+const smp = new SpeedMeasureWebpackPlugin();
 
 module.exports = merge.merge(baseConfig, {
   // 模式
@@ -29,6 +33,7 @@ module.exports = merge.merge(baseConfig, {
         },
       ],
     }),
+    new BundleAnalyzerPlugin({ analyzerPort: 8919 }),
   ],
   optimization: {
     minimizer: [
@@ -50,6 +55,11 @@ module.exports = merge.merge(baseConfig, {
           test: /[\\/]node_modules[\\/]antd(.*)?[\\/]/, // 需要打包到一起的模块
           priority: 40, // 权重（越大越高）
           name: "chunk-antd",
+        },
+        echarts: {
+          test: /[\\/]node_modules[\\/]echarts(.*)?[\\/]/, // 需要打包到一起的模块
+          priority: 40, // 权重（越大越高）
+          name: "chunk-echarts",
         },
         // 其他的一起打包
         lib: {

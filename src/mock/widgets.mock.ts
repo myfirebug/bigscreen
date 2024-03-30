@@ -1,7 +1,8 @@
 import Mock from "mockjs";
+import { guid } from "@src/utils";
 // 获取统计数据
-export const componentsTotal = {
-  url: "/components-total",
+export const widgetsTotal = {
+  url: "/widgets-total",
   method: "get",
   data: {
     result: true,
@@ -36,8 +37,8 @@ export const componentsTotal = {
 };
 
 // 新增组件走势图
-export const componentsTrendChart = {
-  url: "/components-trend-chart",
+export const widgetsTrendChart = {
+  url: "/widgets-trend-chart",
   method: "get",
   data: Mock.mock({
     data: [
@@ -94,8 +95,8 @@ export const componentsTrendChart = {
 };
 
 // 使用排行榜TOP8
-export const componentsLeaderboard = {
-  url: "/components-leaderboard",
+export const widgetsLeaderboard = {
+  url: "/widgets-leaderboard",
   method: "get",
   data: Mock.mock({
     data: [
@@ -136,8 +137,8 @@ export const componentsLeaderboard = {
 };
 
 // 获取组件类型
-export const componentsType = {
-  url: "/components-types",
+export const widgetsType = {
+  url: "/widgets-types",
   method: "get",
   data: {
     data: [
@@ -214,30 +215,59 @@ export const componentsType = {
 };
 
 // 获取组件类型
-export const componentsList = {
-  url: "/components-list",
+export const widgetsList = {
+  url: "/widgets-list",
   method: "get",
   data: {
     data: [
       {
-        id: 1,
-        name: "基础文本",
+        id: guid(),
+        name: "xxxx微件",
         level1Type: "text",
         level2Type: "",
         images:
           "https://p3-tt.byteimg.com/origin/pgc-image/5017bca3cfee4172abc1a1622f464c09?from=pc",
         count: 0,
         createTime: new Date().getTime(),
-      },
-      {
-        id: 2,
-        name: "基础折线图",
-        level1Type: "echarts",
-        level2Type: "line",
-        images:
-          "https://p3-tt.byteimg.com/origin/pgc-image/5017bca3cfee4172abc1a1622f464c09?from=pc",
-        count: 0,
-        createTime: new Date().getTime(),
+        configuration: {
+          show: true,
+        },
+        data: {
+          header: [
+            {
+              id: guid(),
+              type: "row",
+              children: [
+                {
+                  id: guid(),
+                  type: "icon",
+                  element: "Icon",
+                  configuration: {},
+                },
+                {
+                  id: guid(),
+                  type: "text",
+                  element: "Text",
+                  configuration: {},
+                },
+              ],
+            },
+          ],
+          body: [
+            {
+              id: guid(),
+              type: "row",
+              children: [
+                {
+                  id: guid(),
+                  type: "text",
+                  element: "Text",
+                  configuration: {},
+                },
+              ],
+            },
+          ],
+        },
       },
     ],
   },

@@ -1,14 +1,14 @@
 import { useCallback, useState } from "react";
 import {
-  IComponentsTotalItem,
-  IComponentstrendItem,
-  IComponentsTeaderboardItem,
-  IComponentsTypeItem,
-  IComponentsItem,
+  IwidgetsTotalItem,
+  IwidgetstrendItem,
+  IwidgetsTeaderboardItem,
+  IwidgetsTypeItem,
+  IwidgetsItem,
 } from "@src/service";
 import { API } from "@service/index";
 
-const flatten = (arr: IComponentsTypeItem[]) => {
+const flatten = (arr: IwidgetsTypeItem[]) => {
   return arr
     .reduce((result, item) => {
       return result.concat(
@@ -23,16 +23,14 @@ const flatten = (arr: IComponentsTypeItem[]) => {
           : []
       );
     }, [])
-    .sort(
-      (a: IComponentsTypeItem, b: IComponentsTypeItem) => a.level - b.level
-    );
+    .sort((a: IwidgetsTypeItem, b: IwidgetsTypeItem) => a.level - b.level);
 };
 
-export function useComponents() {
+export function useWidgets() {
   // 统计
   const [total, setTotal] = useState<{
     loading: boolean;
-    datas: IComponentsTotalItem[];
+    datas: IwidgetsTotalItem[];
   }>({
     loading: false,
     datas: [],
@@ -43,7 +41,7 @@ export function useComponents() {
       ...state,
       loading: true,
     }));
-    API.componentsService
+    API.widgetsService
       .total()
       .then((res) => {
         setTimeout(() => {
@@ -64,7 +62,7 @@ export function useComponents() {
   // 新增组件统计图
   const [trend, setTrend] = useState<{
     loading: boolean;
-    datas: IComponentstrendItem[];
+    datas: IwidgetstrendItem[];
   }>({
     loading: false,
     datas: [],
@@ -75,7 +73,7 @@ export function useComponents() {
       ...state,
       loading: true,
     }));
-    API.componentsService
+    API.widgetsService
       .trendChart()
       .then((res) => {
         setTimeout(() => {
@@ -96,7 +94,7 @@ export function useComponents() {
   // 使用排行榜TOP8
   const [leaderboard, setLeaderboard] = useState<{
     loading: boolean;
-    datas: IComponentsTeaderboardItem[];
+    datas: IwidgetsTeaderboardItem[];
   }>({
     loading: false,
     datas: [],
@@ -107,7 +105,7 @@ export function useComponents() {
       ...state,
       loading: true,
     }));
-    API.componentsService
+    API.widgetsService
       .leaderboard()
       .then((res) => {
         setTimeout(() => {
@@ -128,7 +126,7 @@ export function useComponents() {
   // 获取组件类型
   const [types, setTypes] = useState<{
     loading: boolean;
-    datas: IComponentsTypeItem[];
+    datas: IwidgetsTypeItem[];
   }>({
     loading: false,
     datas: [],
@@ -140,8 +138,8 @@ export function useComponents() {
       loading: true,
     }));
     try {
-      const { data } = await API.componentsService.types();
-      const datas: IComponentsTypeItem[] = flatten(data);
+      const { data } = await API.widgetsService.types();
+      const datas: IwidgetsTypeItem[] = flatten(data);
       if (datas.length) {
         const selects = new Array(datas[datas.length - 1].level).fill("");
         selects[0] = data[0].id;
@@ -169,8 +167,8 @@ export function useComponents() {
   // 获取组件列表
   const [list, setList] = useState<{
     loading: boolean;
-    datas: IComponentsItem[];
-    searchDatas: IComponentsItem[];
+    datas: IwidgetsItem[];
+    searchDatas: IwidgetsItem[];
     params: {
       type: string[];
     };
@@ -230,7 +228,7 @@ export function useComponents() {
       loading: true,
     }));
     try {
-      const { data } = await API.componentsService.list();
+      const { data } = await API.widgetsService.list();
       setTimeout(() => {
         setList((state) => ({
           ...state,

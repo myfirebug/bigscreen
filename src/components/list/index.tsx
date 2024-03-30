@@ -1,11 +1,11 @@
 import React, { FC, ReactNode, useCallback, useEffect, useState } from "react";
-import "./index.scss";
-import { IComponentsItem } from "@src/service";
+import { fmtDate } from "@src/utils";
 import { Empty, Skeleton } from "antd";
+import "./index.scss";
 interface IList {
   children: ReactNode;
   loading: boolean;
-  datas: IComponentsItem[];
+  datas: any[];
 }
 
 const List: FC<IList> = ({ children, datas, loading }) => {
@@ -23,6 +23,8 @@ const List: FC<IList> = ({ children, datas, loading }) => {
       window.removeEventListener("resize", sizeHandler);
     };
   }, [sizeHandler]);
+
+  console.log(datas, "datas");
   return (
     <div className="cms-components__list">
       {children && <div className="cms-selector">{children}</div>}
@@ -44,7 +46,9 @@ const List: FC<IList> = ({ children, datas, loading }) => {
                 类型：{item.level2Type || item.level1Type}
               </div>
               <div className="type">使用次数：{item.count}次</div>
-              <div className="createtime">创建时间：{item.createTime}</div>
+              <div className="createtime">
+                创建时间：{fmtDate(item.createTime, "yyyy-MM-dd hh:mm:ss")}
+              </div>
             </div>
           ))
         ) : (

@@ -41,7 +41,14 @@ export interface IComponentsTeaderboardResult {
   message: string;
 }
 
-export type ILevel1Types = "echarts" | "table" | "text" | "images";
+export type ILevel1Types =
+  | "echarts"
+  | "table"
+  | "text"
+  | "images"
+  | "icon"
+  | "bmap"
+  | "amap";
 export type IEchartsTypes =
   | "line"
   | "bar"
@@ -83,11 +90,15 @@ export interface IComponentsTypeResult {
 export interface IComponentsItem {
   id: number;
   name: string;
+  element: string;
   level1Type: ILevel1Types;
   level2Type: IEchartsTypes | "";
   images: string;
   count: number;
   createTime: string;
+  configuration: {
+    [propName: string]: any;
+  };
 }
 
 export interface IComponentsResult {

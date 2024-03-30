@@ -5,10 +5,13 @@ import * as login from "./login.mock";
 import * as userInfo from "./userInfo.mock";
 // 组件模块
 import * as components from "./components.mock";
+// 微件模块
+import * as widgets from "./widgets.mock";
 
 create(login);
 create(userInfo);
 create(components);
+create(widgets);
 /**
  * 根据模块创建接口
  * @param mod m模块

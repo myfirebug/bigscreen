@@ -85,11 +85,17 @@ const Echarts = memo(
         chart.current?.resize();
         onResize?.();
       };
+      const resizeObserver = new ResizeObserver((entries) => {
+        if (!Array.isArray(entries) || !entries.length) {
+          return;
+        }
+        callback();
+      });
 
-      window.addEventListener("resize", callback);
+      resizeObserver.observe(dom.current as HTMLDivElement);
       return () => {
         cleanup();
-        window.removeEventListener("resize", callback);
+        resizeObserver.disconnect();
       };
     }, [cleanup, init, autoresize]);
 

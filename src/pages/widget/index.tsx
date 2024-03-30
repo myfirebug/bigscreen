@@ -1,20 +1,36 @@
 import React, { FC, useEffect } from "react";
 import { Col, Row } from "antd";
-import { useComponents } from "@src/core/hook";
+import { useWidgets } from "@src/core/hook";
 import Total from "@src/components/total";
 import TrendChart from "@src/components/trendChart";
-import CompoentsTable from "@src/components/table";
 import UseLeaderboard from "@src/components/useLeaderboard";
+import List from "@src/components/list";
+import FilterItem from "@src/components/filter";
 import "./index.scss";
 
 const Widget: FC = () => {
-  const { total, getTotal, getTrend, trend, leaderboard, getLeaderboard } =
-    useComponents();
+  const {
+    total,
+    getTotal,
+    getTrend,
+    trend,
+    leaderboard,
+    getLeaderboard,
+    types,
+    getTypes,
+    list,
+    getList,
+    listSearchHandler,
+  } = useWidgets();
   useEffect(() => {
     getTotal();
     getTrend();
     getLeaderboard();
-  }, [getTotal, getTrend, getLeaderboard]);
+    (async function fn() {
+      await getTypes();
+      await getList();
+    })();
+  }, [getTotal, getTrend, getLeaderboard, getTypes, getList]);
   return (
     <div className="cms-components">
       <Row gutter={16}>
@@ -29,7 +45,45 @@ const Widget: FC = () => {
           />
         </Col>
         <Col span={24}>
-          <CompoentsTable />
+          <List loading={list.loading} datas={list.searchDatas}>
+            {list.params.type.map((_, index) => {
+              if (index === 0) {
+                return (
+                  <FilterItem
+                    label={`${index + 1}级标签：`}
+                    key={index}
+                    index={index}
+                    field="type"
+                    select={list.params.type[index]}
+                    datas={types.datas.filter((item) => item.level === 1) || []}
+                    listSearchHandler={listSearchHandler}
+                  />
+                );
+              } else if (
+                list.params.type[index - 1] &&
+                types.datas.filter(
+                  (item) => item.pid && item.pid === list.params.type[index - 1]
+                )?.length
+              ) {
+                return (
+                  <FilterItem
+                    label={`${index + 1}级标签：`}
+                    key={index}
+                    index={index}
+                    field="type"
+                    select={list.params.type[index]}
+                    datas={
+                      types.datas.filter(
+                        (item) => item.pid === list.params.type[index - 1]
+                      ) || []
+                    }
+                    listSearchHandler={listSearchHandler}
+                  />
+                );
+              }
+              return null;
+            })}
+          </List>
         </Col>
       </Row>
     </div>

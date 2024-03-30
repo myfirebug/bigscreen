@@ -49,7 +49,9 @@ const App: FC<IApp> = ({ currentTheme }) => {
       }}
     >
       <Layout
-        className={collapsed ? "is-collapsed" : ""}
+        className={`${collapsed ? "is-collapsed" : ""} ${
+          currentRoute?.meta?.fullScreen ? "is-fullScreen" : ""
+        }`}
         Header={
           !currentRoute?.meta?.fullScreen ? (
             <Header collapsed={collapsed} setCollapsed={setCollapsed} />

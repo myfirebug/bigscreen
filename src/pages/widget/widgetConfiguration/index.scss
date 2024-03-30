@@ -143,8 +143,26 @@
   @include e(content) {
     position: relative;
     flex: 1;
+    height: 100%;
     background-color: var(--module-dark-background-color);
     background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA4AAAAOAQMAAAAlhr+SAAAABlBMVEUqLjNSXWS1zSUzAAAAD0lEQVQI12NgwADMYIQBAACrAAd4ROv5AAAAAElFTkSuQmCC)
       repeat;
+    overflow: auto;
+    @include m(wrap) {
+      position: relative;
+      height: 3000px;
+      overflow: hidden;
+      width: 5000px;
+    }
+    @include m(view) {
+      position: absolute;
+      z-index: 1;
+      left: 66px;
+      top: 66px;
+      width: 400px;
+      height: 300px;
+      transform-origin: 0px 0px;
+      background: rgb(9, 5, 72);
+    }
   }
 }

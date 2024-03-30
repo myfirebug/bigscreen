@@ -13,6 +13,15 @@
       width: 80px;
     }
   }
+  @include when(fullScreen) {
+    .cms-layout__main {
+      padding-top: 0;
+      padding-left: 0;
+    }
+    .cms-content {
+      min-height: 100vh;
+    }
+  }
   @include e(main) {
     transition: all 0.25s ease 0s;
   }

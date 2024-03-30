@@ -11,11 +11,15 @@ const Rightside = memo((props: IRightside) => {
       icon: "&#xe63c;",
       name: "图层管理",
     },
+    {
+      icon: "&#xe63c;",
+      name: "微件配置",
+    },
   ]);
   return (
     <div className="cms-configuration__rightside">
       <div className="cms-configuration__rightside--content">
-        {current === 0 && <Layer />}
+        {current === 0 && <Layer onClose={() => setCurrent(-1)} />}
       </div>
       <ul className="cms-configuration__rightside--tabs">
         {tabs.map((item, index) => (

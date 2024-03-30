@@ -5,6 +5,7 @@ interface IFilter {
   label: string;
   select: string;
   datas: IComponentsTypeItem[];
+  field: string;
   listSearchHandler: (field: string, value: any, index?: number) => void;
   index?: number;
 }
@@ -13,6 +14,7 @@ const Filter: FC<IFilter> = ({
   select,
   datas,
   label,
+  field,
   listSearchHandler,
   index,
 }) => {
@@ -24,7 +26,7 @@ const Filter: FC<IFilter> = ({
           <span
             className={item.id === select ? "is-active" : ""}
             key={item.id}
-            onClick={() => listSearchHandler("type", item.id, index)}
+            onClick={() => listSearchHandler(field, item.id, index)}
           >
             {item.name}
           </span>

@@ -1,97 +1,83 @@
-import React, { FC } from "react";
+import React, { FC, useEffect } from "react";
 import Box from "../../../box";
+import { useComponents } from "@src/core/hook";
 import "./index.scss";
+import { Empty, Skeleton } from "antd";
 
-interface ILayer {}
+interface IElement {
+  onClose: () => void;
+}
 
-const Layer: FC<ILayer> = () => {
+const Element: FC<IElement> = ({ onClose }) => {
+  const { types, getTypes, list, getList, listSearchHandler } = useComponents();
+
+  useEffect(() => {
+    getTypes();
+    getList();
+  }, [getTypes, getList]);
   return (
-    <Box className="cms-element" title="组件">
-      <div className="cms-element__level1">
-        <div className="cms-icon is-active">&#xe7b0;</div>
-        <div className="cms-icon">&#xe7f7;</div>
-      </div>
-      <div className="cms-element__level2">
-        <div className="item">全部</div>
-        <div className="item is-active">柱状图</div>
-        <div className="item">拆线图</div>
-      </div>
+    <Box className="cms-element" title="组件" onClose={onClose}>
+      {list.params.type.map((_, index) => {
+        if (index === 0) {
+          return (
+            <div className="cms-element__level1" key={index}>
+              {(types.datas.filter((item) => item.level === 1) || []).map(
+                (item) => (
+                  <div
+                    key={item.id}
+                    className={`item ${item.id === _ ? "is-active" : ""}`}
+                    onClick={() => listSearchHandler("type", item.id, index)}
+                  >
+                    {item.name}
+                  </div>
+                )
+              )}
+            </div>
+          );
+        } else if (
+          list.params.type[index - 1] &&
+          types.datas.filter(
+            (item) => item.pid && item.pid === list.params.type[index - 1]
+          )?.length
+        ) {
+          return (
+            <div className="cms-element__level2" key={index}>
+              {(
+                types.datas.filter(
+                  (item) => item.pid === list.params.type[index - 1]
+                ) || []
+              ).map((item) => (
+                <div
+                  key={item.id}
+                  className={`item ${item.id === _ ? "is-active" : ""}`}
+                  onClick={() => listSearchHandler("type", item.id, index)}
+                >
+                  {item.name}
+                </div>
+              ))}
+            </div>
+          );
+        }
+        return null;
+      })}
       <div className="cms-element__content">
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
-        <div className="item">
-          <div className="picture">
-            <img
-              src="https://img1.baidu.com/it/u=1068872213,1997360364&fm=253&fmt=auto&app=138&f=JPEG?w=714&h=500"
-              alt=""
-            />
-          </div>
-          <div className="name">折线图</div>
-        </div>
+        {list.loading ? (
+          <Skeleton active />
+        ) : list.searchDatas.length ? (
+          list.searchDatas.map((item) => (
+            <div className="item" key={item.id}>
+              <div className="picture">
+                <img src={item.images} alt="" />
+              </div>
+              <div className="name">{item.name}</div>
+            </div>
+          ))
+        ) : (
+          <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+        )}
       </div>
     </Box>
   );
 };
 
-export default Layer;
+export default Element;

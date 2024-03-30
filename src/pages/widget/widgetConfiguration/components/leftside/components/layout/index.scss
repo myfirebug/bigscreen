@@ -1,0 +1,24 @@
+$width: 45px;
+
+@include b(layout) {
+  @include e(list) {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    padding: 20px;
+    box-sizing: border-box;
+    li {
+      cursor: pointer;
+    }
+  }
+  @include e(item) {
+    display: flex;
+    flex-wrap: wrap;
+    width: $width;
+    height: $width;
+    span {
+      box-sizing: border-box;
+      border: 1px solid var(--primary-color);
+    }
+  }
+}

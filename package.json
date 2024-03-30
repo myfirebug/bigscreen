@@ -31,10 +31,12 @@
     "sass": "^1.64.1",
     "sass-loader": "^13.3.2",
     "sass-resources-loader": "^2.2.5",
+    "speed-measure-webpack-plugin": "^1.5.0",
     "style-loader": "^3.3.3",
     "terser-webpack-plugin": "^5.3.9",
     "typescript": "^5.1.6",
     "webpack": "^5.88.2",
+    "webpack-bundle-analyzer": "^4.10.1",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1",
     "webpackbar": "^5.0.2"

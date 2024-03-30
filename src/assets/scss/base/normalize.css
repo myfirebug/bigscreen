@@ -368,6 +368,7 @@ dd {
 /* 修改整体轨道的宽度 */
 ::-webkit-scrollbar {
   width: 4px; /* 根据需要调整大小 */
+  height: 4px;
 }
 
 /* 修改滑块的样式 */

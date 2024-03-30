@@ -2,9 +2,9 @@ import { IRoute } from "@src/router/routes";
 
 /**
  * 根据当前节点id返回当前节点数据
- * @param datas 数据
- * @param value 字段值
- * @param field 字段名
+ * @param {IRoute[]} datas 数据
+ * @param {string} value 字段值
+ * @param {keyof IRoute} field 字段名
  */
 export function getGroupById(
   datas: IRoute[],
@@ -33,8 +33,8 @@ export function getGroupById(
 
 /**
  * 根据id返回所有的父级
- * @param data
- * @param id
+ * @param {IRoute[]} data
+ * @param {string} id
  */
 export function getParentsById(data: IRoute[], id: string): any {
   for (const i in data) {

@@ -7,7 +7,7 @@ const { getStyleLoader, isDev, fmtDate } = tools;
 const config = require(`../src/config.js`);
 
 module.exports = {
-  stats: "errors-only",
+  // stats: "errors-only",
   // 入口相对路径
   entry: "./src/main.tsx",
   // 输出
@@ -113,5 +113,9 @@ module.exports = {
       "@core": path.resolve(__dirname, "../src/core/"),
       "@components": path.resolve(__dirname, "../src/components/"),
     },
+  },
+  cache: {
+    type: "filesystem",
+    allowCollectingMemory: true,
   },
 };

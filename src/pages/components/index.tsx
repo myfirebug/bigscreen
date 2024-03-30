@@ -4,11 +4,11 @@ import { useComponents } from "@src/core/hook";
 import Total from "@src/components/total";
 import TrendChart from "@src/components/trendChart";
 import UseLeaderboard from "@src/components/useLeaderboard";
-import List from "./components/list";
-import FilterItem from "./components/filter";
+import List from "@src/components/list";
+import FilterItem from "@src/components/filter";
 import "./index.scss";
 
-const Widget: FC = () => {
+const Components: FC = () => {
   const {
     total,
     getTotal,
@@ -26,8 +26,10 @@ const Widget: FC = () => {
     getTotal();
     getTrend();
     getLeaderboard();
-    getTypes();
-    getList();
+    (async function fn() {
+      await getTypes();
+      await getList();
+    })();
   }, [getTotal, getTrend, getLeaderboard, getTypes, getList]);
 
   console.log(list.searchDatas, "types");
@@ -53,6 +55,7 @@ const Widget: FC = () => {
                     label={`${index + 1}级标签：`}
                     key={index}
                     index={index}
+                    field="type"
                     select={list.params.type[index]}
                     datas={types.datas.filter((item) => item.level === 1) || []}
                     listSearchHandler={listSearchHandler}
@@ -69,6 +72,7 @@ const Widget: FC = () => {
                     label={`${index + 1}级标签：`}
                     key={index}
                     index={index}
+                    field="type"
                     select={list.params.type[index]}
                     datas={
                       types.datas.filter(
@@ -88,4 +92,4 @@ const Widget: FC = () => {
   );
 };
 
-export default Widget;
+export default Components;
