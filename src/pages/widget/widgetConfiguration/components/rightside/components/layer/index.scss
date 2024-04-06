@@ -1,3 +1,48 @@
 @include b(layer) {
   width: 300px;
+  line-height: 28px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* 标准语法 */
+  @include e(item) {
+    position: relative;
+    .cms-layer__list {
+      display: none;
+    }
+    @include when(active) {
+      > .cms-layer__list {
+        display: block;
+      }
+      > .cms-layer__item--name .jt {
+        transform: rotate(135deg);
+      }
+    }
+    @include m(name) {
+      display: flex;
+      align-items: center;
+      padding-left: 10px;
+      cursor: pointer;
+      @include when(widget) {
+        background-color: var(--module-light-background-color);
+        border-bottom: 1px solid var(--border-color);
+      }
+      @include when(selected) {
+        background: var(--primary-color);
+      }
+      .cms-icon {
+        padding-right: 5px;
+      }
+      .jt {
+        position: relative;
+        width: 5px;
+        height: 5px;
+        margin-right: 10px;
+        transform: rotate(-45deg);
+        border-left: 2px solid var(--html-font-color);
+        border-bottom: 2px solid var(--html-font-color);
+        transition: all 0.25s ease 0s;
+      }
+    }
+  }
 }

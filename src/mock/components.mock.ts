@@ -222,6 +222,7 @@ export const componentsList = {
       {
         id: 1,
         name: "基础文本",
+        element: "BaseText",
         level1Type: "text",
         level2Type: "",
         images:
@@ -232,6 +233,7 @@ export const componentsList = {
       {
         id: 2,
         name: "基础折线图",
+        element: "BaseLine",
         level1Type: "echarts",
         level2Type: "line",
         images:

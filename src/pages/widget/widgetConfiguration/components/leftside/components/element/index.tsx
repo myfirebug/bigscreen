@@ -1,6 +1,7 @@
 import React, { FC, useEffect } from "react";
 import Box from "../../../box";
 import { useComponents } from "@src/core/hook";
+import { useWidgetDispatch } from "../../../../widgetContext";
 import "./index.scss";
 import { Empty, Skeleton } from "antd";
 
@@ -9,6 +10,7 @@ interface IElement {
 }
 
 const Element: FC<IElement> = ({ onClose }) => {
+  const dispatch = useWidgetDispatch();
   const { types, getTypes, list, getList, listSearchHandler } = useComponents();
 
   useEffect(() => {
@@ -65,7 +67,17 @@ const Element: FC<IElement> = ({ onClose }) => {
           <Skeleton active />
         ) : list.searchDatas.length ? (
           list.searchDatas.map((item) => (
-            <div className="item" key={item.id}>
+            <div
+              className="item"
+              key={item.id}
+              draggable
+              onDragStart={() =>
+                dispatch({
+                  type: "MODIFY_TEMPORARILY_ELEMENT_NAME",
+                  name: item.element,
+                })
+              }
+            >
               <div className="picture">
                 <img src={item.images} alt="" />
               </div>

@@ -55,13 +55,25 @@ const Layout = React.memo((props: ILayout) => {
     for (let i = 0; i < row; i++) {
       let data: Idata = {
         ...init,
+        id: guid(),
         children: [],
+        configuration: {
+          layout: {
+            flexBasis: (100 / col).toFixed(2) + "%",
+          },
+        },
       };
       if (col > 1) {
         for (let i = 0; i < col; i++) {
           data.children.push({
             ...init,
+            id: guid(),
             type: "col",
+            configuration: {
+              layout: {
+                flexBasis: (100 / col).toFixed(2) + "%",
+              },
+            },
           });
         }
       }
@@ -79,11 +91,46 @@ const Layout = React.memo((props: ILayout) => {
         createTime: new Date().getTime().toString(),
         configuration: {
           header: {
-            show: false,
+            show: true,
           },
         },
         data: {
-          header: [],
+          header: [
+            {
+              id: guid(),
+              type: "row",
+              element: "",
+              configuration: {
+                layout: {
+                  flexBasis: "100%",
+                },
+              },
+              children: [
+                {
+                  id: guid(),
+                  type: "col",
+                  element: "",
+                  configuration: {
+                    layout: {
+                      flexBasis: "80%",
+                    },
+                  },
+                  children: [],
+                },
+                {
+                  id: guid(),
+                  type: "col",
+                  element: "",
+                  configuration: {
+                    layout: {
+                      flexBasis: "20%",
+                    },
+                  },
+                  children: [],
+                },
+              ],
+            },
+          ],
           body: body,
         },
       },

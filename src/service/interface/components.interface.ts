@@ -88,7 +88,7 @@ export interface IComponentsTypeResult {
 
 // 获取组件列表
 export interface IComponentsItem {
-  id: number;
+  id: string;
   name: string;
   element: string;
   level1Type: ILevel1Types;

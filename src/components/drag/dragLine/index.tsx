@@ -3,8 +3,16 @@ import "./index.scss";
 
 interface IDragLine {
   direction?: "vertical" | "horizontal";
-  onMouseMove: (e: MouseEvent, node: HTMLDivElement) => void;
-  onMouseUp: (e: MouseEvent, node: HTMLDivElement) => void;
+  onMouseMove: (
+    e: MouseEvent,
+    node: HTMLDivElement,
+    direction: "vertical" | "horizontal"
+  ) => void;
+  onMouseUp: (
+    e: MouseEvent,
+    node: HTMLDivElement,
+    direction: "vertical" | "horizontal"
+  ) => void;
 }
 
 const DragLine: FC<IDragLine> = ({
@@ -16,14 +24,14 @@ const DragLine: FC<IDragLine> = ({
   // 拖拽结束
   const mouseUp = (e: MouseEvent) => {
     document.body.classList.remove("dragging");
-    onMouseUp && onMouseUp(e, ref.current as HTMLDivElement);
+    onMouseUp && onMouseUp(e, ref.current as HTMLDivElement, direction);
     document.removeEventListener("mousemove", mouseMove, false);
     document.removeEventListener("mouseup", mouseUp, false);
   };
 
   // 拖拽中
   const mouseMove = (e: MouseEvent) => {
-    onMouseMove && onMouseMove(e, ref.current as HTMLDivElement);
+    onMouseMove && onMouseMove(e, ref.current as HTMLDivElement, direction);
   };
 
   // 开始拖拽

@@ -61,7 +61,7 @@ export interface IwidgetsTypeResult {
 }
 
 export interface Idata {
-  id: number | string;
+  id: string;
   type: "row" | "col" | "element" | "widget"; //类型
   element: string; //组件名称
   configuration: {
@@ -72,7 +72,7 @@ export interface Idata {
 
 // 获取微件列表
 export interface IwidgetsItem {
-  id: number | string;
+  id: string;
   name: string;
   level1Type: ILevel1Types;
   level2Type: IEchartsTypes | "";
@@ -94,4 +94,22 @@ export interface IwidgetsResult {
   // 后台返回的token
   data: IwidgetsItem[];
   message: string;
+}
+
+// 传入layout布局容器类型
+export interface IModifyLayout {
+  type: "header" | "body";
+  pid: string;
+  current: {
+    id: string;
+    layout: {
+      [propName: string]: string;
+    };
+  };
+  next: {
+    id: string;
+    layout: {
+      [propName: string]: string;
+    };
+  };
 }

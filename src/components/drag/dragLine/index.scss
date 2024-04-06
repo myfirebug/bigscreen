@@ -1,14 +1,26 @@
 @include b(drag-line) {
-  width: 20px;
-  height: 60px;
-  background: red;
+  position: absolute;
+  background: var(--primary-color);
+  $width: 20px;
+  $height: 5px;
+  $half: -10px;
 
   @include when(vertical) {
     cursor: row-resize;
+    left: 50%;
+    bottom: 0;
+    margin-left: $half;
+    width: $width;
+    height: $height;
   }
 
   @include when(horizontal) {
     cursor: col-resize;
+    top: 50%;
+    right: 0;
+    margin-top: $half;
+    height: $width;
+    width: $height;
   }
 
   &.active,
