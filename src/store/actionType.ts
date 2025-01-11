@@ -29,7 +29,6 @@ export type USERINFO_TYPE = typeof USERINFO;
 // 定义 clearUserInfo 类型常量
 export const CLEARUSERINFO = "CLEARUSERINFO";
 export type CLEARUSERINFO_TYPE = typeof CLEARUSERINFO;
-
 // 所有的数据的数据类型, 注意这里每加一个state模块都必须在这里进行申明
 export type ALL_STATE = {
   counter: COUNTER_STATE;
