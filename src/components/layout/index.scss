@@ -1,0 +1,34 @@
+@include b(layout) {
+  @include when(collapsed) {
+    .cms-header__left {
+      width: 80px;
+      .cms-icon {
+        padding-left: 14px;
+      }
+      .title {
+        width: 0px;
+      }
+    }
+    .cms-sidder {
+      width: 80px;
+    }
+  }
+  @include when(fullScreen) {
+    .cms-layout__main {
+      padding-top: 0;
+      padding-left: 0;
+    }
+    .cms-content {
+      min-height: 100vh;
+    }
+  }
+  @include e(main) {
+    transition: all 0.25s ease 0s;
+  }
+}
+
+@include b(content) {
+  min-height: calc(100vh - 48px);
+  padding: 15px;
+  box-sizing: border-box;
+}

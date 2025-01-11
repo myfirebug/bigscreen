@@ -1,0 +1,14 @@
+@include b(configuration) {
+  @include e(rightside) {
+    @include m(layout) {
+      width: 300px;
+      display: none;
+      @include when(show) {
+        display: block;
+      }
+      .cms-side-box__body {
+        padding: 10px;
+      }
+    }
+  }
+}

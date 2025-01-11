@@ -1,0 +1,246 @@
+import Mock from "mockjs";
+// 获取统计数据
+export const componentsTotal = {
+  url: "/components-total",
+  method: "get",
+  data: {
+    result: true,
+    data: Mock.mock([
+      {
+        name: "移动端",
+        "total|1-300": 100,
+        unit: "个",
+        bgFont: "Mobile",
+      },
+      {
+        name: "PC端",
+        "total|1-300": 100,
+        unit: "个",
+        bgFont: "Computer",
+      },
+      {
+        name: "总数",
+        "total|100-1000": 100,
+        unit: "个",
+        bgFont: "Total",
+      },
+      {
+        name: "使用率",
+        "total|1-100": 100,
+        unit: "%",
+        bgFont: "Rate",
+      },
+    ]),
+    message: "请求成功",
+  },
+};
+
+// 新增组件走势图
+export const componentsTrendChart = {
+  url: "/components-trend-chart",
+  method: "get",
+  data: Mock.mock({
+    data: [
+      {
+        name: "01月",
+        "value|1-300": 100,
+      },
+      {
+        name: "02月",
+        "value|1-300": 100,
+      },
+      {
+        name: "03月",
+        "value|1-300": 100,
+      },
+      {
+        name: "04月",
+        "value|1-300": 100,
+      },
+      {
+        name: "05月",
+        "value|1-300": 100,
+      },
+      {
+        name: "06月",
+        "value|1-300": 100,
+      },
+      {
+        name: "07月",
+        "value|1-300": 100,
+      },
+      {
+        name: "08月",
+        "value|1-300": 100,
+      },
+      {
+        name: "09月",
+        "value|1-300": 100,
+      },
+      {
+        name: "10月",
+        "value|1-300": 100,
+      },
+      {
+        name: "11月",
+        "value|1-300": 100,
+      },
+      {
+        name: "12月",
+        "value|1-300": 100,
+      },
+    ],
+  }),
+};
+
+// 使用排行榜TOP8
+export const componentsLeaderboard = {
+  url: "/components-leaderboard",
+  method: "get",
+  data: Mock.mock({
+    data: [
+      {
+        name: "文本",
+        "value|1-100": 100,
+      },
+      {
+        name: "折线图",
+        "value|1-100": 100,
+      },
+      {
+        name: "图片",
+        "value|1-100": 100,
+      },
+      {
+        name: "柱状图",
+        "value|1-100": 100,
+      },
+      {
+        name: "饼图",
+        "value|1-100": 100,
+      },
+      {
+        name: "下拉框",
+        "value|1-100": 100,
+      },
+      {
+        name: "单选框",
+        "value|1-100": 100,
+      },
+      {
+        name: "雷达图",
+        "value|1-100": 100,
+      },
+    ],
+  }),
+};
+
+// 获取组件类型
+export const componentsType = {
+  url: "/components-types",
+  method: "get",
+  data: {
+    data: [
+      {
+        name: "全部",
+        value: "",
+        level: 1,
+        id: 1,
+      },
+      {
+        name: "echarts",
+        value: "echarts",
+        level: 1,
+        id: 2,
+        children: [
+          {
+            name: "全部",
+            value: "",
+            level: 2,
+            id: 21,
+          },
+          {
+            name: "折线图",
+            value: "line",
+            level: 2,
+            id: 22,
+          },
+          {
+            name: "柱状图",
+            value: "bar",
+            level: 2,
+            id: 23,
+          },
+          {
+            name: "饼图",
+            value: "pie",
+            level: 2,
+            id: 24,
+          },
+        ],
+      },
+      {
+        name: "文本",
+        value: "text",
+        level: 1,
+        id: 3,
+      },
+      {
+        name: "图片",
+        value: "image",
+        level: 1,
+        id: 4,
+      },
+      {
+        name: "表格",
+        value: "table",
+        level: 1,
+        id: 5,
+      },
+      {
+        name: "百度地图",
+        value: "bmap",
+        level: 1,
+        id: 6,
+      },
+      {
+        name: "高德地图",
+        value: "bmap",
+        level: 1,
+        id: 7,
+      },
+    ],
+  },
+};
+
+// 获取组件类型
+export const componentsList = {
+  url: "/components-list",
+  method: "get",
+  data: {
+    data: [
+      {
+        id: 1,
+        name: "基础文本",
+        element: "baseText",
+        level1Type: "text",
+        level2Type: "",
+        images:
+          "https://p3-tt.byteimg.com/origin/pgc-image/5017bca3cfee4172abc1a1622f464c09?from=pc",
+        count: 0,
+        createTime: new Date().getTime(),
+      },
+      {
+        id: 2,
+        name: "基础折线图",
+        element: "baseEchartsLine",
+        level1Type: "echarts",
+        level2Type: "line",
+        images:
+          "https://p3-tt.byteimg.com/origin/pgc-image/5017bca3cfee4172abc1a1622f464c09?from=pc",
+        count: 0,
+        createTime: new Date().getTime(),
+      },
+    ],
+  },
+};

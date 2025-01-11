@@ -1,23 +1,60 @@
 @include b(login) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
+  display: flex;
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  background: var(--change-primary-color);
+  @include e(left) {
+    position: relative;
     width: 100vw;
-    background: url('../../assets/image/login/bg.jpg') no-repeat;
-    background-size: 100% 100%;
-    @include e(form) {
-        width: 410px;
-        padding: 50px;
-        border-radius: 11px;
-        background: #fff;
-        .header {
-            padding-bottom: 20px;
-            .title {
-                margin: 0;
-                font-size: 20px;
-                font-weight: bold;
-            }
-        }
+    height: 100vh;
+    padding: 15vh 0 0 15vw;
+    background: url(./assets/bg02.png) 15% 50% no-repeat;
+    background-size: auto 66%;
+    color: #fff;
+    box-sizing: border-box;
+    h1,
+    p {
+      margin: 0;
+      padding: 0;
     }
+    h1 {
+      font-size: 40px;
+    }
+    p {
+      padding-top: 20px;
+      font-size: 16px;
+    }
+  }
+  @include e(right) {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    z-index: 2;
+    padding: 0 50px;
+    transform: translate(30%, -50%);
+    width: 380px;
+    height: 400px;
+    background: var(--module-background-color);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.14);
+    box-sizing: border-box;
+    border-radius: 24px;
+    h2 {
+      font-size: 24px;
+      margin: 60px 0 30px 0;
+    }
+    .site-form-item-icon {
+      color: var(--light-font-color);
+    }
+  }
+  @include e(mask) {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 0;
+    z-index: 1;
+  }
 }

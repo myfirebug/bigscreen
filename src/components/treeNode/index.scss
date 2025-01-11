@@ -1,0 +1,71 @@
+@include b(widget-main) {
+  $color: rgba(255, 255, 255, 0.5);
+  .no-data {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    &:after,
+    &:before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      margin: -7px 0 0 -1px;
+      width: 2px;
+      height: 14px;
+      background: $color;
+    }
+    &:after {
+      transform: rotate(90deg);
+    }
+  }
+  @include e(row) {
+    position: relative;
+    display: flex;
+    justify-content: stretch;
+    flex: 1;
+    > div {
+      flex: 1;
+    }
+  }
+  @include e(col) {
+    position: relative;
+    display: flex;
+    flex-flow: column;
+    justify-content: stretch;
+    flex: 1;
+    > div {
+      flex: 1;
+    }
+  }
+  @include e(auxiliaryline) {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: 1px $color dashed;
+    box-sizing: border-box;
+    &:after {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      right: 0;
+      z-index: 1;
+    }
+    @include when(moveTo) {
+      &::after {
+        opacity: 0.3;
+        background-color: var(--primary-color);
+      }
+    }
+    @include when(selected) {
+      border: 2px solid var(--primary-color);
+      &::after {
+        opacity: 0.3;
+        background-color: var(--primary-color);
+      }
+    }
+  }
+}

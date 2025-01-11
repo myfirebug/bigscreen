@@ -1,11 +1,11 @@
-import { combineReducers } from 'redux'
-import { authorization } from './authorization'
-import { counter } from './counter'
-import { largeScreen } from './largeScreen'
-import { userinfo } from './userinfo'
+import { combineReducers } from "redux";
+import { counter } from "./counter";
+import { currentTheme } from "./theme";
+import { token } from "./token";
+import { userInfo } from "./userInfo";
 export default combineReducers({
   counter,
-  authorization,
-  largeScreen,
-  userinfo
-})
+  currentTheme,
+  token,
+  userInfo,
+});

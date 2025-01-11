@@ -1,0 +1,16 @@
+@include b(widget-main) {
+  height: 100%;
+  @include e(header) {
+    height: 40px;
+    display: flex;
+    justify-content: stretch;
+    flex: 1;
+  }
+  @include e(body) {
+    height: calc(100% - 40px);
+    display: flex;
+    flex-flow: column;
+    justify-content: stretch;
+    flex: 1;
+  }
+}

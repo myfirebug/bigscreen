@@ -1,0 +1,72 @@
+@include b(element) {
+  width: 400px;
+  .cms-side-box__body {
+    display: flex;
+    background: var(--module-light-background-color);
+  }
+  @include e(level1) {
+    height: 100%;
+    width: 70px;
+    padding: 0 10px;
+    text-align: center;
+    background: var(--module-background-color);
+    .item {
+      margin-top: 10px;
+      width: 70px;
+      height: 30px;
+      line-height: 30px;
+      color: var(--light-font-color);
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+      border-radius: 5px;
+      &:hover,
+      &.is-active {
+        background-color: var(--module-light-background-color);
+        color: var(--html-font-color);
+      }
+    }
+  }
+  @include e(level2) {
+    height: 100%;
+    width: 70px;
+    padding-left: 10px;
+    text-align: center;
+    color: var(--light-font-color);
+    .item {
+      margin-top: 10px;
+      height: 30px;
+      line-height: 30px;
+      text-align: center;
+      cursor: pointer;
+      transition: all 0.25s ease 0s;
+      border-radius: 5px;
+      &:hover,
+      &.is-active {
+        background: var(--module-background-color);
+        color: var(--html-font-color);
+      }
+    }
+  }
+  @include e(content) {
+    flex: 1;
+    padding: 0 10px;
+    overflow: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    .item {
+      margin-top: 10px;
+    }
+    .picture {
+      border-radius: 5px;
+      overflow: hidden;
+      img {
+        vertical-align: top;
+        width: 100%;
+      }
+    }
+    .name {
+      text-align: center;
+      padding-top: 5px;
+    }
+  }
+}
