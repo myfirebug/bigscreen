@@ -4,27 +4,9 @@ import {
   MODIFY_LAYOUT_TYPE,
   MODIFY_TEMPORARILY_ELEMENT_NAME_TYPE,
   MODIFY_ELEMENT_NAME_TYPE,
-  SELECT_ELEMENT_TYPE,
+  SELECT_TYPE,
 } from "./type";
-import { IwidgetsItem } from "@src/service";
-
-// 传入layout布局容器类型
-export interface IModifyLayout {
-  type: "header" | "body";
-  pid: string;
-  current: {
-    id: string;
-    layout: {
-      [propName: string]: string;
-    };
-  };
-  next: {
-    id: string;
-    layout: {
-      [propName: string]: string;
-    };
-  };
-}
+import { IwidgetsItem, IModifyLayout } from "@src/service";
 
 // 获取widget数据
 export interface widgetAction {
@@ -54,13 +36,12 @@ export interface modifyTemporarilyElementName {
 export interface modifyElementName {
   type: MODIFY_ELEMENT_NAME_TYPE;
   id: string;
-  useArea: "header" | "body";
 }
 
 // 选中组件
-export interface selectElement {
-  type: SELECT_ELEMENT_TYPE;
-  id: string;
+export interface select {
+  type: SELECT_TYPE;
+  data: IModifyLayout;
 }
 
 // 定义 ModifyAction 类型
@@ -70,4 +51,4 @@ export type ModifyAction =
   | modifyWidgetLayout
   | modifyTemporarilyElementName
   | modifyElementName
-  | selectElement;
+  | select;

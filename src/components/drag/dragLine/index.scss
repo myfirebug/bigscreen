@@ -1,5 +1,6 @@
 @include b(drag-line) {
   position: absolute;
+  z-index: 100;
   background: var(--primary-color);
   $width: 20px;
   $height: 5px;

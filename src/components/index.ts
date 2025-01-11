@@ -6,3 +6,5 @@ export * from "./sidder";
 export * from "./box";
 export * from "./echarts";
 export * from "./drag";
+export * from "./dynamicForm";
+export * from "./baseForm";

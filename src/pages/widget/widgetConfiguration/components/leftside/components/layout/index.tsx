@@ -4,6 +4,8 @@ import { guid } from "@src/utils";
 import { useWidgetDispatch } from "../../../../widgetContext";
 import { Idata } from "@src/service";
 import "./index.scss";
+import baseConfiguration from "@src/elements/config/base-configuration";
+const { data } = baseConfiguration;
 
 interface ILayout {
   onClose: () => void;
@@ -12,8 +14,9 @@ interface ILayout {
 const init: Idata = {
   id: guid(),
   type: "row",
-  element: "",
-  configuration: {},
+  configuration: {
+    flexBasis: "100%",
+  },
   children: [],
 };
 
@@ -58,9 +61,7 @@ const Layout = React.memo((props: ILayout) => {
         id: guid(),
         children: [],
         configuration: {
-          layout: {
-            flexBasis: (100 / col).toFixed(2) + "%",
-          },
+          styleFlexBasis: (100 / row).toFixed(2) + "%",
         },
       };
       if (col > 1) {
@@ -70,9 +71,7 @@ const Layout = React.memo((props: ILayout) => {
             id: guid(),
             type: "col",
             configuration: {
-              layout: {
-                flexBasis: (100 / col).toFixed(2) + "%",
-              },
+              styleFlexBasis: (100 / col).toFixed(2) + "%",
             },
           });
         }
@@ -90,49 +89,63 @@ const Layout = React.memo((props: ILayout) => {
         count: 0,
         createTime: new Date().getTime().toString(),
         configuration: {
-          header: {
-            show: true,
+          configureValue: {
+            styleAnimateInfinite: false,
+            styleAnimationDelay: 0,
+            styleAnimationName: "",
+            styleAnimationDuration: 1,
+            styleAnimationTimingFunction: "linear",
+            styleBoxInset: true,
+            styleBoxShadowX: 0,
+            styleBoxShadowY: 0,
+            styleBoxShadowF: 10,
+            styleBoxShadowC: "rgba(22,119,255,0.5)",
+            styleBorderStyle: "solid",
+            styleBorderWidth: 1,
+            styleBorderColor: "#1677ff",
+            styleBorderTopLeftRadius: 10,
+            styleBorderTopRightRadius: 10,
+            styleBorderBottomLeftRadius: 10,
+            styleBorderBottomRightRadius: 10,
+          },
+          dataValue: {
+            ...data.configureValue,
           },
         },
-        data: {
-          header: [
-            {
-              id: guid(),
-              type: "row",
-              element: "",
-              configuration: {
-                layout: {
-                  flexBasis: "100%",
+        layout: [
+          {
+            ...init,
+            id: guid(),
+            type: "header",
+            configuration: {},
+            children: [
+              {
+                id: guid(),
+                type: "col",
+                configuration: {
+                  styleFlexBasis: "80%",
                 },
+                children: [],
               },
-              children: [
-                {
-                  id: guid(),
-                  type: "col",
-                  element: "",
-                  configuration: {
-                    layout: {
-                      flexBasis: "80%",
-                    },
-                  },
-                  children: [],
+              {
+                id: guid(),
+                type: "col",
+                configuration: {
+                  styleFlexBasis: "20%",
                 },
-                {
-                  id: guid(),
-                  type: "col",
-                  element: "",
-                  configuration: {
-                    layout: {
-                      flexBasis: "20%",
-                    },
-                  },
-                  children: [],
-                },
-              ],
-            },
-          ],
-          body: body,
-        },
+                children: [],
+              },
+            ],
+          },
+          {
+            ...init,
+            id: guid(),
+            type: "body",
+            configuration: {},
+            children: body,
+          },
+        ],
+        elements: [],
       },
     });
   };

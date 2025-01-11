@@ -1,28 +1,26 @@
 import React, { useCallback } from "react";
-import { Idata, IwidgetsItem } from "@src/service";
+import { Idata, IdataTypes, IwidgetsItem } from "@src/service";
+import { DIRECTION } from "@src/core/types/constant";
 import TreeNode from "@src/components/treeNode";
+import { getStyles } from "@src/utils";
 import { useWidgetDispatch } from "../../widgetContext";
 import "./index.scss";
 
 interface IWidgetMain {
   widget: IwidgetsItem;
-  selectedElementId: string;
+  selectedId: string;
 }
 
-const WidgetMain: React.FC<IWidgetMain> = ({ widget, selectedElementId }) => {
+const WidgetMain: React.FC<IWidgetMain> = ({ widget, selectedId }) => {
   const dispatch = useWidgetDispatch();
 
   const onMouseUp = useCallback(
-    (
-      e: MouseEvent,
-      node: HTMLDivElement,
-      direction: "vertical" | "horizontal",
-      type: "header" | "body"
-    ) => {
+    (e: MouseEvent, node: HTMLDivElement, direction: DIRECTION) => {
       const parent = node.parentNode as HTMLDivElement;
       const pid = parent.dataset.pid as string;
       const id = parent.dataset.id as string;
       const nextid = parent.dataset.nextid as string;
+      const type = parent.dataset.type as IdataTypes;
       const leftElement = document.querySelector(
         `[data-id='${id}']`
       ) as HTMLDivElement;
@@ -33,18 +31,21 @@ const WidgetMain: React.FC<IWidgetMain> = ({ widget, selectedElementId }) => {
       dispatch({
         type: "MODIFY_LAYOUT",
         data: {
-          type: type,
-          pid: pid,
+          direction,
+          parent: {
+            id: pid,
+          },
           current: {
             id: id,
-            layout: {
-              flexBasis: leftElement.style.flexBasis,
+            type: type,
+            configuration: {
+              styleFlexBasis: leftElement.style.flexBasis,
             },
           },
           next: {
             id: nextid,
-            layout: {
-              flexBasis: rightElement.style.flexBasis,
+            configuration: {
+              styleFlexBasis: rightElement.style.flexBasis,
             },
           },
         },
@@ -54,62 +55,71 @@ const WidgetMain: React.FC<IWidgetMain> = ({ widget, selectedElementId }) => {
   );
 
   const onDrop = useCallback(
-    (
-      e: React.DragEvent<HTMLDivElement>,
-      item: Idata,
-      type: "header" | "body"
-    ) => {
+    (e: React.DragEvent<HTMLDivElement>, item: Idata) => {
       dispatch({
         type: "MODIFY_ELEMENT_NAME",
         id: item.id,
-        useArea: type,
       });
     },
     [dispatch]
   );
 
-  const clickHandler = useCallback(
-    (id: string) => {
-      dispatch({
-        type: "SELECT_ELEMENT",
-        id,
-      });
+  const onClick = useCallback(
+    (e: any) => {
+      const parent = e.target?.offsetParent;
+      const pid = parent.dataset.pid as string;
+      const id = parent.dataset.id as string;
+      const direction = parent.dataset.direction;
+      const nextid = parent.dataset.nextid as string;
+      if (selectedId !== id) {
+        dispatch({
+          type: "SELECT",
+          data: {
+            direction: direction,
+            parent: {
+              id: pid,
+            },
+            current: {
+              id: id,
+              type: "element",
+            },
+            next: {
+              id: nextid,
+            },
+          },
+        });
+      }
     },
-    [dispatch]
+    [selectedId, dispatch]
   );
 
   return (
-    <div className="cms-widget-main">
-      {widget.configuration?.header?.show ? (
-        <div className="cms-widget-main__header">
+    <div
+      className="cms-widget-main"
+      style={{ ...getStyles(widget.configuration.configureValue) }}
+    >
+      {widget.layout?.map((item) => (
+        <div
+          key={item.id}
+          className={
+            item.type === "header"
+              ? "cms-widget-main__header"
+              : "cms-widget-main__body"
+          }
+          data-id={item.id}
+        >
           <TreeNode
-            datas={widget.data.header || []}
+            datas={item.children}
             type="modify"
-            onMouseUp={(
-              e: MouseEvent,
-              node: HTMLDivElement,
-              direction: "vertical" | "horizontal"
-            ) => onMouseUp(e, node, direction, "header")}
-            onDrop={(e, item) => onDrop(e, item, "header")}
-            selectedElementId={selectedElementId}
-            clickHandler={clickHandler}
+            onMouseUp={onMouseUp}
+            onDrop={onDrop}
+            selectedId={selectedId}
+            onClick={onClick}
+            elements={widget.elements}
+            pid={item.id}
           />
         </div>
-      ) : null}
-      <div className="cms-widget-main__body">
-        <TreeNode
-          datas={widget.data.body || []}
-          type="modify"
-          onMouseUp={(
-            e: MouseEvent,
-            node: HTMLDivElement,
-            direction: "vertical" | "horizontal"
-          ) => onMouseUp(e, node, direction, "body")}
-          onDrop={(e, item) => onDrop(e, item, "body")}
-          selectedElementId={selectedElementId}
-          clickHandler={clickHandler}
-        />
-      </div>
+      ))}
     </div>
   );
 };

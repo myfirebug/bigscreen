@@ -1,4 +1,4 @@
-import { ILevel1Types, IEchartsTypes } from "./index";
+import { ILevel1Types, IEchartsTypes, IComponentsItem } from "./index";
 
 export interface IwidgetsTotalItem {
   name: string;
@@ -60,11 +60,19 @@ export interface IwidgetsTypeResult {
   message: string;
 }
 
+export type IdataTypes =
+  | "row"
+  | "col"
+  | "element"
+  | "widget"
+  | "header"
+  | "body";
+
 export interface Idata {
   id: string;
-  type: "row" | "col" | "element" | "widget"; //类型
-  element: string; //组件名称
+  type: IdataTypes; //类型
   configuration: {
+    // flexBasis?: string;
     [propName: string]: any;
   };
   children: Idata[];
@@ -82,10 +90,8 @@ export interface IwidgetsItem {
   configuration: {
     [propName: string]: any;
   };
-  data: {
-    header: Idata[];
-    body: Idata[];
-  };
+  layout: Idata[];
+  elements: IComponentsItem[];
 }
 
 export interface IwidgetsResult {
@@ -98,17 +104,23 @@ export interface IwidgetsResult {
 
 // 传入layout布局容器类型
 export interface IModifyLayout {
-  type: "header" | "body";
-  pid: string;
+  direction: "vertical" | "horizontal";
+  parent: {
+    id: string;
+    configuration?: {
+      [propName: string]: string;
+    };
+  };
   current: {
     id: string;
-    layout: {
+    type: IdataTypes;
+    configuration?: {
       [propName: string]: string;
     };
   };
   next: {
     id: string;
-    layout: {
+    configuration?: {
       [propName: string]: string;
     };
   };

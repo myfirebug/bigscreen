@@ -71,12 +71,13 @@ const Element: FC<IElement> = ({ onClose }) => {
               className="item"
               key={item.id}
               draggable
-              onDragStart={() =>
+              onDragStart={(e: React.DragEvent<HTMLDivElement>) => {
+                e.dataTransfer.effectAllowed = "move";
                 dispatch({
                   type: "MODIFY_TEMPORARILY_ELEMENT_NAME",
                   name: item.element,
-                })
-              }
+                });
+              }}
             >
               <div className="picture">
                 <img src={item.images} alt="" />

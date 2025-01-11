@@ -2,11 +2,13 @@ import React, { memo, useState } from "react";
 import { Theme } from "@src/components";
 import ModifyName from "./components/modifyName";
 import { useWidget } from "../../widgetContext";
+import { useNavigate } from "react-router-dom";
 import "../../index.scss";
 
 interface IHeader {}
 
 const Header = memo((props: IHeader) => {
+  const navigate = useNavigate();
   const [isModalNameOpen, setIsModalNameOpen] = useState(false);
   const widget = useWidget();
   return (
@@ -31,7 +33,7 @@ const Header = memo((props: IHeader) => {
         <div className="publish">
           <i className="cms-icon">&#xe620;</i>发布
         </div>
-        <div className="preview">
+        <div className="preview" onClick={() => navigate(-1)}>
           <i className="cms-icon">&#xe720;</i>返回
         </div>
       </div>

@@ -3,7 +3,6 @@
   @include e(header) {
     height: 40px;
     display: flex;
-    flex-flow: column;
     justify-content: stretch;
     flex: 1;
   }

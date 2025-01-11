@@ -1,5 +1,5 @@
 import React, { FC, useEffect } from "react";
-import { Col, Row } from "antd";
+import { Button, Col, Row } from "antd";
 import { useWidgets } from "@src/core/hook";
 import Total from "@src/components/total";
 import TrendChart from "@src/components/trendChart";
@@ -7,8 +7,10 @@ import UseLeaderboard from "@src/components/useLeaderboard";
 import List from "@src/components/list";
 import FilterItem from "@src/components/filter";
 import "./index.scss";
+import { useNavigate } from "react-router-dom";
 
 const Widget: FC = () => {
+  const navigate = useNavigate();
   const {
     total,
     getTotal,
@@ -49,15 +51,29 @@ const Widget: FC = () => {
             {list.params.type.map((_, index) => {
               if (index === 0) {
                 return (
-                  <FilterItem
-                    label={`${index + 1}级标签：`}
-                    key={index}
-                    index={index}
-                    field="type"
-                    select={list.params.type[index]}
-                    datas={types.datas.filter((item) => item.level === 1) || []}
-                    listSearchHandler={listSearchHandler}
-                  />
+                  <div key={index} style={{ position: "relative" }}>
+                    <FilterItem
+                      label={`${index + 1}级标签：`}
+                      index={index}
+                      field="type"
+                      select={list.params.type[index]}
+                      datas={
+                        types.datas.filter((item) => item.level === 1) || []
+                      }
+                      listSearchHandler={listSearchHandler}
+                    />
+                    <Button
+                      type="primary"
+                      style={{
+                        position: "absolute",
+                        right: "10px",
+                        top: "15px",
+                      }}
+                      onClick={() => navigate("/widget/configuration")}
+                    >
+                      新增微件
+                    </Button>
+                  </div>
                 );
               } else if (
                 list.params.type[index - 1] &&

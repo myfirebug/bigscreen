@@ -1,0 +1,34 @@
+@include b(widget) {
+  width: 300px;
+  line-height: 28px;
+  -webkit-user-select: none; /* Safari */
+  -moz-user-select: none; /* Firefox */
+  -ms-user-select: none; /* IE10+/Edge */
+  user-select: none; /* 标准语法 */
+  display: none;
+  @include when(show) {
+    display: block;
+  }
+  .cms-side-box__body {
+    padding-top: 10px;
+  }
+  .ant-form-item {
+    padding: 0 15px;
+    margin-bottom: 5px;
+  }
+  .ant-collapse-item,
+  .ant-collapse {
+    border-radius: 0;
+  }
+  .ant-collapse {
+    border-left: none;
+    border-right: none;
+
+    .ant-collapse-item:last-child {
+      border: none;
+    }
+  }
+  .ant-collapse-content-box {
+    padding: 10px 0 0 0 !important;
+  }
+}

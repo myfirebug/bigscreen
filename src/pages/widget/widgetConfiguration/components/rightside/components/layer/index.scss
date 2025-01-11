@@ -5,6 +5,10 @@
   -moz-user-select: none; /* Firefox */
   -ms-user-select: none; /* IE10+/Edge */
   user-select: none; /* 标准语法 */
+  display: none;
+  @include when(show) {
+    display: block;
+  }
   @include e(item) {
     position: relative;
     .cms-layer__list {
@@ -14,7 +18,7 @@
       > .cms-layer__list {
         display: block;
       }
-      > .cms-layer__item--name .jt {
+      > .cms-layer__item--name .jt:after {
         transform: rotate(135deg);
       }
     }
@@ -29,19 +33,42 @@
       }
       @include when(selected) {
         background: var(--primary-color);
+        color: var(--white);
+        .jt:after {
+          border-left-color: var(--white);
+          border-bottom-color: var(--white);
+        }
+        .controls {
+          display: flex;
+        }
       }
       .cms-icon {
         padding-right: 5px;
       }
       .jt {
         position: relative;
-        width: 5px;
-        height: 5px;
-        margin-right: 10px;
-        transform: rotate(-45deg);
-        border-left: 2px solid var(--html-font-color);
-        border-bottom: 2px solid var(--html-font-color);
-        transition: all 0.25s ease 0s;
+        width: 20px;
+        height: 20px;
+        &:after {
+          content: "";
+          position: absolute;
+          left: 40%;
+          top: 50%;
+          margin-left: -3px;
+          margin-top: -3px;
+          width: 5px;
+          height: 5px;
+          transform: rotate(-45deg);
+          border-left: 2px solid var(--html-font-color);
+          border-bottom: 2px solid var(--html-font-color);
+          transition: all 0.25s ease 0s;
+        }
+      }
+      .controls {
+        flex: 1;
+        display: none;
+        align-items: center;
+        justify-content: flex-end;
       }
     }
   }

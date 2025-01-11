@@ -38,7 +38,16 @@ const Leftside = memo((props: ILeftside) => {
         }));
       });
     }
-  }, [widget, current, setTabs]);
+    if (!widget) {
+      setCurrent("layout");
+      setTabs((state) => {
+        return state.map((item) => ({
+          ...item,
+          show: item.type === "element" ? false : true,
+        }));
+      });
+    }
+  }, [widget, current, setTabs, setCurrent]);
   return (
     <div className="cms-configuration__leftside">
       <ul className="cms-configuration__leftside--tabs">

@@ -31,7 +31,7 @@ export const getStyles = (config: { [propName: string]: any }) => {
     }px ${config.styleBoxShadowC} ${config.styleBoxInset ? "inset" : ""}`,
   };
   for (let filed in config) {
-    if (filed.indexOf("style") === 0) {
+    if (filed.indexOf("style") === 0 && typeof config[filed] !== "object") {
       let newField = filed.substring(5);
       newField = newField.replace(newField[0], newField[0].toLocaleLowerCase());
       result[newField] = config[filed];

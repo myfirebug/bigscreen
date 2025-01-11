@@ -96,9 +96,7 @@ export interface IComponentsItem {
   images: string;
   count: number;
   createTime: string;
-  configuration: {
-    [propName: string]: any;
-  };
+  [propName: string]: any;
 }
 
 export interface IComponentsResult {

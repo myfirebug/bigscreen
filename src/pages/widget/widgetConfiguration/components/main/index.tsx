@@ -9,14 +9,14 @@ interface IMain {}
 
 const Main = memo((props: IMain) => {
   const widget = useWidget()?.widget;
-  const selectedElementId = useWidget()?.selectedElementId as string;
+  const selectedId = useWidget()?.selectedId as string;
   return (
     <div className="cms-configuration__content">
       <div className="cms-configuration__content--wrap">
         <Rule />
         <div className="cms-configuration__content--view">
           {widget ? (
-            <WidgetMain widget={widget} selectedElementId={selectedElementId} />
+            <WidgetMain widget={widget} selectedId={selectedId} />
           ) : (
             <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
           )}

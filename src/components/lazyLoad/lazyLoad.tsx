@@ -6,7 +6,7 @@ import React, { lazy } from "react";
  * @returns
  */
 const lazyLoad = function (path: string) {
-  const Module = lazy(() => import(`@src/pages/${path}`));
+  const Module = lazy(() => import(`@src/pages/${path}` /*home*/));
   return <Module />;
 };
 

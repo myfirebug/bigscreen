@@ -1,0 +1,33 @@
+@include b(configuration) {
+  @include e(rightside) {
+    @include m(element) {
+      width: 300px;
+      display: none;
+      @include when(show) {
+        display: block;
+      }
+      .cms-side-box__body {
+        padding-top: 10px;
+      }
+      .ant-form-item {
+        padding: 0 15px;
+        margin-bottom: 5px;
+      }
+      .ant-collapse-item,
+      .ant-collapse {
+        border-radius: 0;
+      }
+      .ant-collapse {
+        border-left: none;
+        border-right: none;
+
+        .ant-collapse-item:last-child {
+          border: none;
+        }
+      }
+      .ant-collapse-content-box {
+        padding: 10px 0 0 0 !important;
+      }
+    }
+  }
+}

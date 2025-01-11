@@ -5,102 +5,192 @@ import {
   MODIFY_LAYOUT,
   MODIFY_TEMPORARILY_ELEMENT_NAME,
   MODIFY_ELEMENT_NAME,
-  SELECT_ELEMENT,
+  SELECT,
 } from "./type";
+import elementsConfiguration from "@src/elements/config/elements";
 import { ModifyAction } from "./action";
-import { IwidgetsItem, Idata } from "@src/service";
+import { IwidgetsItem, IModifyLayout, Idata } from "@src/service";
+import { MIN } from "@src/core/types/constant";
+import { DIRECTION } from "@src/core/types/constant";
 
 /**
- *
- * @param {Idata[]} datas 数组
- * @param {string} id 查找的ID
- * @param {string} elementName 替换的名称
+ * 获取最小，最大值
+ * @param pid 父级ID
+ * @param currentid 当前ID
+ * @param nextid 下级ID
+ * @param direction 方向
+ * @returns
  */
-export const modififyElementById = (
-  datas: Idata[],
-  id: string,
-  elementName: string
+const getMinAndMax = (
+  pid: string,
+  currentid: string,
+  nextid: string,
+  direction: DIRECTION
 ) => {
-  let hasFound = false; // 表示是否有找到id值
-  let fn = function (datas: Idata[]) {
-    if (Array.isArray(datas) && !hasFound) {
-      // 判断是否是数组并且没有的情况下，
-      for (let i = 0; i < datas.length; i++) {
-        if (datas[i].id === id) {
-          datas[i].element = elementName;
-          hasFound = true;
-          break;
-        } else if (datas[i].children) {
-          fn(datas[i].children);
-        }
-      }
-    }
+  const wrapDom = document.querySelector(
+    ".cms-configuration__content--view"
+  ) as Element;
+  const pRect = (
+    wrapDom.querySelector(`[data-id='${pid}']`) as HTMLDivElement
+  ).getBoundingClientRect();
+  const cRect = (
+    wrapDom.querySelector(`[data-id='${currentid}']`) as HTMLDivElement
+  ).getBoundingClientRect();
+  const nRect = (
+    wrapDom.querySelector(`[data-id='${nextid}']`) as HTMLDivElement
+  ).getBoundingClientRect();
+
+  return {
+    min:
+      direction === "horizontal"
+        ? (MIN / pRect.width).toFixed(4)
+        : (MIN / pRect.height).toFixed(4),
+    max:
+      direction === "horizontal"
+        ? ((cRect.width + nRect.width - MIN) / pRect.width).toFixed(4)
+        : ((cRect.height + nRect.height - MIN) / pRect.height).toFixed(4),
   };
-  fn(datas);
+};
+
+const modifyData = (datas: Idata[], data: IModifyLayout) => {
+  if (!datas) {
+    return [];
+  }
+  const { parent, current, next } = data;
+  datas.forEach((element) => {
+    if (parent.id === element.id) {
+      const currentObj = element.children.find(
+        (item) => item.id === current.id
+      ) as Idata;
+      const nextObj = element.children.find(
+        (item) => item.id === next.id
+      ) as Idata;
+
+      nextObj.configuration = {
+        ...nextObj.configuration,
+        ...next.configuration,
+        styleFlexBasis: current.configuration?.styleFlexBasis
+          ? (parseFloat(currentObj.configuration.styleFlexBasis) * 100 +
+              parseFloat(nextObj.configuration.styleFlexBasis) * 100 -
+              parseFloat(current.configuration?.styleFlexBasis) * 100) /
+              100 +
+            "%"
+          : next.configuration?.styleFlexBasis ||
+            nextObj.configuration.styleFlexBasis,
+      };
+
+      currentObj.configuration = {
+        ...currentObj.configuration,
+        ...current.configuration,
+      };
+    } else if (element.children.length) {
+      modifyData(element.children, data);
+    }
+  });
 };
 
 // 处理并返回 state
 export const initialState: ALL_STATE = {
   widget: null,
   temporarilyElementName: "",
-  selectedElementId: "",
+  selectedId: "",
+  selectedType: "widget",
+  pid: "",
+  nextid: "",
+  min: 0,
+  max: 1,
 };
 
 export const widgetReducer = (
   state: ALL_STATE = initialState,
   action: ModifyAction
 ) => {
-  const copyWidget: IwidgetsItem = JSON.parse(JSON.stringify(state.widget));
-  console.log(state, action);
+  const copy: ALL_STATE = JSON.parse(JSON.stringify(state));
+  console.log(state, action, "触发了action");
   switch (action.type) {
+    // 获取微件数据
     case WIDGET: {
-      console.log(action, "action");
-      return {
-        ...state,
-        widget: action.data,
+      copy.widget = {
+        ...action.data,
       };
+      return copy;
     }
+    // 修改微件名称
     case MODIFY_WIDGET_NAME: {
-      return {
-        ...state,
-        widget: {
-          ...copyWidget,
-          name: action.data,
-        },
-      };
+      (copy.widget as IwidgetsItem).name = action.data;
+      return copy;
     }
+    // 修改微件布局
     case MODIFY_LAYOUT: {
-      return {
-        ...state,
-        widget: copyWidget,
-      };
+      if (action.data.current.id === copy.selectedId) {
+        const data = getMinAndMax(
+          action.data.parent.id,
+          action.data.current.id,
+          action.data.next.id,
+          action.data.direction
+        );
+        copy.min = Number(data.min);
+        copy.max = Number(data.max);
+      }
+      modifyData(copy.widget?.layout || [], action.data);
+      // copy.pid = action.data.parent.id;
+      // copy.selectedId = action.data.current.id;
+      // copy.selectedType = action.data.current.type;
+      // copy.nextid = action.data.next.id;
+      return copy;
     }
+    // 修改临时使用的组件名称
     case MODIFY_TEMPORARILY_ELEMENT_NAME: {
-      return {
-        ...state,
-        temporarilyElementName: action.name,
-      };
+      copy.temporarilyElementName = action.name;
+      return copy;
     }
+    // 修改组件
     case MODIFY_ELEMENT_NAME: {
-      modififyElementById(
-        action.useArea === "header"
-          ? copyWidget.data.header
-          : copyWidget.data.body,
-        action.id,
-        state.temporarilyElementName
+      const index = copy.widget?.elements.findIndex(
+        (item) => item.id === action.id
       );
-
-      return {
-        ...state,
-        selectedElementId: action.id,
-        widget: copyWidget,
-      };
+      if (index !== -1) {
+        // 修改组件
+      } else {
+        // 添加组件
+        if (
+          state.temporarilyElementName &&
+          elementsConfiguration[state.temporarilyElementName]
+        ) {
+          copy.widget?.elements.push({
+            ...elementsConfiguration[state.temporarilyElementName],
+            id: action.id,
+            count: 0,
+          });
+          copy.selectedId = action.id;
+          copy.temporarilyElementName = "";
+          copy.selectedType = "element";
+        }
+      }
+      return copy;
     }
-    case SELECT_ELEMENT: {
-      return {
-        ...state,
-        selectedElementId: action.id,
-      };
+    // 选中微件
+    case SELECT: {
+      if (action.data.current.id !== copy.selectedId && action.data.parent.id) {
+        const data = getMinAndMax(
+          action.data.parent.id,
+          action.data.current.id,
+          action.data.next.id,
+          action.data.direction
+        );
+        copy.min = Number(data.min);
+        copy.max = Number(data.max);
+      }
+
+      modifyData(copy.widget?.layout || [], action.data);
+
+      copy.pid = action.data.parent.id;
+      copy.selectedId = action.data.current.id;
+      copy.selectedType = action.data.current.type;
+      copy.nextid = action.data.next.id;
+      // copy.selectedId = action.data.id;
+      // copy.selectedType = action.data.type;
+      return copy;
     }
   }
 };

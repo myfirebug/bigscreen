@@ -232,41 +232,9 @@ export const widgetsList = {
         configuration: {
           show: true,
         },
-        data: {
-          header: [
-            {
-              id: guid(),
-              type: "row",
-              children: [
-                {
-                  id: guid(),
-                  type: "icon",
-                  element: "Icon",
-                  configuration: {},
-                },
-                {
-                  id: guid(),
-                  type: "text",
-                  element: "Text",
-                  configuration: {},
-                },
-              ],
-            },
-          ],
-          body: [
-            {
-              id: guid(),
-              type: "row",
-              children: [
-                {
-                  id: guid(),
-                  type: "text",
-                  element: "Text",
-                  configuration: {},
-                },
-              ],
-            },
-          ],
+        layout: {
+          header: [],
+          body: [],
         },
       },
     ],

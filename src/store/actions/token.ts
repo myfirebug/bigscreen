@@ -18,21 +18,21 @@ export interface IClearTokenAction {
 
 export type ModifyAction = ISetTokenAction | IClearTokenAction;
 
-const actionSetTheme = (data: string): ISetTokenAction => ({
+const actionSetToken = (data: string): ISetTokenAction => ({
   type: SETTOKEN,
   data,
 });
 
-const actionClearTheme = (): IClearTokenAction => ({
+const actionClearToken = (): IClearTokenAction => ({
   type: CLEARTOKEN,
 });
 
 export const setToken = (data: string) => (dispatch: Dispatch) => {
-  dispatch(actionSetTheme(data));
+  dispatch(actionSetToken(data));
 };
 
 export const clearToken = () => (dispatch: Dispatch) => {
-  dispatch(actionClearTheme());
+  dispatch(actionClearToken());
   dispatch({
     type: CLEARUSERINFO,
   });

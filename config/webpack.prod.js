@@ -61,6 +61,16 @@ module.exports = merge.merge(baseConfig, {
           priority: 40, // 权重（越大越高）
           name: "chunk-echarts",
         },
+        mock: {
+          test: /[\\/]node_modules[\\/]mock(.*)?[\\/]/, // 需要打包到一起的模块
+          priority: 40, // 权重（越大越高）
+          name: "chunk-mock",
+        },
+        zrender: {
+          test: /[\\/]node_modules[\\/]zrender(.*)?[\\/]/, // 需要打包到一起的模块
+          priority: 40, // 权重（越大越高）
+          name: "chunk-zrender",
+        },
         // 其他的一起打包
         lib: {
           test: /[\\/]node_modules[\\/][\\/]/,
